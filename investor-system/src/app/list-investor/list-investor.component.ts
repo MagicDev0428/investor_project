@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { configService } from '../service/config.service';
+import { environment } from '../../environments/environment';
 
 interface Message {
   message?: string;
@@ -20,7 +21,7 @@ export class ListInvestorComponent {
 
   callProtectedEndpoint(): void {
     this.http
-      .get<Message>("http://localhost:3007/private")
+      .get<Message>(`${environment.apiUrl}/private`)
       .subscribe({
         next: result => {
           if (result.err) {
@@ -38,7 +39,7 @@ export class ListInvestorComponent {
 
   callPublicEndpoint(): void {
     this.http
-      .get<Message>("http://localhost:3007")
+      .get<Message>(`${environment.apiUrl}`)
       .subscribe(result => {
         this.message = result.message;
       });

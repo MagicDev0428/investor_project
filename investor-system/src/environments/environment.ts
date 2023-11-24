@@ -1,4 +1,6 @@
 export const environment = {
-    production: true,
-    apiUrl: 'http://my-prod-url'
+  production: true,
+  apiUrl: '',
+  auth0Domain: '',
+  auth0ClientId: ''
 };
