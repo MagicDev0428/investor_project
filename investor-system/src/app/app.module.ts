@@ -17,6 +17,7 @@ import { LogoutButtonComponent } from './components/logout-button/logout-button.
 import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CallbackComponent } from './components/callback/callback.component';
     LogoutButtonComponent,
     AuthenticationButtonComponent,
     ProfileComponent,
-    CallbackComponent
+    CallbackComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { CallbackComponent } from './components/callback/callback.component';
         redirect_uri: `${window.location.origin}/callback`,
         audience: 'http://localhost:3007'
       },
+      errorPath: `unauthorized`,
       cacheLocation: 'localstorage',
       httpInterceptor: {
         allowedList: [
