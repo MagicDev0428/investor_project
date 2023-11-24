@@ -100,15 +100,19 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="BeneficiaryPhone">Beneficiary Phone</label>
-                    <input type="tel" required pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-45-678"
+                    <input formControlName="beneficiaryPhone" type="tel" required  
                         class="form-control" id="BeneficiaryPhone" aria-describedby="Beneficiary Phone" />
+                    <span class="text-danger"
+                        *ngIf="(addInvestorForm.controls['beneficiaryPhone'].touched || submitted) && addInvestorForm.controls['beneficiaryPhone'].errors?.['required']">
+                        Beneficiary Phone is required
+                    </span>
                 </div>
             </div>
             <hr class="separator">
             <div class="row">
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="moneyTransfer">Money Transfer</label>
-                    <select class="form-control" id="moneyTransfer" name="moneyTransfer"
+                    <select formControlName="countryToTransfer" class="form-control" id="moneyTransfer" name="moneyTransfer"
                         aria-describedby="Money Transfer">
                         <option selected disabled>Select Money Transfer</option>
                         <option>Thailand</option>
@@ -119,7 +123,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="currency">Currency</label>
-                    <select class="form-control" id="currency" name="currency" aria-describedby="investor currency">
+                    <select formControlName="currency" class="form-control" id="currency" name="currency" aria-describedby="investor currency">
 
                         <option selected disabled>Select Currency</option>
                         <option>THB</option>
@@ -130,7 +134,7 @@
                 </div>
                 <div class="col-lg-6 col-xl-6 col-sm-12 form-group">
                     <label for="moneyTransferInformation">Money Transfer Information</label>
-                    <textarea class="form-control" id="moneyTransferInformation" aria-describedby="Money Transfer Information" rows="4"
+                    <textarea formControlName="reason" class="form-control" id="moneyTransferInformation" aria-describedby="Money Transfer Information" rows="4"
                         cols="50"></textarea>
                 </div>
             </div>

@@ -59,6 +59,12 @@ export class ManageInvestorComponent implements OnInit {
       facebook: new FormControl(),
       passport: new FormControl(),
       beneficiaryName: new FormControl("", Validators.required),
+      beneficiaryEmail: new FormControl("", [Validators.required, Validators.email]),
+      beneficiaryPhone: new FormControl("", Validators.required),
+      countryToTransfer: new FormControl(),
+      currency: new FormControl(),
+      reason: new FormControl(),
+      
     });
 
     

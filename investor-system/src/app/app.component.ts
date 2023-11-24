@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
 
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'investor-system';
+  constructor() {
+    console.log(environment.production);
+  }
 }
