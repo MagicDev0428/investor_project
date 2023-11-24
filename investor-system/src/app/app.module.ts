@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +18,7 @@ import { LogoutButtonComponent } from './components/logout-button/logout-button.
 import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { CallbackComponent } from './components/callback/callback.component';
     LogoutButtonComponent,
     AuthenticationButtonComponent,
     ProfileComponent,
-    CallbackComponent
+    CallbackComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -39,33 +42,21 @@ import { CallbackComponent } from './components/callback/callback.component';
     FormsModule,
     ReactiveFormsModule,
     AuthModule.forRoot({
-      domain: 'dev-i2zq17ecubzreyxk.us.auth0.com',
-      clientId: 'aP2PzJ0D8mtsvscnuX02mEGPosfi832v',
+      domain: environment.auth0Domain,
+      clientId: environment.auth0ClientId,
       authorizationParams: {
         redirect_uri: `${window.location.origin}/callback`,
-        audience: 'http://localhost:3007'
+        audience: environment.apiUrl
       },
+      errorPath: `unauthorized`,
       cacheLocation: 'localstorage',
       httpInterceptor: {
         allowedList: [
-          // {
-          //   // Match any request that starts 'https://{yourDomain}/api/v2/' (note the asterisk)
-          //   uri: 'https://dev-i2zq17ecubzreyxk.us.auth0.com/api/v2/*',
-          //   tokenOptions: {
-          //     authorizationParams: {
-          //       // The attached token should target this audience
-          //       audience: 'https://dev-i2zq17ecubzreyxk.us.auth0.com/api/v2/',
-    
-          //       // The attached token should have these scopes
-          //       scope: 'read:current_user'
-          //     }
-          //   }
-          // }
           {
-            uri: 'http://localhost:3007',
+            uri: environment.apiUrl,
             allowAnonymous: true
           },
-          'http://localhost:3007/*'
+          `${environment.apiUrl}/*`
         ]
       }
     }),
