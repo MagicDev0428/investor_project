@@ -21,6 +21,7 @@ export class ManageInvestorComponent implements OnInit {
 
   selectedInvestor$!: Observable<string | number>;
   investor: Investor;
+  files: any[] = [];
 
   protected addInvestorForm: FormGroup;
   protected submitted = false;
@@ -64,13 +65,13 @@ export class ManageInvestorComponent implements OnInit {
       countryToTransfer: new FormControl(),
       currency: new FormControl(),
       reason: new FormControl(),
-      
+      passportImage: new FormControl()
     });
 
     
-    this.addInvestorForm.setValue({investorName: this.investor.investorName, nickName: '', phone: 12356, email: "",
-      address: "", zipCode: "", city: "", country: "", investorStatus: "", facebook: "", passport: "", beneficiaryName: ""
-,     });
+//     this.addInvestorForm.setValue({investorName: this.investor.investorName, nickName: '', phone: 12356, email: "",
+//       address: "", zipCode: "", city: "", country: "", investorStatus: "", facebook: "", passport: "", beneficiaryName: ""
+// ,     });
 
    }
   
@@ -87,6 +88,60 @@ export class ManageInvestorComponent implements OnInit {
         "Form Submitted succesfully!!!\n Check the values in browser console."
       );
       console.table(this.addInvestorForm.value);
+
+      this.investorService.uploadFile(this.files).subscribe((response) => {
+        console.log(response);
+      })
     }
   }
+
+   /**
+   * on file drop handler
+   */
+   onFileDropped($event) {
+    this.prepareFilesList($event);
+  }
+   /**
+   * handle file from browsing
+   */
+   fileBrowseHandler(target) {
+    let files = target?.files;
+    this.prepareFilesList(files);
+  }
+
+   /**
+   * Convert Files list to normal array list
+   * @param files (Files List)
+   */
+   prepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      this.files.push(item);
+    }
+    //this.addInvestorForm.get('passportImage').setValue(this.files);
+  
+  }
+
+  /**
+   * format bytes
+   * @param bytes (File size in bytes)
+   * @param decimals (Decimals point)
+   */
+   formatBytes(bytes, decimals = 0) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+    /**
+   * Delete file from files list
+   * @param index (File index)
+   */
+    deleteFile(index: number) {
+      this.files.splice(index, 1);
+    }
 }

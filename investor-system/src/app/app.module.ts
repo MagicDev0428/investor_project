@@ -19,6 +19,7 @@ import { AuthenticationButtonComponent } from './components/authentication-butto
 import { ProfileComponent } from './components/profile/profile.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { DndDirective } from './dnd.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
     AuthenticationButtonComponent,
     ProfileComponent,
     CallbackComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    DndDirective
   ],
   imports: [
     BrowserModule,

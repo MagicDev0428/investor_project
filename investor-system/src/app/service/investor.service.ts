@@ -3,6 +3,7 @@ import { Observable, catchError, map, of } from 'rxjs';
 import { Investor } from '../model/investor';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { configService } from './config.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,15 @@ export class InvestorService {
 
   getMockdata() {
     return of(this.investor);
+  }
+
+  uploadFile(fileData: File[]){
+
+    let formData = new FormData();
+    for (var i = 0; i < fileData.length; i++) {
+        formData.append("uploads[]", fileData[i], fileData[i].name);
+    }
+    return this.http.post(environment.apiUrl + '/api/upload', formData)
+    
   }
 }
