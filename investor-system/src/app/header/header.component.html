@@ -1,7 +1,7 @@
 <nav class="nav">
   <a class="nav-link" [routerLink]="['list']" >Home</a>
   <a class="nav-link" [routerLink]="['manage-investor']">Manage Investor</a>
-  <a class="nav-link" [routerLink]="['manage-investor', 5]">Go to 5</a>
+  <!-- <a class="nav-link" [routerLink]="['manage-investor', 5]">Go to 5</a> -->
   <a class="nav-link" [routerLink]="['profile']" *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
   <div class="navbar-nav ml-auto">
     <app-authentication-button></app-authentication-button>

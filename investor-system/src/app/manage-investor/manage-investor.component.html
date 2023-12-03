@@ -1,5 +1,8 @@
 <div class="wrapper">
-    <h4 class="title-create">Create New Investor</h4>
+    <div class="title-create">
+        <h4 class="add-edit">Add: </h4>
+        <h4>Create New Investor</h4>
+    </div>
     <form class="form" [formGroup]="addInvestorForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
         <div class="content-wrap container-fluid text-left box-wrapper">
             <div class="row">
@@ -141,7 +144,8 @@
             <hr class="separator">
 
             <div class="row">
-                <div class="col-lg-8 col-sm-12 form-group choose-image-wrapper">
+                <!-- Upload File-->
+                <div class="col-lg-6 col-sm-12 form-group choose-image-wrapper">
                     <label for="passportImage">Passport Image</label>
                     <div class="file-wrapper">
                         <div class="container" appDnd (fileDropped)="onFileDropped($event)">
@@ -203,34 +207,55 @@
                     </div>
 
                 </div>
+
+                <!-- Pin Code -->
+                <div class="col-lg-3 col-sm-12 form-group offset-lg-3">
+                    <label for="pincode">Pin Code</label>
+                    <input formControlName="pincode" type="text" class="form-control" id="pincode"
+                        aria-describedby="pincode" />
+                        <span class="text-danger"
+                        *ngIf="(addInvestorForm.controls['pincode'].touched || submitted) && addInvestorForm.controls['pincode'].errors?.['required']">
+                        Pin Code is Required
+                    </span>
+                    <div class="isAdmin">
+                        <input type="checkbox" formControlName="isAdmin" class="admin-check-box"/>
+                        <span>Admin ?</span>
+                    </div>
+
+                </div>
             </div>
             <hr class="separator">
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg" >Save Investor</button>
+            <div class="row">
+                <div class="col-sm-12 col-lg-8 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg" >Save Investor</button>
+                </div>
+                <div class="col-sm-12 col-lg-4 text-center">
+                    <button class="btn btn-danger btn-lg" >Delete Investor</button>
+                </div>
             </div>
+        
 
-            <div class="info d-flex flex-row">
-                <div class="info-wrapper d-flex flex-column align-center">
-                    <div class="info-col">
+            <div class="row footer-info">
+                
+                    <div class="col-lg-3 col-sm-6">
                         <span class="info-text">Create Date: </span>
                         <span class="info-value">01-Feb-2023</span>
                     </div>
-                    <div class="info-col">
+                    <div class="col-lg-3 col-sm-6">
                         <span class="info-text">Edit Date</span>
                         <span class="info-value">12-August-2023</span>
                     </div>
-                </div>
-                <div class="info-wrapper d-flex flex-column align-center">
-                    <div class="info-col">
+                
+                    <div class="col-lg-3 col-sm-6">
                         <span class="info-text">Create By</span>
                         <span class="info-value">Torben</span>
                     </div>
-                    <div class="info-col">
+                    <div class="col-lg-3 col-sm-6">
                         <span class="info-text">Edit By</span>
                         <span class="info-value">Bee</span>
                     </div>
+                
                 </div>
             </div>
-        </div>
         </form>
 </div>

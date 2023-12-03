@@ -1,15 +1,36 @@
 .container .wrapper {
     padding: 10px 0;
   }
+  .form-group {
+    margin-bottom: 10px;
+  }
   .wrapper .title-create {
-    color: #2462b9;
+    .add-edit {
+      color: #aee06d;
+      margin-right: 10px;
+    }
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #1f4e78;
+    color: #fff;
     text-align: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+  }
+  .isAdmin {
+    margin-top: 10px;
+    .admin-check-box {
+      margin-right: 5px;
+    }
   }
   
   .box-wrapper {
     background-color: #e4efff;
     border-radius: 10px;
-    padding: 15px 10px;
+    padding: 15px 10px 0 10px;
   }
   .form-group label {
     color: #4175be;
@@ -20,19 +41,11 @@
     border-radius: 10px;
   }
 
-  .info .info-wrapper {
-      width: 100%;
-      align-items: center;
-  }
-  .info-wrapper .info-col {
-      display: flex;
-      justify-content: flex-start;
-      width: 100%;
-  }
-  .info-wrapper .info-text {
-      color: #6a86af;
-      width: 100px;
-      align-self: flex-start;
+  .footer-info {
+    color: #fff;
+    background-color: #ccd3f0;
+    padding: 10px 0;
+    margin: 10px -10px;
   }
 
   .file-wrapper {

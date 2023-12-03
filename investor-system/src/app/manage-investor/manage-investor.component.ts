@@ -65,7 +65,9 @@ export class ManageInvestorComponent implements OnInit {
       countryToTransfer: new FormControl(),
       currency: new FormControl(),
       reason: new FormControl(),
-      passportImage: new FormControl()
+      passportImage: new FormControl(),
+      pincode: new FormControl(),
+      isAdmin: new FormControl()
     });
 
     
