@@ -12,11 +12,28 @@ export class InvestorService {
   apiURL = 'api/investors';  // URL to web api
  
    investor: Investor = {
-    id: 1,
-    investorName: "Satendra",
-    lastName: "rawat",
-    address: ""
-  }
+     id: 0,
+     investorName: '',
+     nickName: '',
+     phone: '',
+     email: '',
+     address: '',
+     zipCode: 0,
+     city: '',
+     country: '',
+     investorStatus: '',
+     facebook: '',
+     passport: '',
+     beneficiaryName: '',
+     beneficiaryEmail: '',
+     beneficiaryPhone: '',
+     countryToTransfer: '',
+     currency: '',
+     reason: '',
+     passportImage: undefined,
+     pincode: 0,
+     isAdmin: undefined
+   }
   constructor(private http: HttpClient, private _configService: configService) { }
 
   getInvestors() : Observable<Investor[]> {
@@ -41,10 +58,18 @@ export class InvestorService {
   uploadFile(fileData: File[]){
 
     let formData = new FormData();
-    for (var i = 0; i < fileData.length; i++) {
-        formData.append("uploads[]", fileData[i], fileData[i].name);
-    }
-    return this.http.post(environment.apiUrl + '/api/upload', formData)
-    
+    [...fileData].forEach((file) => {
+      formData.append("file", file, file.name);
+    });
+    return formData;
+  }
+
+  saveInvestor(modelData: Investor): Observable<Investor> {
+    let urlPath = 'investor/addInvestor';
+      
+      
+      return this.http.post<Investor>(environment.apiUrl + urlPath, modelData).pipe(
+        catchError(this._configService.handleError)
+      );;
   }
 }

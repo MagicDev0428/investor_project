@@ -90,10 +90,25 @@ export class ManageInvestorComponent implements OnInit {
         "Form Submitted succesfully!!!\n Check the values in browser console."
       );
       console.table(this.addInvestorForm.value);
+      
+      let formData;
+      if(this.files && this.files.length) {
+        formData = this.investorService.uploadFile(this.files);
+      } else {
+        formData = new FormData()
+      }
+      const mData = JSON.stringify(this.addInvestorForm.value);
+      
+      formData.append('data', mData);
 
-      this.investorService.uploadFile(this.files).subscribe((response) => {
-        console.log(response);
-      })
+      this.investorService.saveInvestor(formData).subscribe({
+        next: (x) =>  {
+          console.log('The next value is: ', x)
+        },  
+  error: err => console.error('An error occurred :', err),  
+  complete: () => console.log('There are no more action happen.')  
+    })
+        
     }
   }
 
