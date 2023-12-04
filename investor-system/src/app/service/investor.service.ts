@@ -10,52 +10,52 @@ import { environment } from 'src/environments/environment';
 })
 export class InvestorService {
   apiURL = 'api/investors';  // URL to web api
- 
-   investor: Investor = {
-     id: 0,
-     investorName: '',
-     nickName: '',
-     phone: '',
-     email: '',
-     address: '',
-     zipCode: 0,
-     city: '',
-     country: '',
-     investorStatus: '',
-     facebook: '',
-     passport: '',
-     beneficiaryName: '',
-     beneficiaryEmail: '',
-     beneficiaryPhone: '',
-     countryToTransfer: '',
-     currency: '',
-     reason: '',
-     passportImage: undefined,
-     pincode: 0,
-     isAdmin: undefined
-   }
+
+  investor: Investor = {
+    id: 0,
+    investorName: '',
+    nickName: '',
+    phone: '',
+    email: '',
+    address: '',
+    zipCode: 0,
+    city: '',
+    country: '',
+    investorStatus: '',
+    facebook: '',
+    passport: '',
+    beneficiaryName: '',
+    beneficiaryEmail: '',
+    beneficiaryPhone: '',
+    countryToTransfer: '',
+    currency: '',
+    reason: '',
+    passportImage: undefined,
+    pincode: 0,
+    isAdmin: undefined
+  }
   constructor(private http: HttpClient, private _configService: configService) { }
 
-  getInvestors() : Observable<Investor[]> {
+  getInvestors(): Observable<Investor[]> {
     return this.http.get<Investor[]>(this.apiURL)
-    .pipe(
-      map((investor) => investor),
-      //tap(investors => this.log(`fetched heroes`)),
-      catchError(this._configService.handleError)
-    );
+      .pipe(
+        map((investor) => investor),
+        //tap(investors => this.log(`fetched heroes`)),
+        catchError(this._configService.handleError)
+      );
   }
   getInvestor(id: number | string): Observable<Investor> {
     return this.getInvestors().pipe(
-      map((investors: Investor[]) => investors.find(investor=> investor.id == id))
+      map((investors: Investor[]) => investors.find(investor => investor.id == id))
     )
-   
+
   }
 
   getMockdata() {
     return of(this.investor);
   }
 
-  uploadFile(fileData: File[]){
+  uploadFile(fileData: File[]) {
 
     let formData = new FormData();
     [...fileData].forEach((file) => {
@@ -66,10 +66,10 @@ export class InvestorService {
 
   saveInvestor(modelData: Investor): Observable<Investor> {
     let urlPath = 'investor/addInvestor';
-      
-      
-      return this.http.post<Investor>(environment.apiUrl + urlPath, modelData).pipe(
-        catchError(this._configService.handleError)
-      );;
+
+
+    return this.http.post<Investor>(environment.apiUrl + urlPath, modelData).pipe(
+      catchError(this._configService.handleError)
+    );;
   }
 }
