@@ -97,7 +97,7 @@
                     <input formControlName="beneficiaryEmail" type="email" class="form-control" id="BeneficiaryEmail"
                         aria-describedby="Beneficiary Email" />
                         <span class="text-danger"
-                        *ngIf="(addInvestorForm.controls['email'].touched || submitted) && addInvestorForm.controls['email'].errors?.['required']">
+                        *ngIf="(addInvestorForm.controls['beneficiaryEmail'].touched || submitted) && addInvestorForm.controls['beneficiaryEmail'].errors?.['required']">
                         Email Address is required
                     </span>
                 </div>
