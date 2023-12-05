@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class InvestorService {
-  apiURL = 'api/investors';  // URL to web api
+  apiURL = '/investors';  // URL to web api
 
   investor: Investor = {
     id: 0,
@@ -64,11 +64,10 @@ export class InvestorService {
     return formData;
   }
 
-  saveInvestor(modelData: Investor): Observable<Investor> {
-    let urlPath = 'investor/addInvestor';
+  saveInvestor(modelData: Investor): Observable<Investor> {   
 
 
-    return this.http.post<Investor>(environment.apiUrl + urlPath, modelData).pipe(
+    return this.http.post<Investor>(environment.apiUrl + this.apiURL, modelData).pipe(
       catchError(this._configService.handleError)
     );;
   }
