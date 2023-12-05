@@ -1,14 +1,14 @@
 export interface Investor {
     id: number,
-    investorName: string,
-    nickName: string,
+    name: string,
+    nickname: string,
     phone: string,
     email: string,
     address: string,
-    zipCode: number,
+    postcode: number,
     city: string,
     country: string,
-    investorStatus: string,
+    status: string,
     facebook: string,
     passport: string,
     beneficiaryName: string,
@@ -17,7 +17,7 @@ export interface Investor {
     countryToTransfer: string,
     currency: string,
     reason: string,
-    passportImage: File,
+    passportImages: File,
     pincode: number,
     isAdmin: Boolean
 }

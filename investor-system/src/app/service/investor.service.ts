@@ -13,15 +13,15 @@ export class InvestorService {
 
   investor: Investor = {
     id: 0,
-    investorName: '',
-    nickName: '',
+    name: '',
+    nickname: '',
     phone: '',
     email: '',
     address: '',
-    zipCode: 0,
+    postcode: 0,
     city: '',
     country: '',
-    investorStatus: '',
+    status: '',
     facebook: '',
     passport: '',
     beneficiaryName: '',
@@ -30,7 +30,7 @@ export class InvestorService {
     countryToTransfer: '',
     currency: '',
     reason: '',
-    passportImage: undefined,
+    passportImages: undefined,
     pincode: 0,
     isAdmin: undefined
   }
@@ -59,7 +59,7 @@ export class InvestorService {
 
     let formData = new FormData();
     [...fileData].forEach((file) => {
-      formData.append("file", file, file.name);
+      formData.append("passportImages", file, file.name);
     });
     return formData;
   }

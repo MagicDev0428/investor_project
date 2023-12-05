@@ -48,15 +48,15 @@ export class ManageInvestorComponent implements OnInit {
 
     this.addInvestorForm = this.formBuilder.group(
       {
-        investorName: new FormControl("", Validators.required),
-        nickName: new FormControl(),
+        name: new FormControl("", Validators.required),
+        nickname: new FormControl(),
         phone: new FormControl("", Validators.required),
         email: new FormControl("", [Validators.required, Validators.email]),
         address: new FormControl(),
-        zipCode: new FormControl(),
+        postcode: new FormControl(),
         city: new FormControl(),
         country: new FormControl(),
-        investorStatus: new FormControl(),
+        status: new FormControl(),
         facebook: new FormControl(),
         passport: new FormControl(),
         beneficiaryName: new FormControl("", Validators.required),
@@ -65,14 +65,14 @@ export class ManageInvestorComponent implements OnInit {
         countryToTransfer: new FormControl(),
         currency: new FormControl(),
         reason: new FormControl(),
-        passportImage: new FormControl(),
+        passportImages: new FormControl(),
         pincode: new FormControl(),
         isAdmin: new FormControl()
       });
 
 
-    //     this.addInvestorForm.setValue({investorName: this.investor.investorName, nickName: '', phone: 12356, email: "",
-    //       address: "", zipCode: "", city: "", country: "", investorStatus: "", facebook: "", passport: "", beneficiaryName: ""
+    //     this.addInvestorForm.setValue({name: this.investor.name, nickname: '', phone: 12356, email: "",
+    //       address: "", zipCode: "", city: "", country: "", status: "", facebook: "", passport: "", beneficiaryName: ""
     // ,     });
 
   }

@@ -7,16 +7,16 @@
         <div class="content-wrap container-fluid text-left box-wrapper">
             <div class="row">
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                    <label for="investorName">Name</label>
-                    <input formControlName="investorName" type="text" class="form-control" id="investorName" aria-describedby="investor Name" />
+                    <label for="name">Name</label>
+                    <input formControlName="name" type="text" class="form-control" id="name" aria-describedby="investor Name" />
                     <span class="text-danger"
-                                *ngIf="(addInvestorForm.controls['investorName'].touched || submitted) && addInvestorForm.controls['investorName'].errors?.['required']">
+                                *ngIf="(addInvestorForm.controls['name'].touched || submitted) && addInvestorForm.controls['name'].errors?.['required']">
                                 Name is required
                             </span>
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="investorNiceName">Nickname</label>
-                    <input formControlName="nickName" type="text" class="form-control" id="investorNiceName"
+                    <input formControlName="nickname" type="text" class="form-control" id="investorNiceName"
                         aria-describedby="investor Nick Name" />
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
@@ -47,8 +47,8 @@
                         cols="50"></textarea>
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                    <label for="zipCode">Zip Code</label>
-                    <input formControlName="zipCode" type="text" class="form-control" id="zipCode" aria-describedby="investor Zip Code" />
+                    <label for="postcode">Zip Code</label>
+                    <input formControlName="postcode" type="text" class="form-control" id="postcode" aria-describedby="investor Zip Code" />
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="city">City</label>
@@ -64,8 +64,8 @@
                     </select>
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                    <label for="investorStatus">Investor Status:</label>
-                    <select formControlName="investorStatus" class="form-control" id="investorStatus" name="investorStatus"
+                    <label for="status">Investor Status:</label>
+                    <select formControlName="status" class="form-control" id="status" name="status"
                         aria-describedby="investor status">
                         <option>Active</option>
                         <option>On Hold</option>
@@ -146,10 +146,10 @@
             <div class="row">
                 <!-- Upload File-->
                 <div class="col-lg-6 col-sm-12 form-group choose-image-wrapper">
-                    <label for="passportImage">Passport Image</label>
+                    <label for="passportImages">Passport Image</label>
                     <div class="file-wrapper">
                         <div class="container" appDnd (fileDropped)="onFileDropped($event)">
-                            <input formControlName="passportImage" type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target)" />
+                            <input formControlName="passportImages" type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target)" />
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
                                 <g fill="#3B454F" fill-rule="nonzero">
                                     <path
