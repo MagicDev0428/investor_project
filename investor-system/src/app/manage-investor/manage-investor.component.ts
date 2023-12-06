@@ -97,9 +97,17 @@ export class ManageInvestorComponent implements OnInit {
       } else {
         formData = new FormData()
       }
-      const mData = JSON.stringify(this.addInvestorForm.value);
 
-      formData.append('data', mData);
+      const formValues = this.addInvestorForm.value;
+      for (const key in formValues) {
+        if (formValues.hasOwnProperty(key)) {
+          formData.append(key, formValues[key]);
+        }
+      }
+      // const mData = JSON.stringify(this.addInvestorForm.value);
+
+      // formData.append('data', mData);
+      console.log('formData', formData);
 
       this.investorService.saveInvestor(formData).subscribe({
         next: (x) => {
