@@ -1,0 +1,49 @@
+<div class="adam-table">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title ">Transactions FROM and TO Adam</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="search-panel">
+                            <div class="d-flex flex-row form-group">
+                                <label class="col-form-label" for="search">Search Text:</label>
+                                <input type="text" class="form-control" id="searcg" aria-describedby="search" />
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-block btn-secondary">New Transfer</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Transfer Date</th>
+                                        <th scope="col">Transfer From</th>
+                                        <th scope="col">Transfer To</th>
+                                        <th scope="col">Amount Transfered</th>
+                                        <th scope="col">Description / Text</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of items" [ngClass]="{'redirect': item.t_direction}">
+                                        <td>{{ item.t_date }}</td>
+                                        <td>{{ item.t_from }}</td>
+                                        <td>{{ item.t_to }}</td>
+                                        <td class="amount">{{ item.t_amount }}</td>
+                                        <td>{{ item.t_description }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
