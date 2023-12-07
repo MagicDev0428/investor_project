@@ -137,10 +137,6 @@ textarea.form-control {
     font-weight: bold;
 }
 
-.file-wrapper .files-list {
-    // margin-top: 1rem;
-}
-
 .file-wrapper .single-file {
     display: flex;
     padding: 0.5rem;
@@ -183,19 +179,21 @@ textarea.form-control {
 
 .info-wrapper {
     margin-top: 30px;
-}
 
-.info-wrapper .info-text {
-    color: rgb(111, 75, 15);
-}
+    .info-text {
+        color: rgb(111, 75, 15);
+    }
 
-.info-wrapper .info-value {
-    margin-left: 15px;
-    color: rgb(111, 75, 15);
-}
+    .info-value {
+        margin-left: 15px;
+        color: rgb(111, 75, 15);
+    }
 
-.info-wrapper .info-col {
-    margin-bottom: 5px;
+    .info-col {
+        margin-bottom: 5px;
+    }
+
+    
 }
 
 .btn-secondary {
@@ -224,47 +222,35 @@ textarea.form-control {
 .modal-footer {
     height: auto;
     background-color: rgb(216, 204, 180);
+
+    .info-wrapper {
+        width: 100%;
+        margin: 0;
+        justify-content: space-between;
+    }
+
+    .info-col {
+        margin: 0;
+        color: white;
+        width: auto;
+        display: flex;
+    }
+
+    .info-text {
+        color: white;
+        width: auto;
+        margin-right: 15px;
+        margin-left: 10px;
+    }
+
+    .info-value {
+        color: white;
+        margin: 0;
+        margin-right: 10px;
+    }
 }
 
-.modal-footer .info-wrapper {
-    width: 100%;
-    margin: 0;
-    justify-content: space-between;
-}
 
-.modal-footer .info-col {
-    margin: 0;
-    color: white;
-    width: auto;
-    display: flex;
-}
-
-.modal-footer .info-text {
-    color: white;
-    width: auto;
-    margin-right: 15px;
-}
-
-.modal-footer .info-value {
-    color: white;
-    margin: 0;
-}
-
-.modal-footer .info-col:nth-child(1) {
-    justify-content: start;
-}
-
-.modal-footer .info-col:nth-child(2) {
-    justify-content: center;
-}
-
-.modal-footer .info-col:nth-child(3) {
-    justify-content: center;
-}
-
-.modal-footer .info-col:nth-child(4) {
-    justify-content: end;
-}
 
 @media (max-width: 992px) {
     .info-col {
