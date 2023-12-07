@@ -10,120 +10,162 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                <label for="amount">Amount</label>
-                                <input type="text" [style.textAlign]="textAlign" class="form-control" id="amount"
-                                    (keydown)="onlyNumbers($event)" (input)="validation($event)" value="{{amount}}"
-                                    aria-describedby="amount" />
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                <label for="from">From</label>
-                                <select class="form-control" id="from" name="from" aria-describedby="Money Transfer">
-                                    <option selected disabled>From Adam</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                <label for="to">To</label>
-                                <select class="form-control" id="to" name="to" aria-describedby="Money Transfer">
-                                    <option selected disabled>To Terban</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                <label for="trans_date">Transfer Date</label>
-                                <input type="date" class="form-control" id="trans_date" aria-describedby="trans_date" />
-                            </div>
-                            <div class="col-xl-6 col-lg-4 form-group">
-                                <label for="investment">Investment</label>
-                                <select class="form-control" id="investment" name="investment"
-                                    aria-describedby="investment">
-                                    <option>001 Bee and Terban's first...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="col-xl-6 col-lg-4 form-group">
-                                <label for="investor">Investor Name</label>
-                                <select class="form-control" id="investor" name="investor" aria-describedby="investor">
-                                    <option>Mark Snowman</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <hr class="separator">
-                        <div class="row">
-                            <div class="col-md-6 d-flex flex-column justify-content-between">
-                                <div class="form-group">
-                                    <label for="trans_from">Transfer From</label>
-                                    <select class="form-control" id="trans_from" name="trans_from"
-                                        aria-describedby="trans_from">
-                                        <option>KBank Toke xxx.x.xx....</option>
+                        <form class="form" [formGroup]="adamForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+                            <div class="row">
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="amount">Amount</label>
+                                    <input formControlName="amount" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="amount" (keydown)="onlyNumbers($event)"
+                                        (input)="validation($event)" value="{{amount}}" aria-describedby="amount" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="invest_from">From</label>
+                                    <select formControlName="invest_from" class="form-control" id="invest_from"
+                                        aria-describedby="Money Transfer">
+                                        <option selected>From Adam</option>
                                         <option>...</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="trans_to">Transfer To</label>
-                                    <select class="form-control" id="trans_to" name="trans_to"
-                                        aria-describedby="trans_to">
-                                        <option>Tarben KBank 562-90-9...</option>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="invest_to">To</label>
+                                    <select formControlName="invest_to" class="form-control" id="invest_to"
+                                        aria-describedby="Money Transfer">
+                                        <option selected>To Terban</option>
                                         <option>...</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="trans_no">Transfer No</label>
-                                    <select class="form-control" id="trans_no" name="trans_no"
-                                        aria-describedby="trans_no">
-                                        <option>013871569F15C35</option>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="trans_date">Transfer Date</label>
+                                    <input formControlName="trans_date" type="date" class="form-control" id="trans_date"
+                                        aria-describedby="Transfer Date" />
+                                </div>
+                                <div class="col-xl-6 col-lg-4 form-group">
+                                    <label for="investment">Investment</label>
+                                    <select formControlName="investment" class="form-control" id="investment"
+                                        aria-describedby="Investment">
+                                        <option>001 Bee and Terban's first...</option>
+                                        <option>...</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-6 col-lg-4 form-group">
+                                    <label for="investor">Investor Name</label>
+                                    <select formControlName="investor" class="form-control" id="investor"
+                                        aria-describedby="Investor">
+                                        <option>Mark Snowman</option>
                                         <option>...</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea class="form-control" id="description"
-                                        aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                            <hr class="separator">
+                            <div class="row">
+                                <div class="col-md-6 d-flex flex-column justify-content-between">
+                                    <div class="form-group">
+                                        <label for="trans_from">Transfer From</label>
+                                        <input formControlName="trans_from" type="text" class="form-control"
+                                            id="trans_from" aria-describedby="Transfer From" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="trans_to">Transfer To</label>
+                                        <input formControlName="trans_to" type="text" class="form-control" id="trans_to"
+                                            aria-describedby="Transfer To" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="trans_no">Transfer No</label>
+                                        <input formControlName="trans_no" type="text" class="form-control" id="trans_no"
+                                            aria-describedby="Transfer No" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea formControlName="description" class="form-control" id="description"
+                                            aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr class="separator">
-                        <div class="row d-flex flex-row">
-                            <div class="col-lg-8 col-sm-12 form-group choose-image-wrapper">
-                                <label for="passportImage">Reciepts</label>
-                                <div class="file-wrapper">
-                                    <input type="file" id="fileElem" multiple accept="image/*"
-                                        onchange="handleFiles(this.files)">
-                                    <span class="caption">Drag and drop files here</span>
-                                </div>
+                            <hr class="separator">
+                            <div class="row d-flex flex-row">
+                                <div class="col-lg-8 col-sm-12 form-group choose-image-wrapper">
+                                    <label for="receiptImages">Reciepts</label>
+                                    <div class="file-wrapper">
+                                        <div class="container" appDnd (fileDropped)="onFileDropped($event)">
+                                            <input formControlName="receiptImages" type="file" id="fileElem" multiple
+                                                accept="image/*" (change)="fileBrowseHandler($event.target)">
+                                            <span class="caption">Drag and drop files here</span>
+                                        </div>
+                                        <div class="files-list">
+                                            <div class="single-file" *ngFor="let file of files; let i = index">
+                                                <div class="file-icon" style="width: 50px">
+                                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                        viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;"
+                                                        xml:space="preserve">
+                                                        <polygon style="fill:#EDEADA;"
+                                                            points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />
+                                                        <g>
+                                                            <path style="fill:#CEC9AE;"
+                                                                d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />
+                                                            <path style="fill:#CEC9AE;"
+                                                                d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />
+                                                            <path style="fill:#CEC9AE;"
+                                                                d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />
+                                                            <path style="fill:#CEC9AE;"
+                                                                d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />
+                                                            <path style="fill:#CEC9AE;"
+                                                                d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />
+                                                        </g>
+                                                        <polygon style="fill:#CEC9AE;"
+                                                            points="37.5,0 37.5,14 51.5,14 " />
+                                                    </svg>
+                                                </div>
+                                                <div class="info">
+                                                    <h4 class="name">
+                                                        {{ file?.name }}
+                                                    </h4>
+                                                    <p class="size">
+                                                        {{ formatBytes(file?.size) }}
+                                                    </p>
+                                                    <!-- <app-progress [progress]="file?.progress"></app-progress> -->
+                                                </div>
 
-                            </div>
-                            <div class="col-lg-4 info d-flex flex-row">
-                                <div class="info-wrapper d-flex flex-column align-center">
-                                    <div class="info-col">
-                                        <span class="info-text">Create Date </span>
-                                        <span class="info-value">01-Feb-2023</span>
+                                                <div class="delete" (click)="deleteFile(i)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18"
+                                                        viewBox="0 0 14 18">
+                                                        <path fill="#B1B1B1" fill-rule="nonzero"
+                                                            d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="info-col">
-                                        <span class="info-text">Create By</span>
-                                        <span class="info-value">Torben</span>
-                                    </div>
-                                    <div class="info-col">
-                                        <span class="info-text">Update Date</span>
-                                        <span class="info-value">12-August-2023</span>
-                                    </div>
-                                    <div class="info-col">
-                                        <span class="info-text">Update By</span>
-                                        <span class="info-value">Bee</span>
+                                </div>
+                                <div class="col-lg-4 info d-flex flex-row">
+                                    <div class="info-wrapper d-flex flex-column align-center">
+                                        <div class="info-col">
+                                            <span class="info-text">Create Date </span>
+                                            <span class="info-value">01-Feb-2023</span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-text">Create By</span>
+                                            <span class="info-value">Torben</span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-text">Update Date</span>
+                                            <span class="info-value">12-August-2023</span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-text">Update By</span>
+                                            <span class="info-value">Bee</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row d-flex justify-content-center m-3 position-relative">
-                            <button type="button" class="btn btn-secondary">SAVE ADAM TRANSACTION</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">DELETE
-                                TRANSACTION</button>
-                        </div>
+                            <div class="row d-flex justify-content-center m-3 position-relative">
+                                <button type="button" class="btn btn-secondary">SAVE ADAM TRANSACTION</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">DELETE
+                                    TRANSACTION</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <div class="info-wrapper d-flex flex-row">
