@@ -1,20 +1,68 @@
-<p>list-investor works!</p>
-
-<h3>External API</h3>
-<div role="group">
-  <button (click)="callPublicEndpoint()" type="button">
-    Get Public Message
-  </button>
-  <button (click)="callProtectedEndpoint()" type="button">
-    Get Protected Message
-  </button>
-</div>
-
-<div *ngIf="message">
-  <h6>Result</h6>
-  <div>
-    <div>
-      <code> {{ message }} </code>
+<div class="list-investor ">
+  <div class="container">
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title ">INVESTORS</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">x</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="search-panel">
+              <div class="d-flex flex-row form-group">
+                <label class="col-form-label" for="search">Search Investor:</label>
+                <input type="text" class="form-control" id="searcg" aria-describedby="search" />
+              </div>
+              <div>
+                <button type="button" class="btn btn-block btn-secondary">New Investor</button>
+              </div>
+            </div>
+            <div class="table-responsive-sm">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Investor Name</th>
+                    <th scope="col">Amount Invested</th>
+                    <th scope="col">Monthly Profit</th>
+                    <th scope="col">Transfer Type</th>
+                    <th scope="col">Next Profit</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Facebook</th>
+                    <th scope="col">Folder</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of items">
+                    <td>
+                      <div>
+                        <span class="name">{{ item.name }}</span>
+                        <div class="button-group">
+                          <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal"
+                            aria-label="Icon Button">
+                            <span aria-hidden="true">i</span>
+                          </button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Icon Button">
+                            <span aria-hidden="true">E</span>
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ currency_style(item.amount) }}</td>
+                    <td>{{ currency_style(item.profit) }}</td>
+                    <td>{{ item.transfer_type }}</td>
+                    <td><app-profit-button [profitStyle]="item.profitStyle">{{ item.next_profit }}</app-profit-button></td>
+                    <td><a [href]="'mailTo:'+item.email">{{ item.email }}</a></td>
+                    <td><a [href]="item.facebook">Facebook</a></td>
+                    <td><a [href]="item.folder">FOLDER</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -58,7 +58,7 @@ export class AdamFormComponent {
     }
   }
 
-  validation(event: any) {
+  currency_style(event: any) {
     let thb_character = String.fromCharCode(3647);
     let value = event.target.value;
     value = value.replace(/,/g, ''); // Remove existing commas

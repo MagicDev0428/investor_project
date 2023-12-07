@@ -22,6 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { DndDirective } from './dnd.directive';
+import { ProfitButtonComponent } from './components/profit-button/profit-button-component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DndDirective } from './dnd.directive';
     ProfileComponent,
     CallbackComponent,
     UnauthorizedComponent,
-    DndDirective
+    DndDirective,
+    ProfitButtonComponent
   ],
   imports: [
     BrowserModule,

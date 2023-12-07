@@ -16,7 +16,7 @@
                                     <label for="amount">Amount</label>
                                     <input formControlName="amount" type="text" [style.textAlign]="textAlign"
                                         class="form-control" id="amount" (keydown)="onlyNumbers($event)"
-                                        (input)="validation($event)" value="{{amount}}" aria-describedby="amount" />
+                                        (input)="currency_style($event)" value="{{amount}}" aria-describedby="amount" />
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="invest_from">From</label>
