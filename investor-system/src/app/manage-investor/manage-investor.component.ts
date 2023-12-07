@@ -26,6 +26,7 @@ export class ManageInvestorComponent implements OnInit {
   selectedInvestor$!: Observable<string | number>;
   investor: Investor;
   files: any[] = [];
+  userId;
 
   protected addInvestorForm: FormGroup;
   protected submitted = false;
@@ -33,7 +34,7 @@ export class ManageInvestorComponent implements OnInit {
 
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
-      console.log(res);
+      this.userId = res;
       this.investorService.getMockdata().subscribe({
         next: (val) => {
           console.log(val);
