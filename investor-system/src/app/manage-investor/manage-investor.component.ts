@@ -3,7 +3,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Investor } from '../model/investor';
 import { Observable, map } from 'rxjs';
 import {
+  AbstractControl,
   Validators,
+  ValidatorFn,
   FormGroup,
   NonNullableFormBuilder,
   FormControl,
@@ -17,6 +19,8 @@ import { InvestorService } from '../service/investor.service';
   templateUrl: './manage-investor.component.html',
   styleUrls: ['./manage-investor.component.scss']
 })
+
+
 export class ManageInvestorComponent implements OnInit {
 
   selectedInvestor$!: Observable<string | number>;
@@ -49,27 +53,28 @@ export class ManageInvestorComponent implements OnInit {
     this.addInvestorForm = this.formBuilder.group(
       {
         name: new FormControl("", Validators.required),
-        nickname: new FormControl(),
-        phone: new FormControl("", Validators.required),
-        email: new FormControl("", [Validators.required, Validators.email]),
+        nickname: new FormControl("", Validators.required),
+        phone: new FormControl(""),
+        email: new FormControl(""),
         address: new FormControl(),
         postcode: new FormControl(),
         city: new FormControl(),
         country: new FormControl(),
-        status: new FormControl(),
+        status: new FormControl("active"),
         facebook: new FormControl(),
         passport: new FormControl(),
-        beneficiaryName: new FormControl("", Validators.required),
-        beneficiaryEmail: new FormControl("", [Validators.required, Validators.email]),
-        beneficiaryPhone: new FormControl("", Validators.required),
+        beneficiaryName: new FormControl(""),
+        beneficiaryEmail: new FormControl(""),
+        beneficiaryPhone: new FormControl(""),
         countryToTransfer: new FormControl(),
         currency: new FormControl(),
         reason: new FormControl(),
         passportImages: new FormControl(),
-        pincode: new FormControl(),
+        pincode: new FormControl("", Validators.required),
         isAdmin: new FormControl()
       });
 
+    this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator])
 
     //     this.addInvestorForm.setValue({name: this.investor.name, nickname: '', phone: 12356, email: "",
     //       address: "", zipCode: "", city: "", country: "", status: "", facebook: "", passport: "", beneficiaryName: ""
@@ -77,6 +82,21 @@ export class ManageInvestorComponent implements OnInit {
 
   }
 
+  emailValidator = (form: FormGroup) => {
+    const email = form.get('email').value;
+    const emailRegex = /^$|^.+@[^\.].*\.[a-z]{2,}$/; // Customize the regex pattern as needed
+
+    const valid = emailRegex.test(email);
+    return valid ? null : { invalidEmail: "true" };
+  };
+
+  beneficiaryEmailValidator = (form: FormGroup) => {
+    const beneficiaryEmail = form.get('beneficiaryEmail').value;
+    const emailRegex = /^$|^.+@[^\.].*\.[a-z]{2,}$/; // Customize the regex pattern as needed
+
+    const valid = emailRegex.test(beneficiaryEmail);
+    return valid ? null : { invalidBeneficiaryEmail: "true" };
+  };
 
   protected get InvestorFormControl() {
     return this.addInvestorForm.controls;
@@ -163,9 +183,9 @@ export class ManageInvestorComponent implements OnInit {
   }
 
   /**
- * Delete file from files list
- * @param index (File index)
- */
+  * Delete file from files list
+  * @param index (File index)
+  */
   deleteFile(index: number) {
     this.files.splice(index, 1);
   }

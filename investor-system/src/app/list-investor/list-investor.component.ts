@@ -12,7 +12,7 @@ interface Message {
 @Component({
   selector: 'app-list-investor',
   templateUrl: './list-investor.component.html',
-  styleUrls: ['./list-investor.component.scss']
+  styleUrls: ['../adam/investorForm.scss', './list-investor.component.scss']
 })
 export class ListInvestorComponent {
   message: string | undefined;
