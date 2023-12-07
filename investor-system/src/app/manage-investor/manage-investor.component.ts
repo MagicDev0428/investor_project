@@ -70,8 +70,7 @@ export class ManageInvestorComponent implements OnInit {
         currency: new FormControl(),
         reason: new FormControl(),
         passportImages: new FormControl(),
-        pincode: new FormControl("", Validators.required),
-        isAdmin: new FormControl()
+        pincode: new FormControl("", Validators.required)
       });
 
     this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator])

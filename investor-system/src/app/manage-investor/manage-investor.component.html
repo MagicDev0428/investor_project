@@ -41,7 +41,7 @@
                         *ngIf="(addInvestorForm.controls['email'].touched || submitted) && addInvestorForm.controls['email'].errors?.['required']">
                         Email Address is required
                     </span>
-                    <span class="text-danger" *ngIf="addInvestorForm.errors?.['invalidEmail']">
+                    <span class="text-danger" *ngIf="(addInvestorForm.controls['email'].touched || submitted) && addInvestorForm.errors?.['invalidEmail']">
                         Email Address is Invalid
                     </span>
                 </div>
@@ -110,7 +110,7 @@
                         Email Address is required
                     </span>
                     <span class="text-danger"
-                        *ngIf="addInvestorForm.errors?.['invalidBeneficiaryEmail']">
+                        *ngIf="(addInvestorForm.controls['beneficiaryEmail'].touched || submitted) && addInvestorForm.errors?.['invalidBeneficiaryEmail']">
                         Email Address is Invalid
                     </span>
                 </div>
@@ -233,11 +233,6 @@
                         *ngIf="(addInvestorForm.controls['pincode'].touched || submitted) && addInvestorForm.controls['pincode'].errors?.['required']">
                         Pin Code is Required
                     </span>
-                    <div class="isAdmin">
-                        <input type="checkbox" formControlName="isAdmin" class="admin-check-box" />
-                        <span>Admin ?</span>
-                    </div>
-
                 </div>
             </div>
             <hr class="separator">
