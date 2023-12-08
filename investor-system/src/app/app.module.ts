@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ToastrModule } from 'ngx-toastr';
+
 
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +26,7 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { DndDirective } from './dnd.directive';
 import { ProfitButtonComponent } from './components/profit-button/profit-button-component';
+import { AuthGuardFN } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,7 @@ import { ProfitButtonComponent } from './components/profit-button/profit-button-
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
@@ -68,9 +73,14 @@ import { ProfitButtonComponent } from './components/profit-button/profit-button-
         ]
       }
     }),
+    ToastrModule.forRoot({
+      closeButton: true,
+      timeOut: 15000, // 15 seconds
+      progressBar: true,
+    })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, {provide: AuthGuardFN }
   ],
   bootstrap: [AppComponent]
 })

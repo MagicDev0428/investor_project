@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Investor } from '../model/investor';
 import { Observable, map } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 import {
   AbstractControl,
   Validators,
@@ -30,7 +32,7 @@ export class ManageInvestorComponent implements OnInit {
 
   protected addInvestorForm: FormGroup;
   protected submitted = false;
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private investorService: InvestorService) {
+  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private investorService: InvestorService, private toastrService: ToastrService) {
 
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
@@ -46,7 +48,7 @@ export class ManageInvestorComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     //   this.activatedRoute.paramMap.subscribe((params: ParamMap) =>  {
     //     this.selectedInvestor$ = params.get('id');
     // });
@@ -132,8 +134,12 @@ export class ManageInvestorComponent implements OnInit {
       this.investorService.saveInvestor(formData).subscribe({
         next: (x) => {
           console.log('The next value is: ', x)
+          this.toastrService.success('Investor Created Successfully!');
         },
-        error: err => console.error('An error occurred :', err),
+        error: err => {
+          console.error('An error occurred :', err);
+          this.toastrService.error('Error while saving investor');
+        },
         complete: () => console.log('There are no more action happen.')
       })
 

@@ -4,6 +4,7 @@ import { Investor } from '../model/investor';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { configService } from './config.service';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class InvestorService {
     pincode: 0,
     isAdmin: undefined
   }
-  constructor(private http: HttpClient, private _configService: configService) { }
+  constructor(private http: HttpClient, private _configService: configService, private toasterService: ToastrService) { }
 
   getInvestors(): Observable<Investor[]> {
     return this.http.get<Investor[]>(this.apiURL)
