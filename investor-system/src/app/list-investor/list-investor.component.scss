@@ -42,40 +42,40 @@ textarea.form-control {
         background-color: rgb(31, 78, 120);
         border-radius: 0;
         position: relative;
-    }
 
-    .modal-header h5 {
-        width: 100%;
-        text-align: center;
-        color: white;
-        font-weight: bold;
-    }
+        h5 {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
 
-    .modal-header .close {
-        position: absolute;
-        right: 6px;
-        font-style: italic;
-        text-shadow: none;
-        opacity: 1;
-        padding: 0;
-        border-radius: 0.25rem;
-        border: none;
-    }
+        .close {
+            position: absolute;
+            right: 6px;
+            font-style: italic;
+            text-shadow: none;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0.25rem;
+            border: none;
 
-    .modal-header .close span {
-        background-color: #AAAAAA;
-        color: white;
-        font-weight: lighter;
-        border-radius: 0.25rem;
-        display: block;
-        width: 29px;
-        height: 29px;
-        text-align: center;
-        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+            span {
+                background-color: #AAAAAA;
+                color: white;
+                font-weight: lighter;
+                border-radius: 0.25rem;
+                display: block;
+                width: 29px;
+                height: 29px;
+                text-align: center;
+                box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+            }
+        }
     }
 
     .modal-dialog {
-        max-width: 1320px;
+        max-width: 1440px;
     }
 
     .modal-body {
@@ -91,10 +91,10 @@ textarea.form-control {
     font-weight: bold;
     font-size: 1.25rem;
     box-shadow: 5px 5px 4px rgba(31, 78, 120, 0.4);
-}
 
-.btn-secondary:hover {
-    background-color: rgb(25, 61, 92);
+    &:hover {
+        background-color: rgb(25, 61, 92);
+    }
 }
 
 .search-panel {
@@ -119,171 +119,176 @@ textarea.form-control {
 
 .form-group label {
     color: rgb(3, 0, 145);
-    ;
 }
 
-.table {
+.div-table {
     --bs-table-bg: none;
-    font-size: 11pt;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    overflow-x: auto;
 
-    thead tr {
-        background-color: rgb(31, 78, 120);
-        text-align: center;
-    }
-
-    thead th {
-        vertical-align: middle;
-        color: white;
-        font-weight: bold;
-    }
-
-    th:nth-child(1) {
-        width: 26%;
-    }
-
-    th:nth-child(2) {
-        width: 9.5%;
-    }
-
-    th:nth-child(3) {
-        width: 8.7%;
-    }
-
-    th:nth-child(4) {
-        width: 11.3%;
-    }
-
-    th:nth-child(5) {
-        width: 8.7%;
-    }
-
-    th:nth-child(6) {
-        width: 21.6%;
-    }
-
-    th:nth-child(7) {
-        width: 7.1%;
-    }
-
-    th:nth-child(8) {
-        width: 7.1%;
-    }
-
-    th,
-    tr {
+    .trow {
+        display: table-row;
         border: 1px solid rgba(0, 0, 0, 0.7);
-    }
-
-    tr,
-    td {
         background-color: white;
-    }
 
-    td {
-        text-align: center;
-        vertical-align: middle;
-    }
-
-    td:nth-child(1) {
-        text-align: start;
-
-        div {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-        }
-
-        span {
-            width: auto;
-        }
-
-        button:nth-child(1) {
-            margin-right: 10px;
-        }
-    }
-
-    td:nth-child(2) {
-        text-align: right;
-    }
-
-    td:nth-child(3) {
-        text-align: right;
-    }
-
-    td:nth-child(4) {
-        text-align: left;
-    }
-
-    td:nth-child(5) {
-        text-align: center;
-        vertical-align: middle;
-        padding: 8px 4px;
-
-        button {
+        .tcol {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 10px 8px;
+            border: 1px solid rgba(0, 0, 0, 0.7);
+            text-align: center;
             font-size: 11pt;
+
+            &:nth-child(1) {
+                text-align: start;
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+        
+                span {
+                    width: auto;
+                }
+        
+                button:nth-child(1) {
+                    margin-right: 10px;
+                }
+            }
+
+            &:nth-child(2) {
+                text-align: right;
+            }
+        
+            &:nth-child(3) {
+                text-align: right;
+            }
+        
+            &:nth-child(4) {
+                text-align: left;
+            }
+        
+            &:nth-child(5) {
+                text-align: center;
+                vertical-align: middle;
+                padding: 8px 4px;
+        
+                button {
+                    font-size: 11pt;
+                }
+            }
+        
+            &:nth-child(6) {
+                text-align: left;
+                color: rgb(32, 32, 255);
+                text-decoration: underline;
+        
+                a {
+                    color: rgb(32, 32, 255);
+                }
+        
+                a:active {
+                    color: rgb(32, 32, 255);
+                }
+        
+                a:focuse {
+                    color: rgb(32, 32, 255);
+                }
+            }
+        
+            &:nth-child(7) {
+                text-align: center;
+                color: rgb(32, 32, 255);
+                font-weight: bold;
+                text-decoration: underline;
+        
+                a {
+                    color: rgb(32, 32, 255);
+                }
+        
+                a:active {
+                    color: rgb(32, 32, 255);
+                }
+        
+                a:focuse {
+                    color: rgb(32, 32, 255);
+                }
+            }
+        
+            &:nth-child(8) {
+                text-align: center;
+                color: rgb(32, 32, 255);
+                font-weight: bold;
+                text-decoration: underline;
+        
+                a {
+                    color: rgb(32, 32, 255);
+                }
+        
+                a:active {
+                    color: rgb(32, 32, 255);
+                }
+        
+                a:focuse {
+                    color: rgb(32, 32, 255);
+                }
+            }
         }
-    }
 
-    td:nth-child(6) {
-        text-align: left;
-        color: rgb(32, 32, 255);
-        text-decoration: underline;
+        &.theader {
+            background-color: rgb(31, 78, 120);
+            text-align: center;
+            color: white;
+            height: 40px;
+            font-weight: bold;
 
-        a {
-            color: rgb(32, 32, 255);
-        }
+            .tcol {
+                &:nth-child(1) {
+                    width: 26%;
+                }
 
-        a:active {
-            color: rgb(32,32,255);
-        }
+                &:nth-child(2) {
+                    width: 10.5%;
+                }
 
-        a:focuse {
-            color: rgb(32,32,255);
-        }
-    }
+                &:nth-child(3) {
+                    width: 8.7%;
+                }
 
-    td:nth-child(7) {
-        text-align: center;
-        color: rgb(32, 32, 255);
-        font-weight: bold;
-        text-decoration: underline;
+                &:nth-child(4) {
+                    width: 11.3%;
+                }
 
-        a {
-            color: rgb(32, 32, 255);
-        }
+                &:nth-child(5) {
+                    width: 10.7%;
+                }
 
-        a:active {
-            color: rgb(32,32,255);
-        }
+                &:nth-child(6) {
+                    width: 18.6%;
+                    color: white;
+                    text-decoration: none;
+                }
 
-        a:focuse {
-            color: rgb(32,32,255);
-        }
-    }
+                &:nth-child(7) {
+                    width: 7.1%;
+                    color: white;
+                    text-decoration: none;
+                }
 
-    td:nth-child(8) {
-        text-align: center;
-        color: rgb(32, 32, 255);
-        font-weight: bold;
-        text-decoration: underline;
-
-        a {
-            color: rgb(32, 32, 255);
-        }
-
-        a:active {
-            color: rgb(32,32,255);
-        }
-
-        a:focuse {
-            color: rgb(32,32,255);
+                &:nth-child(8) {
+                    width: 7.1%;
+                    color: white;
+                    text-decoration: none;
+                }
+            }
         }
     }
 
     .button-group {
         display: flex;
         flex-direction: row;
-        justify-content: end;
         float: right;
 
         .btn-secondary {
@@ -311,6 +316,27 @@ textarea.form-control {
     }
 }
 
+@media (max-width: 768px) {
+    .search-panel {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        flex-direction: column !important;
+        justify-content: center;
+    }
+
+    .form-control {
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    .btn-secondary {
+        width: 100%;
+    }
+}
+
 @media (max-width: 576px) {
     .search-panel {
         display: block;
@@ -325,5 +351,9 @@ textarea.form-control {
     .form-control {
         width: 100%;
         margin: 0 !important;
+    }
+
+    .btn-secondary {
+        width: 100%;
     }
 }
