@@ -1,9 +1,9 @@
-<nav class="nav">
-  <a class="nav-link" [routerLink]="['list']" >Home</a>
-  <a class="nav-link" [routerLink]="['manage-investor']">Manage Investor</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-nav nav-link" [routerLink]="['list']">Home</a>
+  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['manage-investor']">Manage Investor</a>
   <!-- <a class="nav-link" [routerLink]="['manage-investor', 5]">Go to 5</a> -->
-  <a class="nav-link" [routerLink]="['profile']" *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
-  <div class="navbar-nav ml-auto">
-    <app-authentication-button></app-authentication-button>
-  </div>
+  <a class="navbar-nav" [routerLink]="['profile']" *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
+  
+  <app-authentication-button></app-authentication-button>
+  
 </nav>
