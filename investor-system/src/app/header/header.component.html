@@ -8,7 +8,7 @@
   <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['logs']">Logs</a>
   <a class="navbar-nav nav-link" [routerLink]="['my-investments']">My Investments</a>
   <!-- <a class="nav-link" [routerLink]="['manage-investor', 5]">Go to 5</a> -->
-  <a class="navbar-nav" [routerLink]="['profile']" *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
+  <a class="navbar-nav nav-link" [routerLink]="['profile']" *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
   
   <app-authentication-button></app-authentication-button>
   
