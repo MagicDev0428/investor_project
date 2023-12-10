@@ -1,6 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-nav nav-link" [routerLink]="['list']">Home</a>
   <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['manage-investor']">Manage Investor</a>
+  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['investments']">Investments</a>
+  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['balance']">Balance</a>
+  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['adam-table']">Adam</a>
+  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['total']">Total</a>
+  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['logs']">Logs</a>
+  <a class="navbar-nav nav-link" [routerLink]="['my-investments']">My Investments</a>
   <!-- <a class="nav-link" [routerLink]="['manage-investor', 5]">Go to 5</a> -->
   <a class="navbar-nav" [routerLink]="['profile']" *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
   
