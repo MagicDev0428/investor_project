@@ -16,7 +16,8 @@
                 <input type="text" class="form-control" id="searcg" aria-describedby="search" />
               </div>
               <div>
-                <button type="button" class="btn btn-block btn-secondary">New Investor</button>
+                <button type="button" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" 
+                  class="btn btn-block btn-secondary" (click)="addNewInvestor()">New Investor</button>
               </div>
             </div>
             <div class="div-table">

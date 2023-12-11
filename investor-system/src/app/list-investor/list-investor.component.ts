@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { configService } from '../service/config.service';
 import { environment } from '../../environments/environment';
+import { AuthService } from '@auth0/auth0-angular';
+import { Router } from '@angular/router';
 
 interface Message {
   message?: string;
@@ -89,7 +91,12 @@ export class ListInvestorComponent {
   items = table_contents;
   thb_mark = String.fromCharCode(3647);
 
-  constructor(private http: HttpClient, private configService: configService) { }
+  constructor(
+    private http: HttpClient,
+    private configService: configService,
+    public auth: AuthService,
+    private router: Router
+    ) { }
 
   callProtectedEndpoint(): void {
     this.http
@@ -126,5 +133,13 @@ export class ListInvestorComponent {
     currency_amount = currency_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
     currency_amount = currency_amount.replace(currency_amount, thb_character + ' ' + currency_amount);
     return currency_amount;
+  }
+
+  /**
+   * Add new investor only if user has admin token then only he can add the new investor
+   * @author Satendra
+   */
+  addNewInvestor() {
+    this.router.navigate(["manage-investor"]);
   }
 }
