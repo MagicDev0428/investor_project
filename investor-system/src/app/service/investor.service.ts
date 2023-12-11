@@ -33,7 +33,8 @@ export class InvestorService {
     reason: '',
     passportImages: undefined,
     pincode: 0,
-    isAdmin: undefined
+    isAdmin: undefined,
+    transferType: ''
   }
   constructor(private http: HttpClient, private _configService: configService, private toasterService: ToastrService) { }
 

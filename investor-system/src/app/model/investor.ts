@@ -19,5 +19,6 @@ export interface Investor {
     reason: string,
     passportImages: File,
     pincode: number,
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    transferType: string    
 }
