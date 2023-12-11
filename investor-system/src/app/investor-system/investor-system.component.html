@@ -1,0 +1,142 @@
+<div class="wrapper">
+    <div class="title-create">
+        <h4 class="title">INVESTOR SYSTEM</h4>
+        <h4>Friday 17 <span class="add-edit">NOVEMBER 2023</span></h4>
+    </div>
+    <div class="content-wrap container-fluid text-left box-wrapper">
+        <div class="row">
+            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                <label for="investor_left_pay">Investors left to Pay</label>
+                <input type="text" class="form-control fw-bold" id="investor_left_pay"
+                    aria-describedby="Investors left to Pay" [value]="currency_style(data.investor_left_pay)" />
+            </div>
+            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                <label for="profit_to_pay">Profit to Pay</label>
+                <input type="text" class="form-control fw-bold" id="profit_to_pay" aria-describedby="Profit to Pay"
+                    [value]="currency_style(data.profit_to_pay)" />
+            </div>
+            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                <label for="profit_already_paid">Profit Already Paid</label>
+                <input type="tel" class="form-control text-success fw-bold" id="profit_already_paid"
+                    aria-describedby="Profit Already Paid" [value]="currency_style(data.profit_already_paid)" />
+            </div>
+            <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                <label for="profit_left_pay">Profit left to Pay</label>
+                <input type="email" class="form-control text-danger fw-bold" id="profit_left_pay"
+                    aria-describedby="Profit left to Pay" [value]="currency_style(data.profit_left_pay)" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="div-table bank-table">
+                    <div class="trow ttitle">ThaiBank Investors</div>
+                    <div class="trow theader">
+                        <div class="tcol">Total</div>
+                        <div class="tcol">{{ currency_style(data.bank_total) }}</div>
+                    </div>
+                    <div *ngFor="let item of data.bank_data; let i = index" class="trow">
+                        <div class="tcol"><button *ngIf="item[0]!=null" [class]="data.invest_state[item[2]]">{{ item[0] }}</button></div>
+                        <div *ngIf="item[1]!=null" class="tcol">{{ currency_style(item[1]) }}</div>
+                        <div *ngIf="item[1]==null" class="tcol"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="div-table transfer-table">
+                    <div class="trow ttitle">Transfer Investors</div>
+                    <div class="trow theader">
+                        <div class="tcol">Total</div>
+                        <div class="tcol">{{ currency_style(data.transfer_total) }}</div>
+                    </div>
+                    <div *ngFor="let item of data.transfer_data; let i = index" class="trow">
+                        <div class="tcol"><button *ngIf="item[0]!=null" [class]="data.invest_state[item[2]]">{{ item[0] }}</button></div>
+                        <div *ngIf="item[1]!=null" class="tcol">{{ currency_style(item[1]) }}</div>
+                        <div *ngIf="item[1]==null" class="tcol"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="div-table envelop-table">
+                    <div class="trow ttitle">Envelop Investors</div>
+                    <div class="trow theader">
+                        <div class="tcol">Total</div>
+                        <div class="tcol">{{ currency_style(data.envelop_total) }}</div>
+                    </div>
+                    <div *ngFor="let item of data.envelop_data; let i = index" class="trow">
+                        <div class="tcol"><button *ngIf="item[0]!=null" [class]="data.invest_state[item[2]]">{{ item[0] }}</button></div>
+                        <div *ngIf="item[1]!=null" class="tcol">{{ currency_style(item[1]) }}</div>
+                        <div *ngIf="item[1]==null" class="tcol"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <div class="row">
+                    <div class="col-xl-6 form-group">
+                        <label for="open_invest">Open Investments</label>
+                        <input type="text" class="form-control fw-bold" id="open_invest"
+                            aria-describedby="Open Investments" [value]="data.open_invest" />
+                    </div>
+                    <div class="col-xl-6 form-group">
+                        <label for="amount_available">Amount Available</label>
+                        <input type="text" class="form-control fw-bold" id="amount_available"
+                            aria-describedby="Amount Available" [value]="currency_style(data.amount_available)" />
+                    </div>
+                    <div class="col-xl-6 form-group">
+                        <label for="total_invest">Totally Invested</label>
+                        <input type="tel" class="form-control fw-bold" id="total_invest"
+                            aria-describedby="Totally Invested" [value]="currency_style(data.total_invest)" />
+                    </div>
+                    <div class="col-xl-6 form-group">
+                        <label for="total_profit">Total Profit Paid</label>
+                        <input type="email" class="form-control fw-bold" id="total_profit"
+                            aria-describedby="Total Profit Paid" [value]="currency_style(data.total_profit)" />
+                    </div>
+                    <div class="col-xl-6 form-group">
+                        <label for="no_investor">No of Investors</label>
+                        <input type="email" class="form-control fw-bold" id="no_investor"
+                            aria-describedby="No of Investors" [value]="data.no_investor" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-7 form-group mb-4">
+                        <button class="btn btn-primary">Investors</button>
+                    </div>
+                    <div class="col-xl-5 form-group mb-4">
+                        <button class="btn btn-primary">New</button>
+                    </div>
+                    <div class="col-xl-7 form-group mb-4">
+                        <button class="btn btn-info">Investments</button>
+                    </div>
+                    <div class="col-xl-5 form-group mb-4">
+                        <button class="btn btn-info">New</button>
+                    </div>
+                    <div class="col-xl-7 form-group mb-4">
+                        <button class="btn btn-secondary">Adam Transaction</button>
+                    </div>
+                    <div class="col-xl-5 form-group mb-4">
+                        <button class="btn btn-secondary">New</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 form-group">
+                <div class="div-table expire-table">
+                    <div class="trow ttitle">Soon To Expire Investment</div>
+                    <div *ngFor="let item of data.soon_invests; let i = index"
+                        [ngClass]="{'trow': true, 'theader': i==0, 'text-danger': i==0, 'fw-bold': i==0}">
+                        <div class="tcol">{{ item[0] }}</div>
+                        <div class="tcol">{{ item[1] }}</div>
+                        <div class="tcol">{{ currency_style(item[2]) }}</div>
+                    </div>
+                </div>
+                <div class="log-entry">
+                    <div class="log-title fw-bold">Newest Log Entries</div>
+                    <select class="form-select" multiple aria-label="multiple select example">
+                        <option *ngFor="let item of data.log_entry">{{ item }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
