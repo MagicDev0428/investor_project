@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow-2">
   <a class="navbar-nav nav-link" [routerLink]="['list']">Home</a>
   <!-- <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['manage-investor']">Investors</a> -->
   <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['investments']">Investments</a>
