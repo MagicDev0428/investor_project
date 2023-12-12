@@ -123,11 +123,12 @@ select.form-control {
         display: table-row;
         border: 1px solid rgba(0, 0, 0, 0.7);
         background-color: rgb(235, 255, 200);
+        cursor: pointer;
 
         &.redirect {
             background-color: #F6DED4;
         }
-
+        
         .tcol {
             display: table-cell;
             vertical-align: middle;
@@ -149,8 +150,12 @@ select.form-control {
             text-align: center;
             color: white;
             height: 40px;
+            cursor:auto;
 
             .tcol {
+                text-align: center;
+                cursor: pointer;
+
                 &:nth-child(1) {
                     width: 13%;
                 }

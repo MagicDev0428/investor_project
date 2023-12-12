@@ -13,26 +13,30 @@
                         <div class="search-panel">
                             <div class="d-flex flex-row form-group">
                                 <label class="col-form-label" for="search">Search Text:</label>
-                                <input type="text" class="form-control" id="searcg" aria-describedby="search" />
+                                <input type="text" class="form-control" id="search" aria-describedby="search"
+                                    [(ngModel)]="searchTerm" (keyup)="onSearch($event)" placeholder="search..." />
                             </div>
                             <div>
-                                <button type="button" class="btn btn-block btn-secondary">New Transfer</button>
+                                <button type="button" (click)="goForm()" class="btn btn-block btn-secondary">New
+                                    Transfer</button>
                             </div>
                         </div>
                         <div class="div-table">
                             <div class="trow theader">
-                                <div class="tcol">Transfer Date</div>
-                                <div class="tcol">Transfer From</div>
-                                <div class="tcol">Transfer To</div>
-                                <div class="tcol">Amount Transfered</div>
-                                <div class="tcol">Description / Text</div>
+                                <div class="tcol" (click)="orderTable('createdDate')">Transfer Date</div>
+                                <div class="tcol" (click)="orderTable('transactionFrom')">Transfer From</div>
+                                <div class="tcol" (click)="orderTable('transactionTo')">Transfer To</div>
+                                <div class="tcol" (click)="orderTable('amount')">Amount Transfered</div>
+                                <div class="tcol" (click)="orderTable('description')">Description / Text</div>
                             </div>
-                            <div *ngFor="let item of items" [class]="{'trow': true, 'redirect': item.t_direction}">
-                                <div class="tcol">{{ item.t_date }}</div>
-                                <div class="tcol">{{ item.t_from }}</div>
-                                <div class="tcol">{{ item.t_to }}</div>
-                                <div class="tcol">{{ currency_style(item.t_amount) }}</div>
-                                <div class="tcol">{{ item.t_description }}</div>
+                            <div *ngFor="let item of items"
+                                [class]="{'trow': true, 'redirect': item.transactionTo.toLowerCase().includes('adam')}"
+                                (click)="goForm(item._id)">
+                                <div class="tcol">{{ item.createdDate }}</div>
+                                <div class="tcol">{{ item.transactionFrom }}</div>
+                                <div class="tcol">{{ item.transactionTo }}</div>
+                                <div class="tcol">{{ item.amount }}</div>
+                                <div class="tcol">{{ item.description }}</div>
                             </div>
                         </div>
                     </div>
