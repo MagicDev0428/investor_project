@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Adam } from '../model/adam';
+import { Observable, map } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import {
   Validators,
   FormGroup,
   NonNullableFormBuilder,
   FormControl,
 } from "@angular/forms";
+
 import { FormBuilder } from '@angular/forms';
+import { AdamService } from '../service/adam.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-adam-form',
@@ -14,35 +20,94 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./investorForm.scss', './adam-form.component.scss'],
 })
 
-export class AdamFormComponent {
+export class AdamFormComponent implements OnInit {
 
   amount = '';
-  textAlign = '';
+  section = 'CREATE';
+  title = 'ADAM\'\s New Transaction'
+  selectedAdam$!: Observable<string | number>;
+  adam: Adam = {
+    _id: '',
+    amount: '',
+    transactionFrom: '',
+    transactionTo: '',
+    createdDate: new Date(),
+    investments: '',
+    investorName: '',
+    investmentNo: 0,
+    transferFrom: '',
+    transferTo: '',
+    transactionNo: '',
+    description: '',
+    attachments: []
+  }
   files: any[] = [];
+  userId: any = '';
+  values: any[] = [];
+  investments: any[] = [];
+  investorsNames: any[] = [];
 
   protected adamForm: FormGroup;
+  protected submitted = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
-
-   }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private adamService: AdamService, private toastrService: ToastrService) {
+    this.selectedAdam$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.selectedAdam$.subscribe(res => {
+      this.userId = res;
+    });
+  }
 
   ngOnInit(): void {
-    this.amount = String.fromCharCode(3647);
-    this.textAlign = 'right';
     this.adamForm = this.formBuilder.group(
       {
         amount: new FormControl(""),
-        invest_from: new FormControl(),
-        invest_to: new FormControl(""),
-        trans_date: new FormControl(""),
-        investment: new FormControl(),
-        investor: new FormControl(),
-        trans_from: new FormControl(),
-        trans_to: new FormControl(),
-        trans_no: new FormControl(),
+        transactionFrom: new FormControl(),
+        transactionTo: new FormControl(""),
+        createdDate: new FormControl(""),
+        investments: new FormControl(),
+        investorName: new FormControl(),
+        transferFrom: new FormControl(),
+        transferTo: new FormControl(),
+        transactionNo: new FormControl(),
         description: new FormControl(),
-        receiptImages: new FormControl()
+        attachments: new FormControl()
       });
+    if (typeof this.userId !== 'undefined') {
+      this.adamService.getAdam(this.userId).subscribe({
+        next: (res) => {
+          this.values = res.adams;
+          this.amount = this.values['amount'];
+          this.currency_style(this.amount);
+          this.adamForm.get('transactionFrom').setValue(this.values['transactionFrom']);
+          this.adamForm.get('transactionTo').setValue(this.values['transactionTo']);
+          this.adamForm.get('createdDate').setValue(moment(this.values['createdDate']).format('yyyy-MM-DD'));
+          this.adamForm.get('investments').setValue(this.values['investmentNo']);
+          this.adamForm.get('investorName').setValue(this.values['investorName']);
+          this.adamForm.get('transferFrom').setValue(this.values['transferFrom']);
+          this.adamForm.get('transferTo').setValue(this.values['transferTo']);
+          this.adamForm.get('transactionNo').setValue(this.values['transactionNo']);
+          this.adamForm.get('description').setValue(this.values['description']);
+          this.section = 'EDIT';
+          this.title = moment(this.values['createdDate']).format('DD-MMM-YYYY') + ' ' +
+            'transfer ' + this.adamForm.get('amount').value;
+          this.title = this.title.replace(new RegExp(String.fromCharCode(3647), "gi"), "");
+          if (this.values['transactionTo']?.toLowerCase().includes('adam')) {
+            this.title = this.title + ' to ' + 'Adam';
+          } else if (this.values['transactionFrom']?.toLowerCase().includes('adam')) {
+            this.title = this.title + ' from ' + 'Adam';
+          }
+        },
+        error: err => {
+          console.error('An error occurred :', err);
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    }
+    this.adamService.getAdamInvestors().subscribe((res) => {
+      this.investments = res.adams.investments;
+      this.investorsNames = res.adams.investorsNames;
+    });
   }
 
   onlyNumbers(event: KeyboardEvent) {
@@ -58,15 +123,75 @@ export class AdamFormComponent {
     }
   }
 
-  currency_style(event: any) {
+  currency_style(value: any) {
     let thb_character = String.fromCharCode(3647);
-    let value = event.target.value;
-    value = value.replace(/,/g, ''); // Remove existing commas
-    value = value.replace(thb_character, ''); //Remove existing thb mark
-    value = value.replace(' ', ''); //Remove existing spaces
-    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
-    value = value.replace(value, thb_character + ' ' + value);
-    this.amount = value;
+    value = value?.toString();
+    value = value?.replace(/,/g, ''); // Remove existing commas
+    value = value?.replace(thb_character, ''); //Remove existing thb mark
+    value = value?.replace(' ', ''); //Remove existing spaces
+    value = value?.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
+    value = value?.replace(value, thb_character + ' ' + value);
+    this.adamForm.get('amount').setValue(value);
+  }
+
+  onInputChange(event: any) {
+    this.amount = event.target.value.replace(/\D/g, '');
+    this.currency_style(this.amount);
+  }
+
+  deleteTransaction(_id: any) {
+    console.log('ID->', _id);
+    if (typeof _id !== 'undefined') {
+      this.adamService.deleteAdam(_id).subscribe({
+        next: (res) => {
+          this.toastrService.success('Data was successfully deleted!');
+          this.router.navigate(['/adam-table/']);
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    }
+  }
+
+  saveAction() {
+    this.adam._id = this.userId;
+    this.adam.amount = this.amount;
+    this.adam.transactionFrom = this.adamForm.get('transactionFrom').value;
+    this.adam.investmentNo = this.adamForm.get('investments').value;
+    this.adam.transactionTo = this.adamForm.get('transactionTo').value;
+    this.adam.createdDate = this.adamForm.get('createdDate').value;
+    let selectedOption = document.querySelector(`option[value="${this.adam.investmentNo}"]`);
+    this.adam.investments = selectedOption.textContent.trim();
+    this.adam.investorName = this.adamForm.get('investorName').value;
+    this.adam.transferFrom = this.adamForm.get('transferFrom').value;
+    this.adam.transferTo = this.adamForm.get('transferTo').value;
+    this.adam.transactionNo = this.adamForm.get('transactionNo').value;
+    this.adam.description = this.adamForm.get('description').value;
+    if (typeof this.userId !== 'undefined') {
+      this.adamService.updateAdam(this.adam).subscribe({
+        next: (res) => {
+          this.toastrService.success('Transaction was successfully created!');
+          this.router.navigate(['/adam-form/' + this.userId]);
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    } else {
+      this.adamService.saveAdam(this.adam).subscribe({
+        next: (res) => {
+          this.toastrService.success('Transaction was successfully created!');
+          this.router.navigate(['/adam-table/']);
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    }
   }
 
   protected onSubmit(): void {
@@ -74,8 +199,8 @@ export class AdamFormComponent {
   }
 
   /**
-* on file drop handler
-*/
+  * on file drop handler
+  */
   onFileDropped($event) {
     this.prepareFilesList($event);
   }
@@ -116,9 +241,9 @@ export class AdamFormComponent {
   }
 
   /**
- * Delete file from files list
- * @param index (File index)
- */
+  * Delete file from files list
+  * @param index (File index)
+  */
   deleteFile(index: number) {
     this.files.splice(index, 1);
   }

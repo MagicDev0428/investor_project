@@ -3,12 +3,12 @@ import { temp_data } from './temp-data';
 
 
 @Component({
-  selector: 'app-investor-system',
-  templateUrl: './investor-system.component.html',
-  styleUrls: ['./investor-system.component.scss']
+  selector: 'app-front-page',
+  templateUrl: './front-page.component.html',
+  styleUrls: ['./front-page.component.scss']
 })
 
-export class InvestorSystemComponent {
+export class FrontPageComponent {
 
   data = temp_data;
 
