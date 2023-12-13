@@ -20,19 +20,19 @@ import { AuthGuardFN } from './auth-guard.service';
 const routes: Routes = [
   {path: 'list', component: ListInvestorComponent},
   {path: 'manage-investor', component: ManageInvestorComponent},
-  {path: 'manage-investor/:id', component: ManageInvestorComponent},
+  {path: 'manage-investor/:id', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
   {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: 'profile', component: ProfileComponent },
   {path: 'callback', component: CallbackComponent},
   {path: 'unauthorized', component: UnauthorizedComponent},
-  {path: 'adam-table', component: AdamTableComponent},
-  {path: 'adam-form',  component: AdamFormComponent},
-  {path: 'adam-form/:id', component: AdamFormComponent},
-  {path: 'info', component: InvestorInfoComponent},
-  {path: 'front-page', component:FrontPageComponent},
-  {path: 'investment-list', component:InvestmentListComponent},
-  {path: 'investment-form', component:InvestmentFormComponent},
-  {path: 'investment-form/:id', component:InvestmentFormComponent}
+  {path: 'adam-table', component: AdamTableComponent, canActivate: [AuthGuardFN]},
+  {path: 'adam-form',  component: AdamFormComponent, canActivate: [AuthGuardFN]},
+  {path: 'adam-form/:id', component: AdamFormComponent, canActivate: [AuthGuardFN]},
+  {path: 'info', component: InvestorInfoComponent, canActivate: [AuthGuardFN]},
+  {path: 'front-page', component:FrontPageComponent, canActivate: [AuthGuardFN]},
+  {path: 'investment-list', component:InvestmentListComponent, canActivate: [AuthGuardFN]},
+  {path: 'investment-form', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
+  {path: 'investment-form/:id', component:InvestmentFormComponent, canActivate: [AuthGuardFN]}
 ];
 
 @NgModule({

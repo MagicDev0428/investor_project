@@ -71,15 +71,15 @@ import { AuthGuardFN } from './auth-guard.service';
       },
       errorPath: `unauthorized`,
       cacheLocation: 'localstorage',
-      // httpInterceptor: {
-      //   allowedList: [
-      //     {
-      //       uri: environment.apiUrl,
-      //       allowAnonymous: true
-      //     },
-      //     `${environment.apiUrl}/*`
-      //   ]
-      // }
+      httpInterceptor: {
+        allowedList: [
+          {
+            uri: environment.apiUrl,
+            allowAnonymous: true
+          },
+          `${environment.apiUrl}/*`
+        ]
+      }
     }),
     ToastrModule.forRoot({
       closeButton: true,
