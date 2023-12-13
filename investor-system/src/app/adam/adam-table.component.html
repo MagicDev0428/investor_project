@@ -30,7 +30,7 @@
                                 <div class="tcol" (click)="orderTable('description')">Description / Text</div>
                             </div>
                             <div *ngFor="let item of items"
-                                [class]="{'trow': true, 'redirect': item.transactionTo.toLowerCase().includes('adam')}"
+                                [class]="{'trow': true, 'redirect': item.transactionTo?.toLowerCase().includes('adam')}"
                                 (click)="goForm(item._id)">
                                 <div class="tcol">{{ item.createdDate }}</div>
                                 <div class="tcol">{{ item.transactionFrom }}</div>

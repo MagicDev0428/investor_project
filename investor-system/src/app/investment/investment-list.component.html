@@ -13,20 +13,22 @@
                         <div class="search-panel">
                             <div class="d-flex flex-row form-group">
                                 <label class="col-form-label" for="search">Search Text:</label>
-                                <input type="text" class="form-control" id="search" aria-describedby="search" />
+                                <input type="text" [(ngModel)]="searchTerm" (keyup)="onSearch($event)"
+                                    class="form-control" id="search" aria-describedby="search" />
                             </div>
                             <div>
-                                <button type="button" class="btn btn-block btn-secondary">New Investment</button>
+                                <button type="button" (click)="goForm()" class="btn btn-block btn-secondary">New
+                                    Investment</button>
                             </div>
                         </div>
                         <div class="div-table">
                             <div class="trow theader">
-                                <div class="tcol">No</div>
-                                <div class="tcol">Amount Invested</div>
-                                <div class="tcol">Profit Monthly</div>
-                                <div class="tcol">Profit Annual</div>
-                                <div class="tcol">Investments ends in</div>
-                                <div class="tcol">Description/Text</div>
+                                <div class="tcol" (click)="orderTable('_no')">No</div>
+                                <div class="tcol" (click)="orderTable('amount')">Amount Invested</div>
+                                <div class="tcol" (click)="orderTable('monthlyProfit')">Profit Monthly</div>
+                                <div class="tcol" (click)="orderTable('annualProfit')">Profit Annual</div>
+                                <div class="tcol" (click)="orderTable('investmentEnds')">Investments ends in</div>
+                                <div class="tcol" (click)="orderTable('description')">Description/Text</div>
                                 <div class="tcol">i</div>
                             </div>
                             <div *ngFor="let item of items; let i = index" [class]="{'trow': true, 'first-row': i===0}">
@@ -38,7 +40,7 @@
                                 <div class="tcol">{{ item.description }}</div>
                                 <div class="tcol">
                                     <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal"
-                                        aria-label="Icon Button">
+                                        aria-label="Icon Button" (click)="goForm(item._no)">
                                         <span aria-hidden="true">i</span>
                                     </button>
                                 </div>
