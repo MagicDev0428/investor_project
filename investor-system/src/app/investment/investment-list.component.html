@@ -1,0 +1,51 @@
+<div class="investment-list">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title ">All Investments Total - {{ currency_style(total) }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="search-panel">
+                            <div class="d-flex flex-row form-group">
+                                <label class="col-form-label" for="search">Search Text:</label>
+                                <input type="text" class="form-control" id="search" aria-describedby="search" />
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-block btn-secondary">New Investment</button>
+                            </div>
+                        </div>
+                        <div class="div-table">
+                            <div class="trow theader">
+                                <div class="tcol">No</div>
+                                <div class="tcol">Amount Invested</div>
+                                <div class="tcol">Profit Monthly</div>
+                                <div class="tcol">Profit Annual</div>
+                                <div class="tcol">Investments ends in</div>
+                                <div class="tcol">Description/Text</div>
+                                <div class="tcol">i</div>
+                            </div>
+                            <div *ngFor="let item of items; let i = index" [class]="{'trow': true, 'first-row': i===0}">
+                                <div class="tcol">{{ item._no }}</div>
+                                <div class="tcol">{{ currency_style(item.amount) }}</div>
+                                <div class="tcol">{{ item.monthlyProfit }}</div>
+                                <div class="tcol">{{ item.annualProfit }}</div>
+                                <div class="tcol">{{ item.investmentEnds }}</div>
+                                <div class="tcol">{{ item.description }}</div>
+                                <div class="tcol">
+                                    <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal"
+                                        aria-label="Icon Button">
+                                        <span aria-hidden="true">i</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

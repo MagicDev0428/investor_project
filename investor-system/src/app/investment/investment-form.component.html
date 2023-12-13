@@ -1,0 +1,156 @@
+<div class="investment-form">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title "><span>EDIT:</span> 002 Monthly Profit 5,000,000 at 2%</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" [formGroup]="investmentForm" (ngSubmit)="onSubmit()" autocomplete="off"
+                            novalidate>
+                            <div class="row">
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="investmentNo">Investment No.</label>
+                                    <input formControlName="investmentNo" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="investmentNo" (keydown)="onlyNumbers($event)"
+                                        aria-describedby="investmentNo" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="amount">Amount</label>
+                                    <input formControlName="amount" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="amount" (keydown)="onlyNumbers($event)"
+                                        (input)="currency_style($event)" value="{{amount}}" aria-describedby="amount" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="startDate">Start Date</label>
+                                    <input formControlName="startDate" type="date" class="form-control" id="startDate"
+                                        aria-describedby="startDate" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="endDate">End Date</label>
+                                    <input formControlName="endDate" type="date" class="form-control" id="endDate"
+                                        aria-describedby="endDate" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="monthlyProfit">Profit pr Month</label>
+                                    <input formControlName="monthlyProfit" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="monthlyProfit" aria-describedby="monthlyProfit" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="annualProfit">Profit pr Year</label>
+                                    <input formControlName="annualProfit" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="annualProfit" aria-describedby="annualProfit" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="endProfit">Profit by End</label>
+                                    <input formControlName="endProfit" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="endProfit" aria-describedby="endProfit" />
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="investmentType">Investment Type</label>
+                                    <select formControlName="investmentType" class="form-control" id="investmentType"
+                                        aria-describedby="investmentType">
+                                        <option selected>Monthly Profit</option>
+                                        <option>...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr class="separator">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea formControlName="description" class="form-control" id="description"
+                                            aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="separator">
+                            <div class="row d-flex flex-row">
+                                <div class="col-lg-8 col-sm-12 form-group choose-image-wrapper">
+                                    <label for="receiptImages">Reciepts</label>
+                                    <div class="files-list">
+                                        <div class="single-file" *ngFor="let file of files; let i = index">
+                                            <div class="info">
+                                                <h4 class="name">
+                                                    {{ file?.name }}
+                                                </h4>
+                                                <p class="size">
+                                                    ({{ formatBytes(file?.size) }})
+                                                </p>
+                                                <!-- <app-progress [progress]="file?.progress"></app-progress> -->
+                                            </div>
+                                            <div class="delete" (click)="deleteFile(i)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18"
+                                                    viewBox="0 0 14 18">
+                                                    <path fill="#ff0000" fill-rule="nonzero"
+                                                        d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="file-wrapper">
+                                        <div class="container" appDnd (fileDropped)="onFileDropped($event)">
+                                            <input formControlName="receiptImages" type="file" id="receiptImages"
+                                                multiple accept="image/*" (change)="fileBrowseHandler($event.target)">
+                                            <span class="caption">Drag and drop files here</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 info d-flex flex-row">
+                                    <div class="info-wrapper d-flex flex-column align-center">
+                                        <div class="info-col">
+                                            <span class="info-text">Create Date </span>
+                                            <span class="info-value">01-Feb-2023</span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-text">Create By</span>
+                                            <span class="info-value">Torben</span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-text">Update Date</span>
+                                            <span class="info-value">12-August-2023</span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-text">Update By</span>
+                                            <span class="info-value">Bee</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center m-3 position-relative">
+                                <button type="button" class="btn btn-secondary">SAVE ADAM TRANSACTION</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">DELETE
+                                    TRANSACTION</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="info-wrapper d-flex flex-row">
+                            <div class="info-col">
+                                <span class="info-text">Create Date </span>
+                                <span class="info-value">01-Feb-2023</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Create By</span>
+                                <span class="info-value">Torben</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Update Date</span>
+                                <span class="info-value">12-August-2023</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Update By</span>
+                                <span class="info-value">Bee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

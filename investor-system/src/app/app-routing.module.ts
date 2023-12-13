@@ -9,6 +9,8 @@ import { AdamTableComponent } from './adam/adam-table.component';
 import { AdamFormComponent } from './adam/adam-form.component';
 import { InvestorInfoComponent } from './info/investor-info.component';
 import { FrontPageComponent } from './front-page/front-page.component';
+import { InvestmentListComponent } from './investment/investment-list.component';
+import { InvestmentFormComponent } from './investment/investment-form.component';
 // import {  AuthService } from '@auth0/auth0-angular';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
@@ -27,7 +29,10 @@ const routes: Routes = [
   {path: 'adam-form',  component: AdamFormComponent, canActivate: [AuthGuardFN]},
   {path: 'adam-form/:id', component: AdamFormComponent, canActivate: [AuthGuardFN]},
   {path: 'info', component: InvestorInfoComponent, canActivate: [AuthGuardFN]},
-  {path: 'front-page', component:FrontPageComponent, canActivate: [AuthGuardFN]}
+  {path: 'front-page', component:FrontPageComponent, canActivate: [AuthGuardFN]},
+  {path: 'investment-list', component:InvestmentListComponent, canActivate: [AuthGuardFN]},
+  {path: 'investment-form', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
+  {path: 'investment-form/:id', component:InvestmentFormComponent, canActivate: [AuthGuardFN]}
 ];
 
 @NgModule({
