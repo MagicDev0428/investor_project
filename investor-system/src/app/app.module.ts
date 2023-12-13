@@ -16,6 +16,8 @@ import { AdamTableComponent } from './adam/adam-table.component';
 import { AdamFormComponent } from './adam/adam-form.component';
 import { InvestorInfoComponent } from './info/investor-info.component';
 import { FrontPageComponent } from './front-page/front-page.component';
+import { InvestmentListComponent } from './investment/investment-list.component';
+import { InvestmentFormComponent } from './investment/investment-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -41,6 +43,8 @@ import { AuthGuardFN } from './auth-guard.service';
     AdamFormComponent,
     InvestorInfoComponent,
     FrontPageComponent,
+    InvestmentListComponent,
+    InvestmentFormComponent,
     LoginButtonComponent,
     LogoutButtonComponent,
     AuthenticationButtonComponent,
