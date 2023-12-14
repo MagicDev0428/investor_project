@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Adam } from '../model/adam';
 import { Observable, map } from 'rxjs';
@@ -21,6 +21,8 @@ import * as moment from 'moment';
 })
 
 export class AdamFormComponent implements OnInit {
+  @ViewChild('transactionFrom') transactionFrom: ElementRef;
+  @ViewChild('transactionTo') transactionTo: ElementRef;
 
   amount = '';
   section = 'CREATE';
@@ -155,50 +157,56 @@ export class AdamFormComponent implements OnInit {
     }
   }
 
-  saveAction() {
-    this.adam._id = this.userId;
-    this.adam.amount = this.amount;
-    this.adam.transactionFrom = this.adamForm.get('transactionFrom').value;
-    this.adam.investmentNo = this.adamForm.get('investments').value;
-    this.adam.transactionTo = this.adamForm.get('transactionTo').value;
-    this.adam.createdDate = this.adamForm.get('createdDate').value;
-    let selectedOption = document.querySelector(`option[value="${this.adam.investmentNo}"]`);
-    this.adam.investments = selectedOption?.textContent.trim();
-    this.adam.investorName = this.adamForm.get('investorName').value;
-    this.adam.transferFrom = this.adamForm.get('transferFrom').value;
-    this.adam.transferTo = this.adamForm.get('transferTo').value;
-    this.adam.transactionNo = this.adamForm.get('transactionNo').value;
-    this.adam.description = this.adamForm.get('description').value;
-    if (typeof this.userId !== 'undefined') {
-      this.adamService.updateAdam(this.adam).subscribe({
-        next: (res) => {
-          this.toastrService.success('Transaction was successfully created!');
-          this.router.navigate(['/adam-form/' + this.userId]);
-        },
-        error: err => {
-          this.toastrService.error(err);
-        },
-        complete: () => console.log('There are no more action happen.')
-      });
-    } else {
-      this.adamService.saveAdam(this.adam).subscribe({
-        next: (res) => {
-          this.toastrService.success('Transaction was successfully created!');
-          this.router.navigate(['/adam-table/']);
-        },
-        error: err => {
-          this.toastrService.error(err);
-        },
-        complete: () => console.log('There are no more action happen.')
-      });
-    }
-  }
-
   protected onSubmit(): void {
     this.submitted = true;
     if (this.adamForm.valid) {
-      this.saveAction();
+      this.adam._id = this.userId;
+      this.adam.amount = this.amount;
+      this.adam.transactionFrom = this.adamForm.get('transactionFrom').value;
+      this.adam.investmentNo = this.adamForm.get('investments').value;
+      this.adam.transactionTo = this.adamForm.get('transactionTo').value;
+      this.adam.createdDate = this.adamForm.get('createdDate').value;
+      let selectedOption = document.querySelector(`option[value="${this.adam.investmentNo}"]`);
+      this.adam.investments = selectedOption?.textContent.trim();
+      this.adam.investorName = this.adamForm.get('investorName').value;
+      this.adam.transferFrom = this.adamForm.get('transferFrom').value;
+      this.adam.transferTo = this.adamForm.get('transferTo').value;
+      this.adam.transactionNo = this.adamForm.get('transactionNo').value;
+      this.adam.description = this.adamForm.get('description').value;
+
+      if (this.adam.transactionFrom === this.adam.transactionTo) {
+        this.toastrService.error('From and To can\'\t be same!');
+        this.transactionFrom.nativeElement.focus();
+        return;
+      }
+      if (typeof this.userId !== 'undefined') {
+        this.adamService.updateAdam(this.adam).subscribe({
+          next: (res) => {
+            this.toastrService.success('Transaction was successfully created!');
+            this.router.navigate(['/adam-form/' + this.userId]);
+          },
+          error: err => {
+            this.toastrService.error(err);
+          },
+          complete: () => console.log('There are no more action happen.')
+        });
+      } else {
+        this.adamService.saveAdam(this.adam).subscribe({
+          next: (res) => {
+            this.toastrService.success('Transaction was successfully created!');
+            this.router.navigate(['/adam-table/']);
+          },
+          error: err => {
+            this.toastrService.error(err);
+          },
+          complete: () => console.log('There are no more action happen.')
+        });
+      }
     }
+  }
+
+  goTable() {
+    this.router.navigate(['/adam-table/']);
   }
 
   /**
