@@ -14,6 +14,7 @@ import { InvestmentFormComponent } from './investment/investment-form.component'
 // import {  AuthService } from '@auth0/auth0-angular';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
+import { InvestorPortfolioComponent } from './investor-portfolio/investor-portfolio.component';
 //import { AuthGuard } from '@auth0/auth0-angular';
 
 
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path: 'front-page', component:FrontPageComponent, canActivate: [AuthGuardFN]},
   {path: 'investment-list', component:InvestmentListComponent, canActivate: [AuthGuardFN]},
   {path: 'investment-form', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-form/:id', component:InvestmentFormComponent, canActivate: [AuthGuardFN]}
+  {path: 'investment-form/:id', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
+  {path: 'my-investments', component: InvestorPortfolioComponent}
 ];
 
 @NgModule({

@@ -5,4 +5,8 @@
         padding: 0 10px;
         cursor: pointer;
     }
+    .container-fluid {
+        background: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+        z-index: 9999;
+    }
 }

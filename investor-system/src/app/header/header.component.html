@@ -1,15 +1,54 @@
-<nav class="navbar navbar-expand-sm bg-light justify-content-center fixed-top">
-  <a class="navbar-nav nav-link" [routerLink]="['list']">Home</a>
-  <!-- <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['manage-investor']">Investors</a> -->
-  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['investments']">Investments</a>
-  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['balance']">Balance</a>
-  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['adam-table']">Adam</a>
-  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['total']">Total</a>
-  <a class="navbar-nav nav-link" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" [routerLink]="['logs']">Logs</a>
-  <a class="navbar-nav nav-link" [routerLink]="['my-investments']">My Investments</a>
-  <!-- <a class="nav-link" [routerLink]="['manage-investor', 5]">Go to 5</a> -->
-  <a class="navbar-nav nav-link" [routerLink]="['profile']" *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
-  
-  <app-authentication-button></app-authentication-button>
-  
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['list']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+            *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
+            [routerLink]="['investments']">Investments</a>
+
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+            *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
+            [routerLink]="['balance']">Balance</a>
+        </li>
+        <li class="nav-item">
+          <a class=" nav-link"
+            *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
+            [routerLink]="['adam-table']">Adam</a>
+        </li>
+        <li class="nav-item">
+          <a class=" nav-link"
+            *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
+            [routerLink]="['total']">Total</a>
+        </li>
+        <li class="nav-item">
+          <a class=" nav-link"
+            *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
+            [routerLink]="['logs']">Logs</a>
+        </li>
+        <li class="nav-item">
+          <a class=" nav-link" [routerLink]="['my-investments']">My Investments</a>
+        </li>
+        <li class="nav-item">
+          <a class=" nav-link" [routerLink]="['profile']"
+            *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
+        </li>
+        <li class="nav-item">
+          <app-authentication-button></app-authentication-button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
 </nav>

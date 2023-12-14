@@ -5,6 +5,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from 'ngx-toastr';
 
 
+
+
+
+
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +35,7 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 import { DndDirective } from './dnd.directive';
 import { ProfitButtonComponent } from './components/profit-button/profit-button-component';
 import { AuthGuardFN } from './auth-guard.service';
+import { InvestorPortfolioComponent } from './investor-portfolio/investor-portfolio.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,8 @@ import { AuthGuardFN } from './auth-guard.service';
     CallbackComponent,
     UnauthorizedComponent,
     DndDirective,
-    ProfitButtonComponent
+    ProfitButtonComponent,
+    InvestorPortfolioComponent
   ],
   imports: [
     BrowserModule,
