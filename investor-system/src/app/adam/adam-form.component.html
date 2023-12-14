@@ -5,7 +5,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>{{ section }}: </span>{{ title }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTable()">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -25,7 +25,7 @@
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionFrom">From</label>
                                     <select formControlName="transactionFrom" class="form-control" id="transactionFrom"
-                                        aria-describedby="Money Transfer">
+                                        #transactionFrom aria-describedby="Money Transfer">
                                         <option value="Adam">From Adam</option>
                                         <option value="Toben">From Torben</option>
                                         <option value="Bee">From Bee</option>
@@ -39,7 +39,7 @@
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionTo">To</label>
                                     <select formControlName="transactionTo" class="form-control" id="transactionTo"
-                                        aria-describedby="Money Transfer">
+                                        #transactionTo aria-describedby="Money Transfer">
                                         <option value="Adam">To Adam</option>
                                         <option value="Toben">To Torben</option>
                                         <option value="Bee">To Bee</option>
