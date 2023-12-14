@@ -17,6 +17,10 @@
                                     <input formControlName="amount" type="text" class="form-control text-end"
                                         id="amount" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
                                         aria-describedby="amount" />
+                                    <span class="text-danger"
+                                        *ngIf="(adamForm.controls['amount'].touched || submitted) && adamForm.controls['amount'].errors?.['required']">
+                                        Amount is required
+                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionFrom">From</label>
@@ -27,6 +31,10 @@
                                         <option value="Bee">From Bee</option>
                                         <option value="Other">From Other</option>
                                     </select>
+                                    <span class="text-danger"
+                                        *ngIf="(adamForm.controls['transactionFrom'].touched || submitted) && adamForm.controls['transactionFrom'].errors?.['required']">
+                                        From is required
+                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionTo">To</label>
@@ -37,17 +45,26 @@
                                         <option value="Bee">To Bee</option>
                                         <option value="Other">To Other</option>
                                     </select>
+                                    <span class="text-danger"
+                                        *ngIf="(adamForm.controls['transactionTo'].touched || submitted) && adamForm.controls['transactionTo'].errors?.['required']">
+                                        To is required
+                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="createdDate">Transfer Date</label>
                                     <input formControlName="createdDate" type="date" class="form-control"
                                         id="createdDate" aria-describedby="Transfer Date" />
+                                    <span class="text-danger"
+                                        *ngIf="(adamForm.controls['createdDate'].touched || submitted) && adamForm.controls['createdDate'].errors?.['required']">
+                                        Transfer Date is required
+                                    </span>
                                 </div>
                                 <div class="col-xl-6 col-lg-4 form-group">
                                     <label for="investments">Investment</label>
                                     <select formControlName="investments" class="form-control" id="investments"
                                         aria-describedby="investments">
-                                        <option [value]="item._id" *ngFor="let item of investments">{{ item._id + ' ' + item.Explanation }}
+                                        <option [value]="item._id" *ngFor="let item of investments">{{ item._id + ' ' +
+                                            item.Explanation }}
                                         </option>
                                     </select>
                                 </div>
@@ -55,7 +72,8 @@
                                     <label for="investorName">Investor Name</label>
                                     <select formControlName="investorName" class="form-control" id="investorName"
                                         aria-describedby="investorName">
-                                        <option [value]="item._id" *ngFor="let item of investorsNames">{{ item._id}}</option>
+                                        <option [value]="item._id" *ngFor="let item of investorsNames">{{ item._id}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -122,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">
-                                <button type="button" class="btn btn-secondary" (click)="saveAction()">SAVE ADAM
+                                <button type="submit" class="btn btn-secondary">SAVE ADAM
                                     TRANSACTION</button>
                                 <button type="button" class="btn btn-danger"
                                     [class]="{'disabled': userId === undefined}" data-dismiss="modal"

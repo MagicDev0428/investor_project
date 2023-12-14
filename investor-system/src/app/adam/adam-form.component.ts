@@ -60,10 +60,10 @@ export class AdamFormComponent implements OnInit {
   ngOnInit(): void {
     this.adamForm = this.formBuilder.group(
       {
-        amount: new FormControl(""),
-        transactionFrom: new FormControl(),
-        transactionTo: new FormControl(""),
-        createdDate: new FormControl(""),
+        amount: new FormControl("", Validators.required),
+        transactionFrom: new FormControl("", Validators.required),
+        transactionTo: new FormControl("", Validators.required),
+        createdDate: new FormControl("", Validators.required),
         investments: new FormControl(),
         investorName: new FormControl(),
         transferFrom: new FormControl(),
@@ -163,7 +163,7 @@ export class AdamFormComponent implements OnInit {
     this.adam.transactionTo = this.adamForm.get('transactionTo').value;
     this.adam.createdDate = this.adamForm.get('createdDate').value;
     let selectedOption = document.querySelector(`option[value="${this.adam.investmentNo}"]`);
-    this.adam.investments = selectedOption.textContent.trim();
+    this.adam.investments = selectedOption?.textContent.trim();
     this.adam.investorName = this.adamForm.get('investorName').value;
     this.adam.transferFrom = this.adamForm.get('transferFrom').value;
     this.adam.transferTo = this.adamForm.get('transferTo').value;
@@ -195,7 +195,10 @@ export class AdamFormComponent implements OnInit {
   }
 
   protected onSubmit(): void {
-
+    this.submitted = true;
+    if (this.adamForm.valid) {
+      this.saveAction();
+    }
   }
 
   /**
@@ -220,7 +223,7 @@ export class AdamFormComponent implements OnInit {
     for (const item of files) {
       this.files.push(item);
     }
-    //this.addInvestorForm.get('passportImage').setValue(this.files);
+    //this.adamForm.get('passportImage').setValue(this.files);
 
   }
 
