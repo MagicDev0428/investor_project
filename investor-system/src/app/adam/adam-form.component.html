@@ -25,9 +25,9 @@
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionFrom">From</label>
                                     <select formControlName="transactionFrom" class="form-control" id="transactionFrom"
-                                        #transactionFrom aria-describedby="Money Transfer">
+                                        #transactionFrom aria-describedby="Money Transfer" (change)="checkSelect('from')">
                                         <option value="Adam">From Adam</option>
-                                        <option value="Toben">From Torben</option>
+                                        <option value="Torben">From Torben</option>
                                         <option value="Bee">From Bee</option>
                                         <option value="Other">From Other</option>
                                     </select>
@@ -39,9 +39,9 @@
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionTo">To</label>
                                     <select formControlName="transactionTo" class="form-control" id="transactionTo"
-                                        #transactionTo aria-describedby="Money Transfer">
+                                        #transactionTo aria-describedby="Money Transfer" (change)="checkSelect('to')">
                                         <option value="Adam">To Adam</option>
-                                        <option value="Toben">To Torben</option>
+                                        <option value="Torben">To Torben</option>
                                         <option value="Bee">To Bee</option>
                                         <option value="Other">To Other</option>
                                     </select>
@@ -81,17 +81,17 @@
                             <div class="row">
                                 <div class="col-md-6 d-flex flex-column justify-content-between">
                                     <div class="form-group">
-                                        <label for="transferFrom">Transfer From</label>
+                                        <label for="transferFrom">Transfer From Account</label>
                                         <input formControlName="transferFrom" type="text" class="form-control"
                                             id="transferFrom" aria-describedby="Transfer From" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="transferTo">Transfer To</label>
+                                        <label for="transferTo">Transfer To Account</label>
                                         <input formControlName="transferTo" type="text" class="form-control"
                                             id="transferTo" aria-describedby="Transfer To" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="transactionNo">Transfer No</label>
+                                        <label for="transactionNo">Transfer Number</label>
                                         <input formControlName="transactionNo" type="text" class="form-control"
                                             id="transactionNo" aria-describedby="Transfer No" />
                                     </div>

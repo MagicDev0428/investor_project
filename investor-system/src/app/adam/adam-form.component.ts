@@ -109,6 +109,15 @@ export class AdamFormComponent implements OnInit {
     this.adamService.getAdamInvestors().subscribe((res) => {
       this.investments = res.adams.investments;
       this.investorsNames = res.adams.investorsNames;
+      this.investments = res.adams.investments.map(obj => {
+        if(obj._id === undefined ) {
+          obj._id = ""
+        } 
+        if(obj.Explanation === undefined ) {
+          obj.Explanation = ""
+        } 
+        return obj;
+      });
     });
   }
 
@@ -201,6 +210,24 @@ export class AdamFormComponent implements OnInit {
           },
           complete: () => console.log('There are no more action happen.')
         });
+      }
+    }
+  }
+
+  checkSelect(name: string) {
+    let from_val = this.adamForm.get('transactionFrom').value;
+    let to_val = this.adamForm.get('transactionTo').value
+    if (name === 'from') {
+      if (from_val === to_val) {
+        this.toastrService.error('From and To can\'\t be same!');
+        this.transactionFrom.nativeElement.focus();
+        this.adamForm.get('transactionFrom').setValue("");
+      }
+    } else if (name === 'to') {
+      if (from_val === to_val) {
+        this.toastrService.error('From and To can\'\t be same!');
+        this.transactionTo.nativeElement.focus();
+        this.adamForm.get('transactionTo').setValue("");
       }
     }
   }
