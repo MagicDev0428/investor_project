@@ -48,6 +48,9 @@ export class AdamTableComponent {
     onSearch(event: KeyboardEvent) {
         this.items = this.temp;
         this.items = this.items.filter(item => item.description?.toLowerCase().includes(this.searchTerm.toLowerCase()));
+        if (this.searchTerm === "") {
+            this.items = this.temp;
+        }
     }
 
     goForm(id: string = '') {
