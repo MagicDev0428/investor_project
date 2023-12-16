@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Adam } from '../model/adam';
-import { Observable, map } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import {
   Validators,
@@ -48,6 +48,8 @@ export class AdamFormComponent implements OnInit {
   values: any[] = [];
   investments: any[] = [];
   investorsNames: any[] = [];
+  to_value: string;
+  from_value: string;
 
   protected adamForm: FormGroup;
   protected submitted = false;
@@ -89,6 +91,8 @@ export class AdamFormComponent implements OnInit {
           this.adamForm.get('transferTo').setValue(this.values['transferTo']);
           this.adamForm.get('transactionNo').setValue(this.values['transactionNo']);
           this.adamForm.get('description').setValue(this.values['description']);
+          this.to_value = this.values['transactionTo'];
+          this.from_value = this.values['transactionFrom']
           this.section = 'EDIT';
           this.title = moment(this.values['createdDate']).format('DD-MMM-YYYY') + ' ' +
             'transfer ' + this.adamForm.get('amount').value;
@@ -110,12 +114,12 @@ export class AdamFormComponent implements OnInit {
       this.investments = res.adams.investments;
       this.investorsNames = res.adams.investorsNames;
       this.investments = res.adams.investments.map(obj => {
-        if(obj._id === undefined ) {
+        if (obj._id === undefined) {
           obj._id = ""
-        } 
-        if(obj.Explanation === undefined ) {
+        }
+        if (obj.Explanation === undefined) {
           obj.Explanation = ""
-        } 
+        }
         return obj;
       });
     });
@@ -166,6 +170,11 @@ export class AdamFormComponent implements OnInit {
     }
   }
 
+  checkSelect() {
+      this.from_value = this.adamForm.get('transactionFrom').value;
+      this.to_value = this.adamForm.get('transactionTo').value;
+  }
+
   protected onSubmit(): void {
     this.submitted = true;
     if (this.adamForm.valid) {
@@ -210,24 +219,6 @@ export class AdamFormComponent implements OnInit {
           },
           complete: () => console.log('There are no more action happen.')
         });
-      }
-    }
-  }
-
-  checkSelect(name: string) {
-    let from_val = this.adamForm.get('transactionFrom').value;
-    let to_val = this.adamForm.get('transactionTo').value
-    if (name === 'from') {
-      if (from_val === to_val) {
-        this.toastrService.error('From and To can\'\t be same!');
-        this.transactionFrom.nativeElement.focus();
-        this.adamForm.get('transactionFrom').setValue("");
-      }
-    } else if (name === 'to') {
-      if (from_val === to_val) {
-        this.toastrService.error('From and To can\'\t be same!');
-        this.transactionTo.nativeElement.focus();
-        this.adamForm.get('transactionTo').setValue("");
       }
     }
   }

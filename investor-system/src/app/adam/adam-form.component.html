@@ -25,11 +25,11 @@
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionFrom">From</label>
                                     <select formControlName="transactionFrom" class="form-control" id="transactionFrom"
-                                        #transactionFrom aria-describedby="Money Transfer" (change)="checkSelect('from')">
-                                        <option value="Adam">From Adam</option>
-                                        <option value="Torben">From Torben</option>
-                                        <option value="Bee">From Bee</option>
-                                        <option value="Other">From Other</option>
+                                        #transactionFrom aria-describedby="Money Transfer" (change)="checkSelect()">
+                                        <option value="Adam" [hidden]="to_value=='Adam'?true:null">FROM Adam</option>
+                                        <option value="Torben" [hidden]="to_value=='Torben'?true:null">FROM Torben</option>
+                                        <option value="Bee" [hidden]="to_value=='Bee'?true:null">FROM Bee</option>
+                                        <option value="Other" [hidden]="to_value=='Other'?true:null">FROM Other</option>
                                     </select>
                                     <span class="text-danger"
                                         *ngIf="(adamForm.controls['transactionFrom'].touched || submitted) && adamForm.controls['transactionFrom'].errors?.['required']">
@@ -39,11 +39,11 @@
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionTo">To</label>
                                     <select formControlName="transactionTo" class="form-control" id="transactionTo"
-                                        #transactionTo aria-describedby="Money Transfer" (change)="checkSelect('to')">
-                                        <option value="Adam">To Adam</option>
-                                        <option value="Torben">To Torben</option>
-                                        <option value="Bee">To Bee</option>
-                                        <option value="Other">To Other</option>
+                                        #transactionTo aria-describedby="Money Transfer" (change)="checkSelect()">
+                                        <option value="Adam" [hidden]="from_value=='Adam'?true:null">TO Adam</option>
+                                        <option value="Torben" [hidden]="from_value=='Torben'?true:null">TO Torben</option>
+                                        <option value="Bee" [hidden]="from_value=='Bee'?true:null">TO Bee</option>
+                                        <option value="Other" [hidden]="from_value=='Other'?true:null">TO Other</option>
                                     </select>
                                     <span class="text-danger"
                                         *ngIf="(adamForm.controls['transactionTo'].touched || submitted) && adamForm.controls['transactionTo'].errors?.['required']">
