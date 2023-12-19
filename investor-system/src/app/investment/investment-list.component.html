@@ -17,30 +17,30 @@
                                     class="form-control" id="search" aria-describedby="search" />
                             </div>
                             <div>
-                                <button type="button" (click)="goForm()" class="btn btn-block btn-secondary">New
+                                <button type="button" (click)="goForm('', 'form')" class="btn btn-block btn-secondary">New
                                     Investment</button>
                             </div>
                         </div>
                         <div class="div-table">
                             <div class="trow theader">
-                                <div class="tcol" (click)="orderTable('_no')">No</div>
-                                <div class="tcol" (click)="orderTable('amount')">Amount Invested</div>
-                                <div class="tcol" (click)="orderTable('monthlyProfit')">Profit Monthly</div>
-                                <div class="tcol" (click)="orderTable('annualProfit')">Profit Annual</div>
-                                <div class="tcol" (click)="orderTable('investmentEnds')">Investments ends in</div>
-                                <div class="tcol" (click)="orderTable('description')">Description/Text</div>
+                                <div class="tcol" (click)="orderTable('_id')">No</div>
+                                <div class="tcol" (click)="orderTable('investAmount')">Amount Invested</div>
+                                <div class="tcol" (click)="orderTable('profitMonthly')">Profit Monthly</div>
+                                <div class="tcol" (click)="orderTable('profitYearly')">Profit Annual</div>
+                                <div class="tcol" (click)="orderTable('endDate')">Investments ends in</div>
+                                <div class="tcol" (click)="orderTable('explanation')">Description/Text</div>
                                 <div class="tcol">i</div>
                             </div>
-                            <div *ngFor="let item of items; let i = index" [class]="{'trow': true, 'first-row': i===0}">
-                                <div class="tcol">{{ item._no }}</div>
-                                <div class="tcol">{{ currency_style(item.amount) }}</div>
-                                <div class="tcol">{{ item.monthlyProfit }}</div>
-                                <div class="tcol">{{ item.annualProfit }}</div>
-                                <div class="tcol">{{ item.investmentEnds }}</div>
-                                <div class="tcol">{{ item.description }}</div>
+                            <div *ngFor="let item of items; let i = index" [class]="{'trow': true, 'first-row': i===0}" (click)="goForm(item._id, 'form')">
+                                <div class="tcol">{{ item._id }}</div>
+                                <div class="tcol">{{ currency_style(item.investAmount) }}</div>
+                                <div class="tcol">{{ profit_style(item.profitMonthly) }}</div>
+                                <div class="tcol">{{ profit_style(item.profitYearly) }}</div>
+                                <div class="tcol">{{ item.endDate }}</div>
+                                <div class="tcol">{{ item.explanation }}</div>
                                 <div class="tcol">
                                     <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal"
-                                        aria-label="Icon Button" (click)="goForm(item._no)">
+                                        aria-label="Icon Button" (click)="goForm(item._id, 'info')">
                                         <span aria-hidden="true">i</span>
                                     </button>
                                 </div>

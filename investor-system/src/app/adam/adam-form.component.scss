@@ -37,6 +37,7 @@ textarea {
 
     .modal-dialog {
         max-width: 1024px;
+        margin-top: 0;
     }
 
     .modal-content {
@@ -233,6 +234,8 @@ textarea {
     background-color: rgb(216, 204, 180);
 
     .info-wrapper {
+        display: flex;
+        flex-direction: row;
         width: 100%;
         margin: 0;
         justify-content: space-between;
@@ -262,8 +265,17 @@ textarea {
 
 
 @media (max-width: 992px) {
-    .info-col {
-        width: 90%
+    .modal-footer {
+        .info-wrapper {
+            width: 100%!important;
+            display: flex;
+            flex-wrap: wrap;
+        }
+    
+        .info-col {
+            width: 50%!important;
+            flex: 0 0 auto;
+        }
     }
 
     .btn-secondary {

@@ -4,6 +4,9 @@ import { configService } from '../service/config.service';
 import { environment } from '../../environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { BaseComponent } from '../base/base.component';
+import { InvestorService } from '../service/investor.service';
 
 interface Message {
   message?: string;
@@ -86,17 +89,32 @@ const table_contents = [
   styleUrls: ['../adam/investorForm.scss', './list-investor.component.scss']
 })
 
-export class ListInvestorComponent {
+export class ListInvestorComponent extends BaseComponent {
   message: string | undefined;
-  items = table_contents;
-  thb_mark = String.fromCharCode(3647);
+  items: any[] = [];
+  temp: any[] = [];
 
   constructor(
     private http: HttpClient,
     private configService: configService,
     public auth: AuthService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private investorService: InvestorService
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.investorService.getInvestors().subscribe((res) => {
+      console.log('DATA->', res);
+      this.items = res.investors.map((investor) => {
+        // investor.createdDate = moment(adam.createdDate).format('DD-MMM-YYYY');
+        // investor.amount = this.currency_style(adam.amount);
+        return investor;
+      });
+      this.temp = this.items;
+    });
+  }
 
   callProtectedEndpoint(): void {
     this.http
@@ -122,17 +140,6 @@ export class ListInvestorComponent {
       .subscribe(result => {
         this.message = result.message;
       });
-  }
-
-  currency_style(amount: number) {
-    let currency_amount = amount.toString();
-    let thb_character = String.fromCharCode(3647);
-    currency_amount = currency_amount.replace(/,/g, ''); // Remove existing commas
-    currency_amount = currency_amount.replace(thb_character, ''); //Remove existing thb mark
-    currency_amount = currency_amount.replace(' ', ''); //Remove existing spaces
-    currency_amount = currency_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
-    currency_amount = currency_amount.replace(currency_amount, thb_character + ' ' + currency_amount);
-    return currency_amount;
   }
 
   /**

@@ -13,6 +13,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import { AdamService } from '../service/adam.service';
 import * as moment from 'moment';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-adam-form',
@@ -20,7 +21,7 @@ import * as moment from 'moment';
   styleUrls: ['./investorForm.scss', './adam-form.component.scss'],
 })
 
-export class AdamFormComponent implements OnInit {
+export class AdamFormComponent extends BaseComponent implements OnInit {
   @ViewChild('transactionFrom') transactionFrom: ElementRef;
   @ViewChild('transactionTo') transactionTo: ElementRef;
 
@@ -54,7 +55,14 @@ export class AdamFormComponent implements OnInit {
   protected adamForm: FormGroup;
   protected submitted = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private adamService: AdamService, private toastrService: ToastrService) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private adamService: AdamService,
+    private toastrService: ToastrService
+  ) {
+    super();
     this.selectedAdam$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedAdam$.subscribe(res => {
       this.userId = res;
@@ -81,7 +89,7 @@ export class AdamFormComponent implements OnInit {
         next: (res) => {
           this.values = res.adams;
           this.amount = this.values['amount'];
-          this.currency_style(this.amount);
+          this.changeStyle(this.amount);
           this.adamForm.get('transactionFrom').setValue(this.values['transactionFrom']);
           this.adamForm.get('transactionTo').setValue(this.values['transactionTo']);
           this.adamForm.get('createdDate').setValue(moment(this.values['createdDate']).format('yyyy-MM-DD'));
@@ -104,7 +112,6 @@ export class AdamFormComponent implements OnInit {
           }
         },
         error: err => {
-          console.error('An error occurred :', err);
           this.toastrService.error(err);
         },
         complete: () => console.log('There are no more action happen.')
@@ -125,37 +132,16 @@ export class AdamFormComponent implements OnInit {
     });
   }
 
-  onlyNumbers(event: KeyboardEvent) {
-    if (
-      event.key !== "Backspace" &&
-      event.key !== "Delete" &&
-      event.key !== "ArrowLeft" &&
-      event.key !== "ArrowRight" &&
-      event.key !== "Tab" &&
-      (event.key < "0" || event.key > "9")
-    ) {
-      event.preventDefault();
-    }
-  }
-
-  currency_style(value: any) {
-    let thb_character = String.fromCharCode(3647);
-    value = value?.toString();
-    value = value?.replace(/,/g, ''); // Remove existing commas
-    value = value?.replace(thb_character, ''); //Remove existing thb mark
-    value = value?.replace(' ', ''); //Remove existing spaces
-    value = value?.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
-    value = value?.replace(value, thb_character + ' ' + value);
-    this.adamForm.get('amount').setValue(value);
+  changeStyle(value: any) {
+    this.adamForm.get('amount').setValue(this.currency_style(value));
   }
 
   onInputChange(event: any) {
     this.amount = event.target.value.replace(/\D/g, '');
-    this.currency_style(this.amount);
+    this.changeStyle(this.amount);
   }
 
   deleteTransaction(_id: any) {
-    console.log('ID->', _id);
     if (typeof _id !== 'undefined') {
       this.adamService.deleteAdam(_id).subscribe({
         next: (res) => {
@@ -171,8 +157,8 @@ export class AdamFormComponent implements OnInit {
   }
 
   checkSelect() {
-      this.from_value = this.adamForm.get('transactionFrom').value;
-      this.to_value = this.adamForm.get('transactionTo').value;
+    this.from_value = this.adamForm.get('transactionFrom').value;
+    this.to_value = this.adamForm.get('transactionTo').value;
   }
 
   protected onSubmit(): void {
@@ -200,8 +186,8 @@ export class AdamFormComponent implements OnInit {
       if (typeof this.userId !== 'undefined') {
         this.adamService.updateAdam(this.adam).subscribe({
           next: (res) => {
-            this.toastrService.success('Transaction was successfully created!');
-            this.router.navigate(['/adam-form/' + this.userId]);
+            this.toastrService.success('Transaction was successfully updated!');
+            this.router.navigate(['/adam-table/']);
           },
           error: err => {
             this.toastrService.error(err);

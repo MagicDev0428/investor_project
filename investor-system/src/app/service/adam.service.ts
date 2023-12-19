@@ -64,7 +64,7 @@ export class AdamService {
 		);
 	}
 
-	updateAdam(modelData:any): Observable<any> {
+	updateAdam(modelData: any): Observable<any> {
 		return this.http.put<any>(environment.apiUrl + this.apiURL + '/updateadam/', modelData).pipe(
 			catchError(this._configService.handleError)
 		);

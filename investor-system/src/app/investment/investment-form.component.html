@@ -4,8 +4,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title "><span>EDIT:</span> 002 Monthly Profit 5,000,000 at 2%</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title "><span>{{ section }}: </span>{{ title }}</h5>
+                        <button (click)="goList()" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -14,16 +14,16 @@
                             novalidate>
                             <div class="row">
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="investmentNo">Investment No.</label>
-                                    <input formControlName="investmentNo" type="text" [style.textAlign]="textAlign"
-                                        class="form-control" id="investmentNo" (keydown)="onlyNumbers($event)"
-                                        aria-describedby="investmentNo" />
+                                    <label for="_id">Investment No.</label>
+                                    <input formControlName="_id" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="_id" (keydown)="onlyNumbers($event)"
+                                        aria-describedby="_id" readonly />
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="amount">Amount</label>
-                                    <input formControlName="amount" type="text" [style.textAlign]="textAlign"
-                                        class="form-control" id="amount" (keydown)="onlyNumbers($event)"
-                                        (input)="currency_style($event)" value="{{amount}}" aria-describedby="amount" />
+                                    <label for="investAmount">Amount</label>
+                                    <input formControlName="investAmount" type="text" class="form-control text-end"
+                                        id="investAmount" (input)="onInputChange($event)"
+                                        (keydown)="onlyNumbers($event)" aria-describedby="investAmount" />
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="startDate">Start Date</label>
@@ -36,43 +36,61 @@
                                         aria-describedby="endDate" />
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="monthlyProfit">Profit pr Month</label>
-                                    <input formControlName="monthlyProfit" type="text" [style.textAlign]="textAlign"
-                                        class="form-control" id="monthlyProfit" aria-describedby="monthlyProfit" />
+                                    <label for="profitMonthly">Profit pr Month</label>
+                                    <input formControlName="profitMonthly" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="profitMonthly" aria-describedby="profitMonthly" />
+                                    <span class="text-danger"
+                                        *ngIf="submitted && (investmentForm.errors?.['monthlyRequired'] || investmentForm.errors?.['anyoneRequired'])">
+                                        Profit pr Month is required.
+                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="annualProfit">Profit pr Year</label>
-                                    <input formControlName="annualProfit" type="text" [style.textAlign]="textAlign"
-                                        class="form-control" id="annualProfit" aria-describedby="annualProfit" />
+                                    <label for="profitYearly">Profit pr Year</label>
+                                    <input formControlName="profitYearly" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="profitYearly" aria-describedby="profitYearly" />
+                                    <span class="text-danger"
+                                        *ngIf="submitted && (investmentForm.errors?.['yearlyRequired'] || investmentForm.errors?.['anyoneRequired'])">
+                                        Profit pr Year is required.
+                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="endProfit">Profit by End</label>
-                                    <input formControlName="endProfit" type="text" [style.textAlign]="textAlign"
-                                        class="form-control" id="endProfit" aria-describedby="endProfit" />
+                                    <label for="profitEnd">Profit by End</label>
+                                    <input formControlName="profitEnd" type="text" [style.textAlign]="textAlign"
+                                        class="form-control" id="profitEnd" aria-describedby="profitEnd" />
+                                    <span class="text-danger"
+                                        *ngIf="submitted && (investmentForm.errors?.['endRequired'] || investmentForm.errors?.['anyoneRequired'])">
+                                        Profit by End is required.
+                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="investmentType">Investment Type</label>
-                                    <select formControlName="investmentType" class="form-control" id="investmentType"
-                                        aria-describedby="investmentType">
-                                        <option selected>Monthly Profit</option>
-                                        <option>...</option>
+                                    <label for="investType">Investment Type</label>
+                                    <select formControlName="investType" class="form-control" id="investType"
+                                        aria-describedby="investType">
+                                        <option>Monthly Profit</option>
+                                        <option>Annual Profit</option>
+                                        <option>One-time Profit</option>
+                                        <option>Mixed</option>
                                     </select>
+                                    <span class="text-danger"
+                                        *ngIf="(investmentForm.controls['investType'].touched || submitted) && investmentForm.controls['investType'].errors?.['required']">
+                                        Investment Type is required.
+                                    </span>
                                 </div>
                             </div>
                             <hr class="separator">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea formControlName="description" class="form-control" id="description"
-                                            aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                        <label for="explanation">Description</label>
+                                        <textarea formControlName="explanation" class="form-control" id="explanation"
+                                            aria-describedby="Money Transfer explanation" rows="4" cols="50"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <hr class="separator">
                             <div class="row d-flex flex-row">
                                 <div class="col-lg-8 col-sm-12 form-group choose-image-wrapper">
-                                    <label for="receiptImages">Reciepts</label>
+                                    <label for="attachments">Reciepts</label>
                                     <div class="files-list">
                                         <div class="single-file" *ngFor="let file of files; let i = index">
                                             <div class="info">
@@ -95,8 +113,8 @@
                                     </div>
                                     <div class="file-wrapper">
                                         <div class="container" appDnd (fileDropped)="onFileDropped($event)">
-                                            <input formControlName="receiptImages" type="file" id="receiptImages"
-                                                multiple accept="image/*" (change)="fileBrowseHandler($event.target)">
+                                            <input formControlName="attachments" type="file" id="attachments" multiple
+                                                accept="image/*" (change)="fileBrowseHandler($event.target)">
                                             <span class="caption">Drag and drop files here</span>
                                         </div>
                                     </div>
@@ -123,14 +141,16 @@
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">
-                                <button type="button" class="btn btn-secondary">SAVE ADAM TRANSACTION</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">DELETE
-                                    TRANSACTION</button>
+                                <button type="submit" class="btn btn-secondary">SAVE INVESTMENT</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                    [class]="{'disabled': investmentId === undefined}"
+                                    (click)="deleteInvestment(investmentId)">DELETE
+                                    INVESTMENT</button>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <div class="info-wrapper d-flex flex-row">
+                        <div class="info-wrapper">
                             <div class="info-col">
                                 <span class="info-text">Create Date </span>
                                 <span class="info-value">01-Feb-2023</span>

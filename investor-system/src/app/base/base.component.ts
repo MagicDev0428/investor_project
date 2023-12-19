@@ -1,0 +1,43 @@
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+export class BaseComponent {
+
+    constructor() { }
+
+    currency_style(amount: any) {
+        let currency_amount = amount?.toString();
+        if (currency_amount === undefined) {
+            currency_amount = '0';
+        }
+        let thb_character = String.fromCharCode(3647);
+        currency_amount = currency_amount?.replace(/,/g, ''); // Remove existing commas
+        currency_amount = currency_amount?.replace(thb_character, ''); //Remove existing thb mark
+        currency_amount = currency_amount?.replace(' ', ''); //Remove existing spaces
+        currency_amount = currency_amount?.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
+        currency_amount = currency_amount?.replace(currency_amount, thb_character + ' ' + currency_amount);
+        return currency_amount;
+    }
+
+    profit_style(profit: number) {
+        let value = '0';
+        const factor = Math.pow(10, 2);
+        value = (Math.round(profit * factor) / factor).toFixed(2);
+        value = value + '%';
+        return value;
+    }
+
+    onlyNumbers(event: KeyboardEvent) {
+        if (
+            event.key !== "Backspace" &&
+            event.key !== "Delete" &&
+            event.key !== "ArrowLeft" &&
+            event.key !== "ArrowRight" &&
+            event.key !== "Tab" &&
+            (event.key < "0" || event.key > "9")
+        ) {
+            event.preventDefault();
+        }
+    }
+}
+

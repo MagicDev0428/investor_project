@@ -11,6 +11,7 @@ import { InvestorInfoComponent } from './info/investor-info.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { InvestmentListComponent } from './investment/investment-list.component';
 import { InvestmentFormComponent } from './investment/investment-form.component';
+import { InvestmentInfoComponent } from './investment/investment-info.component';
 // import {  AuthService } from '@auth0/auth0-angular';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
@@ -21,20 +22,22 @@ import { InvestorPortfolioComponent } from './investor-portfolio/investor-portfo
 const routes: Routes = [
   {path: 'list', component: ListInvestorComponent},
   {path: 'manage-investor', component: ManageInvestorComponent},
-  {path: 'manage-investor/:id', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
+  {path: 'manage-investor/:id', component: ManageInvestorComponent},
   {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: 'profile', component: ProfileComponent },
   {path: 'callback', component: CallbackComponent},
   {path: 'unauthorized', component: UnauthorizedComponent},
-  {path: 'adam-table', component: AdamTableComponent, canActivate: [AuthGuardFN]},
-  {path: 'adam-form',  component: AdamFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'adam-form/:id', component: AdamFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'info', component: InvestorInfoComponent, canActivate: [AuthGuardFN]},
-  {path: 'front-page', component:FrontPageComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-list', component:InvestmentListComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-form', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-form/:id', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'my-investments', component: InvestorPortfolioComponent}
+  {path: 'adam-table', component: AdamTableComponent},
+  {path: 'adam-form',  component: AdamFormComponent},
+  {path: 'adam-form/:id', component: AdamFormComponent},
+  {path: 'info', component: InvestorInfoComponent},
+  {path: 'front-page', component:FrontPageComponent},
+  {path: 'investment-list', component:InvestmentListComponent},
+  {path: 'investment-form', component:InvestmentFormComponent},
+  {path: 'investment-form/:id', component:InvestmentFormComponent},
+  {path: 'investment-info', component:InvestmentInfoComponent},
+  {path: 'investment-info/:id', component:InvestmentInfoComponent},
+  {path: 'my-investments', component: InvestorPortfolioComponent},
 ];
 
 @NgModule({
