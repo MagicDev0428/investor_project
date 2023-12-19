@@ -51,6 +51,7 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   investorsNames: any[] = [];
   to_value: string;
   from_value: string;
+  nowDateTime: Date;
 
   protected adamForm: FormGroup;
   protected submitted = false;
@@ -67,6 +68,7 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
     this.selectedAdam$.subscribe(res => {
       this.userId = res;
     });
+    this.nowDateTime = new Date();
   }
 
   ngOnInit(): void {
@@ -84,6 +86,20 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
         description: new FormControl(),
         attachments: new FormControl()
       });
+      this.adamForm.get('createdDate').setValue(moment(this.nowDateTime).format('yyyy-MM-DDTHH:mm'));
+      this.adamService.getAdamInvestors().subscribe((res) => {
+        this.investments = res.adams.investments;
+        this.investorsNames = res.adams.investorsNames;
+        this.investments = res.adams.investments.map(obj => {
+          if (obj._id === undefined) {
+            obj._id = ""
+          }
+          if (obj.Explanation === undefined) {
+            obj.Explanation = ""
+          }
+          return obj;
+        });
+      });
     if (typeof this.userId !== 'undefined') {
       this.adamService.getAdam(this.userId).subscribe({
         next: (res) => {
@@ -92,7 +108,7 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
           this.changeStyle(this.amount);
           this.adamForm.get('transactionFrom').setValue(this.values['transactionFrom']);
           this.adamForm.get('transactionTo').setValue(this.values['transactionTo']);
-          this.adamForm.get('createdDate').setValue(moment(this.values['createdDate']).format('yyyy-MM-DD'));
+          this.adamForm.get('createdDate').setValue(moment(this.values['createdDate']).format('yyyy-MM-DDTHH:mm'));
           this.adamForm.get('investments').setValue(this.values['investmentNo']);
           this.adamForm.get('investorName').setValue(this.values['investorName']);
           this.adamForm.get('transferFrom').setValue(this.values['transferFrom']);
@@ -117,19 +133,6 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
         complete: () => console.log('There are no more action happen.')
       });
     }
-    this.adamService.getAdamInvestors().subscribe((res) => {
-      this.investments = res.adams.investments;
-      this.investorsNames = res.adams.investorsNames;
-      this.investments = res.adams.investments.map(obj => {
-        if (obj._id === undefined) {
-          obj._id = ""
-        }
-        if (obj.Explanation === undefined) {
-          obj.Explanation = ""
-        }
-        return obj;
-      });
-    });
   }
 
   changeStyle(value: any) {
