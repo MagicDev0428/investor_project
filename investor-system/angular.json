@@ -18,7 +18,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "moment"
+              "moment",
+              "jquery"
             ],
             "outputPath": "dist/investor-system",
             "index": "src/index.html",
