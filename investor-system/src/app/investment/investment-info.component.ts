@@ -102,6 +102,10 @@ export class InvestmentInfoComponent extends BaseComponent {
         obj.modifiedDate = moment(obj.modifiedDate).format('DD-MMM-YYYY');
         return obj;
       });
+      this.logEtries = res.investmentInfo[0].investments?.logs?.logs.map(obj => {
+        obj.log =`${moment(obj._id).format('DD-MMM-YYYY')} ${obj.description} [${obj.investorName}]`;
+        return obj;
+      });
       this.sumOfTotalAmountAdam = this.currency_style(res.investmentInfo[0].investments?.adams?.
         sumOfTotalAmountAdam) ? this.currency_style(res.investmentInfo[0].investments?.adams?.
           sumOfTotalAmountAdam) : this.currency_style(0);
@@ -115,7 +119,7 @@ export class InvestmentInfoComponent extends BaseComponent {
       this.sumOfTotalAmountInvested = this.currency_style(res.investmentInfo[0].investments?.myInvestmentsList?.sumOfTotalAmountInvested)
         ? this.currency_style(res.investmentInfo[0].investments?.myInvestmentsList?.sumOfTotalAmountInvested) :
         this.currency_style(0);
-      this.investmentMissing = this.currency_style(res.investmentInfo[0].remainingDays);
+      this.investmentMissing = this.currency_style(res.investmentInfo[0].investments?.investmentMissing);
     });
   }
 

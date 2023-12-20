@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-6 form-group">
                                 <label for="expireIn">Expire in</label>
-                                <input [value]="investmentInfo?.remainingDays + ' days'" type="text" class="form-control" id="expireIn" aria-describedby="expireIn" />
+                                <input [value]="investmentInfo?.investments?.remainingDays + ' days'" type="text" class="form-control" id="expireIn" aria-describedby="expireIn" />
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-6 form-group">
                                 <label for="investmentType">Investment Type</label>
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <select class="form-select" multiple aria-label="multiple select example">
-                                        <option *ngFor="let item of logs">{{ item }}</option>
+                                        <option *ngFor="let item of logEtries">{{ item.log }}</option>
                                     </select>
                                 </div>
                             </div>

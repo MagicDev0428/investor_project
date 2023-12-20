@@ -14,6 +14,7 @@ import { FormBuilder } from '@angular/forms';
 import { AdamService } from '../service/adam.service';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-adam-form',
@@ -61,7 +62,7 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adamService: AdamService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {
     super();
     this.selectedAdam$ = activatedRoute.params.pipe(map(p => p['id']));
