@@ -135,6 +135,7 @@ select.form-control {
 
         .tcol {
             display: table-cell;
+            white-space: nowrap;
             vertical-align: middle;
             padding: 10px 8px;
             border: 1px solid rgba(0, 0, 0, 0.7);

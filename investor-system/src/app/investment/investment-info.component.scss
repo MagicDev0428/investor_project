@@ -228,6 +228,7 @@ textarea {
 
                     .tcol {
                         text-align: center;
+                        white-space: nowrap;
 
                         &:nth-child(1) {
                             text-align: start;
@@ -326,6 +327,7 @@ textarea {
 
                     .tcol {
                         text-align: center;
+                        white-space: nowrap;
 
                         &:nth-child(3) {
                             text-align: end;
@@ -416,56 +418,7 @@ textarea {
     }
 }
 
-.modal-footer {
-    height: auto;
-    background-color: #D1B9E8;
-    border-radius: 0;
-
-    .info-wrapper {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        margin: 0;
-        justify-content: space-between;
-
-        .info-col {
-            margin: 0;
-            color: white;
-            width: auto;
-            display: flex;
-
-            .info-text {
-                color: white;
-                width: auto;
-                margin-right: 15px;
-                margin-left: 10px;
-            }
-
-            .info-value {
-                color: white;
-                margin: 0;
-                margin-right: 10px;
-            }
-        }
-    }
-}
-
-
-
 @media (max-width: 992px) {
-    .modal-footer {
-        .info-wrapper {
-            width: 100%!important;
-            display: flex;
-            flex-wrap: wrap;
-        }
-    
-        .info-col {
-            width: 50%!important;
-            flex: 0 0 auto;
-        }
-    }
-
     .btn-secondary {
         display: block;
         width: 100%;
@@ -496,17 +449,6 @@ textarea {
         font-weight: bold;
         font-size: 1.2rem;
         padding: .375rem .75rem;
-    }
-
-    .modal-footer {
-        .info-wrapper {
-            flex-direction: column !important;
-
-            info-col {
-                width: 100% !important;
-                justify-content: center !important;
-            }
-        }
     }
 }
 
