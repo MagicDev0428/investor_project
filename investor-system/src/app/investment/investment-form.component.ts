@@ -13,6 +13,7 @@ import { BaseComponent } from '../base/base.component';
 import * as moment from 'moment';
 import { InvestmentService } from '../service/investment.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-investment-form',
@@ -26,6 +27,11 @@ export class InvestmentFormComponent extends BaseComponent {
   section = 'CREATE';
   title = 'New Investment'
   textAlign = '';
+  profit = '';
+  createdDate = '';
+  createdBy = '';
+  modifiedDate = '';
+  modifiedBy = '';
 
   selectedInvestment$!: Observable<string | number>;
   investment: Investment = {
@@ -48,6 +54,7 @@ export class InvestmentFormComponent extends BaseComponent {
   files: any[] = [];
   investmentId: any = '';
   values: any[] = [];
+  user: any = [];
 
   protected investmentForm: FormGroup;
   protected submitted = false;
@@ -57,7 +64,8 @@ export class InvestmentFormComponent extends BaseComponent {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private investmentService: InvestmentService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private auth: AuthService
   ) {
     super();
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
@@ -67,6 +75,9 @@ export class InvestmentFormComponent extends BaseComponent {
   }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(result => {
+      this.user = result;
+    });
     this.amount = String.fromCharCode(3647);
     this.textAlign = 'right';
     this.investmentForm = this.formBuilder.group(
@@ -99,6 +110,14 @@ export class InvestmentFormComponent extends BaseComponent {
           this.investmentForm.get('profitYearly').setValue(this.profit_style(this.values['profitYearly']));
           this.investmentForm.get('profitEnd').setValue(this.profit_style(this.values['profitEnd']));
           this.investmentForm.get('explanation').setValue(this.values['explanation']);
+          this.createdDate = moment(this.values['createdDate']).format('yyyy-MM-DD');
+          this.investment.createdDate = this.values['createdDate'];
+          this.createdBy = this.values['createdBy'];
+          this.investment.createdBy = this.values['createdBy'];
+          this.modifiedDate = moment(this.values['modifiedDate']).format('yyyy-MM-DD');
+          this.investment.modifiedDate = this.values['modifiedDate'];
+          this.modifiedBy = this.values['modifiedBy'];
+          this.investment.modifiedBy = this.values['modifiedBy'];
           this.section = 'EDIT';
           this.title = this.investmentId + " " + this.values['investType'] + " " +
             this.investmentForm.get('investAmount').value + " at ";
@@ -125,34 +144,78 @@ export class InvestmentFormComponent extends BaseComponent {
   }
 
   profitValidator = (form: FormGroup) => {
-    const investType = form.get('investType').value;
-    const profitMonthly = form.get('profitMonthly').value;
-    const profitYearly = form.get('profitYearly').value;
-    const profitEnd = form.get('profitEnd').value;
+    const investType = form.get('investType').value?.replace(/%/g, '');
+    const profitMonthly = form.get('profitMonthly').value?.replace(/%/g, '');
+    const profitYearly = form.get('profitYearly').value?.replace(/%/g, '');
+    const profitEnd = form.get('profitEnd').value?.replace(/%/g, '');
     let valid = false;
+
     if (investType === 'Monthly Profit') {
-      // if (profitMonthly === undefined)
-      valid = profitMonthly === '' ? false : true;
-      console.log('val->', valid);
-      return valid ? null : { monthlyRequired: "true" };
-    } else if (investType === 'Annual Profit') {
-      valid = profitYearly === '' ? false : true;
-      return valid ? null : { yearlyRequired: "true" };
+      if (profitMonthly === '') {
+        valid = false;
+        return valid ? null : { monthlyRequired: "true" };
+      }
+      if (Number(profitMonthly?.replace(/%/g, '')) > 100 || Number(profitMonthly?.replace(/%/g, '')) < 0.01) {
+        valid = false;
+        return valid ? null : { monthlyExceed: "true" };
+      }
+    } if (investType === 'Annual Profit') {
+      if (profitYearly === '') {
+        valid = false;
+        return valid ? null : { yearlyRequired: "true" };
+      }
+      if (Number(profitYearly?.replace(/%/g, '')) > 100 || Number(profitYearly?.replace(/%/g, '')) < 0.01) {
+        valid = false;
+        return valid ? null : { yearlyExceed: "true" };
+      }
     } else if (investType === 'One-time Profit') {
-      valid = profitEnd === '' ? false : true;
-      return valid ? null : { endRequired: "true" };
+      if (profitEnd === '') {
+        valid = false;
+        return valid ? null : { endRequired: "true" };
+      }
+      if (Number(profitEnd?.replace(/%/g, '')) > 100 || Number(profitEnd?.replace(/%/g, '')) < 0.01) {
+        valid = false;
+        return valid ? null : { endExceed: "true" };
+      }
     } else if (investType === 'Mixed') {
       if (profitMonthly === '' && profitYearly === '' && profitEnd === '') {
         valid = false;
         return valid ? null : { anyoneRequired: "true" };
       }
+      if (profitMonthly !== '') {
+
+        if (Number(profitMonthly?.replace(/%/g, '')) > 100 || Number(profitMonthly?.replace(/%/g, '')) < 0.01) {
+          valid = false;
+          return valid ? null : { monthlyExceed: "true" };
+        }
+      }
+      if (profitYearly !== '') {
+        if (Number(profitYearly?.replace(/%/g, '')) > 100 || Number(profitYearly?.replace(/%/g, '')) < 0.01) {
+          valid = false;
+          return valid ? null : { yearlyExceed: "true" };
+        }
+      }
+      if (profitEnd !== '') {
+        if (Number(profitEnd?.replace(/%/g, '')) > 100 || Number(profitEnd?.replace(/%/g, '')) < 0.01) {
+          valid = false;
+          return valid ? null : { endExceed: "true" };
+        }
+      }
     }
+
     return null;
   };
 
   onInputChange(event: any) {
-    this.amount = event.target.value.replace(/\D/g, '');
-    this.changeStyle(this.amount);
+    console.log(event.target.id);
+    let id = event.target.id;
+    if (id === 'investAmount') {
+      this.amount = event.target.value.replace(/\D/g, '');
+      this.changeStyle(this.amount);
+    } else if (id === 'profitMonthly' || id === 'profitYearly' || id === 'profitEnd') {
+      this.profit = event.target.value?.replace(/%/g, '');
+      this.investmentForm.get(id).setValue(this.profit + '%');
+    }
   }
 
   changeStyle(value: any) {
@@ -167,7 +230,7 @@ export class InvestmentFormComponent extends BaseComponent {
     if (typeof _id !== 'undefined') {
       this.investmentService.deleteInvestment(_id).subscribe({
         next: (res) => {
-          this.toastrService.success('Data was successfully deleted!');
+          this.toastrService.success('Investment was successfully deleted!');
           this.router.navigate(['/investment-list/']);
         },
         error: err => {
@@ -193,17 +256,21 @@ export class InvestmentFormComponent extends BaseComponent {
       this.investment.explanation = this.investmentForm.get('explanation').value;
 
       if (typeof this.investmentId !== 'undefined') {
-        this.investmentService.updateInvestment(this.investment).subscribe({
-          next: (res) => {
-            this.toastrService.success('Investment was successfully updated!');
-            this.goList();
-          },
-          error: err => {
-            this.toastrService.error(err);
-          },
-          complete: () => console.log('There are no more action happen.')
-        });
+        this.investment.modifiedBy = this.user.name;
+        this.investment.modifiedDate = new Date();
+          this.investmentService.updateInvestment(this.investment).subscribe({
+            next: (res) => {
+              this.toastrService.success('Investment was successfully updated!');
+              this.goList();
+            },
+            error: err => {
+              this.toastrService.error(err);
+            },
+            complete: () => console.log('There are no more action happen.')
+          });
       } else {
+        this.investment.createdBy = this.user.name;
+        this.investment.createdDate = new Date();
         this.investmentService.createInvestment(this.investment).subscribe({
           next: (res) => {
             this.toastrService.success('Investment was successfully created!');

@@ -24,12 +24,14 @@
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-6 form-group">
                                 <label for="totalAmount">Total Amount</label>
-                                <input type="text" class="form-control text-end" id="totalAmount" aria-describedby="totalAmount"
+                                <input type="text" class="form-control text-end" id="totalAmount"
+                                    aria-describedby="totalAmount"
                                     [value]="currency_style(investmentInfo.investments?.investAmount)" />
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-6 form-group">
                                 <label for="expireIn">Expire in</label>
-                                <input [value]="investmentInfo?.investments?.remainingDays + ' days'" type="text" class="form-control" id="expireIn" aria-describedby="expireIn" />
+                                <input [value]="investmentInfo?.investments?.remainingDays + ' days'" type="text"
+                                    class="form-control" id="expireIn" aria-describedby="expireIn" />
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-6 form-group">
                                 <label for="investmentType">Investment Type</label>
@@ -55,7 +57,8 @@
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-6 form-group">
                                 <label for="endProfit">Profit by End</label>
-                                <input type="text" class="form-control text-end" id="endProfit" aria-describedby="endProfit"
+                                <input type="text" class="form-control text-end" id="endProfit"
+                                    aria-describedby="endProfit"
                                     [value]="profit_style(investmentInfo.investments?.profitEnd)" />
                             </div>
                         </div>
@@ -69,7 +72,8 @@
                                         <div class="col-lg-5 col-md-6 col-sm-6 my-1">
                                             <div class="row statistics-panel">
                                                 <div class="col-xl-7 statistics-title">Total Investments</div>
-                                                <div class="col-xl-5 statistics-value">{{ sumOfTotalAmountInvested }}</div>
+                                                <div class="col-xl-5 statistics-value">{{ sumOfTotalAmountInvested }}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-5 col-md-6 col-sm-6 my-1">
@@ -124,8 +128,8 @@
                                         <div class="col-lg-5 col-md-6 col-sm-6 my-1">
                                         </div>
                                         <div class="col-lg-2 d-flex my-2">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                aria-label="Icon Button">NEW</button>
+                                            <button type="button" (click)="goAdam()" class="btn btn-secondary"
+                                                data-dismiss="modal" aria-label="Icon Button">NEW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -169,26 +173,6 @@
                                         <option *ngFor="let item of logEtries">{{ item.log }}</option>
                                     </select>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="info-wrapper">
-                            <div class="info-col">
-                                <span class="info-text">Create Date </span>
-                                <span class="info-value">01-Feb-2023</span>
-                            </div>
-                            <div class="info-col">
-                                <span class="info-text">Create By</span>
-                                <span class="info-value">Torben</span>
-                            </div>
-                            <div class="info-col">
-                                <span class="info-text">Update Date</span>
-                                <span class="info-value">12-August-2023</span>
-                            </div>
-                            <div class="info-col">
-                                <span class="info-text">Update By</span>
-                                <span class="info-value">Bee</span>
                             </div>
                         </div>
                     </div>

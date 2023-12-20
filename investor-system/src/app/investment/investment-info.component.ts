@@ -131,6 +131,10 @@ export class InvestmentInfoComponent extends BaseComponent {
     this.router.navigate(['/investment-list/']);
   }
 
+  goAdam() {
+    this.router.navigate(['/adam-form/']);
+  }
+
   /**
 * on file drop handler
 */
