@@ -9,36 +9,36 @@
           <a  data-bs-target="#navbarNav" class="nav-link" (click)="toggleNavbar()" [routerLink]="['list']">Home</a>
         </li>
         <li class="nav-item">
-          <a data-bs-target="#navbarNav" class="nav-link"
+          <a data-bs-target="#navbarNav" class="nav-link" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
             [routerLink]="['investment-list']">Investments</a>
 
         </li>
         <li class="nav-item">
-          <a data-bs-target="#navbarNav" class="nav-link"
+          <a data-bs-target="#navbarNav" class="nav-link" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
             [routerLink]="['balance']">Balance</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link" data-bs-target="#navbarNav"
+          <a class=" nav-link" data-bs-target="#navbarNav" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
             [routerLink]="['adam-table']">Adam</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link" data-bs-target="#navbarNav"
+          <a class=" nav-link" data-bs-target="#navbarNav" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
             [routerLink]="['total']">Total</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link" data-bs-target="#navbarNav"
+          <a class=" nav-link" data-bs-target="#navbarNav" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
             [routerLink]="['logs']">Logs</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link"  data-bs-target="#navbarNav" [routerLink]="['my-investments']">My Investments</a>
+          <a class=" nav-link"  data-bs-target="#navbarNav" (click)="toggleNavbar()" [routerLink]="['my-investments']">My Investments</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link"  data-bs-target="#navbarNav" [routerLink]="['profile']"
+          <a class=" nav-link"  data-bs-target="#navbarNav" (click)="toggleNavbar()" [routerLink]="['profile']"
             *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
         </li>
         <li class="nav-item">

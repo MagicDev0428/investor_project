@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,9 @@ export class HeaderComponent {
   }
 
   toggleNavbar() {
-    //$(".navbar-toggler").trigger("click");
+    if($(".navbar-toggler").is(":visible")) {
+      $(".navbar-toggler").trigger("click");
+    }
   }
 
   
