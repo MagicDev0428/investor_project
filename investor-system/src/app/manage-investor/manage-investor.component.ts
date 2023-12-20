@@ -48,13 +48,14 @@ export class ManageInvestorComponent implements OnInit {
 
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     //   this.activatedRoute.paramMap.subscribe((params: ParamMap) =>  {
     //     this.selectedInvestor$ = params.get('id');
     // });
 
     this.addInvestorForm = this.formBuilder.group(
       {
+        _id: new FormControl(""),
         name: new FormControl("", Validators.required),
         nickname: new FormControl("", Validators.required),
         phone: new FormControl(""),
@@ -78,11 +79,6 @@ export class ManageInvestorComponent implements OnInit {
       });
 
     this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator])
-
-    //     this.addInvestorForm.setValue({name: this.investor.name, nickname: '', phone: 12356, email: "",
-    //       address: "", zipCode: "", city: "", country: "", status: "", facebook: "", passport: "", beneficiaryName: ""
-    // ,     });
-
   }
 
   emailValidator = (form: FormGroup) => {
@@ -109,6 +105,7 @@ export class ManageInvestorComponent implements OnInit {
     this.submitted = true;
 
     if (this.addInvestorForm.valid) {
+      this.addInvestorForm.get('_id').setValue(this.addInvestorForm.get('name').value);
       console.log(
         "Form Submitted succesfully!!!\n Check the values in browser console."
       );
@@ -131,7 +128,6 @@ export class ManageInvestorComponent implements OnInit {
 
       // formData.append('data', mData);
       console.log('formData', formData);
-
       this.investorService.saveInvestor(formData).subscribe({
         next: (x) => {
           console.log('The next value is: ', x)
@@ -139,7 +135,7 @@ export class ManageInvestorComponent implements OnInit {
         },
         error: err => {
           console.error('An error occurred :', err);
-          this.toastrService.error('Error while saving investor');
+          this.toastrService.error(err);
         },
         complete: () => console.log('There are no more action happen.')
       })
