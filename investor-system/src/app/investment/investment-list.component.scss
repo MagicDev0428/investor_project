@@ -181,9 +181,12 @@ select.form-control {
             height: 40px;
             font-weight: bold;
             cursor: pointer;
+            font-family: 'Arial Narrow';
+            font-size: 11pt;
 
             .tcol {
                 text-align: center;
+                white-space:wrap;
 
                 &:nth-child(1) {
                     width: 8%;

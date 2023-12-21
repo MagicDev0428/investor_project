@@ -277,8 +277,12 @@ textarea {
                 width: 50%!important;
                 flex: 0 0 auto;
             }
+    
+            .info-text{
+                width: 30%!important;
+            }
         }
-
+    
         .btn-secondary {
             display: block;
             width: 100%;
@@ -313,14 +317,26 @@ textarea {
 
         .modal-footer {
             .info-wrapper {
-                flex-direction: column !important;
-
-                info-col {
-                    width: 100% !important;
-                    justify-content: center !important;
-                }
+                width: 100%!important;
+                display: flex;
+                flex-direction: column;
+            }
+        
+            .info-col {
+                width: 100%!important;
+                flex: 0 0 auto;
+            }
+    
+            .info-text{
+                width: 20%!important;
             }
         }
     }
 
-    @media (max-width: 576px) {}
+    @media (max-width: 576px) {
+        .modal-footer {
+            .info-text{
+                width: 25%!important;
+            }
+        }
+    }

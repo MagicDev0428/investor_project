@@ -198,6 +198,7 @@ textarea {
 
         .info-col {
             margin-bottom: 5px;
+            
         }
 
 
@@ -245,12 +246,14 @@ textarea {
             color: white;
             width: auto;
             display: flex;
+            white-space: nowrap;
 
             .info-text {
                 color: white;
                 width: auto;
                 margin-right: 15px;
                 margin-left: 10px;
+                white-space: nowrap;
             }
 
             .info-value {
@@ -276,11 +279,16 @@ textarea {
             width: 50%!important;
             flex: 0 0 auto;
         }
+
+        .info-text{
+            width: 30%!important;
+        }
     }
 
     .btn-secondary {
         display: block;
         width: 100%;
+        white-space: wrap;
     }
 
     .btn-danger {
@@ -291,6 +299,7 @@ textarea {
         font-weight: bold;
         font-size: 1.2rem;
         padding: .375rem .75rem;
+        white-space: wrap;
     }
 }
 
@@ -312,14 +321,26 @@ textarea {
 
     .modal-footer {
         .info-wrapper {
-            flex-direction: column !important;
+            width: 100%!important;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .info-col {
+            width: 100%!important;
+            flex: 0 0 auto;
+        }
 
-            info-col {
-                width: 100% !important;
-                justify-content: center !important;
-            }
+        .info-text{
+            width: 20%!important;
         }
     }
 }
 
-@media (max-width: 576px) {}
+@media (max-width: 576px) {
+    .modal-footer {
+        .info-text{
+            width: 25%!important;
+        }
+    }
+}
