@@ -13,7 +13,7 @@ export class InvestorService {
   apiURL = '/investor';  // URL to web api
 
   investor: Investor = {
-    id: 0,
+    _id: undefined,
     name: '',
     nickname: '',
     phone: '',
@@ -52,7 +52,7 @@ export class InvestorService {
       );
   }
 
-  getInvestor(id: number | string): Observable<Investor> {
+  getInvestor(id: number | string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + this.apiURL + '/getinvestor/' + id)
       .pipe(
         map((investor) => investor),
@@ -91,7 +91,7 @@ export class InvestorService {
     );;
   }
 
-  getInvestorInfo(id: number | string): Observable<Investor> {
+  getInvestorInfo(id: number | string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorinfo/' + id)
       .pipe(
         catchError(this._configService.handleError)

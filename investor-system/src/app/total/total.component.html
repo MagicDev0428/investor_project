@@ -1,0 +1,74 @@
+<div class="total">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title ">All Investments - Total {{ total }}</h5>
+                        <button type="button" (click)="goList()" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row section-header">
+                            <div class="col-lg-4 col-md-4 my-4">
+                                <div class="row statistics-panel">
+                                    <div class="col-xl-7 statistics-title">Total Investments</div>
+                                    <div class="col-xl-5 statistics-value">{{ totalInvestment }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 my-4">
+                                <div class="row statistics-panel total-profit">
+                                    <div class="col-xl-7 statistics-title">Total Profit</div>
+                                    <div class="col-xl-5 statistics-value">{{ totalProfit }}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 my-4">
+                                <div class="row statistics-panel">
+                                    <div class="col-xl-7 statistics-title">Monthly Profit</div>
+                                    <div class="col-xl-5 statistics-value">{{ monthlyProfit }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row total-tables">
+                            <div class="col-lg-9 p-0">
+                                <div class="div-table invest-table">
+                                    <div class="trow theader">
+                                        <div class="tcol">No</div>
+                                        <div class="tcol">Amount Invested</div>
+                                        <div class="tcol">Profit Monthly</div>
+                                        <div class="tcol">Profit Monthly</div>
+                                        <div class="tcol">Torben Invested</div>
+                                        <div class="tcol">Torben Monthly</div>
+                                        <div class="tcol">Torben Profit</div>
+                                    </div>
+                                    <div *ngFor="let item of items1; let i = index" class="trow">
+                                        <div class="tcol">{{ item._id }}</div>
+                                        <div class="tcol">{{ currency_style(item.amountInvested) }}</div>
+                                        <div class="tcol">{{ profit_style(item.profitMonthlyPct) }}</div>
+                                        <div class="tcol">{{ currency_style(item.profitMonthly) }}</div>
+                                        <div class="tcol">{{ currency_style(item.torbenInvested) }}</div>
+                                        <div class="tcol">{{ profit_style(item.torbenmonthly) }}</div>
+                                        <div class="tcol">{{ currency_style(item.torbenPtofit) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 p-0">
+                                <div class="div-table profit-table">
+                                    <div class="trow theader">
+                                        <div class="tcol">Profit Month</div>
+                                        <div class="tcol">Total Profit Amount</div>
+                                    </div>
+                                    <div *ngFor="let item of items2; let i = index" class="trow">
+                                        <div class="tcol">{{ item.profitMonth }}</div>
+                                        <div class="tcol">{{ currency_style(item.totalProfitAmount) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

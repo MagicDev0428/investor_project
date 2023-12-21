@@ -1,5 +1,5 @@
 export class Investor {
-    id: number;
+    _id: number;
     name: string
     nickname: string;
     phone: string;

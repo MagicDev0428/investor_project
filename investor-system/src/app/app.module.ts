@@ -37,6 +37,10 @@ import { DndDirective } from './dnd.directive';
 import { ProfitButtonComponent } from './components/profit-button/profit-button-component';
 import { AuthGuardFN } from './auth-guard.service';
 import { InvestorPortfolioComponent } from './investor-portfolio/investor-portfolio.component';
+import { MyInvestmentFormComponent } from './my-investment/my-investment-form.component';
+import { LogListComponent } from './log/log-list.component';
+import { LogFormComponent } from './log/log-form.component';
+import { TotalComponent } from './total/total.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,11 @@ import { InvestorPortfolioComponent } from './investor-portfolio/investor-portfo
     UnauthorizedComponent,
     DndDirective,
     ProfitButtonComponent,
-    InvestorPortfolioComponent
+    InvestorPortfolioComponent,
+    MyInvestmentFormComponent,
+    LogListComponent,
+    LogFormComponent,
+    TotalComponent
   ],
   imports: [
     BrowserModule,

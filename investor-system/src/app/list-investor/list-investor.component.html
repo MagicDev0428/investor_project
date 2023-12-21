@@ -33,10 +33,10 @@
                 <div class="tcol">Facebook</div>
                 <div class="tcol">Folder</div>
               </div>
-              <div class="trow" *ngFor="let item of items">
+              <div class="trow" *ngFor="let item of items" (click)="goForm(item._id)">
                 <div class="tcol">
                   <div>
-                    <span class="name">{{ item.name }}</span>
+                    <span class="name">{{ item._id }}</span>
                     <div class="button-group">
                       <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal"
                         aria-label="Icon Button">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="tcol">{{ currency_style(item.amount) }}</div>
                 <div class="tcol">{{ currency_style(item.profit) }}</div>
-                <div class="tcol">{{ item.transfer_type }}</div>
+                <div class="tcol">{{ item.transferType }}</div>
                 <div class="tcol"><app-profit-button [profitStyle]="item.profitStyle">{{ item.next_profit
                     }}</app-profit-button>
                 </div>

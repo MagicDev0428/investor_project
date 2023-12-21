@@ -13,45 +13,6 @@ import { InvestmentService } from '../service/investment.service';
 import { Adam } from '../model/adam';
 import * as moment from 'moment';
 
-const table_contents = [
-  {
-    _no: '001',
-    amount: '1200000',
-    monthlyProfit: '2.00%',
-    annualProfit: '2.00%',
-    investmentEnds: '18 Days',
-    description: 'Adam offered 2.16% on a 5,000,000 investment'
-  },
-  {
-    _no: '002',
-    amount: '21200001',
-    monthlyProfit: '2.00%',
-    annualProfit: '2.00%',
-    investmentEnds: '42 Days',
-    description: 'Adam offered 3.16% on a 15,000,000 investment'
-  },
-  {
-    _no: '003',
-    amount: '1200000',
-    monthlyProfit: '2.00%',
-    annualProfit: '2.00%',
-    investmentEnds: '280 Days',
-    description: 'Adam offered 3.16% on a 15,000,000 investment'
-  }
-];
-
-const log_entry = [
-  "25-Jul-2023 created the Investment [Torben]",
-  "26-Jul-2023 updated the Investment [Bee]",
-  "28-Jul-2023 added new Investment 4,500,000 from Mark [Torben]",
-  "28-Aug-2023 added new Investment 3,000,000 from Mark [Torben]",
-  "15-Sep-2023 paid profit 90,000 to Mark [Bee]",
-  "15-Sep-2023 sent Email to Mark [Bee]",
-  "15-Sep-2023 paid profit 60,000 to Mark [Bee]",
-  "15-Sep-2023 Mark withdraw 50,000 [Bee]",
-  "15-Oct-2023 paid profit 90,000 to Mark [Bee]",
-];
-
 @Component({
   selector: 'app-investment-info',
   templateUrl: './investment-info.component.html',
@@ -63,8 +24,8 @@ export class InvestmentInfoComponent extends BaseComponent {
   amount = '';
   textAlign = '';
   files: any[] = [];
-  items = table_contents;
-  logs = log_entry;
+  items = [];
+  logs = [];
   title: string = '';
   investmentId: any = '';
 
@@ -103,7 +64,7 @@ export class InvestmentInfoComponent extends BaseComponent {
         return obj;
       });
       this.logEtries = res.investmentInfo[0].investments?.logs?.logs.map(obj => {
-        obj.log =`${moment(obj._id).format('DD-MMM-YYYY')} ${obj.description} [${obj.investorName}]`;
+        obj.log = `${moment(obj._id).format('DD-MMM-YYYY')} ${obj.description} [${obj.investorName}]`;
         return obj;
       });
       this.sumOfTotalAmountAdam = this.currency_style(res.investmentInfo[0].investments?.adams?.
@@ -133,6 +94,14 @@ export class InvestmentInfoComponent extends BaseComponent {
 
   goAdam() {
     this.router.navigate(['/adam-form/']);
+  }
+
+  goNewMyInvestment() {
+    this.router.navigate(['/my-investment-form/']);
+  }
+
+  goLogForm() {
+    this.router.navigate(['/log-form/']);
   }
 
   /**

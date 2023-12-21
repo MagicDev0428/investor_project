@@ -12,6 +12,10 @@ import { FrontPageComponent } from './front-page/front-page.component';
 import { InvestmentListComponent } from './investment/investment-list.component';
 import { InvestmentFormComponent } from './investment/investment-form.component';
 import { InvestmentInfoComponent } from './investment/investment-info.component';
+import { MyInvestmentFormComponent } from './my-investment/my-investment-form.component';
+import { LogListComponent } from './log/log-list.component';
+import { LogFormComponent } from './log/log-form.component';
+import { TotalComponent } from './total/total.component';
 // import {  AuthService } from '@auth0/auth0-angular';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
@@ -38,6 +42,10 @@ const routes: Routes = [
   {path: 'investment-info', component:InvestmentInfoComponent},
   {path: 'investment-info/:id', component:InvestmentInfoComponent},
   {path: 'my-investments', component: InvestorPortfolioComponent},
+  {path: 'my-investment-form', component: MyInvestmentFormComponent},
+  {path: 'log-list', component: LogListComponent},
+  {path: 'log-form', component: LogFormComponent},
+  {path: 'total', component: TotalComponent},
 ];
 
 @NgModule({

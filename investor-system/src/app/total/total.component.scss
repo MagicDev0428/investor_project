@@ -1,0 +1,267 @@
+.total {
+    background-color: white;
+}
+
+
+.container .modal {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 1;
+    display: block;
+
+    .modal-dialog {
+        max-width: 1140px;
+        margin-top: 0;
+    }
+
+    .modal-content {
+        border-radius: 0;
+        background-color: #EDD7D9;
+    }
+
+    .modal-header {
+        padding: 0.3rem 0.3rem;
+        background-color: #6D010E;
+        border-radius: 0;
+        position: relative;
+
+        h5 {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .close {
+            position: absolute;
+            right: 6px;
+            font-style: italic;
+            text-shadow: none;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0.25rem;
+            border: none;
+
+            span {
+                background-color: #AAAAAA;
+                color: white;
+                font-weight: lighter;
+                border-radius: 0.25rem;
+                display: block;
+                width: 29px;
+                height: 29px;
+                text-align: center;
+                box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+            }
+        }
+    }
+
+    .modal-body {
+        padding: 0;
+
+        .section-header {
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            padding: 5px 30px;
+
+            .ttitle {
+                font-size: 18pt;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                color: #6D010E;
+            }
+
+            .statistics-panel {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                font-weight: bold;
+
+                .statistics-title {
+                    border: 1px solid grey;
+                    display: flex;
+                    justify-content: center;
+                    padding: 5px 5px;
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: -1px;
+                    color: white;
+                    background-color: #6D010E;
+                    color: white;
+                }
+
+                .statistics-value {
+                    border: 1px solid grey;
+                    display: flex;
+                    justify-content: flex-end;
+                    padding: 5px 5px;
+                    display: flex;
+                    align-items: center;
+                    color: black;
+                    background-color: white;
+                }
+            }
+
+            .total-profit {
+                padding-right: 1.5rem;
+                padding-left: 1.5rem;
+            }
+        }
+
+        .total-tables {
+            padding: 5px 30px;
+
+            .div-table {
+                --bs-table-bg: none;
+                border-collapse: collapse;
+                border-spacing: 2px;
+                overflow-x: auto;
+                padding: 0;
+
+                .trow {
+                    display: table-row;
+                    border: 1px solid rgba(0, 0, 0, 0.7);
+                    background-color: white;
+
+                    .tcol {
+                        display: table-cell;
+                        vertical-align: middle;
+                        padding: 10px 8px;
+                        border: 1px solid rgba(0, 0, 0, 0.7);
+                        text-align: right;
+
+                        &:nth-child(1) {
+                            text-align: center;
+                        }
+                    }
+
+                    &.theader {
+                        text-align: center;
+                        color: white;
+                        height: 40px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        background-color: #6D010E;
+
+                        .tcol {
+                            text-align: center;
+
+                            &:nth-child(1) {
+                                width: 29%;
+                            }
+
+                            &:nth-child(2) {
+                                width: 11%;
+                            }
+
+                            &:nth-child(3) {
+                                width: 11.5%;
+                            }
+
+                            &:nth-child(4) {
+                                width: 12%;
+                            }
+
+                            &:nth-child(5) {
+                                width: 12.5%;
+                            }
+
+                            &:nth-child(6) {
+                                width: 12.5%;
+                            }
+
+                            &:nth-child(7) {
+                                width: 11.5%;
+                            }
+                        }
+                    }
+                }
+
+                &.invest-table {
+                    padding-right: 15px;
+
+                    .trow {
+                        &.theader {
+
+                            .tcol {
+                                text-align: center;
+
+                                &:nth-child(1) {
+                                    width: 8.4%;
+                                }
+
+                                &:nth-child(2) {
+                                    width: 16.4%;
+                                }
+
+                                &:nth-child(3) {
+                                    width: 10%;
+                                }
+
+                                &:nth-child(4) {
+                                    width: 17.1%;
+                                }
+
+                                &:nth-child(5) {
+                                    width: 17.1%;
+                                }
+
+                                &:nth-child(6) {
+                                    width: 13%;
+                                }
+
+                                &:nth-child(7) {
+                                    width: 18%;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.profit-table {
+                    padding-left: 15px;
+
+                    .trow {
+                        &.theader {
+
+                            .tcol {
+                                text-align: center;
+
+                                &:nth-child(1) {
+                                    width: 45%;
+                                }
+
+                                &:nth-child(2) {
+                                    width: 55%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .invest-table {
+        padding: 0!important;
+        margin-bottom: 30px;
+    }
+
+    .profit-table {
+        width: 100%;
+        padding: 0!important;
+    }
+}
+
+@media (max-width: 768px) {
+    .total-profit {
+        padding: 0 !important;
+    }
+}
