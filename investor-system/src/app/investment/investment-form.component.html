@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="investType">Investment Type</label>
-                                    <select formControlName="investType" class="form-control form-select" id="investType"
+                                    <select formControlName="investType" (change)="onSelectChange($event)" class="form-control form-select" id="investType"
                                         aria-describedby="investType">
                                         <option>Monthly Profit</option>
                                         <option>Annual Profit</option>
@@ -66,8 +66,8 @@
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="profitYearly">Profit pr Year</label>
                                     <input formControlName="profitYearly" type="text" [style.textAlign]="textAlign"
-                                        class="form-control" (input)="onInputChange($event)" id="profitYearly"
-                                        aria-describedby="profitYearly" />
+                                        class="form-control form-input" (input)="onInputChange($event)" id="profitYearly"
+                                        aria-describedby="profitYearly"/>
                                     <span class="text-danger"
                                         *ngIf="submitted && (investmentForm.errors?.['yearlyRequired'] || investmentForm.errors?.['anyoneRequired'])">
                                         Profit pr Year is required.

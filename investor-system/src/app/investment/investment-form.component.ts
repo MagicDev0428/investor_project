@@ -55,6 +55,7 @@ export class InvestmentFormComponent extends BaseComponent {
   investmentId: any = '';
   values: any[] = [];
   user: any = [];
+  investType: string = undefined;
 
   protected investmentForm: FormGroup;
   protected submitted = false;
@@ -106,6 +107,7 @@ export class InvestmentFormComponent extends BaseComponent {
           this.investmentForm.get('startDate').setValue(moment(this.values['startDate']).format('yyyy-MM-DD'));
           this.investmentForm.get('endDate').setValue(moment(this.values['endDate']).format('yyyy-MM-DD'));
           this.investmentForm.get('investType').setValue(this.values['investType']);
+          this.investType = this.values['investType'];
           this.investmentForm.get('profitMonthly').setValue(this.profit_style(this.values['profitMonthly']));
           this.investmentForm.get('profitYearly').setValue(this.profit_style(this.values['profitYearly']));
           this.investmentForm.get('profitEnd').setValue(this.profit_style(this.values['profitEnd']));
@@ -141,6 +143,7 @@ export class InvestmentFormComponent extends BaseComponent {
         this.investmentForm.get('_id').setValue(res.investmentNo);
       });
     }
+    this.checkProfitDisable();
   }
 
   profitValidator = (form: FormGroup) => {
@@ -206,8 +209,36 @@ export class InvestmentFormComponent extends BaseComponent {
     return null;
   };
 
+  onSelectChange(event: any) {
+    this.investType = event.target.value;
+    this.checkProfitDisable();
+  }
+
+  checkProfitDisable() {
+    if (this.investType === undefined) {
+      this.investmentForm.get('profitMonthly').disable();
+      this.investmentForm.get('profitYearly').disable();
+      this.investmentForm.get('profitEnd').disable();
+    } else if (this.investType === 'Monthly Profit') {
+      this.investmentForm.get('profitMonthly').enable();
+      this.investmentForm.get('profitYearly').disable();
+      this.investmentForm.get('profitEnd').disable();
+    } else if (this.investType === 'Annual Profit') {
+      this.investmentForm.get('profitMonthly').disable();
+      this.investmentForm.get('profitYearly').enable();
+      this.investmentForm.get('profitEnd').disable();
+    } else if (this.investType === 'One-time Profit') {
+      this.investmentForm.get('profitMonthly').disable();
+      this.investmentForm.get('profitYearly').disable();
+      this.investmentForm.get('profitEnd').enable();
+    } else if (this.investType === 'Mixed') {
+      this.investmentForm.get('profitMonthly').enable();
+      this.investmentForm.get('profitYearly').enable();
+      this.investmentForm.get('profitEnd').enable();
+    }
+  }
+
   onInputChange(event: any) {
-    console.log(event.target.id);
     let id = event.target.id;
     if (id === 'investAmount') {
       this.amount = event.target.value.replace(/\D/g, '');
@@ -258,16 +289,16 @@ export class InvestmentFormComponent extends BaseComponent {
       if (typeof this.investmentId !== 'undefined') {
         this.investment.modifiedBy = this.user.name;
         this.investment.modifiedDate = new Date();
-          this.investmentService.updateInvestment(this.investment).subscribe({
-            next: (res) => {
-              this.toastrService.success('Investment was successfully updated!');
-              this.goList();
-            },
-            error: err => {
-              this.toastrService.error(err);
-            },
-            complete: () => console.log('There are no more action happen.')
-          });
+        this.investmentService.updateInvestment(this.investment).subscribe({
+          next: (res) => {
+            this.toastrService.success('Investment was successfully updated!');
+            this.goList();
+          },
+          error: err => {
+            this.toastrService.error(err);
+          },
+          complete: () => console.log('There are no more action happen.')
+        });
       } else {
         this.investment.createdBy = this.user.name;
         this.investment.createdDate = new Date();

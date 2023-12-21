@@ -27,7 +27,7 @@
                                 <div class="tcol" (click)="orderTable('investAmount')">Amount Invested</div>
                                 <div class="tcol" (click)="orderTable('profitMonthly')">Profit Monthly</div>
                                 <div class="tcol" (click)="orderTable('profitYearly')">Profit Annual</div>
-                                <div class="tcol" (click)="orderTable('endDate')">Investments ends in</div>
+                                <div class="tcol" (click)="orderTable('investmentEnds')">Investments ends in</div>
                                 <div class="tcol" (click)="orderTable('explanation')">Description/Text</div>
                                 <div class="tcol">i</div>
                             </div>
@@ -36,7 +36,7 @@
                                 <div class="tcol">{{ currency_style(item.investAmount) }}</div>
                                 <div class="tcol">{{ profit_style(item.profitMonthly) }}</div>
                                 <div class="tcol">{{ profit_style(item.profitYearly) }}</div>
-                                <div class="tcol">{{ item.endDate }}</div>
+                                <div class="tcol">{{ item.investmentEnds + ' Days' }}</div>
                                 <div class="tcol">{{ item.explanation }}</div>
                                 <div class="tcol">
                                     <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal"
