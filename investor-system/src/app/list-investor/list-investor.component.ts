@@ -116,6 +116,14 @@ export class ListInvestorComponent extends BaseComponent {
     });
   }
 
+  goForm(id: string = '') {
+    if (id.length === 0) {
+        this.router.navigate(['/manage-investor']);
+    } else {
+        this.router.navigate(['/manage-investor/' + id]);
+    }
+}
+
   callProtectedEndpoint(): void {
     this.http
       .get<Message>(`${environment.apiUrl}/private`)

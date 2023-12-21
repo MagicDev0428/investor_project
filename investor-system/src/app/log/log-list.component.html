@@ -1,0 +1,108 @@
+<div class="log-list">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title ">Log System</h5>\
+                        <button type="button" (click)="goForm()" class="close new-log" data-dismiss="modal" aria-label="New Log">
+                            <span aria-hidden="true">New Log</span>
+                        </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="row">
+                                    <div class="col-lg-6 mb-2">
+                                        <div class="form-group row">
+                                            <label for="startDate" class="col-sm-3 col-form-label">Date</label>
+                                            <div class="col-sm-9">
+                                                <div class="row multi-date">
+                                                    <div class="date startDate pl-0">
+                                                        <input type="date" class="form-control" id="startDate"
+                                                            aria-describedby="startDate" />
+                                                    </div>
+                                                    <div class="col-form-label text px-0 w-auto">
+                                                        <span>to</span>
+                                                    </div>
+                                                    <div class="date endDate pr-0">
+                                                        <input type="date" class="form-control" id="endDate"
+                                                            aria-describedby="endDate" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-2">
+                                        <div class="form-group row">
+                                            <label for="customer" class="col-sm-3 col-form-label">Customer</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control form-select" id="customer" name="customer"
+                                                    aria-describedby="customer">
+                                                    <option>Mark Snowman</option>
+                                                    <option>...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-2">
+                                        <div class="form-group row">
+                                            <label for="type" class="col-sm-3 col-form-label">Type</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control form-select" id="type" name="type"
+                                                    aria-describedby="type">
+                                                    <option>INVESTOR</option>
+                                                    <option>...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-2">
+                                        <div class="form-group row">
+                                            <label for="investment" class="col-sm-3 col-form-label">Investment</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="investment" name="investment"
+                                                    aria-describedby="investment">
+                                                    <option>[001] 1.5% profit monthly for Bee..</option>
+                                                    <option>...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <button type="button" class="btn btn-block btn-secondary">Search Log</button>
+                            </div>
+                        </div>
+                        <div class="div-table mb-3">
+                            <div class="trow theader">
+                                <div class="tcol" (click)="orderTable('createdDate')">Date</div>
+                                <div class="tcol" (click)="orderTable('time')">Time</div>
+                                <div class="tcol" (click)="orderTable('type')">Type</div>
+                                <div class="tcol" (click)="orderTable('description')">Description</div>
+                                <div class="tcol" (click)="orderTable('customer')">Customer</div>
+                                <div class="tcol" (click)="orderTable('investmentNo')">Inv No</div>
+                                <div class="tcol" (click)="orderTable('createdBy')">By</div>
+                            </div>
+                            <div *ngFor="let item of items"
+                                [class]="{'trow': true, 'redirect': item.transactionTo?.toLowerCase().includes('adam')}"
+                                (click)="goForm()">
+                                <div class="tcol">{{ item.createdDate }}</div>
+                                <div class="tcol">{{ item.time }}</div>
+                                <div class="tcol">{{ item.type }}</div>
+                                <div class="tcol">{{ item.customer }}</div>
+                                <div class="tcol">{{ item.customer }}</div>
+                                <div class="tcol">{{ item.investmentNo }}</div>
+                                <div class="tcol">{{ item.createdBy }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

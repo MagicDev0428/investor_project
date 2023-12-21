@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap , Router} from '@angular/router';
 import { Investor } from '../model/investor';
 import { Observable, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -26,24 +26,46 @@ import { InvestorService } from '../service/investor.service';
 export class ManageInvestorComponent implements OnInit {
 
   selectedInvestor$!: Observable<string | number>;
-  investor: Investor;
+  investor: Investor = {
+    _id: undefined,
+    name: '',
+    nickname: '',
+    phone: '',
+    email: '',
+    address: '',
+    postcode: 0,
+    city: '',
+    country: '',
+    status: '',
+    facebook: '',
+    passport: '',
+    beneficiaryName: '',
+    beneficiaryEmail: '',
+    beneficiaryPhone: '',
+    countryToTransfer: '',
+    currency: '',
+    reason: '',
+    passportImages: undefined,
+    pincode: 0,
+    isAdmin: false,
+    transferType: ''
+  }
   files: any[] = [];
   userId;
+  values: any = [];
 
   protected addInvestorForm: FormGroup;
   protected submitted = false;
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private investorService: InvestorService, private toastrService: ToastrService) {
-
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private investorService: InvestorService,
+    private toastrService: ToastrService
+  ) {
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
       this.userId = res;
-      this.investorService.getMockdata().subscribe({
-        next: (val) => {
-          console.log(val);
-          this.investor = val;
-
-        }
-      })
     })
 
   }
@@ -78,7 +100,39 @@ export class ManageInvestorComponent implements OnInit {
         transferType: new FormControl()
       });
 
-    this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator])
+    this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator]);
+
+    if (typeof this.userId !== 'undefined') {
+      this.investorService.getInvestor(this.userId).subscribe({
+        next: (res) => {
+          this.values = res.investors;
+          this.addInvestorForm.get('_id').setValue(this.values['name']);
+          this.addInvestorForm.get('nickname').setValue(this.values['nickname']);
+          this.addInvestorForm.get('name').setValue(this.values['_id']);
+          this.addInvestorForm.get('phone').setValue(this.values['phone']);
+          this.addInvestorForm.get('email').setValue(this.values['email']);
+          this.addInvestorForm.get('address').setValue(this.values['address']);
+          this.addInvestorForm.get('postcode').setValue(this.values['postcode']);
+          this.addInvestorForm.get('city').setValue(this.values['city']);
+          this.addInvestorForm.get('country').setValue(this.values['country']);
+          this.addInvestorForm.get('status').setValue(this.values['status']);
+          this.addInvestorForm.get('facebook').setValue(this.values['facebook']);
+          this.addInvestorForm.get('passport').setValue(this.values['passport']);
+          this.addInvestorForm.get('beneficiaryName').setValue(this.values['beneficiaryName']);
+          this.addInvestorForm.get('beneficiaryEmail').setValue(this.values['beneficiaryEmail']);
+          this.addInvestorForm.get('beneficiaryPhone').setValue(this.values['beneficiaryPhone']);
+          this.addInvestorForm.get('countryToTransfer').setValue(this.values['countryToTransfer']);
+          this.addInvestorForm.get('currency').setValue(this.values['currency']);
+          this.addInvestorForm.get('reason').setValue(this.values['reason']);
+          this.addInvestorForm.get('pincode').setValue(this.values['pincode']);
+          this.addInvestorForm.get('transferType').setValue(this.values['transferType']);
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    }
   }
 
   emailValidator = (form: FormGroup) => {
@@ -101,45 +155,69 @@ export class ManageInvestorComponent implements OnInit {
     return this.addInvestorForm.controls;
   }
 
-  protected onSubmit(): void {
-    this.submitted = true;
-
-    if (this.addInvestorForm.valid) {
-      this.addInvestorForm.get('_id').setValue(this.addInvestorForm.get('name').value);
-      console.log(
-        "Form Submitted succesfully!!!\n Check the values in browser console."
-      );
-      console.table(this.addInvestorForm.value);
-
-      let formData;
-      if (this.files && this.files.length) {
-        formData = this.investorService.uploadFile(this.files);
-      } else {
-        formData = new FormData()
-      }
-
-      const formValues = this.addInvestorForm.value;
-      for (const key in formValues) {
-        if (formValues.hasOwnProperty(key)) {
-          formData.append(key, formValues[key]);
-        }
-      }
-      // const mData = JSON.stringify(this.addInvestorForm.value);
-
-      // formData.append('data', mData);
-      console.log('formData', formData);
-      this.investorService.saveInvestor(formData).subscribe({
-        next: (x) => {
-          console.log('The next value is: ', x)
-          this.toastrService.success('Investor Created Successfully!');
+  deleteInvestor(_id: any) {
+    if (typeof _id !== 'undefined') {
+      this.investorService.deleteInvestor(_id).subscribe({
+        next: (res) => {
+          this.toastrService.success('Data was successfully deleted!');
+          this.router.navigate(['/adam-table/']);
         },
         error: err => {
-          console.error('An error occurred :', err);
           this.toastrService.error(err);
         },
         complete: () => console.log('There are no more action happen.')
-      })
+      });
+    }
+  }
 
+  protected onSubmit(): void {
+    this.submitted = true;
+    if (this.addInvestorForm.valid) {
+      this.investor.name = this.addInvestorForm.get('name').value;
+      this.investor.nickname = this.addInvestorForm.get('nickname').value;
+      this.investor.phone = this.addInvestorForm.get('phone').value;
+      this.investor.email = this.addInvestorForm.get('email').value;
+      this.investor.address = this.addInvestorForm.get('address').value;
+      this.investor.postcode = this.addInvestorForm.get('postcode').value;
+      this.investor.city = this.addInvestorForm.get('city').value;
+      this.investor.country = this.addInvestorForm.get('country').value;
+      this.investor.status = this.addInvestorForm.get('status').value;
+      this.investor.facebook = this.addInvestorForm.get('facebook').value;
+      this.investor.passport = this.addInvestorForm.get('passport').value;
+      this.investor.beneficiaryName = this.addInvestorForm.get('beneficiaryName').value;
+      this.investor.beneficiaryEmail = this.addInvestorForm.get('beneficiaryEmail').value;
+      this.investor.beneficiaryPhone = this.addInvestorForm.get('beneficiaryPhone').value;
+      this.investor.countryToTransfer = this.addInvestorForm.get('countryToTransfer').value;
+      this.investor.currency = this.addInvestorForm.get('currency').value;
+      this.investor.reason = this.addInvestorForm.get('reason').value;
+      this.investor.pincode = this.addInvestorForm.get('pincode').value;
+      this.investor.transferType = this.addInvestorForm.get('transferType').value;
+
+      if (typeof this.userId !== 'undefined') {
+        this.investor._id = this.userId;
+        this.investorService.updateInvestor(this.investor).subscribe({
+          next: (res) => {
+            this.toastrService.success('Investor was successfully updated!');
+            this.router.navigate(['/list/']);
+          },
+          error: err => {
+            this.toastrService.error(err);
+          },
+          complete: () => console.log('There are no more action happen.')
+        });
+      } else {
+        this.investor._id = this.addInvestorForm.get('name').value;
+        this.investorService.saveInvestor(this.investor).subscribe({
+          next: (res) => {
+            this.toastrService.success('Investor was successfully created!');
+            this.router.navigate(['/list/']);
+          },
+          error: err => {
+            this.toastrService.error(err);
+          },
+          complete: () => console.log('There are no more action happen.')
+        });
+      }
     }
   }
 
