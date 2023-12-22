@@ -16,6 +16,7 @@ import { MyInvestmentFormComponent } from './my-investment/my-investment-form.co
 import { LogListComponent } from './log/log-list.component';
 import { LogFormComponent } from './log/log-form.component';
 import { TotalComponent } from './total/total.component';
+import { PortfolioComponent } from './investor-portfolio/portfolio.component';
 // import {  AuthService } from '@auth0/auth0-angular';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path: 'log-list', component: LogListComponent},
   {path: 'log-form', component: LogFormComponent},
   {path: 'total', component: TotalComponent},
+  {path: 'portfolio', component: PortfolioComponent},
 ];
 
 @NgModule({

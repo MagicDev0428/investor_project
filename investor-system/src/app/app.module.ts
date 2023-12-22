@@ -41,6 +41,7 @@ import { MyInvestmentFormComponent } from './my-investment/my-investment-form.co
 import { LogListComponent } from './log/log-list.component';
 import { LogFormComponent } from './log/log-form.component';
 import { TotalComponent } from './total/total.component';
+import { PortfolioComponent } from './investor-portfolio/portfolio.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TotalComponent } from './total/total.component';
     MyInvestmentFormComponent,
     LogListComponent,
     LogFormComponent,
-    TotalComponent
+    TotalComponent,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,
