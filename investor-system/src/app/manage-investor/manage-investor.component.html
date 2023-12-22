@@ -10,16 +10,16 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="name">Name</label>
-                    <input formControlName="name" type="name" class="form-control" id="name"
-                        aria-describedby="investor Name" />
+                    <input formControlName="name" type="text" class="form-control" id="name"
+                        aria-describedby="investor Name" autocomplete="off"/>
                     <span class="text-danger"
                         *ngIf="(addInvestorForm.controls['name'].touched || submitted) && addInvestorForm.controls['name'].errors?.['required']">
                         Name is required
                     </span>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <label for="investorNiceName">Nickname</label>
-                    <input formControlName="nickname" type="text" class="form-control" id="investorNiceName"
+                    <label for="nickname">Nickname</label>
+                    <input formControlName="nickname" type="text" class="form-control" id="nickname"
                         aria-describedby="investor Nick Name" />
                     <span class="text-danger"
                         *ngIf="(addInvestorForm.controls['nickname'].touched || submitted) && addInvestorForm.controls['nickname'].errors?.['required']">
@@ -65,7 +65,7 @@
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="country">Select Country:</label>
                     <select formControlName="country" class="form-control" id="country" name="country"
-                        aria-describedby="investor country">
+                        aria-describedby="investor country"  autocomplete="off">
                         <option>Thailand</option>
                         <option>United States</option>
                         <option>India</option>
@@ -127,8 +127,8 @@
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="currency">Transfer Types</label>
-                    <select formControlName="transferType" class="form-control" id="currency" name="currency"
-                        aria-describedby="investor currency">
+                    <select formControlName="transferType" class="form-control" id="transferType" name="transferType"
+                        aria-describedby="investor transferType">
 
                         <option selected disabled>Select transfer type</option>
                         <option>Envelope</option>
@@ -178,7 +178,7 @@
             <div class="row">
                 <!-- Upload File-->
                 <div class="col-lg-6 col-sm-12 form-group choose-image-wrapper">
-                    <label for="passportImages">Passport Image</label>
+                    <label for="fileDropRef">Passport Image</label>
                     <div class="file-wrapper">
                         <div class="container" appDnd (fileDropped)="onFileDropped($event)">
                             <input formControlName="passportImages" type="file" #fileDropRef id="fileDropRef" multiple

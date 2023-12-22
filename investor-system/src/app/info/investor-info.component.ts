@@ -8,8 +8,8 @@ interface Message {
 }
 
 const temp_data = {
-    name: "Mark Sejr Snowman, \"Mark\"",
-    investor_name: "Mark Sejr Snowman",
+    nickname: "Mark",
+    name: "Mark Sejr Snowman",
     phone: "+66 123-123-1234",
     address: "Nakula Road Soi 16/2 Gai, Nakia \nBangulamung Region \n20120 Pattaya \nThailand",
     email: "bee@sunnythailand.com",

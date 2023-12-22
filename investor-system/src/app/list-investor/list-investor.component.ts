@@ -14,75 +14,6 @@ interface Message {
   error?: string;
 }
 
-const table_contents = [
-  {
-    name: 'Mark Snowman (Mark)',
-    amount: 1200000,
-    profit: 123456,
-    transfer_type: 'Envelop',
-    next_profit: 'Nov-2023',
-    email: 'mark@snowman.dk',
-    facebook: '#',
-    folder: '#',
-    profitStyle: 'green'
-  },
-  {
-    name: 'Torben Rudgaard (Torben)',
-    amount: 1200000,
-    profit: 123456,
-    transfer_type: 'Thai Bank',
-    next_profit: 'Nov-2023',
-    email: 'torben@rudgaard.com',
-    facebook: '#',
-    folder: '#',
-    profitStyle: 'yellow'
-  },
-  {
-    name: 'Bee Primpajit (Bee)',
-    amount: 1200000,
-    profit: 123456,
-    transfer_type: 'Direct Transfer',
-    next_profit: 'Dec-2023',
-    email: 'bee@sunnythailand.com',
-    facebook: '#',
-    folder: '#',
-    profitStyle: 'red'
-  },
-  {
-    name: 'Mark Snowman (Mark)',
-    amount: 1200000,
-    profit: 123456,
-    transfer_type: 'Envelop',
-    next_profit: 'Nov-2023',
-    email: 'mark@snowman.dk',
-    facebook: '#',
-    folder: '#',
-    profitStyle: 'green'
-  },
-  {
-    name: 'Torben Rudgaard (Torben)',
-    amount: 1200000,
-    profit: 123456,
-    transfer_type: 'Thai Bank',
-    next_profit: 'Nov-2023',
-    email: 'torben@rudgaard.com',
-    facebook: '#',
-    folder: '#',
-    profitStyle: 'yellow'
-  },
-  {
-    name: 'Bee Primpajit (Bee)',
-    amount: 1200000,
-    profit: 123456,
-    transfer_type: 'Direct Transfer',
-    next_profit: 'Nov-2023',
-    email: 'bee@sunnythailand.com',
-    facebook: '#',
-    folder: '#',
-    profitStyle: 'red'
-  }
-];
-
 @Component({
   selector: 'app-list-investor',
   templateUrl: './list-investor.component.html',
@@ -93,6 +24,9 @@ export class ListInvestorComponent extends BaseComponent {
   message: string | undefined;
   items: any[] = [];
   temp: any[] = [];
+  searchTerm: string = '';
+  currentColumn: string = '';
+  isDescending: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -106,23 +40,61 @@ export class ListInvestorComponent extends BaseComponent {
 
   ngOnInit(): void {
     this.investorService.getInvestors().subscribe((res) => {
-      console.log('DATA->', res);
       this.items = res.investors.map((investor) => {
-        // investor.createdDate = moment(adam.createdDate).format('DD-MMM-YYYY');
-        // investor.amount = this.currency_style(adam.amount);
+        investor = investor.investor;
+        investor.name = investor?._id;
+        investor.amount = investor?.accountInvestments?.totalInvested;
+        investor.profit = investor.accountInvestments?.totalProfitMonthly;
+        if(investor.amount === undefined) {
+          investor.amount = 0;
+        }
+        if(investor.profit === undefined) {
+          investor.profit = 0;
+        }
         return investor;
       });
       this.temp = this.items;
     });
   }
 
+  onSearch(event: KeyboardEvent) {
+    this.items = this.temp;
+    this.items = this.items.filter(item => item.name?.toLowerCase().includes(this.searchTerm.toLowerCase()));
+    if (this.searchTerm === "") {
+      this.items = this.temp;
+    }
+  }
+
   goForm(id: string = '') {
     if (id.length === 0) {
-        this.router.navigate(['/manage-investor']);
+      this.router.navigate(['/manage-investor']);
     } else {
-        this.router.navigate(['/manage-investor/' + id]);
+      this.router.navigate(['/manage-investor/' + id]);
     }
-}
+  }
+
+  goInfo(id: string = '') {
+      this.router.navigate(['/info/' + id]);
+  }
+
+  orderTable(column: string) {
+    if (this.currentColumn === column) {
+      this.isDescending = !this.isDescending;
+    } else {
+      this.currentColumn = column;
+      this.isDescending = false;
+    }
+
+    this.items.sort((a, b) => {
+      if (a[column] > b[column]) {
+        return this.isDescending ? -1 : 1;
+      } else if (a[column] < b[column]) {
+        return this.isDescending ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
 
   callProtectedEndpoint(): void {
     this.http

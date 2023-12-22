@@ -36,6 +36,7 @@ const routes: Routes = [
   {path: 'adam-form',  component: AdamFormComponent},
   {path: 'adam-form/:id', component: AdamFormComponent},
   {path: 'info', component: InvestorInfoComponent},
+  {path: 'info/:id', component: InvestorInfoComponent},
   {path: 'front-page', component:FrontPageComponent},
   {path: 'investment-list', component:InvestmentListComponent},
   {path: 'investment-form', component:InvestmentFormComponent},
