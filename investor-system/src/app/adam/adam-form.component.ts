@@ -95,8 +95,8 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
           if (obj._id === undefined) {
             obj._id = ""
           }
-          if (obj.Explanation === undefined) {
-            obj.Explanation = ""
+          if (obj.explanation === undefined) {
+            obj.explanation = ""
           }
           return obj;
         });

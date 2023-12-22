@@ -232,19 +232,19 @@ textarea {
                         white-space: nowrap;
 
                         &:nth-child(1) {
-                            text-align: start;
+                            text-align: left;
                         }
 
                         &:nth-child(2) {
-                            text-align: end;
+                            text-align: right;
                         }
 
                         &:nth-child(4) {
-                            text-align: end;
+                            text-align: right;
                         }
 
                         &:nth-child(7) {
-                            text-align: end;
+                            text-align: right;
                         }
                     }
 
@@ -331,15 +331,15 @@ textarea {
                         white-space: nowrap;
 
                         &:nth-child(3) {
-                            text-align: end;
+                            text-align: right;
                         }
 
                         &:nth-child(4) {
-                            text-align: start;
+                            text-align: left;
                         }
 
                         &:nth-child(5) {
-                            text-align: start;
+                            text-align: left;
                         }
                     }
 
