@@ -132,7 +132,6 @@ textarea.form-control {
         display: table-row;
         border: 1px solid rgba(0, 0, 0, 0.7);
         background-color: white;
-        cursor: pointer;
 
         .tcol {
             display: table-cell;
@@ -245,8 +244,12 @@ textarea.form-control {
             color: white;
             height: 40px;
             font-weight: bold;
+            cursor: pointer;
 
             .tcol {
+                text-align: center;
+                line-height: 1;
+
                 &:nth-child(1) {
                     width: 26%;
                 }

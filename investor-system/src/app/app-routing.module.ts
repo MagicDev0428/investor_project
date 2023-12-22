@@ -16,6 +16,7 @@ import { MyInvestmentFormComponent } from './my-investment/my-investment-form.co
 import { LogListComponent } from './log/log-list.component';
 import { LogFormComponent } from './log/log-form.component';
 import { TotalComponent } from './total/total.component';
+import { PortfolioComponent } from './investor-portfolio/portfolio.component';
 // import {  AuthService } from '@auth0/auth0-angular';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'adam-form',  component: AdamFormComponent},
   {path: 'adam-form/:id', component: AdamFormComponent},
   {path: 'info', component: InvestorInfoComponent},
+  {path: 'info/:id', component: InvestorInfoComponent},
   {path: 'front-page', component:FrontPageComponent},
   {path: 'investment-list', component:InvestmentListComponent},
   {path: 'investment-form', component:InvestmentFormComponent},
@@ -46,6 +48,7 @@ const routes: Routes = [
   {path: 'log-list', component: LogListComponent},
   {path: 'log-form', component: LogFormComponent},
   {path: 'total', component: TotalComponent},
+  {path: 'portfolio', component: PortfolioComponent},
 ];
 
 @NgModule({
