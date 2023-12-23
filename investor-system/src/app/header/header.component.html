@@ -17,7 +17,7 @@
         <li class="nav-item">
           <a data-bs-target="#navbarNav" class="nav-link" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
-            [routerLink]="['balance']">Balance</a>
+            [routerLink]="['portfolio']">Balance</a>
         </li>
         <li class="nav-item">
           <a class=" nav-link" data-bs-target="#navbarNav" (click)="toggleNavbar()"
@@ -35,8 +35,8 @@
             [routerLink]="['log-list']">Logs</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            [routerLink]="['my-investments']">My Investments</a>
+          <a class=" nav-link"  data-bs-target="#navbarNav" (click)="toggleNavbar()"
+            [routerLink]="['my-investments']">Customers</a>
         </li>
         <li class="nav-item">
           <a class=" nav-link"  data-bs-target="#navbarNav" (click)="toggleNavbar()" [routerLink]="['profile']"
