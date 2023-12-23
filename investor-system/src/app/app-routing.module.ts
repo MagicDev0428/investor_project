@@ -47,6 +47,7 @@ const routes: Routes = [
   {path: 'my-investment-form', component: MyInvestmentFormComponent},
   {path: 'log-list', component: LogListComponent},
   {path: 'log-form', component: LogFormComponent},
+  {path: 'log-form/:id', component: LogFormComponent},
   {path: 'total', component: TotalComponent},
   {path: 'portfolio', component: PortfolioComponent},
 ];

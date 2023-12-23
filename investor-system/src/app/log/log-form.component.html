@@ -5,70 +5,96 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>EDIT:</span> Log</h5>
-                        <button type="button"  (click)="goTable()" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" (click)="goTable()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="info d-flex flex-row justify-content-between">
-                            <div class="info-wrapper d-flex flex-column align-center">
-                                <div class="info-col">
-                                    <span class="info-text">Date</span>
-                                    <span class="info-value">10 Aug 2023</span>
+                        <form class="form" [formGroup]="logForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+                            <div class="info d-flex flex-row justify-content-between">
+                                <div class="info-wrapper d-flex flex-column align-center">
+                                    <div class="info-col">
+                                        <span class="info-text">Date</span>
+                                        <span class="info-value">{{ date }}</span>
+                                    </div>
+                                </div>
+                                <div class="info-wrapper d-flex flex-column align-center">
+                                    <div class="info-col">
+                                        <span class="info-text">Time</span>
+                                        <span class="info-value">{{ time }}</span>
+                                    </div>
+                                </div>
+                                <div class="info-wrapper d-flex flex-column align-center">
+                                    <div class="info-col">
+                                        <span class="info-text">By</span>
+                                        <span class="info-value">{{ logBy }}</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="info-wrapper d-flex flex-column align-center">
-                                <div class="info-col">
-                                    <span class="info-text">Time</span>
-                                    <span class="info-value">12:45</span>
+                            <div class="form-group row">
+                                <label for="logType" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select formControlName="logType" class="form-control form-select" id="logType"
+                                        name="logType" aria-describedby="log type" value=" ">
+                                        <option>EMAIL</option>
+                                        <option>ADAM</option>
+                                        <option>WITHDRAW</option>
+                                        <option>REINVEST</option>
+                                        <option>INVEST</option>
+                                        <option>PROFIT</option>
+                                        <option>CUSTOMER</option>
+                                    </select>
+                                    <span class="text-danger"
+                                        *ngIf="(logForm.controls['logType'].touched || submitted) && logForm.controls['logType'].errors?.['required']">
+                                        Type is required
+                                    </span>
                                 </div>
                             </div>
-                            <div class="info-wrapper d-flex flex-column align-center">
-                                <div class="info-col">
-                                    <span class="info-text">By</span>
-                                    <span class="info-value">Bee</span>
+                            <div class="form-group row">
+                                <label for="investorName" class="col-sm-2 col-form-label">Customer</label>
+                                <div class="col-sm-10">
+                                    <select formControlName="investorName" class="form-control form-select"
+                                        id="investorName" name="investorName" aria-describedby="log customer">
+                                        <option [value]="item._id" *ngFor="let item of customers">{{ item._id}}
+                                        </option>
+                                    </select>
+                                    <span class="text-danger"
+                                        *ngIf="(logForm.controls['investorName'].touched || submitted) && logForm.controls['investorName'].errors?.['required']">
+                                        Customer is required
+                                    </span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="type" class="col-sm-2 col-form-label">Type</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="type" name="type" aria-describedby="log type">
-                                    <option>INVESTOR</option>
-                                    <option>...</option>
-                                </select>
+                            <div class="form-group row">
+                                <label for="investment" class="col-sm-2 col-form-label">Investment</label>
+                                <div class="col-sm-10">
+                                    <select formControlName="investment" class="form-control form-select"
+                                        id="investment" name="investment" aria-describedby="log investment">
+                                        <option [value]="item._id" *ngFor="let item of investments">[{{ item._id}}] {{
+                                            item.explanation }}
+                                        </option>
+                                    </select>
+                                    <span class="text-danger"
+                                        *ngIf="(logForm.controls['investment'].touched || submitted) && logForm.controls['investment'].errors?.['required']">
+                                        Investment is required
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="customer" class="col-sm-2 col-form-label">Customer</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="customer" name="customer"
-                                    aria-describedby="log customer">
-                                    <option>Mark Snowman</option>
-                                    <option>...</option>
-                                </select>
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <label for="description">Description</label>
+                                    <textarea formControlName="description" class="form-control" id="description"
+                                        aria-describedby="log description" rows="4" cols="50"></textarea>
+                                    <span class="text-danger"
+                                        *ngIf="(logForm.controls['description'].touched || submitted) && logForm.controls['description'].errors?.['required']">
+                                        Description is required
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="investment" class="col-sm-2 col-form-label">Investment</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="investment" name="investment"
-                                    aria-describedby="log investment">
-                                    <option>[001] 1.5% ...</option>
-                                    <option>...</option>
-                                </select>
+                            <div>
+                                <button type="submit" class="btn btn-block btn-secondary">SAVE
+                                    LOG</button>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" aria-describedby="log description"
-                                    rows="4" cols="50"></textarea>
-                            </div>
-                        </div>
-                        <div>
-                            <button type="button" class="btn btn-block btn-secondary">SAVE LOG</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

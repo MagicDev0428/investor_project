@@ -5,7 +5,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title ">Log System</h5>\
-                        <button type="button" (click)="goForm()" class="close new-log" data-dismiss="modal" aria-label="New Log">
+                        <button type="button" (click)="goForm()" class="close new-log" data-dismiss="modal"
+                            aria-label="New Log">
                             <span aria-hidden="true">New Log</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -13,91 +14,102 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-10">
-                                <div class="row">
-                                    <div class="col-lg-6 mb-2">
-                                        <div class="form-group row">
-                                            <label for="startDate" class="col-sm-3 col-form-label">Date</label>
-                                            <div class="col-sm-9">
-                                                <div class="row multi-date">
-                                                    <div class="date startDate pl-0">
-                                                        <input type="date" class="form-control" id="startDate"
-                                                            aria-describedby="startDate" />
-                                                    </div>
-                                                    <div class="col-form-label text px-0 w-auto">
-                                                        <span>to</span>
-                                                    </div>
-                                                    <div class="date endDate pr-0">
-                                                        <input type="date" class="form-control" id="endDate"
-                                                            aria-describedby="endDate" />
+                        <form class="form" [formGroup]="logSearchForm" autocomplete="off" novalidate>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="form-group row">
+                                                <label for="fromDate" class="col-sm-3 col-form-label">Date</label>
+                                                <div class="col-sm-9">
+                                                    <div class="row multi-date">
+                                                        <div class="date fromDate pl-0">
+                                                            <input formControlName="fromDate" type="date" class="form-control" id="fromDate"
+                                                                aria-describedby="fromDate" />
+                                                        </div>
+                                                        <div class="col-form-label text px-0 w-auto">
+                                                            <span>to</span>
+                                                        </div>
+                                                        <div class="date toDate pr-0">
+                                                            <input formControlName="toDate" type="date" class="form-control" id="toDate"
+                                                                aria-describedby="toDate" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-2">
-                                        <div class="form-group row">
-                                            <label for="customer" class="col-sm-3 col-form-label">Customer</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control form-select" id="customer" name="customer"
-                                                    aria-describedby="customer">
-                                                    <option>Mark Snowman</option>
-                                                    <option>...</option>
-                                                </select>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="form-group row">
+                                                <label for="investorName" class="col-sm-3 col-form-label">Customer</label>
+                                                <div class="col-sm-9">
+                                                    <select formControlName="investorName" class="form-control form-select" id="investorName"
+                                                        name="investorName" aria-describedby="investorName">
+                                                        <option>ALL</option>
+                                                        <option [value]="item._id" *ngFor="let item of customers">{{
+                                                            item._id}}
+                                                        </option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-2">
-                                        <div class="form-group row">
-                                            <label for="type" class="col-sm-3 col-form-label">Type</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control form-select" id="type" name="type"
-                                                    aria-describedby="type">
-                                                    <option>INVESTOR</option>
-                                                    <option>...</option>
-                                                </select>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="form-group row">
+                                                <label for="logType" class="col-sm-3 col-form-label">Type</label>
+                                                <div class="col-sm-9">
+                                                    <select formControlName="logType" class="form-control form-select" id="logType" name="logType"
+                                                        aria-describedby="type">
+                                                        <option>ALL</option>
+                                                        <option>EMAIL</option>
+                                                        <option>ADAM</option>
+                                                        <option>WITHDRAW</option>
+                                                        <option>REINVEST</option>
+                                                        <option>INVEST</option>
+                                                        <option>PROFIT</option>
+                                                        <option>CUSTOMER</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-2">
-                                        <div class="form-group row">
-                                            <label for="investment" class="col-sm-3 col-form-label">Investment</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" id="investment" name="investment"
-                                                    aria-describedby="investment">
-                                                    <option>[001] 1.5% profit monthly for Bee..</option>
-                                                    <option>...</option>
-                                                </select>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="form-group row">
+                                                <label for="investment"
+                                                    class="col-sm-3 col-form-label">Investment</label>
+                                                <div class="col-sm-9">
+                                                    <select formControlName="investment" class="form-control" id="investment" name="investment"
+                                                        aria-describedby="investment">
+                                                        <option>ALL</option>
+                                                        <option [value]="item._id" *ngFor="let item of investments">[{{
+                                                            item._id}}] {{ item.explanation }}
+                                                        </option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-2 mb-2">
+                                    <button type="button" (click)="onSearch()" class="btn btn-block btn-secondary">Search Log</button>
+                                </div>
                             </div>
-                            <div class="col-lg-2 mb-2">
-                                <button type="button" class="btn btn-block btn-secondary">Search Log</button>
-                            </div>
-                        </div>
+                        </form>
                         <div class="div-table mb-3">
                             <div class="trow theader">
-                                <div class="tcol" (click)="orderTable('createdDate')">Date</div>
+                                <div class="tcol" (click)="orderTable('date')">Date</div>
                                 <div class="tcol" (click)="orderTable('time')">Time</div>
-                                <div class="tcol" (click)="orderTable('type')">Type</div>
+                                <div class="tcol" (click)="orderTable('logType')">Type</div>
                                 <div class="tcol" (click)="orderTable('description')">Description</div>
-                                <div class="tcol" (click)="orderTable('customer')">Customer</div>
+                                <div class="tcol" (click)="orderTable('investorName')">Customer</div>
                                 <div class="tcol" (click)="orderTable('investmentNo')">Inv No</div>
-                                <div class="tcol" (click)="orderTable('createdBy')">By</div>
+                                <div class="tcol" (click)="orderTable('logBy')">By</div>
                             </div>
-                            <div *ngFor="let item of items"
-                                [class]="{'trow': true, 'redirect': item.transactionTo?.toLowerCase().includes('adam')}"
-                                (click)="goForm()">
-                                <div class="tcol">{{ item.createdDate }}</div>
+                            <div *ngFor="let item of items" class="trow" (click)="goForm(item._id)">
+                                <div class="tcol">{{ item.date }}</div>
                                 <div class="tcol">{{ item.time }}</div>
-                                <div class="tcol">{{ item.type }}</div>
-                                <div class="tcol">{{ item.customer }}</div>
-                                <div class="tcol">{{ item.customer }}</div>
+                                <div class="tcol">{{ item.logType }}</div>
+                                <div class="tcol">{{ item.description }}</div>
+                                <div class="tcol">{{ item.investorName }}</div>
                                 <div class="tcol">{{ item.investmentNo }}</div>
-                                <div class="tcol">{{ item.createdBy }}</div>
+                                <div class="tcol">{{ item.logBy }}</div>
                             </div>
                         </div>
                     </div>
