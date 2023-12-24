@@ -131,6 +131,7 @@ export class InvestmentFormComponent extends BaseComponent {
             this.title += this.values['profitEnd'] + '%';
           }
           this.title = this.title.replace(new RegExp(String.fromCharCode(3647), "gi"), "");
+          this.checkProfitDisable();
         },
         error: err => {
           console.error('An error occurred :', err);
