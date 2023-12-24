@@ -50,12 +50,10 @@ export class LogListComponent extends BaseComponent {
       {
         fromDate: new FormControl("", Validators.required),
         toDate: new FormControl("", Validators.required),
-        logType: new FormControl("ALL", Validators.required),
-        investorName: new FormControl("ALL", Validators.required),
-        investment: new FormControl("ALL", Validators.required)
+        logType: new FormControl("", Validators.required),
+        investorName: new FormControl("", Validators.required),
+        investment: new FormControl("", Validators.required)
       });
-    this.logSearchForm.get('fromDate').setValue(moment().subtract(1, 'month').subtract(1, 'day').format('YYYY-MM-DD'));
-    this.logSearchForm.get('toDate').setValue(moment().format('YYYY-MM-DD'));
     this.logService.logList().subscribe((res) => {
       this.items = res.logs.map((log) => {
         log.date = moment(log._id).format('DD MMM YYYY');
@@ -104,19 +102,22 @@ export class LogListComponent extends BaseComponent {
     let logType = this.logSearchForm.get('logType').value;
     let investorName = this.logSearchForm.get('investorName').value;
     let investment = this.logSearchForm.get('investment').value;
-    console.log(investment);
     this.items = this.temp;
-    if(logType !== 'ALL') {
+    if(logType !== '') {
       this.items = this.items.filter(item => item.logType?.toLowerCase().includes(logType.toLowerCase()));
     }
-    if(investorName !== 'ALL') {
+    if(investorName !== '') {
       this.items = this.items.filter(item => item.investorName?.toLowerCase().includes(investorName.toLowerCase()));
     }
-    if(investment !== 'ALL') {
-      this.items = this.items.filter(item => item.investmentNo?.toLowerCase().includes(investment.toLowerCase()));
+    if(investment !== '') {
+      this.items = this.items.filter(item => item.investmentNo?.toString().toLowerCase() === (investment.toLowerCase()));
     }
-    this.items = this.items.filter(item => moment(item._id).format('YYYY-MM-DD')>=fromDate);
-    this.items = this.items.filter(item => moment(item._id).format('YYYY-MM-DD')<=toDate);
+    if(fromDate !== '') {
+      this.items = this.items.filter(item => moment(item._id).format('YYYY-MM-DD')>=fromDate);
+    }
+    if(toDate !== '') {
+      this.items = this.items.filter(item => moment(item._id).format('YYYY-MM-DD')<=toDate);
+    }
   }
 
   goForm(id: string = '') {

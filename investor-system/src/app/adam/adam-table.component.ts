@@ -29,7 +29,7 @@ export class AdamTableComponent extends BaseComponent {
     ngOnInit(): void {
         this.adamService.listAdam().subscribe((res) => {
             this.items = res.adams.map((adam) => {
-                adam.createdDate = moment(adam.createdDate).format('DD-MMM-YYYY HH:mm');
+                adam.createdDate = moment(adam.createdDate).format('DD-MMM-YYYY');
                 adam.amount = this.currency_style(adam.amount);
                 return adam;
             });
