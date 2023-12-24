@@ -85,18 +85,30 @@ import { PortfolioComponent } from './investor-portfolio/portfolio.component';
       clientId: environment.auth0ClientId,
       authorizationParams: {
         redirect_uri: `${window.location.origin}/callback`,
-        audience: environment.apiUrl
+        audience: environment.apiUrl,
+        // Request this scope at user authentication time
+        scope: 'read:current_user',
       },
+      useRefreshTokens: true,
       errorPath: `unauthorized`,
       cacheLocation: 'localstorage',
       httpInterceptor: {
         allowedList: [
           {
             uri: environment.apiUrl,
-            allowAnonymous: true
+            allowAnonymous: true,
+            tokenOptions: {
+              authorizationParams: {
+                // The attached token should target this audience
+                audience: environment.auth0Domain + '/api/v2/',
+    
+                // The attached token should have these scopes
+                scope: 'read:current_user'
+              }
+            }
           },
           `${environment.apiUrl}/*`
-        ]
+        ],
       }
     }),
     ToastrModule.forRoot({
