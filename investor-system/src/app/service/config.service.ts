@@ -26,10 +26,13 @@ export class configService {
       this.toasterService.error("Invalid token, Please login again!!!");
       this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
     } else {
+      this.toasterService.error("Something bad happened.");
+      this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
       return throwError(() => new Error(
         `Error Code ${error.status}: ${error.error.error}`));
+      
     }
 
 
