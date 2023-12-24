@@ -17,7 +17,6 @@ export class configService {
   }
 
   handleError(error: HttpErrorResponse) {
-    console.log(this.toasterService);
     //this.router.navigate(['/unauthorized']);
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -25,6 +24,8 @@ export class configService {
     } else if(error.status == 403 || error.toString() === 'Error: Unknown or invalid refresh token.') {
       this.toasterService.error("Invalid token, Please login again!!!");
       this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
+    } else if(error.status === 500) {
+      this.toasterService.error(error?.message);
     } else {
       this.toasterService.error("Something bad happened.");
       this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
