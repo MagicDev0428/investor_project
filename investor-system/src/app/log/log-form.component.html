@@ -36,13 +36,12 @@
                                 <div class="col-sm-10">
                                     <select formControlName="logType" class="form-control form-select" id="logType"
                                         name="logType" aria-describedby="log type" value=" ">
-                                        <option>EMAIL</option>
                                         <option>ADAM</option>
-                                        <option>WITHDRAW</option>
-                                        <option>REINVEST</option>
-                                        <option>INVEST</option>
-                                        <option>PROFIT</option>
-                                        <option>CUSTOMER</option>
+                                        <option>BALANCE</option>
+                                        <option>EMAIL</option>
+                                        <option>INVESTOR</option>
+                                        <option>INVESTMENT</option>
+                                        <option>MY INVESTMENT</option>
                                     </select>
                                     <span class="text-danger"
                                         *ngIf="(logForm.controls['logType'].touched || submitted) && logForm.controls['logType'].errors?.['required']">

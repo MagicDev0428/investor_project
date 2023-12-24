@@ -44,7 +44,7 @@
                                                 <div class="col-sm-9">
                                                     <select formControlName="investorName" class="form-control form-select" id="investorName"
                                                         name="investorName" aria-describedby="investorName">
-                                                        <option>ALL</option>
+                                                        <option></option>
                                                         <option [value]="item._id" *ngFor="let item of customers">{{
                                                             item._id}}
                                                         </option>
@@ -58,14 +58,13 @@
                                                 <div class="col-sm-9">
                                                     <select formControlName="logType" class="form-control form-select" id="logType" name="logType"
                                                         aria-describedby="type">
-                                                        <option>ALL</option>
-                                                        <option>EMAIL</option>
+                                                        <option></option>
                                                         <option>ADAM</option>
-                                                        <option>WITHDRAW</option>
-                                                        <option>REINVEST</option>
-                                                        <option>INVEST</option>
-                                                        <option>PROFIT</option>
-                                                        <option>CUSTOMER</option>
+                                                        <option>BALANCE</option>
+                                                        <option>EMAIL</option>
+                                                        <option>INVESTOR</option>
+                                                        <option>INVESTMENT</option>
+                                                        <option>MY INVESTMENT</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -77,7 +76,7 @@
                                                 <div class="col-sm-9">
                                                     <select formControlName="investment" class="form-control" id="investment" name="investment"
                                                         aria-describedby="investment">
-                                                        <option>ALL</option>
+                                                        <option></option>
                                                         <option [value]="item._id" *ngFor="let item of investments">[{{
                                                             item._id}}] {{ item.explanation }}
                                                         </option>

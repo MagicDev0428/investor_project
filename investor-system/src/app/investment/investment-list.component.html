@@ -31,7 +31,7 @@
                                 <div class="tcol" (click)="orderTable('explanation')">Description/Text</div>
                                 <div class="tcol">i</div>
                             </div>
-                            <div *ngFor="let item of items; let i = index" [class]="{'trow': true, 'first-row': i===0}" (click)="goForm(item._id, 'form')">
+                            <div *ngFor="let item of items; let i = index" [class]="{'trow': true, 'first-row': item.investmentEnds< 90}" (click)="goForm(item._id, 'form')">
                                 <div class="tcol">{{ item._id }}</div>
                                 <div class="tcol">{{ currency_style(item.investAmount) }}</div>
                                 <div class="tcol">{{ profit_style(item.profitMonthly) }}</div>
