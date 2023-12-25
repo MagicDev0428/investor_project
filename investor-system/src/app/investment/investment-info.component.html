@@ -4,64 +4,56 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title ">Who is in <span>#22</span> Investment at 15,000,000 at 2.5%</h5>
+                        <h5 class="modal-title ">Who is in <span>#{{ investmentInfo._id }}</span> Investment at {{ title }}</h5>
                         <button type="button" (click)="goList()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row base-info">
-                            <div class="col-lg-1 form-group">
-                                <label for="investment">Investment</label>
-                                <input [value]="investmentInfo._id" type="text" class="form-control" id="investment"
-                                    aria-describedby="investment" />
+                        <form class="form" [formGroup]="investmentInfoForm" (ngSubmit)="onSubmit()" autocomplete="off"
+                            novalidate>
+                            <div class="row base-info">
+                                <div class="col-lg-1 form-group">
+                                    <label for="investment">Investment</label>
+                                    <input formControlName="investment" type="text" class="form-control" id="investment"
+                                        aria-describedby="investment"/>
+                                </div>
+                                <div class="col-lg-11 form-group">
+                                    <label for="description">Explanation</label>
+                                    <textarea formControlName="description" class="form-control" id="description"
+                                        aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6 form-group">
+                                    <label for="totalAmount">Total Amount</label>
+                                    <input formControlName="totalAmount" type="text" class="form-control text-end" id="totalAmount"
+                                        aria-describedby="totalAmount" />
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6 form-group">
+                                    <label for="expireIn">Expire in</label>
+                                    <input formControlName="expireIn" type="text" class="form-control" id="expireIn" aria-describedby="expireIn" />
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6 form-group">
+                                    <label for="investmentType">Investment Type</label>
+                                    <input formControlName="investmentType" type="text" class="form-control" id="investmentType"
+                                        aria-describedby="investmentType" />
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6 form-group">
+                                    <label for="monthlyProfit">Profit pr Month</label>
+                                    <input formControlName="monthlyProfit" type="text" class="form-control text-end" id="monthlyProfit"
+                                        aria-describedby="monthlyProfit" />
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6 form-group">
+                                    <label for="annualProfit">Profit pr Year</label>
+                                    <input formControlName="annualProfit" type="text" class="form-control text-end" id="annualProfit"
+                                        aria-describedby="annualProfit" />
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6 form-group">
+                                    <label for="endProfit">Profit by End</label>
+                                    <input formControlName="endProfit" type="text" class="form-control text-end" id="endProfit"
+                                        aria-describedby="endProfit" />
+                                </div>
                             </div>
-                            <div class="col-lg-11 form-group">
-                                <label for="description">Explanation</label>
-                                <textarea class="form-control" id="description"
-                                    aria-describedby="Money Transfer Description" rows="4"
-                                    cols="50">{{ investmentInfo.investments?.explanation }}</textarea>
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-sm-6 form-group">
-                                <label for="totalAmount">Total Amount</label>
-                                <input type="text" class="form-control text-end" id="totalAmount"
-                                    aria-describedby="totalAmount"
-                                    [value]="currency_style(investmentInfo.investments?.investAmount)" />
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-sm-6 form-group">
-                                <label for="expireIn">Expire in</label>
-                                <input [value]="investmentInfo?.investments?.remainingDays + ' days'" type="text"
-                                    class="form-control" id="expireIn" aria-describedby="expireIn" />
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-sm-6 form-group">
-                                <label for="investmentType">Investment Type</label>
-                                <select [value]="investmentInfo.investments?.investType" class="form-control"
-                                    id="investmentType" aria-describedby="investmentType">
-                                    <option>Monthly Profit</option>
-                                    <option>Annual Profit</option>
-                                    <option>One-time Profit</option>
-                                    <option>Mixed</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-sm-6 form-group">
-                                <label for="monthlyProfit">Profit pr Month</label>
-                                <input type="text" class="form-control text-end" id="monthlyProfit"
-                                    aria-describedby="monthlyProfit"
-                                    [value]="profit_style(investmentInfo.investments?.profitMonthly)" />
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-sm-6 form-group">
-                                <label for="annualProfit">Profit pr Year</label>
-                                <input type="text" class="form-control text-end" id="annualProfit"
-                                    aria-describedby="annualProfit"
-                                    [value]="profit_style(investmentInfo.investments?.profitYearly)" />
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-sm-6 form-group">
-                                <label for="endProfit">Profit by End</label>
-                                <input type="text" class="form-control text-end" id="endProfit"
-                                    aria-describedby="endProfit"
-                                    [value]="profit_style(investmentInfo.investments?.profitEnd)" />
-                            </div>
-                        </div>
+                        </form>
                         <div class="row made-list">
                             <div class="row section-header">
                                 <div class="col-xl-4 d-flex justify-content-xl-start ttitle">

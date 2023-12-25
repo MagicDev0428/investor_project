@@ -24,26 +24,26 @@
                                     <div class="col-xl-12 form-group">
                                         <label for="email">Email</label>
                                         <input [value]="base_info.email" type="text" class="form-control" id="email"
-                                            aria-describedby="email" />
+                                            aria-describedby="email" readonly />
                                     </div>
                                     <div class="col-xl-12 form-group mt-0">
                                         <label for="mobilePhone">Mobile Phone</label>
                                         <input [value]="base_info.phoneNumber" type="text" class="form-control"
-                                            id="mobilePhone" aria-describedby="mobilePhone" />
+                                            id="mobilePhone" aria-describedby="mobilePhone" readonly />
                                     </div>
                                     <div class="col-xl-12 form-group mt-0">
                                         <label for="newestPayment">Newest Payment</label>
                                         <input [value]="base_info.newestPayment" type="text" class="form-control"
-                                            id="newestPayment" aria-describedby="newestPayment" />
+                                            id="newestPayment" aria-describedby="newestPayment" readonly />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="row">
                                     <div class="col-md-5 form-group">
-                                        <label for="address">Adsress</label>
+                                        <label for="address">Address</label>
                                         <select class="form-control form-select" multiple id="address"
-                                            aria-describedby="address">
+                                            aria-describedby="address" readonly>
                                             <option *ngFor="let item of base_info.address">{{ item }}
                                             </option>
                                         </select>
@@ -51,7 +51,7 @@
                                     <div class="col-md-7 form-group">
                                         <label for="moneyTransferInfo">Money Transfer Information</label>
                                         <select multiple class="form-control" id="moneyTransferInfo"
-                                            aria-describedby="moneyTransferInfo">
+                                            aria-describedby="moneyTransferInfo" readonly>
                                             <option *ngFor="let item of base_info.moneyTransferInfo">{{ item }}
                                             </option>
                                         </select>

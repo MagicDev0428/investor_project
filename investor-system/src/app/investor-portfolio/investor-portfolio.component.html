@@ -1,12 +1,121 @@
-<div class="investor-portfolio row">
-    <div class="name col-sm-10 text-center" >Michael Alexander</div>
-    <div class="currency col-sm-2">
-        <select formControlName="currency" class="form-control" id="currency" name="currency"
-            aria-describedby="Investor Currency">
-            <option>THB</option>
-            <option>INR</option>
-            <option>USD</option>
-            <option>CAD</option>
-        </select>
+<div class="investor-portfolio">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title ">{{ name }}</h5>
+                        <select class="form-control form-select" id="investments" aria-describedby="investments">
+                            <option>THB</option>
+                            <option>INR</option>
+                            <option>USD</option>
+                            <option>CAD</option>
+                        </select>
+                    </div>
+                    <div class="modal-body pt-4">
+                        <div class="row investment">
+                            <div class="row section-header">
+                                <div class="col-xl-3 d-flex justify-content-xl-start ttitle">
+                                    My Investments
+                                </div>
+                                <div class="col-xl-9">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-sm-6 my-1">
+                                            <div class="row statistics-panel">
+                                                <div class="col-xl-7 statistics-title">All Investments</div>
+                                                <div class="col-xl-5 statistics-value">{{
+                                                    currency_style(investments.all_investment) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-6 col-sm-6 my-1">
+                                            <div class="row statistics-panel">
+                                                <div class="col-xl-4 statistics-title">Total Profit Paid</div>
+                                                <div class="col-xl-5 col-sm-7 statistics-value">{{
+                                                    currency_style(investments.totalProfitPaid) }}</div>
+                                                <div class="col-xl-3 col-sm-5 statistics-value">{{
+                                                    profit_style(investments.totalProfitPaidPct) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mb-4">
+                                    <div class="div-table">
+                                        <div class="trow theader lh-1">
+                                            <div class="tcol">Invest Start</div>
+                                            <div class="tcol">Invest End</div>
+                                            <div class="tcol">Investment</div>
+                                            <div class="tcol">Amount</div>
+                                            <div class="tcol">Pct</div>
+                                            <div class="tcol">Profit</div>
+                                            <div class="tcol">Receipts</div>
+                                        </div>
+                                        <div *ngFor="let item of investments.investments; let i = index" class="trow">
+                                            <div class="tcol">{{ item[4] }}</div>
+                                            <div class="tcol">{{ item[3] }}</div>
+                                            <div class="tcol">{{ currency_style(item[0]) }}</div>
+                                            <div class="tcol">{{ currency_style(item[2]) }}</div>
+                                            <div class="tcol">{{ profit_style(item[1]) }}</div>
+                                            <div class="tcol">{{ currency_style(item[6]) }}</div>
+                                            <div class="tcol">Slip</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row profit-balance">
+                            <div class="row section-header">
+                                <div class="col-xl-3 d-flex justify-content-xl-start ttitle">
+                                    My Profit Balance
+                                </div>
+                                <div class="col-xl-9">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-sm-6 my-1">
+                                            <div class="row statistics-panel">
+                                                <div class="col-xl-7 statistics-title">Current Balance</div>
+                                                <div class="col-xl-5 statistics-value">{{
+                                                    currency_style(investments.all_investment) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-6 col-sm-6 my-1">
+                                            <div class="row statistics-panel">
+                                                <div class="col-xl-4 statistics-title">Monthly Profit</div>
+                                                <div class="col-xl-5 col-sm-7 statistics-value">{{
+                                                    currency_style(investments.totalProfitPaid) }}</div>
+                                                <div class="col-xl-3 col-sm-5 statistics-value">{{
+                                                    profit_style(investments.totalProfitPaidPct) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mb-4">
+                                    <div class="div-table">
+                                        <div class="trow theader lh-1">
+                                            <div class="tcol">Profit Month</div>
+                                            <div class="tcol">Transfer Date</div>
+                                            <div class="tcol">Description</div>
+                                            <div class="tcol">Profit</div>
+                                            <div class="tcol">Withdraw</div>
+                                            <div class="tcol">Balance</div>
+                                            <div class="tcol">Receipts</div>
+                                        </div>
+                                        <div *ngFor="let item of profit_balance.balances; let i = index"
+                                            [ngClass]="{'trow':true,'minus': item[3]<0, 'new': (item[2]===0)&&(item[3]===0)}">
+                                            <div class="tcol">{{ item[0] }}</div>
+                                            <div class="tcol">{{ item[1] }}</div>
+                                            <div class="tcol fw-bold">{{ currency_style(item[2]) }}</div>
+                                            <div class="tcol">{{ currency_style(item[3]) }}</div>
+                                            <div class="tcol">{{ currency_style(item[4]) }}</div>
+                                            <div class="tcol">{{ item[5] }}</div>
+                                            <div class="tcol">Slip</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>

@@ -1,9 +1,384 @@
 .investor-portfolio {
-    border: 2px solid #28557e;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    .name {
-        color: #1f4e78;
+    background-color: white;
+}
+
+.form-control {
+    border-radius: 0;
+    padding: 2px 5px;
+
+    &:focus {
+        border-color: rgb(31, 80, 122);
+        color: black;
+        box-shadow: 0 0 0 0.2rem rgba(31, 80, 122, 0.25);
+    }
+}
+
+select {
+    &.form-control {
+        position: absolute;
+        right: 3px;
+        padding: 0.375rem 0.3rem;
+        width: 100px;
+        float: right;
+        border: solid 1px rgb(31, 80, 122);
+        font-weight: bold;
+    }
+}
+
+.container .modal {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 1;
+    display: block;
+
+    .modal-dialog {
+        max-width: 992px;
+        margin-top: 0;
+    }
+
+    .modal-content {
+        border-radius: 0;
+    }
+
+    .modal-header {
+        padding: 0.3rem 0.3rem;
+        background-color: white;
+        border-radius: 0;
+        border: solid 3px rgb(31, 80, 122);
+        position: relative;
+
+        h5 {
+            width: 100%;
+            text-align: center;
+            color: rgb(31, 80, 122);
+            font-weight: bold;
+        }
+    }
+
+    .modal-body {
+        padding: 0;
+
+        .btn-secondary {
+            background-color: rgb(31, 80, 122);
+            font-weight: bold;
+            box-shadow: 5px 5px 4px rgba(31, 80, 122, 0.4);
+            width: 100%;
+
+            &:hover {
+                background-color: rgb(19, 48, 73);
+            }
+        }
+
+        .div-table {
+            --bs-table-bg: none;
+            border-collapse: collapse;
+            border-spacing: 2px;
+            overflow-x: auto;
+
+            .trow {
+                display: table-row;
+                border: 1px solid rgba(0, 0, 0, 0.7);
+
+                .tcol {
+                    display: table-cell;
+                    vertical-align: middle;
+                    padding: 10px 8px;
+                    border: 1px solid rgba(0, 0, 0, 0.7);
+                    text-align: right;
+                }
+
+                &.theader {
+                    text-align: center;
+                    color: white;
+                    height: 40px;
+                    font-weight: bold;
+                    cursor: pointer;
+
+                    .tcol {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        .section-header {
+            display: flex;
+            height: auto;
+            align-items: center;
+            padding: 5px 0;
+            justify-content: center;
+
+            .ttitle {
+                font-size: 18pt;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+            }
+
+            .statistics-panel {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                padding: 0 15px;
+                font-weight: bold;
+
+                .statistics-title {
+                    border: 1px solid grey;
+                    display: flex;
+                    justify-content: center;
+                    padding: 5px 5px;
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: -1px;
+                    color: white;
+                }
+
+                .statistics-value {
+                    border: 1px solid grey;
+                    display: flex;
+                    justify-content: flex-end;
+                    padding: 5px 5px;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+
+        }
+
+        .base-info {
+            padding: 0 10px;
+            margin: 0;
+        }
+
+        .investment {
+            padding: 0 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+
+            .ttitle {
+                color: #288D8D;
+                font-size: 14pt;
+            }
+
+            .statistics-panel {
+                .statistics-title {
+                    background-color: #288D8D;
+                    color: white;
+                    font-size: 11pt;
+                }
+
+                .statistics-value {
+                    color: #288D8D;
+                    background-color: white;
+                    font-size: 11pt;
+                }
+            }
+
+            .div-table {
+                .trow {
+                    &:nth-child(even) {
+                        background-color: white;
+                    }
+
+                    .tcol {
+                        text-align: center;
+                        line-height: 1;
+
+                        &:nth-child(3) {
+                            text-align: left;
+                        }
+
+                        &:nth-child(4) {
+                            text-align: right;
+                        }
+
+                        &:nth-child(5) {
+                            text-align: right;
+                        }
+
+                        &:nth-child(6) {
+                            text-align: right;
+                        }
+
+                        &:nth-child(7) {
+                            text-align: right;
+                            color: #0000FF;
+                            cursor: pointer;
+                            text-decoration: underline;
+                            font-weight: bold;
+                        }
+                    }
+
+                    &.theader {
+                        background-color: rgb(39, 139, 139);
+                        font-size: 11pt;
+
+                        .tcol {
+                            text-align: center;
+                            color: white;
+                            text-decoration: none;
+
+                            &:nth-child(1) {
+                                width: 13%;
+                            }
+
+                            &:nth-child(2) {
+                                width: 13%;
+                            }
+
+                            &:nth-child(3) {
+                                width: 38%;
+                            }
+
+                            &:nth-child(4) {
+                                width: 9.5%;
+                            }
+
+                            &:nth-child(5) {
+                                width: 8.5%;
+                            }
+
+                            &:nth-child(6) {
+                                width: 10%;
+                            }
+
+                            &:nth-child(7) {
+                                width: 8%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .profit-balance {
+            padding: 0 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+
+            .ttitle {
+                color: #456E02;
+                font-size: 14pt;
+            }
+
+            .statistics-panel {
+                .statistics-title {
+                    background-color: #456E02;
+                    color: white;
+                    font-size: 11pt;
+                }
+
+                .statistics-value {
+                    color: black;
+                    background-color: white;
+                    font-size: 11pt;
+                }
+            }
+
+            .div-table {
+                .trow {
+                    background-color: #F2FFDD;
+
+                    .tcol {
+                        text-align: center;
+                        line-height: 1;
+
+                        &:nth-child(2) {
+                            text-align: left;
+                        }
+
+                        &:nth-child(3) {
+                            text-align: right;
+                            white-space: nowrap;
+                        }
+
+                        &:nth-child(4) {
+                            text-align: right;
+                            white-space: nowrap;
+                        }
+
+                        &:nth-child(5) {
+                            text-align: right;
+                            white-space: nowrap;
+                        }
+
+                        &:nth-child(7) {
+                            text-align: right;
+                            color: #0000FF;
+                            cursor: pointer;
+                            text-decoration: underline;
+                            font-weight: bold;
+                        }
+                    }
+
+                    &.minus {
+                        background-color: #FFDCE0;
+                    }
+
+                    &.new {
+                        background-color: #FFEB9C;
+                    } 
+
+                    &.theader {
+                        background-color: #456E02;
+                        font-size: 11pt;
+                        line-height: 1;
+
+                        .tcol {
+                            text-align: center;
+                            line-height: 1;
+                            color: white;
+                            text-decoration: none;
+
+                            &:nth-child(1) {
+                                width: 9%;
+                            }
+
+                            &:nth-child(2) {
+                                width: 11%;
+                                text-align: left;
+                            }
+
+                            &:nth-child(3) {
+                                width: 40%;
+                            }
+
+                            &:nth-child(4) {
+                                width: 10%;
+                            }
+
+                            &:nth-child(5) {
+                                width: 11%;
+                            }
+
+                            &:nth-child(6) {
+                                width: 11%;
+                            }
+
+                            &:nth-child(7) {
+                                width: 8%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.form-group {
+    margin: 1rem 0;
+
+    label {
+        color: rgb(31, 80, 122);
+        width: auto !important;
+        font-size: 11pt;
+        margin-bottom: 5px;
     }
 }

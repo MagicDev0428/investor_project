@@ -73,6 +73,10 @@ export class ListInvestorComponent extends BaseComponent {
     }
   }
 
+  goFront() {
+    this.router.navigate(['/front-page/']);
+  }
+
   goInfo(id: string = '') {
       this.router.navigate(['/info/' + id]);
   }

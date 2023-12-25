@@ -52,8 +52,8 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="createdDate">Transfer Date</label>
-                                    <input formControlName="createdDate" type="datetime-local" class="form-control"
-                                        id="createdDate" aria-describedby="Transfer Date" [value]="'2018-06-12T19:30'"/>
+                                    <input formControlName="createdDate" type="text" class="form-control"
+                                        id="createdDate" aria-describedby="Transfer Date" [value]="'2018-06-12T19:30'" bsDatepicker/>
                                     <span class="text-danger"
                                         *ngIf="(adamForm.controls['createdDate'].touched || submitted) && adamForm.controls['createdDate'].errors?.['required']">
                                         Transfer Date is required

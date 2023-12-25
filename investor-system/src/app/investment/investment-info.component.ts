@@ -39,6 +39,8 @@ export class InvestmentInfoComponent extends BaseComponent {
 
   logEtries: any = [];
 
+  protected investmentInfoForm: FormGroup;
+
   selectedInvestment$!: Observable<string | number>;
 
   constructor(
@@ -55,8 +57,30 @@ export class InvestmentInfoComponent extends BaseComponent {
   }
 
   ngOnInit(): void {
+    this.investmentInfoForm = this.formBuilder.group(
+      {
+        investment: new FormControl(),
+        description: new FormControl(""),
+        totalAmount: new FormControl(""),
+        expireIn: new FormControl(""),
+        investmentType: new FormControl(""),
+        monthlyProfit: new FormControl(""),
+        annualProfit: new FormControl(""),
+        endProfit: new FormControl(""),
+      });
     this.investmentService.getInvestmentInfo(this.investmentId).subscribe((res) => {
       this.investmentInfo = res.investmentInfo[0];
+
+      this.investmentInfoForm.get('investment').setValue(this.investmentInfo._id);
+      this.investmentInfoForm.get('description').setValue(this.investmentInfo.investments?.explanation);
+      this.investmentInfoForm.get('totalAmount').setValue(this.currency_style(this.investmentInfo.investments?.investAmount));
+      this.investmentInfoForm.get('expireIn').setValue(this.investmentInfo?.investments?.remainingDays + ' days');
+      this.investmentInfoForm.get('investmentType').setValue(this.investmentInfo.investments?.investType);
+      this.investmentInfoForm.get('monthlyProfit').setValue(this.profit_style(this.investmentInfo.investments?.profitMonthly));
+      this.investmentInfoForm.get('annualProfit').setValue(this.profit_style(this.investmentInfo.investments?.profitYearly));
+      this.investmentInfoForm.get('endProfit').setValue(this.profit_style(this.investmentInfo.investments?.profitEnd));
+      this.checkProfitDisable();
+
       this.adams = res.investmentInfo[0].investments?.adams?.adams.map(obj => {
         obj.amount = this.currency_style(obj.amount);
         obj.createdDate = moment(obj.createdDate).format('DD-MMM-YYYY');
@@ -86,6 +110,45 @@ export class InvestmentInfoComponent extends BaseComponent {
 
   protected onSubmit(): void {
 
+  }
+
+  checkProfitDisable() {
+    let investmentType = this.investmentInfoForm.get('investmentType').value;
+    this.title = this.currency_style(this.investmentInfo.investments?.investAmount) + ' at ';
+    if (investmentType === undefined) {
+      this.investmentInfoForm.get('monthlyProfit').disable();
+      this.investmentInfoForm.get('annualProfit').disable();
+      this.investmentInfoForm.get('endProfit').disable();
+      this.title += '0%';
+    } else if (investmentType === 'Monthly Profit') {
+      this.investmentInfoForm.get('monthlyProfit').enable();
+      this.investmentInfoForm.get('annualProfit').disable();
+      this.investmentInfoForm.get('endProfit').disable();
+      this.title += this.investmentInfo.investments?.profitMonthly + '%';
+    } else if (investmentType === 'Annual Profit') {
+      this.investmentInfoForm.get('monthlyProfit').disable();
+      this.investmentInfoForm.get('annualProfit').enable();
+      this.investmentInfoForm.get('endProfit').disable();
+      this.title += this.investmentInfo.investments?.profitYearly + '%';
+    } else if (investmentType === 'One-time Profit') {
+      this.investmentInfoForm.get('monthlyProfit').disable();
+      this.investmentInfoForm.get('annualProfit').disable();
+      this.investmentInfoForm.get('endProfit').enable();
+      this.title += this.investmentInfo.investments?.profitEnd + '%';
+    } else if (investmentType === 'Mixed') {
+      this.investmentInfoForm.get('monthlyProfit').enable();
+      this.investmentInfoForm.get('annualProfit').enable();
+      this.investmentInfoForm.get('endProfit').enable();
+      if(this.investmentInfo.investments?.profitMonthly !== 0) {
+        this.title += this.investmentInfo.investments?.profitMonthly + '%';
+      }
+      else if(this.investmentInfo.investments?.profitYearly !== 0) {
+        this.title += this.investmentInfo.investments?.profitYearly + '%';
+      }
+      else if(this.investmentInfo.investments?.profitEnd !== 0) {
+        this.title += this.investmentInfo.investments?.profitEnd + '%';
+      }
+    }
   }
 
   goList() {
