@@ -18,56 +18,59 @@
                             novalidate>
                             <div class="row">
                                 <div class="col-xl-5 col-lg-6 form-group">
-                                    <label for="investment">Investment</label>
-                                    <select formControlName="investment" class="form-control form-select"
-                                        id="investment" aria-describedby="investment" [value]="'Adam'">
-                                        <option value="Adam" selected>001 Bee and Torbern's rirst 1.2 MTB...</option>
-                                        <option value="Torben">...</option>
+                                    <label for="investmentNo">Investment</label>
+                                    <select formControlName="investmentNo" class="form-control form-select"
+                                        id="investmentNo" aria-describedby="investmentNo">
+                                        <option [value]="item._id" *ngFor="let item of investments">{{ item._id}} {{
+                                            item.explanation }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-xl-5 col-lg-6 form-group">
                                     <label for="investorName">Investor Name</label>
                                     <select formControlName="investorName" class="form-control form-select"
                                         id="investorName" #transactionFrom aria-describedby="investorName">
-                                        <option value="Adam">Mark Snowman</option>
+                                        <option [value]="item._id" *ngFor="let item of investors">{{ item._id}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-xl-2 col-lg-4 form-group">
-                                    <label for="amount">Amount</label>
-                                    <input formControlName="amount" type="text" class="form-control text-end"
-                                        id="amount" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
-                                        aria-describedby="amount" />
+                                    <label for="amountInvested">Amount</label>
+                                    <input formControlName="amountInvested" type="text" class="form-control text-end"
+                                        id="amountInvested" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
+                                        aria-describedby="amountInvested" />
                                 </div>
                             </div>
                             <hr class="separator m-0">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-6 form-group">
-                                    <label for="transferFrom">Transfer From</label>
-                                    <input formControlName="transferFrom" type="text" class="form-control"
-                                        id="transferFrom" aria-describedby="transferFrom" />
+                                    <label for="transactionFrom">Transfer From</label>
+                                    <input formControlName="transactionFrom" type="text" class="form-control text-start"
+                                        id="transactionFrom" aria-describedby="transactionFrom" />
                                 </div>
                                 <div class="col-xl-5 col-lg-6 form-group">
-                                    <label for="transferTo">Transfer To</label>
-                                    <input formControlName="transferTo" type="text" class="form-control" id="transferTo"
-                                        aria-describedby="transferTo" />
+                                    <label for="transactionTo">Transfer To</label>
+                                    <input formControlName="transactionTo" type="text" class="form-control text-start"
+                                        id="transactionTo" aria-describedby="transactionTo" />
                                 </div>
                                 <div class="col-xl-2 col-lg-4 form-group">
                                     <label for="transferDate">Transfer Date</label>
-                                    <input formControlName="transferDate" type="date" class="form-control"
+                                    <input formControlName="transferDate" type="date" class="form-control text-start"
                                         id="transferDate" aria-describedby="amount" />
                                 </div>
                                 <div class="col-xl-5 col-lg-8 form-group">
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <label for="transactionNo">Transaction No</label>
-                                            <input formControlName="transactionNo" type="text" class="form-control"
-                                                id="transactionNo" aria-describedby="transactionNo" />
+                                            <input formControlName="transactionNo" type="text"
+                                                class="form-control text-start" id="transactionNo"
+                                                aria-describedby="transactionNo" />
                                         </div>
                                         <div class="col-xl-12 form-group choose-image-wrapper">
-                                            <label for="attachments">Reciepts</label>
+                                            <label for="documents">Reciepts</label>
                                             <div class="file-wrapper">
                                                 <div class="container" appDnd (fileDropped)="onFileDropped($event)">
-                                                    <input formControlName="attachments" type="file" id="attachments"
+                                                    <input formControlName="documents" type="file" id="documents"
                                                         multiple accept="image/*"
                                                         (change)="fileBrowseHandler($event.target)">
                                                     <span class="caption">Drag and drop files here</span>
@@ -104,25 +107,37 @@
                             <div class="row">
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="profitMonthly">Profit pr Month</label>
-                                    <input formControlName="profitMonthly" type="text" class="form-control"
+                                    <input formControlName="profitMonthly" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitMonthly"
                                         aria-describedby="profitMonthly" />
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['profitMonthly'].touched || submitted) &&(myInvestmentForm.errors?.['monthlyExceed'])">
+                                        Profit pr Month cannot be less than 0.01% or greater than 100.00%.
+                                    </span>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="profitYearly">Profit pr Year</label>
-                                    <input formControlName="profitYearly" type="text" class="form-control"
+                                    <input formControlName="profitYearly" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitYearly"
                                         aria-describedby="profitYearly" />
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['profitYearly'].touched || submitted) && (myInvestmentForm.errors?.['yearlyExceed'])">
+                                        Profit pr Year cannot be less than 0.01% or greater than 100.00%.
+                                    </span>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="profitEnd">Profit pr End</label>
-                                    <input formControlName="profitEnd" type="text" class="form-control"
+                                    <input formControlName="profitEnd" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitEnd" aria-describedby="profitEnd" />
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['profitEnd'].touched || submitted) && (myInvestmentForm.errors?.['endExceed'])">
+                                        Profit by End cannot be less than 0.01% or greater than 100.00%.
+                                    </span>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="investType">Investment Type</label>
-                                    <select formControlName="investType" class="form-control form-select"
-                                        id="investType" aria-describedby="investType">
+                                    <select formControlName="investType" (change)="onSelectChange($event)"
+                                        class="form-control form-select" id="investType" aria-describedby="investType">
                                         <option>Monthly Profit</option>
                                         <option>Annual Profit</option>
                                         <option>One-time Profit</option>
@@ -131,17 +146,17 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="firstProfitDate">First profit Date</label>
-                                    <input formControlName="firstProfitDate" type="date" class="form-control"
+                                    <input formControlName="firstProfitDate" type="date" class="form-control text-end"
                                         id="firstProfitDate" aria-describedby="firstProfitDate" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="lastProfitDate">Last profit Date</label>
-                                    <input formControlName="lastProfitDate" type="date" class="form-control"
+                                    <input formControlName="lastProfitDate" type="date" class="form-control text-end"
                                         id="lastProfitDate" aria-describedby="lastProfitDate" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="payBackDate">Pay Back Date</label>
-                                    <input formControlName="payBackDate" type="date" class="form-control"
+                                    <input formControlName="payBackDate" type="date" class="form-control text-end"
                                         id="payBackDate" aria-describedby="payBackDate" />
                                 </div>
                             </div>
@@ -149,19 +164,19 @@
                             <div class="row">
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="torbenMonthly">Torben pr Month</label>
-                                    <input formControlName="torbenMonthly" type="text" class="form-control"
+                                    <input formControlName="torbenMonthly" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenMonthly"
                                         aria-describedby="torbenMonthly" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="torbenYearly">Torben pr Year</label>
-                                    <input formControlName="torbenYearly" type="text" class="form-control"
+                                    <input formControlName="torbenYearly" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenYearly"
                                         aria-describedby="torbenYearly" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="torbenEnd">Torben pr End</label>
-                                    <input formControlName="torbenEnd" type="text" class="form-control"
+                                    <input formControlName="torbenEnd" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenEnd" aria-describedby="torbenEnd" />
                                 </div>
                                 <div class="col-xl-12">
@@ -173,11 +188,10 @@
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">
-                                <button type="submit" class="btn btn-secondary">SAVE ADAM
-                                    TRANSACTION</button>
+                                <button type="submit" class="btn btn-secondary">SAVE MY INVESTMENT</button>
                                 <button type="button" class="btn btn-danger"
-                                    [class]="{'disabled': userId === undefined}" data-dismiss="modal"
-                                    (click)="deleteTransaction(userId)">DELETE
+                                    [class]="{'disabled': myInvestmentId === undefined}" data-dismiss="modal"
+                                    (click)="deleteTransaction(myInvestmentId)">DELETE
                                     TRANSACTION</button>
                             </div>
                         </form>
@@ -186,19 +200,19 @@
                         <div class="info-wrapper">
                             <div class="info-col">
                                 <span class="info-text">Create Date </span>
-                                <span class="info-value">01-Feb-2023</span>
+                                <span class="info-value">{{ createdDate }}</span>
                             </div>
                             <div class="info-col">
                                 <span class="info-text">Create By</span>
-                                <span class="info-value">Torben</span>
+                                <span class="info-value">{{ createdBy }}</span>
                             </div>
                             <div class="info-col">
                                 <span class="info-text">Update Date</span>
-                                <span class="info-value">12-August-2023</span>
+                                <span class="info-value">{{ modifiedDate }}</span>
                             </div>
                             <div class="info-col">
                                 <span class="info-text">Update By</span>
-                                <span class="info-value">Bee</span>
+                                <span class="info-value">{{ modifiedBy }}</span>
                             </div>
                         </div>
                     </div>

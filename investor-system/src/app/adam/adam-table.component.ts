@@ -22,7 +22,7 @@ export class AdamTableComponent extends BaseComponent {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private adamService: AdamService
-    ) { 
+    ) {
         super();
     }
 
@@ -53,6 +53,10 @@ export class AdamTableComponent extends BaseComponent {
         }
     }
 
+    goFront() {
+        this.router.navigate(['/front-page/']);
+    }
+
     orderTable(column: string) {
         if (this.currentColumn === column) {
             this.isDescending = !this.isDescending;
@@ -73,7 +77,7 @@ export class AdamTableComponent extends BaseComponent {
             } else {
                 let a_value = Number(a[column]?.replace(/[^\d.-]/g, ''));
                 let b_value = Number(b[column]?.replace(/[^\d.-]/g, ''));
-                if (a_value> b_value) {
+                if (a_value > b_value) {
                     return this.isDescending ? -1 : 1;
                 } else if (a_value < b_value) {
                     return this.isDescending ? 1 : -1;

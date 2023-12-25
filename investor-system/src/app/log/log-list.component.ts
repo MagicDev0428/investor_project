@@ -127,4 +127,8 @@ export class LogListComponent extends BaseComponent {
       this.router.navigate(['/log-form/' + id]);
     }
   }
+
+  goFront() {
+    this.router.navigate(['/front-page/']);
+  }
 }

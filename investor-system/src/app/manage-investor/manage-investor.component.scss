@@ -26,6 +26,30 @@
   text-align: center;
   padding: 10px 0;
   margin-bottom: 10px;
+  position: relative;
+
+  .close {
+    position: absolute;
+    right: 6px;
+    font-style: italic;
+    text-shadow: none;
+    opacity: 1;
+    padding: 0;
+    border-radius: 0.25rem;
+    border: none;
+
+    span {
+        background-color: #AAAAAA;
+        color: white;
+        font-weight: lighter;
+        border-radius: 0.25rem;
+        display: block;
+        width: 29px;
+        height: 29px;
+        text-align: center;
+        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+    }
+}
 }
 
 .isAdmin {

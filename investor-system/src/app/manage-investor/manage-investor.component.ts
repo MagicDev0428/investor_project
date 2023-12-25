@@ -159,8 +159,8 @@ export class ManageInvestorComponent implements OnInit {
     if (typeof _id !== 'undefined') {
       this.investorService.deleteInvestor(_id).subscribe({
         next: (res) => {
-          this.toastrService.success('Data was successfully deleted!');
-          this.router.navigate(['/adam-table/']);
+          this.toastrService.success('Investor was successfully deleted!');
+          this.router.navigate(['/list/']);
         },
         error: err => {
           this.toastrService.error(err);
@@ -168,6 +168,10 @@ export class ManageInvestorComponent implements OnInit {
         complete: () => console.log('There are no more action happen.')
       });
     }
+  }
+
+  goList() {
+    this.router.navigate(['/list/']);
   }
 
   protected onSubmit(): void {

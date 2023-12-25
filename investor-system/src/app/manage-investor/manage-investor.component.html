@@ -4,6 +4,9 @@
         <h4 *ngIf="!userId">Create New Investor</h4>
         <h4 class="add-edit" *ngIf="userId">Update: </h4>
         <h4 *ngIf="userId">[MR. XYZ]</h4>
+        <button (click)="goList()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">x</span>
+        </button>
     </div>
     <form class="form" [formGroup]="addInvestorForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
         <div class="content-wrap container-fluid text-left box-wrapper">
@@ -259,7 +262,7 @@
                     <button type="submit" class="btn btn-primary btn-lg">Save Investor</button>
                 </div>
                 <div class="col-sm-12 col-lg-4 text-center" *ngIf="userId">
-                    <button class="btn btn-danger btn-lg">Delete Investor</button>
+                    <button type="button" (click)="deleteInvestor(userId)" class="btn btn-danger btn-lg">Delete Investor</button>
                 </div>
             </div>
 
