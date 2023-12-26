@@ -77,7 +77,7 @@ export class InvestmentFormComponent extends BaseComponent {
 
   ngOnInit(): void {
     this.auth.user$.subscribe(result => {
-      this.user = result;
+      this.user = result['investor-system'];
     });
     this.amount = String.fromCharCode(3647);
     this.textAlign = 'right';

@@ -43,7 +43,10 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
     transferTo: '',
     transactionNo: '',
     description: '',
-    attachments: []
+    attachments: [],
+    createdBy: '',
+    modifiedDate: new Date(),
+    modifiedBy: '',
   }
   files: any[] = [];
   userId: any = '';
@@ -53,6 +56,11 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   to_value: string;
   from_value: string;
   nowDateTime: Date;
+  user: any = [];
+  createdDate = '';
+  createdBy = '';
+  modifiedDate = '';
+  modifiedBy = '';
 
   protected adamForm: FormGroup;
   protected submitted = false;
@@ -63,6 +71,7 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adamService: AdamService,
     private toastrService: ToastrService,
+    private auth: AuthService
   ) {
     super();
     this.selectedAdam$ = activatedRoute.params.pipe(map(p => p['id']));
@@ -73,6 +82,9 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(result => {
+      this.user = result['investor-system'];
+    });
     this.adamForm = this.formBuilder.group(
       {
         amount: new FormControl("", Validators.required),
@@ -117,7 +129,14 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
           this.adamForm.get('transactionNo').setValue(this.values['transactionNo']);
           this.adamForm.get('description').setValue(this.values['description']);
           this.to_value = this.values['transactionTo'];
-          this.from_value = this.values['transactionFrom']
+          this.from_value = this.values['transactionFrom'];
+          this.createdDate = moment(this.values['createdDate']).format('yyyy-MM-DD');
+          this.adam.createdDate = this.values['createdDate'];
+          this.createdBy = this.values['createdBy'];
+          this.adam.createdBy = this.values['createdBy'];
+          this.modifiedDate = moment(this.values['modifiedDate']).format('yyyy-MM-DD');
+          this.adam.modifiedDate = this.values['modifiedDate'];
+          this.modifiedBy = this.values['modifiedBy'];
           this.section = 'EDIT';
           this.title = moment(this.values['createdDate']).format('DD-MMM-YYYY') + ' ' +
             'transfer ' + this.adamForm.get('amount').value;
@@ -188,6 +207,8 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
         return;
       }
       if (typeof this.userId !== 'undefined') {
+        this.adam.modifiedBy = this.user.name;
+        this.adam.modifiedDate = new Date();
         this.adamService.updateAdam(this.adam).subscribe({
           next: (res) => {
             this.toastrService.success('Transaction was successfully updated!');
@@ -199,6 +220,8 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
           complete: () => console.log('There are no more action happen.')
         });
       } else {
+        this.adam.createdBy = this.user.name;
+        this.adam.createdDate = new Date();
         this.adamService.saveAdam(this.adam).subscribe({
           next: (res) => {
             this.toastrService.success('Transaction was successfully created!');

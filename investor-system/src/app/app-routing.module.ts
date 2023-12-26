@@ -17,6 +17,7 @@ import { LogListComponent } from './log/log-list.component';
 import { LogFormComponent } from './log/log-form.component';
 import { TotalComponent } from './total/total.component';
 import { PortfolioComponent } from './investor-portfolio/portfolio.component';
+import { PayProfitEnvComponent } from './deposit/pay-profit-env.component';
 // import {  AuthService } from '@auth0/auth0-angular';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
@@ -51,6 +52,7 @@ const routes: Routes = [
   {path: 'log-form/:id', component: LogFormComponent, canActivate: [AuthGuardFN]},
   {path: 'total', component: TotalComponent, canActivate: [AuthGuardFN]},
   {path: 'portfolio', component: PortfolioComponent, canActivate: [AuthGuardFN]},
+  {path: 'pay-profit-env', component: PayProfitEnvComponent, canActivate: [AuthGuardFN]}
 ];
 
 @NgModule({

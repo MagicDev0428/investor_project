@@ -34,7 +34,8 @@ export class InvestorService {
     passportImages: undefined,
     pincode: 0,
     isAdmin: undefined,
-    transferType: ''
+    transferType: '',
+    transferInfo: ''
   }
 
   constructor(

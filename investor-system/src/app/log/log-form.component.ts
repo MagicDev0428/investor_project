@@ -63,7 +63,7 @@ export class LogFormComponent extends BaseComponent {
       this.logId = res;
     });
     this.auth.user$.subscribe(result => {
-      this.user = result;
+      this.user = result['investor-system'];
     });
   }
 

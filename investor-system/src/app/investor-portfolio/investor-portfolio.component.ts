@@ -85,7 +85,8 @@ export class InvestorPortfolioComponent extends BaseComponent {
       this.investmentId = res;
     });
     this.auth.user$.subscribe(result => {
-      this.user = result;
+      console.log('user->', result);
+      this.user = result['investor-system'];
       this.name = this.user.name;
     });
   }
