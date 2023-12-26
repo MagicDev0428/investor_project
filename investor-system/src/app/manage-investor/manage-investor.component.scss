@@ -171,6 +171,21 @@
   }
 }
 
+.flle-list-wrapper {
+  .flle-list {
+    align-items: center;
+    margin: 5px 0;
+    padding: 0 5px;
+    justify-content: space-between;
+    .list {
+      text-transform: capitalize;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
 /* Shake animation */
 @keyframes shake {
   0% {

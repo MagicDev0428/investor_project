@@ -3,7 +3,7 @@
         <h4 class="add-edit" *ngIf="!userId">Add: </h4>
         <h4 *ngIf="!userId">Create New Investor</h4>
         <h4 class="add-edit" *ngIf="userId">Update: </h4>
-        <h4 *ngIf="userId">[MR. XYZ]</h4>
+        <h4 *ngIf="userId">{{userId}}</h4>
         <button (click)="goList()" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">x</span>
         </button>
@@ -240,6 +240,12 @@
                                     </svg>
                                 </div>
                             </div>
+                        </div>                        
+                    </div>
+                    <div *ngIf="values?.folders"  class="flle-list-wrapper">
+                        <div class="flle-list d-flex" *ngFor="let item of values?.folders">                            
+                            <a *ngIf="!item.readonly && item.image" class="list" href="{{item.webLink}}" target="_blank">{{item.image}}</a>
+                            <button *ngIf="!item.readonly && item.image" tabindex="0" type="button" class="btn btn-outline-danger" (click)="deleteInvestorFile(item)"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
 

@@ -54,6 +54,7 @@ export class ManageInvestorComponent implements OnInit {
   files: any[] = [];
   userId;
   values: any = [];
+  _oldId = '';
 
   protected addInvestorForm: FormGroup;
   protected submitted = false;
@@ -71,10 +72,7 @@ export class ManageInvestorComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    //   this.activatedRoute.paramMap.subscribe((params: ParamMap) =>  {
-    //     this.selectedInvestor$ = params.get('id');
-    // });
+  ngOnInit() {    
 
     this.addInvestorForm = this.formBuilder.group(
       {
@@ -107,6 +105,7 @@ export class ManageInvestorComponent implements OnInit {
       this.investorService.getInvestor(this.userId).subscribe({
         next: (res) => {
           this.values = res.investors;
+          this._oldId = this.values._id;
           this.addInvestorForm.get('_id').setValue(this.values['name']);
           this.addInvestorForm.get('nickname').setValue(this.values['nickname']);
           this.addInvestorForm.get('name').setValue(this.values['_id']);
@@ -127,9 +126,6 @@ export class ManageInvestorComponent implements OnInit {
           this.addInvestorForm.get('reason').setValue(this.values['reason']);
           this.addInvestorForm.get('pincode').setValue(this.values['pincode']);
           this.addInvestorForm.get('transferType').setValue(this.values['transferType']);
-        },
-        error: err => {
-          this.toastrService.error(err);
         },
         complete: () => console.log('There are no more action happen.')
       });
@@ -207,7 +203,7 @@ export class ManageInvestorComponent implements OnInit {
 
       const formValues = this.addInvestorForm.value;
       for (const key in formValues) {
-        if (formValues.hasOwnProperty(key)) {
+        if (formValues.hasOwnProperty(key) && formValues[key]) {
           formData.append(key, formValues[key]);
         }
       }
@@ -218,12 +214,15 @@ export class ManageInvestorComponent implements OnInit {
       formData.set("_id", this.addInvestorForm.get('name').value);
       console.log('formData', formData);
       
-
+      let investorName = this.addInvestorForm.get('name').value;
       if (typeof this.userId !== 'undefined') {
-        this.investor._id = this.userId;
-        this.investorService.updateInvestor(this.investor).subscribe({
+        // Update case
+        
+        formData.append("folders", JSON.stringify(this.values.folders));
+        formData.append("_oldId", this._oldId);
+        this.investorService.updateInvestor(formData).subscribe({
           next: (res) => {
-            this.toastrService.success('Investor was successfully updated!');
+            this.toastrService.success(`Investor ${investorName} successfully updated!`);
             this.router.navigate(['/list/']);
           },
           error: err => {
@@ -232,14 +231,11 @@ export class ManageInvestorComponent implements OnInit {
           complete: () => console.log('There are no more action happen.')
         });
       } else {
-       // this.investor._id = this.addInvestorForm.get('name').value;
+       // Save case
         this.investorService.saveInvestor(formData).subscribe({
           next: (res) => {
-            this.toastrService.success('Investor was successfully created!');
+            this.toastrService.success(`Investor ${investorName} was successfully created!`);
             this.router.navigate(['/list/']);
-          },
-          error: err => {
-            this.toastrService.error(err);
           },
           complete: () => console.log('There are no more action happen.')
         });
@@ -295,5 +291,11 @@ export class ManageInvestorComponent implements OnInit {
   */
   deleteFile(index: number) {
     this.files.splice(index, 1);
+  }
+
+  deleteInvestorFile(item) {
+    item.image = null;
+    item.webLink = null;
+    console.log(this.values.folders);
   }
 }
