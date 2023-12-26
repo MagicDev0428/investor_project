@@ -20,5 +20,6 @@ export class Investor {
     passportImages: File;
     pincode: number;
     isAdmin: Boolean;
-    transferType: string    
+    transferType: string;
+    transferInfo: string;
 }

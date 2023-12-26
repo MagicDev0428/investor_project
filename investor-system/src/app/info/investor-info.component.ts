@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
+import { InvestorService } from '../service/investor.service';
+import { Observable, map } from 'rxjs';
+import { Investor } from '../model/investor';
+import { ToastrService } from 'ngx-toastr';
 
 interface Message {
   message?: string;
@@ -35,12 +39,66 @@ const temp_data = {
 
 export class InvestorInfoComponent extends BaseComponent {
 
+  selectedInvestor$!: Observable<string | number>;
+
   data = temp_data;
+  userId;
+  values: any = [];
+  title = '';
+
+  investor: Investor = {
+    _id: undefined,
+    name: '',
+    nickname: '',
+    phone: '',
+    email: '',
+    address: '',
+    postcode: 0,
+    city: '',
+    country: '',
+    status: '',
+    facebook: '',
+    passport: '',
+    beneficiaryName: '',
+    beneficiaryEmail: '',
+    beneficiaryPhone: '',
+    countryToTransfer: '',
+    currency: '',
+    reason: '',
+    passportImages: undefined,
+    pincode: 0,
+    isAdmin: false,
+    transferType: '',
+    transferInfo: ''
+  }
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private investorService: InvestorService,
+    private toastrService: ToastrService
   ) {
     super();
+    this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.selectedInvestor$.subscribe(res => {
+      this.userId = res;
+    })
+  }
+
+  ngOnInit() {
+    if (typeof this.userId !== 'undefined') {
+      this.investorService.getInvestorInfo(this.userId).subscribe({
+        next: (res) => {
+          this.values = res.investors[0]?.investor;
+          this.investor = this.values;
+          this.title = `${this.investor._id} \"\ ${this.investor.nickname} \"\ `;
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    }
   }
 
   goList() {

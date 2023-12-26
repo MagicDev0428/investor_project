@@ -12,4 +12,7 @@ export class Adam {
     transactionNo: string;
     description:  string;
     attachments: [];
+    createdBy: '';
+    modifiedDate: Date;
+    modifiedBy: '';
 }

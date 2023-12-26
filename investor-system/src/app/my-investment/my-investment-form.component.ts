@@ -180,7 +180,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
     });
 
     this.auth.user$.subscribe(result => {
-      this.user = result;
+      this.user = result['investor-system'];
       this.title += ' ' + this.user.name;
     });
     this.checkProfitDisable();

@@ -25,7 +25,10 @@ export class AdamService {
 		transferTo: '',
 		transactionNo: '',
 		description: '',
-		attachments: []
+		attachments: [],
+		createdBy: '',
+		modifiedDate: new Date(),
+		modifiedBy: '',
 	}
 
 	constructor(

@@ -42,6 +42,7 @@ import { LogListComponent } from './log/log-list.component';
 import { LogFormComponent } from './log/log-form.component';
 import { TotalComponent } from './total/total.component';
 import { PortfolioComponent } from './investor-portfolio/portfolio.component';
+import { PayProfitEnvComponent } from './deposit/pay-profit-env.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { PortfolioComponent } from './investor-portfolio/portfolio.component';
     LogListComponent,
     LogFormComponent,
     TotalComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    PayProfitEnvComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title "><span>INFO: </span>{{ data.name }}, "{{ data.nickname }}"</h5>
+                        <h5 class="modal-title "><span>INFO: </span>{{ title }}</h5>
                         <button (click)="goList()" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
@@ -15,12 +15,12 @@
                                 <div class="col form-group mb-4">
                                     <label for="investor_name">Investor Name</label>
                                     <input type="text" class="form-control" id="investor_name"
-                                        aria-describedby="Investor Name" [value]="data.name" readonly/>
+                                        aria-describedby="Investor Name" [value]="investor._id" readonly/>
                                 </div>
                                 <div class="col form-group mb-4">
                                     <label for="phone">Phone</label>
                                     <input type="text" class="form-control" id="phone" aria-describedby="Phone"
-                                        [value]="data.phone" readonly/>
+                                        [value]="investor.phone" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -28,7 +28,7 @@
                                     <label for="investorAddress">Address</label>
                                     <textarea class="form-control" id="investorAddress"
                                         aria-describedby="investor Address" rows="4"
-                                        cols="50" readonly>{{ data.address }}</textarea>
+                                        cols="50" readonly>{{ investor.address }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                                 <div class="col form-group mb-4">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" id="email" aria-describedby="Email"
-                                        [value]="data.email" readonly/>
+                                        [value]="investor.email" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -46,21 +46,21 @@
                                         <div class="col form-group mb-4">
                                             <label for="zipcode">Zip Code</label>
                                             <input type="zipcode" class="form-control" id="zipcode"
-                                                aria-describedby="Zip Code" [value]="data.zipcode" readonly/>
+                                                aria-describedby="Zip Code" [value]="investor.postcode" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 d-flex flex-column">
                                         <div class="col form-group mb-4">
                                             <label for="city">City</label>
                                             <input type="city" class="form-control" id="city" aria-describedby="City"
-                                                [value]="data.city" readonly/>
+                                                [value]="investor.city" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 d-flex flex-column">
                                         <div class="col form-group mb-4">
                                             <label for="country">Country</label>
                                             <input type="country" class="form-control" id="country"
-                                                aria-describedby="Country" [value]="data.country" readonly/>
+                                                aria-describedby="Country" [value]="investor.country" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                 <div class="col form-group mb-4">
                                     <label for="transfer_info">Money Transfer Information</label>
                                     <textarea class="form-control" id="transfer_info"
-                                        aria-describedby="Money Transfer Information" rows="4" cols="50" readonly>{{ data.transfer_info }}</textarea>
+                                        aria-describedby="Money Transfer Information" rows="4" cols="50" readonly>{{ investor.transferInfo }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -114,10 +114,10 @@
                                 <button type="button" class="btn btn-block btn-secondary">FOLDER</button>
                             </div>
                             <div class="col-sm-4 mb-2">
-                                <button type="button" class="btn btn-block btn-secondary">FACEBOOK</button>
+                                <a href="{{ investor.facebook }}"><button type="button" class="btn btn-block btn-secondary">FACEBOOK</button></a>
                             </div>
                             <div class="col-sm-4 mb-2">
-                                <button type="button" class="btn btn-block btn-secondary">EMAIL</button>
+                                <a href="mailTo:{{ investor.email }}"><button type="button" class="btn btn-block btn-secondary">EMAIL</button></a>
                             </div>
                         </div>
                     </div>

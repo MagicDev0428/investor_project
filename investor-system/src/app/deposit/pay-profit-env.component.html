@@ -1,0 +1,131 @@
+<div class="pay-profit-env">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title "><span>Pay Profit</span> to <span> Mark </span> via <span>Envelop</span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTable()">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" [formGroup]="payProfitForm" (ngSubmit)="onSubmit()" autocomplete="off"
+                            novalidate>
+                            <div class="row">
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="profitMonth">Profit Month</label>
+                                    <input formControlName="profitMonth" type="date" class="form-control text-end"
+                                        id="profitMonth" aria-describedby="profitMonth" />
+                                    <span class="text-danger"
+                                        *ngIf="(payProfitForm.controls['profitMonth'].touched || submitted) && payProfitForm.controls['profitMonth'].errors?.['required']">
+                                        Profit Month is required
+                                    </span>
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="deposit">Deposit</label>
+                                    <input formControlName="deposit" type="text" class="form-control text-end"
+                                        id="deposit" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
+                                        aria-describedby="deposit" />
+                                    <span class="text-danger"
+                                        *ngIf="(payProfitForm.controls['deposit'].touched || submitted) && payProfitForm.controls['deposit'].errors?.['required']">
+                                        Deposit is required
+                                    </span>
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="transferDate">Transfer/Pay Date</label>
+                                    <input formControlName="transferDate" type="date" class="form-control text-end"
+                                        id="transferDate" aria-describedby="transferDate" />
+                                    <span class="text-danger"
+                                        *ngIf="(payProfitForm.controls['transferDate'].touched || submitted) && payProfitForm.controls['transferDate'].errors?.['required']">
+                                        Transfer/Pay Date is required
+                                    </span>
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="transferType">Transfer Type</label>
+                                    <select formControlName="transferType" class="form-control" id="transferType"
+                                        aria-describedby="transferType">
+                                        <option>Envelope</option>
+                                        <option>Thai Bank</option>
+                                        <option>Foreign Bank</option>
+                                        <option>Crypto Wallet</option>
+                                        <option>Western Union</option>
+                                        <option>WISE</option>
+                                        <option>Other Transfer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-9 col-lg-8 form-group">
+                                    <label for="description">Description</label>
+                                    <textarea formControlName="description" class="form-control" id="description"
+                                        aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="col-xl-3 col-lg-4 form-group">
+                                    <label for="email">Email Sent</label>
+                                    <input type="text" class="form-control" id="email"
+                                        aria-describedby="Transfer From" />
+                                    <button type="button" class="btn btn-primary mt-2" data-dismiss="modal"
+                                        (click)="deleteTransaction(userId)">SEND EMAIL</button>
+                                </div>
+                            </div>
+                            <div class="row my-5">
+                                <div class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Balance</button>
+                                </div>
+                                <div class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Investor
+                                        Info</button>
+                                </div>
+                                <div class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Hidden
+                                        Text</button>
+                                </div>
+                                <div class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Copy
+                                        Paste</button>
+                                </div>
+                                <div class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Show Log</button>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center m-3 position-relative">
+                                <button type="submit" class="btn btn-secondary">PAY PROFIT</button>
+                                <button type="button" class="btn btn-danger"
+                                    [class]="{'disabled': userId === undefined}" data-dismiss="modal"
+                                    (click)="deleteTransaction(userId)">DELETE
+                                    BALANCE</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="info-wrapper">
+                            <div class="info-col">
+                                <span class="info-text">Create Date </span>
+                                <span class="info-value">{{ createdDate }}</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Create By</span>
+                                <span class="info-value">{{ createdBy }}</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Update Date</span>
+                                <span class="info-value">{{ modifiedDate }}</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Update By</span>
+                                <span class="info-value">{{ modifiedBy }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

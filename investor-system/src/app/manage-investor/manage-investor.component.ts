@@ -48,7 +48,8 @@ export class ManageInvestorComponent implements OnInit {
     passportImages: undefined,
     pincode: 0,
     isAdmin: false,
-    transferType: ''
+    transferType: '',
+    transferInfo: '',
   }
   files: any[] = [];
   userId;
