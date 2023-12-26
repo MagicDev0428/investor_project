@@ -25,7 +25,7 @@ export class configService {
       this.toasterService.error("Invalid token, Please login again!!!");
       this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
     } else if(error.status === 500) {
-      this.toasterService.error(error?.message);
+      this.toasterService.error(error?.error?.error);
     } else {
       this.toasterService.error("Something bad happened.");
       this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
