@@ -198,6 +198,27 @@ export class ManageInvestorComponent implements OnInit {
       this.investor.pincode = this.addInvestorForm.get('pincode').value;
       this.investor.transferType = this.addInvestorForm.get('transferType').value;
 
+      let formData;
+      if (this.files && this.files.length) {
+        formData = this.investorService.uploadFile(this.files);
+      } else {
+        formData = new FormData()
+      }
+
+      const formValues = this.addInvestorForm.value;
+      for (const key in formValues) {
+        if (formValues.hasOwnProperty(key)) {
+          formData.append(key, formValues[key]);
+        }
+      }
+
+      this.files.forEach(file => {
+        formData.append("passportImage", file.name)
+      });
+      formData.set("_id", this.addInvestorForm.get('name').value);
+      console.log('formData', formData);
+      
+
       if (typeof this.userId !== 'undefined') {
         this.investor._id = this.userId;
         this.investorService.updateInvestor(this.investor).subscribe({
@@ -211,8 +232,8 @@ export class ManageInvestorComponent implements OnInit {
           complete: () => console.log('There are no more action happen.')
         });
       } else {
-        this.investor._id = this.addInvestorForm.get('name').value;
-        this.investorService.saveInvestor(this.investor).subscribe({
+       // this.investor._id = this.addInvestorForm.get('name').value;
+        this.investorService.saveInvestor(formData).subscribe({
           next: (res) => {
             this.toastrService.success('Investor was successfully created!');
             this.router.navigate(['/list/']);
