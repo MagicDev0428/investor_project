@@ -29,10 +29,10 @@ export class ListInvestorComponent extends BaseComponent {
   isDescending: boolean = false;
 
   constructor(
-    private http: HttpClient,
-    private configService: configService,
     auth: AuthService,
     router: Router,
+    private http: HttpClient,
+    private configService: configService,
     private investorService: InvestorService
   ) {
     super(router, auth);

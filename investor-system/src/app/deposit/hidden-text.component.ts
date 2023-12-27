@@ -27,9 +27,9 @@ export class HiddenTextComponent extends BaseComponent implements OnInit {
 
   constructor(
     router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService,
-    auth: AuthService
   ) {
     super(router, auth);
   }

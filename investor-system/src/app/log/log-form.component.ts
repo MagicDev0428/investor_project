@@ -49,12 +49,12 @@ export class LogFormComponent extends BaseComponent {
 
   constructor(
     router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adamService: AdamService,
     private logService: LogService,
     private toastrService: ToastrService,
-    auth: AuthService
   ) {
     super(router, auth);
     this.selectedLog$ = activatedRoute.params.pipe(map(p => p['id']));

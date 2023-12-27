@@ -22,14 +22,15 @@ export class CopyPasteAreaComponent extends BaseComponent implements OnInit {
     createdBy = '';
     modifiedDate = '';
     modifiedBy = '';
+    text: string = 'text to copy';
 
     protected submitted = false;
 
     constructor(
         router: Router,
+        auth: AuthService,
         private activatedRoute: ActivatedRoute,
         private toastrService: ToastrService,
-        auth: AuthService
     ) {
         super(router, auth);
     }
@@ -50,9 +51,11 @@ export class CopyPasteAreaComponent extends BaseComponent implements OnInit {
 
     protected onSubmit(): void {
         this.submitted = true;
-
     }
 
-    goTable() {
+    getValue(event:any) {
+        this.text = event.target.value;
+        console.log('text->', this.text);
     }
+
 }

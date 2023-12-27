@@ -55,10 +55,6 @@ export class AdamTableComponent extends BaseComponent {
         }
     }
 
-    goFront() {
-        this.router.navigate(['/front-page/']);
-    }
-
     orderTable(column: string) {
         if (this.currentColumn === column) {
             this.isDescending = !this.isDescending;

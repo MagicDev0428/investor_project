@@ -73,10 +73,10 @@ export class InvestorPortfolioComponent extends BaseComponent {
 
   constructor(
     router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder,
-    auth: AuthService
   ) {
     super(router, auth);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));

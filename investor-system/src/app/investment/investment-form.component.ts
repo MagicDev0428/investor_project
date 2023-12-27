@@ -61,11 +61,11 @@ export class InvestmentFormComponent extends BaseComponent {
 
   constructor(
     router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private investmentService: InvestmentService,
     private toastrService: ToastrService,
-    auth: AuthService
   ) {
     super(router, auth);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
@@ -336,22 +336,6 @@ export class InvestmentFormComponent extends BaseComponent {
     }
     //this.addInvestorForm.get('passportImage').setValue(this.files);
 
-  }
-
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
-  formatBytes(bytes, decimals = 0) {
-    if (bytes === 0) {
-      return '0 Bytes';
-    }
-    const k = 1024;
-    const dm = decimals <= 0 ? 0 : decimals || 2;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
   /**
