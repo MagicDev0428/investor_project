@@ -68,18 +68,17 @@ export class InvestorPortfolioComponent extends BaseComponent {
   base_info: any = [];
   investments: any = [];
   profit_balance: any = [];
-  user: any = [];
 
   selectedInvestment$!: Observable<string | number>;
 
   constructor(
-    private router: Router,
+    router: Router,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder,
-    private auth: AuthService
+    auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;
@@ -101,19 +100,4 @@ export class InvestorPortfolioComponent extends BaseComponent {
 
   }
 
-  goList() {
-    this.router.navigate(['/investment-list/']);
-  }
-
-  goAdam() {
-    this.router.navigate(['/adam-form/']);
-  }
-
-  goNewMyInvestment() {
-    this.router.navigate(['/my-investment-form/']);
-  }
-
-  goLogForm() {
-    this.router.navigate(['/log-form/']);
-  }
 }

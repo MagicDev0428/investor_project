@@ -11,6 +11,7 @@ import {
   FormControl,
 } from "@angular/forms";
 import { FormBuilder } from '@angular/forms';
+import { AuthService } from '@auth0/auth0-angular';
 
 const temp = [
   { createdDate: '15 Nov 2023', time: '12:45', type: 'INVESTOR', description: 'added new investment 45,000,000', customer: 'Mark Snowman', investmentNo: '007', createdBy: 'Bee' },
@@ -36,13 +37,14 @@ export class LogListComponent extends BaseComponent {
   protected logSearchForm: FormGroup;
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private logService: LogService,
     private formBuilder: FormBuilder,
     private adamService: AdamService
   ) {
-    super();
+    super(router, auth);
   }
 
   ngOnInit(): void {
@@ -126,9 +128,5 @@ export class LogListComponent extends BaseComponent {
     } else {
       this.router.navigate(['/log-form/' + id]);
     }
-  }
-
-  goFront() {
-    this.router.navigate(['/front-page/']);
   }
 }

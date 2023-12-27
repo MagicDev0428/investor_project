@@ -12,6 +12,7 @@ import { BaseComponent } from '../base/base.component';
 import { InvestmentService } from '../service/investment.service';
 import { Adam } from '../model/adam';
 import * as moment from 'moment';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-investment-info',
@@ -44,12 +45,13 @@ export class InvestmentInfoComponent extends BaseComponent {
   selectedInvestment$!: Observable<string | number>;
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder
   ) {
-    super();
+    super(router, auth);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;
@@ -149,22 +151,6 @@ export class InvestmentInfoComponent extends BaseComponent {
         this.title += this.investmentInfo.investments?.profitEnd + '%';
       }
     }
-  }
-
-  goList() {
-    this.router.navigate(['/investment-list/']);
-  }
-
-  goAdam() {
-    this.router.navigate(['/adam-form/']);
-  }
-
-  goNewMyInvestment() {
-    this.router.navigate(['/my-investment-form/']);
-  }
-
-  goLogForm() {
-    this.router.navigate(['/log-form/']);
   }
 
   /**

@@ -43,6 +43,14 @@ import { LogFormComponent } from './log/log-form.component';
 import { TotalComponent } from './total/total.component';
 import { PortfolioComponent } from './investor-portfolio/portfolio.component';
 import { PayProfitEnvComponent } from './deposit/pay-profit-env.component';
+import { BalanceComponent } from './deposit/balance.component';
+import { HiddenTextComponent } from './deposit/hidden-text.component';
+import { CopyPasteAreaComponent } from './deposit/copy-paste-area.component';
+import { BalanceLogComponent } from './deposit/balance-log.component';
+import { PayProfitBankComponent } from './deposit/pay-profit-bank.component';
+import { AddMoneyEnvComponent } from './deposit/add-money-env.component';
+import { WithdrawCryptoComponent } from './deposit/withdraw-crypto.component';
+import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +80,15 @@ import { PayProfitEnvComponent } from './deposit/pay-profit-env.component';
     LogFormComponent,
     TotalComponent,
     PortfolioComponent,
-    PayProfitEnvComponent
+    PayProfitEnvComponent,
+    BalanceComponent,
+    HiddenTextComponent,
+    CopyPasteAreaComponent,
+    BalanceLogComponent,
+    PayProfitBankComponent,
+    AddMoneyEnvComponent,
+    WithdrawCryptoComponent,
+    WithdrawCashComponent
   ],
   imports: [
     BrowserModule,

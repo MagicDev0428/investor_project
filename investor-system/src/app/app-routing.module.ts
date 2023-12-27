@@ -22,37 +22,53 @@ import { PayProfitEnvComponent } from './deposit/pay-profit-env.component';
 // import { authService } from './service/auth.service';
 import { AuthGuardFN } from './auth-guard.service';
 import { InvestorPortfolioComponent } from './investor-portfolio/investor-portfolio.component';
+import { BalanceComponent } from './deposit/balance.component';
+import { HiddenTextComponent } from './deposit/hidden-text.component';
+import { CopyPasteAreaComponent } from './deposit/copy-paste-area.component';
+import { BalanceLogComponent } from './deposit/balance-log.component';
+import { PayProfitBankComponent } from './deposit/pay-profit-bank.component';
+import { AddMoneyEnvComponent } from './deposit/add-money-env.component';
+import { WithdrawCryptoComponent } from './deposit/withdraw-crypto.component';
+import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
 //import { AuthGuard } from '@auth0/auth0-angular';
 
 
 const routes: Routes = [
-  {path: 'list', component: ListInvestorComponent, canActivate: [AuthGuardFN]},
-  {path: 'manage-investor', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
-  {path: 'manage-investor/:id', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
+  {path: 'list', component: ListInvestorComponent},
+  {path: 'manage-investor', component: ManageInvestorComponent},
+  {path: 'manage-investor/:id', component: ManageInvestorComponent},
   {path: '', redirectTo: '/my-investments', pathMatch: 'full'},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardFN] },
+  {path: 'profile', component: ProfileComponent },
   {path: 'callback', component: CallbackComponent},
   {path: 'unauthorized', component: UnauthorizedComponent},
-  {path: 'adam-table', component: AdamTableComponent, canActivate: [AuthGuardFN]},
-  {path: 'adam-form',  component: AdamFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'adam-form/:id', component: AdamFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'info', component: InvestorInfoComponent, canActivate: [AuthGuardFN]},
-  {path: 'info/:id', component: InvestorInfoComponent, canActivate: [AuthGuardFN]},
-  {path: 'front-page', component:FrontPageComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-list', component:InvestmentListComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-form', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-form/:id', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-info', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
-  {path: 'investment-info/:id', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
+  {path: 'adam-table', component: AdamTableComponent},
+  {path: 'adam-form',  component: AdamFormComponent},
+  {path: 'adam-form/:id', component: AdamFormComponent},
+  {path: 'info', component: InvestorInfoComponent},
+  {path: 'info/:id', component: InvestorInfoComponent},
+  {path: 'front-page', component:FrontPageComponent},
+  {path: 'investment-list', component:InvestmentListComponent},
+  {path: 'investment-form', component:InvestmentFormComponent},
+  {path: 'investment-form/:id', component:InvestmentFormComponent},
+  {path: 'investment-info', component:InvestmentInfoComponent},
+  {path: 'investment-info/:id', component:InvestmentInfoComponent},
   {path: 'my-investments', component: InvestorPortfolioComponent},
-  {path: 'my-investment-form', component: MyInvestmentFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'my-investment-form/:id', component: MyInvestmentFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'log-list', component: LogListComponent, canActivate: [AuthGuardFN]},
-  {path: 'log-form', component: LogFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'log-form/:id', component: LogFormComponent, canActivate: [AuthGuardFN]},
-  {path: 'total', component: TotalComponent, canActivate: [AuthGuardFN]},
-  {path: 'portfolio', component: PortfolioComponent, canActivate: [AuthGuardFN]},
-  {path: 'pay-profit-env', component: PayProfitEnvComponent, canActivate: [AuthGuardFN]}
+  {path: 'my-investment-form', component: MyInvestmentFormComponent},
+  {path: 'my-investment-form/:id', component: MyInvestmentFormComponent},
+  {path: 'log-list', component: LogListComponent},
+  {path: 'log-form', component: LogFormComponent},
+  {path: 'log-form/:id', component: LogFormComponent},
+  {path: 'total', component: TotalComponent},
+  {path: 'portfolio', component: PortfolioComponent},
+  {path: 'pay-profit-env', component: PayProfitEnvComponent},
+  {path: 'balance', component: BalanceComponent},
+  {path: 'hidden-text', component: HiddenTextComponent},
+  {path: 'copy-paste', component: CopyPasteAreaComponent},
+  {path: 'balance-log', component: BalanceLogComponent},
+  {path: 'pay-profit-bank', component: PayProfitBankComponent},
+  {path: 'add-money-env', component: AddMoneyEnvComponent},
+  {path: 'withdraw-crypto', component: WithdrawCryptoComponent},
+  {path: 'withdraw-cash', component: WithdrawCashComponent}
 ];
 
 @NgModule({

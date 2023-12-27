@@ -56,7 +56,6 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   to_value: string;
   from_value: string;
   nowDateTime: Date;
-  user: any = [];
   createdDate = '';
   createdBy = '';
   modifiedDate = '';
@@ -66,14 +65,14 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   protected submitted = false;
 
   constructor(
-    private router: Router,
+    router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adamService: AdamService,
     private toastrService: ToastrService,
-    private auth: AuthService
+    auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.selectedAdam$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedAdam$.subscribe(res => {
       this.userId = res;
@@ -82,9 +81,6 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.auth.user$.subscribe(result => {
-      this.user = result['investor-system'];
-    });
     this.adamForm = this.formBuilder.group(
       {
         amount: new FormControl("", Validators.required),

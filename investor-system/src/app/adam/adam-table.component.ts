@@ -3,6 +3,7 @@ import { AdamService } from '../service/adam.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
     selector: 'app-adam-table',
@@ -19,11 +20,12 @@ export class AdamTableComponent extends BaseComponent {
     isDescending: boolean = false;
 
     constructor(
-        private router: Router,
+        router: Router,
+        auth: AuthService,
         private activatedRoute: ActivatedRoute,
         private adamService: AdamService
     ) {
-        super();
+        super(router, auth);
     }
 
     ngOnInit(): void {

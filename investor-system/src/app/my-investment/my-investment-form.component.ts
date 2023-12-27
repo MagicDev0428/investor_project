@@ -40,7 +40,6 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   to_value: string;
   from_value: string;
   nowDateTime: Date;
-  user: any = [];
   investType: string = undefined;
   profit = '';
   createdDate = '';
@@ -80,15 +79,15 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   }
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private adamService: AdamService,
     private myInvestmentService: MyInvestmentService,
-    private auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.nowDateTime = new Date();
     this.selectedMyInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedMyInvestment$.subscribe(res => {
@@ -359,10 +358,6 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         });
       }
     }
-  }
-
-  goTable() {
-
   }
 
   /**

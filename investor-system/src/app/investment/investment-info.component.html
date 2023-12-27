@@ -5,7 +5,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title ">Who is in <span>#{{ investmentInfo._id }}</span> Investment at {{ title }}</h5>
-                        <button type="button" (click)="goList()" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" (click)="goTo('/investment-list/')" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="col-lg-2 d-flex my-2">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                aria-label="Icon Button" (click)="goNewMyInvestment()">NEW</button>
+                                                aria-label="Icon Button" (click)="goTo('/my-investment-form/')">NEW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                         <div class="col-lg-5 col-md-6 col-sm-6 my-1">
                                         </div>
                                         <div class="col-lg-2 d-flex my-2">
-                                            <button type="button" (click)="goAdam()" class="btn btn-secondary"
+                                            <button type="button" (click)="goTo('/adam-form/')" class="btn btn-secondary"
                                                 data-dismiss="modal" aria-label="Icon Button">NEW</button>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-6 d-flex my-2">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                aria-label="Icon Button" (click)="goLogForm()">NEW</button>
+                                                aria-label="Icon Button" (click)="goTo('/log-form/')">NEW</button>
                                         </div>
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@ import { InvestorService } from '../service/investor.service';
 import { Observable, map } from 'rxjs';
 import { Investor } from '../model/investor';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '@auth0/auth0-angular';
 
 interface Message {
   message?: string;
@@ -73,12 +74,13 @@ export class InvestorInfoComponent extends BaseComponent {
   }
 
   constructor(
-    private router: Router,
+    router: Router,
     private activatedRoute: ActivatedRoute,
     private investorService: InvestorService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
       this.userId = res;
@@ -99,9 +101,5 @@ export class InvestorInfoComponent extends BaseComponent {
         complete: () => console.log('There are no more action happen.')
       });
     }
-  }
-
-  goList() {
-    this.router.navigate(['/list/']);
   }
 }

@@ -3,6 +3,8 @@ import { ActivatedRoute, ParamMap , Router} from '@angular/router';
 import { Investor } from '../model/investor';
 import { Observable, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { BaseComponent } from '../base/base.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 import {
   AbstractControl,
@@ -23,7 +25,7 @@ import { InvestorService } from '../service/investor.service';
 })
 
 
-export class ManageInvestorComponent implements OnInit {
+export class ManageInvestorComponent extends BaseComponent implements OnInit {
 
   selectedInvestor$!: Observable<string | number>;
   investor: Investor = {
@@ -59,12 +61,14 @@ export class ManageInvestorComponent implements OnInit {
   protected addInvestorForm: FormGroup;
   protected submitted = false;
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private investorService: InvestorService,
     private toastrService: ToastrService
   ) {
+    super(router, auth);
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
       this.userId = res;

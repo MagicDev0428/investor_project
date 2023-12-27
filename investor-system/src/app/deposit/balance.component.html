@@ -1,0 +1,41 @@
+<div class="balance">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body pt-3">
+                        <div class="row profit-balance">
+                            <div class="row section-header">
+                                <div class="col-lg-12 mb-4">
+                                    <div class="div-table">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTo('')">
+                                            <span aria-hidden="true">x</span>
+                                        </button>
+                                        <div class="trow theader lh-1">
+                                            <div class="tcol">Profit Month</div>
+                                            <div class="tcol">Description</div>
+                                            <div class="tcol">Money In Profit</div>
+                                            <div class="tcol">Money Out Withdraw</div>
+                                            <div class="tcol">Balance in Thailand</div>
+                                            <div class="tcol">Pay/Transfer Date</div>
+                                            <div class="tcol">Email Sent Date</div>
+                                        </div>
+                                        <div *ngFor="let item of profit_balance.balances; let i = index"
+                                            [ngClass]="{'trow':true,'minus': item[3]<0, 'new': (item[2]===0)&&(item[3]===0)}">
+                                            <div class="tcol">{{ item[0] }}</div>
+                                            <div class="tcol">{{ item[1] }}</div>
+                                            <div class="tcol fw-bold">{{ currency_style(item[2]) }}</div>
+                                            <div class="tcol">{{ currency_style(item[3]) }}</div>
+                                            <div class="tcol">{{ currency_style(item[4]) }}</div>
+                                            <div class="tcol">{{ item[5] }}</div>
+                                            <div class="tcol">{{ item[6] }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

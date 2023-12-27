@@ -31,11 +31,11 @@ export class ListInvestorComponent extends BaseComponent {
   constructor(
     private http: HttpClient,
     private configService: configService,
-    public auth: AuthService,
-    private router: Router,
+    auth: AuthService,
+    router: Router,
     private investorService: InvestorService
   ) {
-    super();
+    super(router, auth);
   }
 
   ngOnInit(): void {

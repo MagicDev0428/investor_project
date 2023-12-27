@@ -16,11 +16,11 @@ import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-pay-profit-env',
-  templateUrl: './pay-profit-env.component.html',
-  styleUrls: ['../adam/investorForm.scss', './pay-profit-env.component.scss'],
+  templateUrl: './add-money-env.component.html',
+  styleUrls: ['../adam/investorForm.scss', './add-money-env.component.scss'],
 })
 
-export class PayProfitEnvComponent extends BaseComponent implements OnInit {
+export class AddMoneyEnvComponent extends BaseComponent implements OnInit {
   @ViewChild('transactionFrom') transactionFrom: ElementRef;
   @ViewChild('transactionTo') transactionTo: ElementRef;
 
@@ -45,10 +45,10 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
 
   constructor(
     router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    auth: AuthService
   ) {
     super(router, auth);
     this.nowDateTime = new Date();
