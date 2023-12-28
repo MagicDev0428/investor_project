@@ -52,6 +52,8 @@ import { PayProfitBankComponent } from './deposit/pay-profit-bank.component';
 import { AddMoneyEnvComponent } from './deposit/add-money-env.component';
 import { WithdrawCryptoComponent } from './deposit/withdraw-crypto.component';
 import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingInterceptor } from './loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,8 @@ import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
     PayProfitBankComponent,
     AddMoneyEnvComponent,
     WithdrawCryptoComponent,
-    WithdrawCashComponent
+    WithdrawCashComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +141,10 @@ import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, {provide: AuthGuardFN }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, {provide: AuthGuardFN },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
