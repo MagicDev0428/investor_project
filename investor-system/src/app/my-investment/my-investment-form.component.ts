@@ -40,7 +40,6 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   to_value: string;
   from_value: string;
   nowDateTime: Date;
-  user: any = [];
   investType: string = undefined;
   profit = '';
   createdDate = '';
@@ -80,15 +79,15 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   }
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private adamService: AdamService,
     private myInvestmentService: MyInvestmentService,
-    private auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.nowDateTime = new Date();
     this.selectedMyInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedMyInvestment$.subscribe(res => {
@@ -361,10 +360,6 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
     }
   }
 
-  goTable() {
-
-  }
-
   /**
   * on file drop handler
   */
@@ -387,22 +382,6 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
     for (const item of files) {
       this.files.push(item);
     }
-  }
-
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
-  formatBytes(bytes, decimals = 0) {
-    if (bytes === 0) {
-      return '0 Bytes';
-    }
-    const k = 1024;
-    const dm = decimals <= 0 ? 0 : decimals || 2;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
   /**

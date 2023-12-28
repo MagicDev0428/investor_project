@@ -54,21 +54,20 @@ export class InvestmentFormComponent extends BaseComponent {
   files: any[] = [];
   investmentId: any = '';
   values: any[] = [];
-  user: any = [];
   investType: string = undefined;
 
   protected investmentForm: FormGroup;
   protected submitted = false;
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private investmentService: InvestmentService,
     private toastrService: ToastrService,
-    private auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;
@@ -253,11 +252,7 @@ export class InvestmentFormComponent extends BaseComponent {
   changeStyle(value: any) {
     this.investmentForm.get('investAmount').setValue(this.currency_style(value));
   }
-
-  goList() {
-    this.router.navigate(['/investment-list/']);
-  }
-
+  
   deleteInvestment(_id: any) {
     if (typeof _id !== 'undefined') {
       this.investmentService.deleteInvestment(_id).subscribe({
@@ -293,7 +288,7 @@ export class InvestmentFormComponent extends BaseComponent {
         this.investmentService.updateInvestment(this.investment).subscribe({
           next: (res) => {
             this.toastrService.success('Investment was successfully updated!');
-            this.goList();
+            this.goTo('/investment-list/');
           },
           error: err => {
             this.toastrService.error(err);
@@ -306,7 +301,7 @@ export class InvestmentFormComponent extends BaseComponent {
         this.investmentService.createInvestment(this.investment).subscribe({
           next: (res) => {
             this.toastrService.success('Investment was successfully created!');
-            this.goList();
+            this.goTo('/investment-list/');
           },
           error: err => {
             this.toastrService.error(err);
@@ -341,22 +336,6 @@ export class InvestmentFormComponent extends BaseComponent {
     }
     //this.addInvestorForm.get('passportImage').setValue(this.files);
 
-  }
-
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
-  formatBytes(bytes, decimals = 0) {
-    if (bytes === 0) {
-      return '0 Bytes';
-    }
-    const k = 1024;
-    const dm = decimals <= 0 ? 0 : decimals || 2;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
   /**

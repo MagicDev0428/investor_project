@@ -56,7 +56,6 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   to_value: string;
   from_value: string;
   nowDateTime: Date;
-  user: any = [];
   createdDate = '';
   createdBy = '';
   modifiedDate = '';
@@ -66,14 +65,14 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   protected submitted = false;
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adamService: AdamService,
     private toastrService: ToastrService,
-    private auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.selectedAdam$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedAdam$.subscribe(res => {
       this.userId = res;
@@ -82,9 +81,6 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.auth.user$.subscribe(result => {
-      this.user = result['investor-system'];
-    });
     this.adamForm = this.formBuilder.group(
       {
         amount: new FormControl("", Validators.required),
@@ -236,10 +232,6 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
     }
   }
 
-  goTable() {
-    this.router.navigate(['/adam-table/']);
-  }
-
   /**
   * on file drop handler
   */
@@ -264,22 +256,6 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
     }
     //this.adamForm.get('passportImage').setValue(this.files);
 
-  }
-
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
-  formatBytes(bytes, decimals = 0) {
-    if (bytes === 0) {
-      return '0 Bytes';
-    }
-    const k = 1024;
-    const dm = decimals <= 0 ? 0 : decimals || 2;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
   /**

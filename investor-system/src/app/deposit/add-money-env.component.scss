@@ -1,4 +1,4 @@
-.pay-profit-env {
+.add-money-env {
     background-color: white;
 }
 
@@ -58,7 +58,7 @@ textarea {
             color: white;
 
             span {
-                color: #CAF78B;
+                color: #7BD3F9;
                 font-weight: bold;
             }
         }
@@ -100,12 +100,12 @@ textarea {
     }
 
     label[for=deposit] {
-        color: #327A30;
+        color: #0500D9;
         font-weight: bold;
     }
 
-    label[for=deposit] + input {
-        color: #327A30;
+    label[for=deposit] +input {
+        color: #0500D9;
         font-weight: bold;
     }
 
@@ -157,14 +157,14 @@ textarea {
 }
 
 .btn-secondary {
-    background-color: rgb(71, 121, 6);
+    background-color: rgb(4, 0, 219);
     font-weight: bold;
     font-size: 17pt;
-    box-shadow: 5px 5px 4px rgba(71, 121, 6, 0.4);
+    box-shadow: 5px 5px 4px rgba(4, 0, 219, 0.4);
     width: 400px;
 
     &:hover {
-        background-color: rgb(44, 75, 4);
+        background-color: rgb(2, 0, 114);
     }
 }
 

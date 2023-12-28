@@ -34,7 +34,6 @@ export class LogFormComponent extends BaseComponent {
   date: string = '';
   time: string = '';
   logBy: string = '';
-  user: any = [];
   values: any = [];
 
   protected logForm: FormGroup;
@@ -49,15 +48,15 @@ export class LogFormComponent extends BaseComponent {
   }
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adamService: AdamService,
     private logService: LogService,
     private toastrService: ToastrService,
-    private auth: AuthService
   ) {
-    super();
+    super(router, auth);
     this.selectedLog$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedLog$.subscribe(res => {
       this.logId = res;
@@ -123,11 +122,6 @@ export class LogFormComponent extends BaseComponent {
         complete: () => console.log('There are no more action happen.')
       });
     }
-  }
-
-
-  goTable() {
-    this.router.navigate(['/log-list/']);
   }
 
   protected onSubmit(): void {

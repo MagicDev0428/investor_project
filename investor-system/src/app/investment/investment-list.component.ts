@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { InvestmentService } from '../service/investment.service';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
     selector: 'app-investment-list',
@@ -20,11 +21,12 @@ export class InvestmentListComponent extends BaseComponent {
     isDescending: boolean = false;
 
     constructor(
-        private router: Router,
+        router: Router,
+        auth: AuthService,
         private activatedRoute: ActivatedRoute,
         private investmentService: InvestmentService,
     ) {
-        super();
+        super(router, auth);
     }
 
     ngOnInit(): void {
@@ -63,10 +65,6 @@ export class InvestmentListComponent extends BaseComponent {
                 this.router.navigate(['/investment-form/' + id]);
             }
         }
-    }
-
-    goFront() {
-        this.router.navigate(['/front-page/']);
     }
 
     orderTable(column: string) {

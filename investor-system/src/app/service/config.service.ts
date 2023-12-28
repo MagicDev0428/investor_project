@@ -11,8 +11,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class configService {
 
-  
-  constructor(private router: Router, public auth: AuthService, @Inject(DOCUMENT) private doc: Document, private toasterService: ToastrService) {    
+
+  constructor(
+    private router: Router,
+    public auth: AuthService,
+    @Inject(DOCUMENT) private doc: Document,
+    private toasterService: ToastrService
+  ) {
     this.handleError = this.handleError.bind(this);
   }
 
@@ -21,10 +26,10 @@ export class configService {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       return throwError(() => new Error(`An error occurred: ${error.error.error}`));
-    } else if(error.status == 403 || error.toString() === 'Error: Unknown or invalid refresh token.') {
+    } else if (error.status == 403 || error.toString() === 'Error: Unknown or invalid refresh token.') {
       this.toasterService.error("Invalid token, Please login again!!!");
       this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
-    } else if(error.status === 500) {
+    } else if (error.status === 500) {
       this.toasterService.error(error?.error?.error);
     } else {
       this.toasterService.error("Something bad happened.");
@@ -33,7 +38,7 @@ export class configService {
       // The response body may contain clues as to what went wrong.
       return throwError(() => new Error(
         `Error Code ${error.status}: ${error.error.error}`));
-      
+
     }
 
 

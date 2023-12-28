@@ -12,6 +12,7 @@ import { BaseComponent } from '../base/base.component';
 import { InvestmentService } from '../service/investment.service';
 import { Adam } from '../model/adam';
 import * as moment from 'moment';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-investment-info',
@@ -44,12 +45,13 @@ export class InvestmentInfoComponent extends BaseComponent {
   selectedInvestment$!: Observable<string | number>;
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder
   ) {
-    super();
+    super(router, auth);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;
@@ -151,22 +153,6 @@ export class InvestmentInfoComponent extends BaseComponent {
     }
   }
 
-  goList() {
-    this.router.navigate(['/investment-list/']);
-  }
-
-  goAdam() {
-    this.router.navigate(['/adam-form/']);
-  }
-
-  goNewMyInvestment() {
-    this.router.navigate(['/my-investment-form/']);
-  }
-
-  goLogForm() {
-    this.router.navigate(['/log-form/']);
-  }
-
   /**
 * on file drop handler
 */
@@ -191,22 +177,6 @@ export class InvestmentInfoComponent extends BaseComponent {
     }
     //this.addInvestorForm.get('passportImage').setValue(this.files);
 
-  }
-
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
-  formatBytes(bytes, decimals = 0) {
-    if (bytes === 0) {
-      return '0 Bytes';
-    }
-    const k = 1024;
-    const dm = decimals <= 0 ? 0 : decimals || 2;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
   /**

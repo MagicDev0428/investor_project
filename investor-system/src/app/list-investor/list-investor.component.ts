@@ -29,13 +29,13 @@ export class ListInvestorComponent extends BaseComponent {
   isDescending: boolean = false;
 
   constructor(
+    auth: AuthService,
+    router: Router,
     private http: HttpClient,
     private configService: configService,
-    public auth: AuthService,
-    private router: Router,
     private investorService: InvestorService
   ) {
-    super();
+    super(router, auth);
   }
 
   ngOnInit(): void {

@@ -12,6 +12,7 @@ import { BaseComponent } from '../base/base.component';
 import { InvestmentService } from '../service/investment.service';
 import { Adam } from '../model/adam';
 import * as moment from 'moment';
+import { AuthService } from '@auth0/auth0-angular';
 
 const temp1 = [
   {_id:'002', amountInvested:21200001, profitMonthlyPct:2, profitMonthly:1200001, torbenInvested:21200001, torbenmonthly:2, torbenPtofit:1200001},
@@ -57,12 +58,13 @@ export class TotalComponent extends BaseComponent {
   selectedInvestment$!: Observable<string | number>;
 
   constructor(
-    private router: Router,
+    router: Router,
+    auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder
   ) {
-    super();
+    super(router, auth);
   }
 
   ngOnInit(): void {

@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 
 export class BaseComponent {
 
-    constructor() { }
+    user: any = [];
+
+    constructor(
+        public router: Router,
+        public auth: AuthService,
+    ) {
+        this.auth.user$.subscribe(result => {
+            this.user = result['investor-system'];
+        });
+    }
 
     currency_style(amount: any) {
         let currency_amount = amount?.toString();
@@ -39,5 +49,26 @@ export class BaseComponent {
             event.preventDefault();
         }
     }
+
+    goTo(routeStr) {
+        this.router.navigate([routeStr]);
+    }
+
+    /**
+ * format bytes
+ * @param bytes (File size in bytes)
+ * @param decimals (Decimals point)
+ */
+    formatBytes(bytes, decimals = 0) {
+        if (bytes === 0) {
+            return '0 Bytes';
+        }
+        const k = 1024;
+        const dm = decimals <= 0 ? 0 : decimals || 2;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
 }
 

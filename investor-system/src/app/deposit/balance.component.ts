@@ -10,8 +10,6 @@ import { FormBuilder } from '@angular/forms';
 import { Observable, from, map } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
 import { InvestmentService } from '../service/investment.service';
-import { Adam } from '../model/adam';
-import * as moment from 'moment';
 import { AuthService } from '@auth0/auth0-angular';
 
 const base_temp = {
@@ -52,17 +50,24 @@ const profit_balance_temp = {
     ['Dec-2023', 'Paid 2% from investment of 7,500,000', 210000, 0, 8700000, '15-Dec-23', '15-Dec-23'],
     ['Jan-2023', 'Paid 2% from investment of 7,500,000', 210000, 0, 8700000, '18-Jan-24', '18-Jan-24'],
     ['Jan-2023', 'Transfer 82.000 DKK to Denmark', 0, -400000, 8700000, '30-Jan-24', '30-Jan-24'],
-    ['Feb-2023', 'Paid 2% from investment of 10,000,000', 1210000, 0, 8700000, '18-Jan-24', ''],
+    ['Feb-2023', 'Paid 2% from investment of 10,000,000', 1210000, 0, 8700000, '18-Jan-24', '30-Jan-2024'],
+    ['Oct-2023', 'Paid 2% from investment of 7,500,000', 150000, 0, 8700000, '15-Oct-23', '23-Oct-23'],
+    ['Oct-2023', 'NEW Investment: 2,500.000', 0, 0, 8700000, '25-Oct-23', '23-Oct-23'],
+    ['Nov-2023', 'Paid 2% from investment of 7,500,000', 150000, 0, 8700000, '15-Nov-23', '15-Nov-23'],
+    ['Dec-2023', 'Paid 2% from investment of 7,500,000', 210000, 0, 8700000, '15-Dec-23', '15-Dec-23'],
+    ['Jan-2023', 'Paid 2% from investment of 7,500,000', 210000, 0, 8700000, '18-Jan-24', '18-Jan-24'],
+    ['Jan-2023', 'Transfer 82.000 DKK to Denmark', 0, -400000, 8700000, '30-Jan-24', '30-Jan-24'],
+    ['Feb-2023', 'Paid 2% from investment of 10,000,000', 1210000, 0, 8700000, '18-Jan-24', '30-Jan-2024'],
   ],
 }
 
 @Component({
-  selector: 'app-portfolio-for',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['../adam/investorForm.scss', './portfolio.component.scss'],
+  selector: 'app-investor-portfolio',
+  templateUrl: './balance.component.html',
+  styleUrls: ['../adam/investorForm.scss', './balance.component.scss'],
 })
 
-export class PortfolioComponent extends BaseComponent {
+export class BalanceComponent extends BaseComponent {
 
   amount = '';
   investmentId: any = '';
@@ -78,12 +83,17 @@ export class PortfolioComponent extends BaseComponent {
     auth: AuthService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
     super(router, auth);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;
+    });
+    this.auth.user$.subscribe(result => {
+      console.log('user->', result);
+      this.user = result['investor-system'];
+      this.name = this.user.name;
     });
   }
 

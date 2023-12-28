@@ -1,13 +1,12 @@
-<div class="pay-profit-env">
+<div class="add-money-env">
     <div class="container">
         <div class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title "><span>Pay Profit</span> to <span> Mark </span> via <span>Envelop</span>
+                        <h5 class="modal-title "><span>Add Money</span> to <span> Mark </span> via <span>Envelop</span>
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                            (click)="goTo('//')">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTo('')">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -25,7 +24,7 @@
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="deposit">Deposit Profit</label>
+                                    <label for="deposit">Deposit Money</label>
                                     <input formControlName="deposit" type="text" class="form-control text-end"
                                         id="deposit" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
                                         aria-describedby="deposit" />
@@ -103,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">
-                                <button type="submit" class="btn btn-secondary">PAY PROFIT</button>
+                                <button type="submit" class="btn btn-secondary">PAY MONEY</button>
                                 <button type="button" class="btn btn-danger"
                                     [class]="{'disabled': userId === undefined}" data-dismiss="modal"
                                     (click)="deleteTransaction(userId)">DELETE

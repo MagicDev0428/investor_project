@@ -15,12 +15,12 @@ import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-pay-profit-env',
-  templateUrl: './pay-profit-env.component.html',
-  styleUrls: ['../adam/investorForm.scss', './pay-profit-env.component.scss'],
+  selector: 'app-pay-profit-bank',
+  templateUrl: './withdraw-cash.component.html',
+  styleUrls: ['../adam/investorForm.scss', './withdraw-cash.component.scss'],
 })
 
-export class PayProfitEnvComponent extends BaseComponent implements OnInit {
+export class WithdrawCashComponent extends BaseComponent implements OnInit {
   @ViewChild('transactionFrom') transactionFrom: ElementRef;
   @ViewChild('transactionTo') transactionTo: ElementRef;
 
@@ -57,16 +57,21 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.payProfitForm = this.formBuilder.group(
     {
-        profitMonth: new FormControl("", Validators.required),
-        deposit: new FormControl("", Validators.required),
+        withdrawMonth: new FormControl("", Validators.required),
+        withdraw: new FormControl("", Validators.required),
         transferDate: new FormControl(new Date(), Validators.required),
         transferType: new FormControl("", Validators.required),
-        description: new FormControl(),
+        description: new FormControl(""),
+        transferInfo: new FormControl(""),
+        transferFrom: new FormControl(""),
+        transferTo: new FormControl(""),
+        transactionNo: new FormControl(""),
+        documents: new FormControl(""),
     });
   }
 
   changeStyle(value: any) {
-    this.payProfitForm.get('deposit').setValue(this.currency_style(value));
+    this.payProfitForm.get('withdraw').setValue(this.currency_style(value));
   }
 
   onInputChange(event: any) {
@@ -86,4 +91,39 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
     this.submitted = true;
    
   }
+
+  /**
+  * on file drop handler
+  */
+  onFileDropped($event) {
+    this.prepareFilesList($event);
+  }
+  /**
+  * handle file from browsing
+  */
+  fileBrowseHandler(target) {
+    let files = target?.files;
+    this.prepareFilesList(files);
+  }
+
+  /**
+  * Convert Files list to normal array list
+  * @param files (Files List)
+  */
+  prepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      this.files.push(item);
+    }
+    //this.adamForm.get('passportImage').setValue(this.files);
+
+  }
+
+  /**
+  * Delete file from files list
+  * @param index (File index)
+  */
+  deleteFile(index: number) {
+    this.files.splice(index, 1);
+  }
+
 }
