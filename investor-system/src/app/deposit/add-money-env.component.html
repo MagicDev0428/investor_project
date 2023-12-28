@@ -16,8 +16,8 @@
                             <div class="row">
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="profitMonth">Profit Month</label>
-                                    <input formControlName="profitMonth" type="date" class="form-control text-end"
-                                        id="profitMonth" aria-describedby="profitMonth" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'MM/yyyy'"
+                                        formControlName="profitMonth" name="profitMonth"></app-date-time-picker>
                                     <span class="text-danger"
                                         *ngIf="(payProfitForm.controls['profitMonth'].touched || submitted) && payProfitForm.controls['profitMonth'].errors?.['required']">
                                         Profit Month is required
@@ -35,8 +35,8 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transferDate">Transfer/Pay Date</label>
-                                    <input formControlName="transferDate" type="date" class="form-control text-end"
-                                        id="transferDate" aria-describedby="transferDate" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'" formControlName="transferDate"
+                                        name="transferDate"></app-date-time-picker>
                                     <span class="text-danger"
                                         *ngIf="(payProfitForm.controls['transferDate'].touched || submitted) && payProfitForm.controls['transferDate'].errors?.['required']">
                                         Transfer/Pay Date is required
@@ -80,25 +80,29 @@
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator">
-                                    <button type="button" (click)="goTo('/info/')" class="btn btn-success" data-dismiss="modal">Investor
+                                    <button type="button" (click)="goTo('/info/')" class="btn btn-success"
+                                        data-dismiss="modal">Investor
                                         Info</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator">
-                                    <button type="button" (click)="goTo('/hidden-text/')" class="btn btn-success" data-dismiss="modal">Hidden
+                                    <button type="button" (click)="goTo('/hidden-text/')" class="btn btn-success"
+                                        data-dismiss="modal">Hidden
                                         Text</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator">
-                                    <button type="button" (click)="goTo('/copy-paste/')" class="btn btn-success" data-dismiss="modal">Copy
+                                    <button type="button" (click)="goTo('/copy-paste/')" class="btn btn-success"
+                                        data-dismiss="modal">Copy
                                         Paste</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator">
-                                    <button type="button" (click)="goTo('/balance-log/')" class="btn btn-success" data-dismiss="modal">Show Log</button>
+                                    <button type="button" (click)="goTo('/balance-log/')" class="btn btn-success"
+                                        data-dismiss="modal">Show Log</button>
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
 
 export class BaseComponent {
 
@@ -9,6 +10,7 @@ export class BaseComponent {
     constructor(
         public router: Router,
         public auth: AuthService,
+        public toastrService: ToastrService,
     ) {
         this.auth.user$.subscribe(result => {
             this.user = result['investor-system'];
@@ -25,7 +27,7 @@ export class BaseComponent {
         currency_amount = currency_amount?.replace(thb_character, ''); //Remove existing thb mark
         currency_amount = currency_amount?.replace(' ', ''); //Remove existing spaces
         currency_amount = currency_amount?.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
-        currency_amount = currency_amount?.replace(currency_amount, thb_character + ' ' + currency_amount);
+        currency_amount = currency_amount?.replace(currency_amount, thb_character + currency_amount);
         return currency_amount;
     }
 
@@ -69,6 +71,28 @@ export class BaseComponent {
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
+
+    copyToClipboard(text: string): void {
+        const input = document.createElement('input');
+        input.style.position = 'fixed';
+        input.style.opacity = '0';
+        input.value = text;
+        document.body.appendChild(input);
+
+        input.select();
+        input.setSelectionRange(0, input.value.length);
+
+        document.execCommand('copy');
+
+        document.body.removeChild(input);
+
+        this.toastrService.success('Copied To Clipboard!');
+    }
+
+    generatePinCode(): number {
+        let code = Math.floor(Math.random() * (99 - 10 + 1) + 10);
+        return code * 101;
+      }
 
 }
 

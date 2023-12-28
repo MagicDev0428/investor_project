@@ -63,12 +63,12 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private investorService: InvestorService,
-    private toastrService: ToastrService
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
       this.userId = res;
@@ -99,7 +99,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         currency: new FormControl(),
         reason: new FormControl(),
         passportImages: new FormControl(),
-        pincode: new FormControl("", Validators.required),
+        pincode: new FormControl(this.generatePinCode(), Validators.required),
         transferType: new FormControl()
       });
 

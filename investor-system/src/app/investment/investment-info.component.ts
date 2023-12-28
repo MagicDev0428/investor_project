@@ -13,6 +13,7 @@ import { InvestmentService } from '../service/investment.service';
 import { Adam } from '../model/adam';
 import * as moment from 'moment';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-investment-info',
@@ -47,11 +48,12 @@ export class InvestmentInfoComponent extends BaseComponent {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;
@@ -121,34 +123,34 @@ export class InvestmentInfoComponent extends BaseComponent {
       this.investmentInfoForm.get('monthlyProfit').disable();
       this.investmentInfoForm.get('annualProfit').disable();
       this.investmentInfoForm.get('endProfit').disable();
-      this.title += '0%';
+      this.title += this.profit_style(0);
     } else if (investmentType === 'Monthly Profit') {
       this.investmentInfoForm.get('monthlyProfit').enable();
       this.investmentInfoForm.get('annualProfit').disable();
       this.investmentInfoForm.get('endProfit').disable();
-      this.title += this.investmentInfo.investments?.profitMonthly + '%';
+      this.title += this.profit_style(this.investmentInfo.investments?.profitMonthly);
     } else if (investmentType === 'Annual Profit') {
       this.investmentInfoForm.get('monthlyProfit').disable();
       this.investmentInfoForm.get('annualProfit').enable();
       this.investmentInfoForm.get('endProfit').disable();
-      this.title += this.investmentInfo.investments?.profitYearly + '%';
+      this.title += this.profit_style(this.investmentInfo.investments?.profitYearly);
     } else if (investmentType === 'One-time Profit') {
       this.investmentInfoForm.get('monthlyProfit').disable();
       this.investmentInfoForm.get('annualProfit').disable();
       this.investmentInfoForm.get('endProfit').enable();
-      this.title += this.investmentInfo.investments?.profitEnd + '%';
+      this.title += this.profit_style(this.investmentInfo.investments?.profitEnd);
     } else if (investmentType === 'Mixed') {
       this.investmentInfoForm.get('monthlyProfit').enable();
       this.investmentInfoForm.get('annualProfit').enable();
       this.investmentInfoForm.get('endProfit').enable();
       if(this.investmentInfo.investments?.profitMonthly !== 0) {
-        this.title += this.investmentInfo.investments?.profitMonthly + '%';
+        this.title += this.profit_style(this.investmentInfo.investments?.profitMonthly);
       }
       else if(this.investmentInfo.investments?.profitYearly !== 0) {
-        this.title += this.investmentInfo.investments?.profitYearly + '%';
+        this.title += this.profit_style(this.investmentInfo.investments?.profitYearly);
       }
       else if(this.investmentInfo.investments?.profitEnd !== 0) {
-        this.title += this.investmentInfo.investments?.profitEnd + '%';
+        this.title += this.profit_style(this.investmentInfo.investments?.profitEnd);
       }
     }
   }

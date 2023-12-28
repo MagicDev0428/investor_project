@@ -76,11 +76,11 @@ export class InvestorInfoComponent extends BaseComponent {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private investorService: InvestorService,
-    private toastrService: ToastrService,
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
       this.userId = res;

@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
-import { ClipboardService } from 'ngx-clipboard';  
 
 const temp = [
     "25-Jul-2023 created the Investment [Torben]",
@@ -45,10 +44,10 @@ export class BalanceLogComponent extends BaseComponent implements OnInit {
     constructor(
         router: Router,
         auth: AuthService,
+        toastrService: ToastrService,
         private activatedRoute: ActivatedRoute,
-        private toastrService: ToastrService,
     ) {
-        super(router, auth);
+        super(router, auth, toastrService);
     }
 
     ngOnInit(): void {

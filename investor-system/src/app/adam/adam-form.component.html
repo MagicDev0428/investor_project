@@ -5,7 +5,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>{{ section }}: </span>{{ title }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTo('/adam-table/')">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="goTo('/adam-table/')">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -27,7 +28,8 @@
                                     <select formControlName="transactionFrom" class="form-control" id="transactionFrom"
                                         #transactionFrom aria-describedby="Money Transfer" (change)="checkSelect()">
                                         <option value="Adam" [hidden]="to_value=='Adam'?true:null">FROM Adam</option>
-                                        <option value="Torben" [hidden]="to_value=='Torben'?true:null">FROM Torben</option>
+                                        <option value="Torben" [hidden]="to_value=='Torben'?true:null">FROM Torben
+                                        </option>
                                         <option value="Bee" [hidden]="to_value=='Bee'?true:null">FROM Bee</option>
                                         <option value="Other" [hidden]="to_value=='Other'?true:null">FROM Other</option>
                                     </select>
@@ -41,7 +43,8 @@
                                     <select formControlName="transactionTo" class="form-control" id="transactionTo"
                                         #transactionTo aria-describedby="Money Transfer" (change)="checkSelect()">
                                         <option value="Adam" [hidden]="from_value=='Adam'?true:null">TO Adam</option>
-                                        <option value="Torben" [hidden]="from_value=='Torben'?true:null">TO Torben</option>
+                                        <option value="Torben" [hidden]="from_value=='Torben'?true:null">TO Torben
+                                        </option>
                                         <option value="Bee" [hidden]="from_value=='Bee'?true:null">TO Bee</option>
                                         <option value="Other" [hidden]="from_value=='Other'?true:null">TO Other</option>
                                     </select>
@@ -52,8 +55,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="createdDate">Transfer Date</label>
-                                    <input formControlName="createdDate" type="text" class="form-control"
-                                        id="createdDate" aria-describedby="Transfer Date" [value]="'2018-06-12T19:30'" bsDatepicker/>
+                                    <app-date-time-picker formControlName="createdDate" name="createdDate"></app-date-time-picker>   
                                     <span class="text-danger"
                                         *ngIf="(adamForm.controls['createdDate'].touched || submitted) && adamForm.controls['createdDate'].errors?.['required']">
                                         Transfer Date is required

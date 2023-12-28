@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-adam-table',
@@ -22,10 +23,11 @@ export class AdamTableComponent extends BaseComponent {
     constructor(
         router: Router,
         auth: AuthService,
+        toastrService: ToastrService,
         private activatedRoute: ActivatedRoute,
         private adamService: AdamService
     ) {
-        super(router, auth);
+        super(router, auth, toastrService);
     }
 
     ngOnInit(): void {

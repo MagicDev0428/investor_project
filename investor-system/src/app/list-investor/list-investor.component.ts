@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { InvestorService } from '../service/investor.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface Message {
   message?: string;
@@ -31,11 +32,12 @@ export class ListInvestorComponent extends BaseComponent {
   constructor(
     auth: AuthService,
     router: Router,
+    toastrService: ToastrService,
     private http: HttpClient,
     private configService: configService,
     private investorService: InvestorService
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
   }
 
   ngOnInit(): void {

@@ -12,6 +12,7 @@ import {
 } from "@angular/forms";
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
 
 const temp = [
   { createdDate: '15 Nov 2023', time: '12:45', type: 'INVESTOR', description: 'added new investment 45,000,000', customer: 'Mark Snowman', investmentNo: '007', createdBy: 'Bee' },
@@ -39,19 +40,20 @@ export class LogListComponent extends BaseComponent {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private logService: LogService,
     private formBuilder: FormBuilder,
     private adamService: AdamService
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
   }
 
   ngOnInit(): void {
     this.logSearchForm = this.formBuilder.group(
       {
-        fromDate: new FormControl("", Validators.required),
-        toDate: new FormControl("", Validators.required),
+        fromDate: new FormControl(moment().subtract(1, 'months').format('YYYY-MM-DD'), Validators.required),
+        toDate: new FormControl(new Date(), Validators.required),
         logType: new FormControl("", Validators.required),
         investorName: new FormControl("", Validators.required),
         investment: new FormControl("", Validators.required)
@@ -105,21 +107,30 @@ export class LogListComponent extends BaseComponent {
     let investorName = this.logSearchForm.get('investorName').value;
     let investment = this.logSearchForm.get('investment').value;
     this.items = this.temp;
-    if(logType !== '') {
+    if (logType !== '') {
       this.items = this.items.filter(item => item.logType?.toLowerCase().includes(logType.toLowerCase()));
     }
-    if(investorName !== '') {
+    if (investorName !== '') {
       this.items = this.items.filter(item => item.investorName?.toLowerCase().includes(investorName.toLowerCase()));
     }
-    if(investment !== '') {
+    if (investment !== '') {
       this.items = this.items.filter(item => item.investmentNo?.toString().toLowerCase() === (investment.toLowerCase()));
     }
-    if(fromDate !== '') {
-      this.items = this.items.filter(item => moment(item._id).format('YYYY-MM-DD')>=fromDate);
+    if (fromDate !== '') {
+      this.items = this.items.filter(item => new Date(item._id) >= new Date(fromDate));
     }
-    if(toDate !== '') {
-      this.items = this.items.filter(item => moment(item._id).format('YYYY-MM-DD')<=toDate);
+    if (toDate !== '') {
+      this.items = this.items.filter(item => new Date(item._id) <= new Date(toDate));
     }
+  }
+
+  onReset() {
+    this.logSearchForm.get('fromDate').setValue(moment().subtract(1, 'months').format('YYYY-MM-DD'));
+    this.logSearchForm.get('toDate').setValue(new Date());
+    this.logSearchForm.get('logType').setValue("");
+    this.logSearchForm.get('investorName').setValue("");
+    this.logSearchForm.get('investment').setValue("");
+    this.items = this.temp;
   }
 
   goForm(id: string = '') {

@@ -11,6 +11,7 @@ import { Observable, from, map } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
 import { InvestmentService } from '../service/investment.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
 
 const base_temp = {
   email: 'bee@sunnythailand.com',
@@ -74,11 +75,12 @@ export class InvestorPortfolioComponent extends BaseComponent {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder,
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;

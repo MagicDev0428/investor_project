@@ -1,16 +1,4 @@
-.pay-profit-bank {
-    background-color: white;
-}
-
-.form-control {
-    border-radius: 0;
-
-    &:focus {
-        border-color: rgb(71, 121, 6);
-        color: black;
-        box-shadow: 0 0 0 0.2rem rgba(71, 121, 6, 0.25);
-    }
-}
+@import url(../base/shared-style.scss);
 
 select {
     &.form-control {

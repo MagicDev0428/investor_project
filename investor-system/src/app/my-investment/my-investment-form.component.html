@@ -37,8 +37,8 @@
                                 <div class="col-xl-2 col-lg-4 form-group">
                                     <label for="amountInvested">Amount</label>
                                     <input formControlName="amountInvested" type="text" class="form-control text-end"
-                                        id="amountInvested" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
-                                        aria-describedby="amountInvested" />
+                                        id="amountInvested" (input)="onInputChange($event)"
+                                        (keydown)="onlyNumbers($event)" aria-describedby="amountInvested" />
                                 </div>
                             </div>
                             <hr class="separator m-0">
@@ -55,10 +55,10 @@
                                 </div>
                                 <div class="col-xl-2 col-lg-4 form-group">
                                     <label for="transferDate">Transfer Date</label>
-                                    <input formControlName="transferDate" type="date" class="form-control text-start"
-                                        id="transferDate" aria-describedby="amount" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
+                                        formControlName="transferDate" name="transferDate"></app-date-time-picker>
                                 </div>
-                                <div class="col-xl-5 col-lg-8 form-group">
+                                <div class="col-xl-5 col-lg-8 form-group my-0">
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <label for="transactionNo">Transaction No</label>
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-7 col-lg-7 form-group">
+                                <div class="col-xl-7 col-lg-7 form-group my-0">
                                     <label>Receipts/Contracts</label>
                                     <div class="files-list">
                                         <div class="single-file" *ngFor="let file of files; let i = index">
@@ -146,18 +146,18 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="firstProfitDate">First profit Date</label>
-                                    <input formControlName="firstProfitDate" type="date" class="form-control text-end"
-                                        id="firstProfitDate" aria-describedby="firstProfitDate" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
+                                        formControlName="firstProfitDate" name="firstProfitDate"></app-date-time-picker>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="lastProfitDate">Last profit Date</label>
-                                    <input formControlName="lastProfitDate" type="date" class="form-control text-end"
-                                        id="lastProfitDate" aria-describedby="lastProfitDate" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
+                                        formControlName="lastProfitDate" name="lastProfitDate"></app-date-time-picker>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="payBackDate">Pay Back Date</label>
-                                    <input formControlName="payBackDate" type="date" class="form-control text-end"
-                                        id="payBackDate" aria-describedby="payBackDate" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
+                                        formControlName="payBackDate" name="payBackDate"></app-date-time-picker>
                                 </div>
                             </div>
                             <hr class="separator m-0">

@@ -28,10 +28,10 @@ export class HiddenTextComponent extends BaseComponent implements OnInit {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService,
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
   }
 
   ngOnInit(): void {
