@@ -17,21 +17,21 @@
                                     <label for="investor_name">Investor Name</label>
                                     <input type="text" class="form-control"
                                         (dblclick)="copyToClipboard(investor._id?.toString())" id="investor_name"
-                                        aria-describedby="Investor Name" [value]="investor._id" readonly />
+                                        aria-describedby="Investor Name" [value]="investor._id?investor._id:''" readonly />
                                 </div>
                                 <div class="col form-group mb-4">
                                     <label for="phone">Phone</label>
-                                    <input type="text" class="form-control" (dblclick)="copyToClipboard(investor.phone)"
-                                        id="phone" aria-describedby="Phone" [value]="investor.phone" readonly />
+                                    <input type="text" class="form-control" (dblclick)="copyToClipboard(investor.phone?investor.phone:'')"
+                                        id="phone" aria-describedby="Phone" [value]="investor.phone?investor.phone:''" readonly />
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="col form-group mb-4">
                                     <label for="investorAddress">Address</label>
                                     <textarea class="form-control" id="investorAddress"
-                                        (dblclick)="copyToClipboard(investor.address)"
+                                        (dblclick)="copyToClipboard(investor.address?investor.address:'')"
                                         aria-describedby="investor Address" rows="4" cols="50"
-                                        readonly>{{ investor.address }}</textarea>
+                                        readonly>{{ investor.address?investor.address:'' }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -39,9 +39,9 @@
                             <div class="col-md-4 d-flex flex-column">
                                 <div class="col form-group mb-4">
                                     <label for="email">Email</label>
-                                    <input type="email" (dblclick)="copyToClipboard(investor.email)"
+                                    <input type="email" (dblclick)="copyToClipboard(investor.email?investor.email:'')"
                                         class="form-control" id="email" aria-describedby="Email"
-                                        [value]="investor.email" readonly />
+                                        [value]="investor.email?investor.email:''" readonly />
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -52,7 +52,7 @@
                                             <input type="zipcode"
                                                 (dblclick)="copyToClipboard(investor.postcode?.toString())"
                                                 class="form-control" id="zipcode" aria-describedby="Zip Code"
-                                                [value]="investor.postcode" readonly />
+                                                [value]="investor.postcode?investor.postcode:''" readonly />
                                         </div>
                                     </div>
                                     <div class="col-md-4 d-flex flex-column">
@@ -60,7 +60,7 @@
                                             <label for="city">City</label>
                                             <input type="city" class="form-control"
                                                 (dblclick)="copyToClipboard(investor.city)" id="city"
-                                                aria-describedby="City" [value]="investor.city" readonly />
+                                                aria-describedby="City" [value]="investor.city?investor.city:''" readonly />
                                         </div>
                                     </div>
                                     <div class="col-md-4 d-flex flex-column">
@@ -68,7 +68,7 @@
                                             <label for="country">Country</label>
                                             <input type="country" (dblclick)="copyToClipboard(investor.country)"
                                                 class="form-control" id="country" aria-describedby="Country"
-                                                [value]="investor.country" readonly />
+                                                [value]="investor.country?investor.country:''" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -80,13 +80,13 @@
                                     <label for="first_invest">First Investment</label>
                                     <input type="first_invest" (dblclick)="copyToClipboard(data.first_invest)"
                                         class="form-control" id="first_invest" aria-describedby="First Investment"
-                                        [value]="data.first_invest" readonly />
+                                        [value]="data.first_invest?data.first_invest:''" readonly />
                                 </div>
                                 <div class="col form-group mb-4">
                                     <label for="invest_for">Invest For</label>
                                     <input type="text" (dblclick)="copyToClipboard(data.invest_for)"
                                         class="form-control" id="invest_for" aria-describedby="Invest For"
-                                        [value]="data.invest_for" readonly />
+                                        [value]="data.invest_for?data.invest_for:''" readonly />
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -95,7 +95,7 @@
                                     <textarea class="form-control" id="transfer_info"
                                         (dblclick)="copyToClipboard(investor.transferInfo)"
                                         aria-describedby="Money Transfer Information" rows="4" cols="50"
-                                        readonly>{{ investor.transferInfo }}</textarea>
+                                        readonly>{{ investor.transferInfo?investor.transferInfo:'' }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 <label for="mothly_profit">Monthly Profit</label>
                                 <input type="text" (dblclick)="copyToClipboard(currency_style(data.monthly_profit))"
                                     class="form-control text-end" id="mothly_profit" aria-describedby="Monthly Profit"
-                                    [value]="currency_style(data.monthly_profit)" readonly />
+                                    [value]="currency_style(data.monthly_profit?data.monthly_profit:0)" readonly />
                             </div>
                             <div class="col-md-3 col-sm-6 form-group">
                                 <label for="new_pay">Newest Payment</label>
@@ -115,13 +115,13 @@
                             <div class="col-md-3 col-sm-6 form-group">
                                 <label for="total_profit">Total Profit</label>
                                 <input type="text" (dblclick)="copyToClipboard(currency_style(data.total_profit))" class="form-control text-end" id="total_profit"
-                                    aria-describedby="Total Profit" [value]="currency_style(data.total_profit)"
+                                    aria-describedby="Total Profit" [value]="currency_style(data.total_profit?data.total_profit:0)"
                                     readonly />
                             </div>
                             <div class="col-md-3 col-sm-6 form-group">
                                 <label for="total_invest">Total Investment</label>
                                 <input type="text" (dblclick)="copyToClipboard(currency_style(data.total_invest))" class="form-control text-end" id="total_invest"
-                                    aria-describedby="Total Investment" [value]="currency_style(data.total_invest)"
+                                    aria-describedby="Total Investment" [value]="currency_style(data.total_invest?data.total_invest:0)"
                                     readonly />
                             </div>
                         </div>
