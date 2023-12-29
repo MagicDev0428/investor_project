@@ -35,7 +35,8 @@ export class InvestorService {
     pincode: 0,
     isAdmin: undefined,
     transferType: '',
-    transferInfo: ''
+    transferInfo: '',
+    investorFolderId: ''
   }
 
   constructor(

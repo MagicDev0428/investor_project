@@ -70,7 +70,8 @@ export class InvestorInfoComponent extends BaseComponent {
     pincode: 0,
     isAdmin: false,
     transferType: '',
-    transferInfo: ''
+    transferInfo: '',
+    investorFolderId: ''
   }
 
   constructor(
@@ -102,4 +103,5 @@ export class InvestorInfoComponent extends BaseComponent {
       });
     }
   }
+
 }

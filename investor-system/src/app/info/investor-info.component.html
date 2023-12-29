@@ -127,10 +127,12 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-sm-4 mb-2">
-                                <button type="button" class="btn btn-block btn-secondary">FOLDER</button>
+                                <a target="_blank" href="https://drive.google.com/drive/folders/{{ investor.investorFolderId }}">
+                                    <button type="button" class="btn btn-block btn-secondary">FOLDER</button>
+                                </a>
                             </div>
                             <div class="col-sm-4 mb-2">
-                                <a href="{{ investor.facebook }}"><button type="button"
+                                <a target="_blank" href="{{ investor.facebook }}"><button type="button"
                                         class="btn btn-block btn-secondary">FACEBOOK</button></a>
                             </div>
                             <div class="col-sm-4 mb-2">

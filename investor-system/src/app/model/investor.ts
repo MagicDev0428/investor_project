@@ -22,4 +22,5 @@ export class Investor {
     isAdmin: Boolean;
     transferType: string;
     transferInfo: string;
+    investorFolderId: string;
 }

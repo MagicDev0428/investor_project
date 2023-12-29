@@ -52,6 +52,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
     isAdmin: false,
     transferType: '',
     transferInfo: '',
+    investorFolderId: ''
   }
   files: any[] = [];
   userId;
