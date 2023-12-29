@@ -22,7 +22,7 @@ export class FrontPageComponent extends BaseComponent {
     year: '2023'
   }
   day = '';
-  selectedDate = new Date();
+  selectedDate: string = '';
 
   selectedOption: string = 'Select a Month';
   isDropdownOpen: boolean = false;
@@ -42,7 +42,7 @@ export class FrontPageComponent extends BaseComponent {
     this.currentMonth.year = moment(new Date()).format('YYYY');
     this.day = moment(new Date()).format('dddd DD');
     this.selectedOption = this.currentMonth.monthName + ' ' + this.currentMonth.year;
-    this.selectedDate = new Date(this.currentMonth.year, this.currentMonth.month-1, 1, 0, 0, 0, 0);
+    this.selectedDate = this.currentMonth.year + '-' + this.currentMonth.month;
     this.pastMonths = this.getPastMonthsAndYears(Number(this.currentMonth.month), Number(this.currentMonth.year));
   }
 
@@ -59,7 +59,7 @@ export class FrontPageComponent extends BaseComponent {
     this.currentMonth.monthName = option.monthName;
     this.currentMonth.month = option.month;
     this.currentMonth.year = option.year;
-    this.selectedDate = new Date(this.currentMonth.year, this.currentMonth.month-1, 1, 0, 0, 0, 0);
+    this.selectedDate = this.currentMonth.year + '-' + this.currentMonth.month;
     this.pastMonths = this.pastMonths.filter(() => false);
     this.pastMonths = this.getPastMonthsAndYears(option.month, option.year);
   }
