@@ -49,7 +49,6 @@ export class FrontPageComponent extends BaseComponent {
   toggleDropdown(event: Event): void {
     event.stopPropagation();
     this.isDropdownOpen = !this.isDropdownOpen;
-    console.log('open->', this.isDropdownOpen)
     this.pastMonths = this.pastMonths.filter(() => false);
     this.pastMonths = this.getPastMonthsAndYears(Number(this.currentMonth.month), Number(this.currentMonth.year));
   }
@@ -69,12 +68,10 @@ export class FrontPageComponent extends BaseComponent {
     event.stopPropagation();
     if (direction === 'up') {
       let firstMonth = this.pastMonths[0];
-      console.log(`month:${firstMonth.month} year:${firstMonth.year}`);
       this.pastMonths = this.pastMonths.filter(() => false);
       this.pastMonths = this.getFutureMonthsAndYears(firstMonth.month, firstMonth.year);
     } else if (direction === 'down') {
       let lastMonth = this.pastMonths.pop();
-      console.log(`month:${lastMonth.month} year:${lastMonth.year}`);
       this.pastMonths = this.pastMonths.filter(() => false);
       this.pastMonths = this.getPastMonthsAndYears(lastMonth.month, lastMonth.year);
     }
