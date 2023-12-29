@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { temp_data } from './temp-data';
+import { BaseComponent } from '../base/base.component';
+import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import * as moment from 'moment';
 
 
 @Component({
@@ -8,26 +13,67 @@ import { temp_data } from './temp-data';
   styleUrls: ['./front-page.component.scss']
 })
 
-export class FrontPageComponent {
+export class FrontPageComponent extends BaseComponent {
 
   data = temp_data;
+  currentMonth: any = {
+    month: '',
+    monthName: '',
+    year: '2023'
+  }
+  day = '';
+  selectedDate: string = '';
 
-  constructor() {
+  selectedOption: string = 'Select a Month';
+  isDropdownOpen: boolean = false;
+  pastMonths: any = [];
 
+  constructor(
+    router: Router,
+    auth: AuthService,
+    toastrService: ToastrService,
+  ) {
+    super(router, auth, toastrService);
   }
 
   ngOnInit() {
-
+    this.currentMonth.monthName = moment(new Date()).format('MMMM');
+    this.currentMonth.month = moment(new Date()).format('MM');
+    this.currentMonth.year = moment(new Date()).format('YYYY');
+    this.day = moment(new Date()).format('dddd DD');
+    this.selectedOption = this.currentMonth.monthName + ' ' + this.currentMonth.year;
+    this.selectedDate = this.currentMonth.year + '-' + this.currentMonth.month;
+    this.pastMonths = this.getPastMonthsAndYears(Number(this.currentMonth.month), Number(this.currentMonth.year));
   }
 
-  currency_style(amount: any) {
-    let currency_amount = amount.toString();
-    let thb_character = String.fromCharCode(3647);
-    currency_amount = currency_amount.replace(/,/g, ''); // Remove existing commas
-    currency_amount = currency_amount.replace(thb_character, ''); //Remove existing thb mark
-    currency_amount = currency_amount.replace(' ', ''); //Remove existing spaces
-    currency_amount = currency_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas every three numbers
-    currency_amount = currency_amount.replace(currency_amount, thb_character + ' ' + currency_amount);
-    return currency_amount;
+  toggleDropdown(event: Event): void {
+    event.stopPropagation();
+    this.isDropdownOpen = !this.isDropdownOpen;
+    this.pastMonths = this.pastMonths.filter(() => false);
+    this.pastMonths = this.getPastMonthsAndYears(Number(this.currentMonth.month), Number(this.currentMonth.year));
+  }
+
+  selectOption(option: any): void {
+    this.selectedOption = option.monthName + ' ' + option.year;
+    this.isDropdownOpen = true;
+    this.currentMonth.monthName = option.monthName;
+    this.currentMonth.month = option.month;
+    this.currentMonth.year = option.year;
+    this.selectedDate = this.currentMonth.year + '-' + this.currentMonth.month;
+    this.pastMonths = this.pastMonths.filter(() => false);
+    this.pastMonths = this.getPastMonthsAndYears(option.month, option.year);
+  }
+
+  onChangeRange(event: Event, direction: string) {
+    event.stopPropagation();
+    if (direction === 'up') {
+      let firstMonth = this.pastMonths[0];
+      this.pastMonths = this.pastMonths.filter(() => false);
+      this.pastMonths = this.getFutureMonthsAndYears(firstMonth.month, firstMonth.year);
+    } else if (direction === 'down') {
+      let lastMonth = this.pastMonths.pop();
+      this.pastMonths = this.pastMonths.filter(() => false);
+      this.pastMonths = this.getPastMonthsAndYears(lastMonth.month, lastMonth.year);
+    }
   }
 }

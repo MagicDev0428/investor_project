@@ -13,6 +13,7 @@ import { InvestmentService } from '../service/investment.service';
 import { Adam } from '../model/adam';
 import * as moment from 'moment';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
 
 const temp1 = [
   {_id:'002', amountInvested:21200001, profitMonthlyPct:2, profitMonthly:1200001, torbenInvested:21200001, torbenmonthly:2, torbenPtofit:1200001},
@@ -60,11 +61,12 @@ export class TotalComponent extends BaseComponent {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
   }
 
   ngOnInit(): void {

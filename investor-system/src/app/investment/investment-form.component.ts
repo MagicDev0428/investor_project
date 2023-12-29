@@ -62,12 +62,12 @@ export class InvestmentFormComponent extends BaseComponent {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private investmentService: InvestmentService,
-    private toastrService: ToastrService,
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;

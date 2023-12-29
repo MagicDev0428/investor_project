@@ -17,22 +17,28 @@ export class CopyPasteAreaComponent extends BaseComponent implements OnInit {
     @ViewChild('transactionTo') transactionTo: ElementRef;
 
     userId: any = '';
-    values: any[] = [];
+    values = {
+        text_1: '',
+        text_2: '',
+        text_3: '',
+        text_4: '',
+        text_5: '',
+    };
     createdDate = '';
     createdBy = '';
     modifiedDate = '';
     modifiedBy = '';
-    text: string = 'text to copy';
 
     protected submitted = false;
 
     constructor(
         router: Router,
         auth: AuthService,
+        toastrService: ToastrService,
         private activatedRoute: ActivatedRoute,
-        private toastrService: ToastrService,
+        // private clipboard: Clipboard
     ) {
-        super(router, auth);
+        super(router, auth, toastrService);
     }
 
     ngOnInit(): void {
@@ -53,9 +59,8 @@ export class CopyPasteAreaComponent extends BaseComponent implements OnInit {
         this.submitted = true;
     }
 
-    getValue(event:any) {
-        this.text = event.target.value;
-        console.log('text->', this.text);
+    getValue(event: any) {
+        let id = event.target.id;
+        this.values[id] = event.target.value;
     }
-
 }

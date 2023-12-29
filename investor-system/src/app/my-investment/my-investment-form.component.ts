@@ -81,13 +81,13 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService,
     private adamService: AdamService,
     private myInvestmentService: MyInvestmentService,
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.nowDateTime = new Date();
     this.selectedMyInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedMyInvestment$.subscribe(res => {

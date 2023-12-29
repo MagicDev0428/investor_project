@@ -54,6 +54,7 @@ import { WithdrawCryptoComponent } from './deposit/withdraw-crypto.component';
 import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
+import { DateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { LoadingInterceptor } from './loading.interceptor';
     AddMoneyEnvComponent,
     WithdrawCryptoComponent,
     WithdrawCashComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DateTimePickerComponent
   ],
   imports: [
     BrowserModule,

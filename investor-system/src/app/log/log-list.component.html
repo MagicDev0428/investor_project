@@ -9,7 +9,8 @@
                             aria-label="New Log">
                             <span aria-hidden="true">New Log</span>
                         </button>
-                        <button type="button" (click)="goTo('/front-page/')" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" (click)="goTo('/front-page/')" class="close" data-dismiss="modal"
+                            aria-label="Close">
                             <span aria-hidden="true">X</span>
                         </button>
                     </div>
@@ -24,15 +25,17 @@
                                                 <div class="col-sm-9">
                                                     <div class="row multi-date">
                                                         <div class="date fromDate pl-0">
-                                                            <input formControlName="fromDate" type="date" class="form-control" id="fromDate"
-                                                                aria-describedby="fromDate" />
+                                                            <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
+                                                                formControlName="fromDate"
+                                                                name="fromDate"></app-date-time-picker>
                                                         </div>
                                                         <div class="col-form-label text px-0 w-auto">
                                                             <span>to</span>
                                                         </div>
                                                         <div class="date toDate pr-0">
-                                                            <input formControlName="toDate" type="date" class="form-control" id="toDate"
-                                                                aria-describedby="toDate" />
+                                                            <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
+                                                                formControlName="toDate"
+                                                                name="toDate"></app-date-time-picker>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -40,9 +43,11 @@
                                         </div>
                                         <div class="col-lg-6 mb-2">
                                             <div class="form-group row">
-                                                <label for="investorName" class="col-sm-3 col-form-label">Customer</label>
+                                                <label for="investorName"
+                                                    class="col-sm-3 col-form-label">Customer</label>
                                                 <div class="col-sm-9">
-                                                    <select formControlName="investorName" class="form-control form-select" id="investorName"
+                                                    <select formControlName="investorName"
+                                                        class="form-control form-select" id="investorName"
                                                         name="investorName" aria-describedby="investorName">
                                                         <option></option>
                                                         <option [value]="item._id" *ngFor="let item of customers">{{
@@ -56,8 +61,8 @@
                                             <div class="form-group row">
                                                 <label for="logType" class="col-sm-3 col-form-label">Type</label>
                                                 <div class="col-sm-9">
-                                                    <select formControlName="logType" class="form-control form-select" id="logType" name="logType"
-                                                        aria-describedby="type">
+                                                    <select formControlName="logType" class="form-control form-select"
+                                                        id="logType" name="logType" aria-describedby="type">
                                                         <option></option>
                                                         <option>ADAM</option>
                                                         <option>BALANCE</option>
@@ -74,8 +79,8 @@
                                                 <label for="investment"
                                                     class="col-sm-3 col-form-label">Investment</label>
                                                 <div class="col-sm-9">
-                                                    <select formControlName="investment" class="form-control" id="investment" name="investment"
-                                                        aria-describedby="investment">
+                                                    <select formControlName="investment" class="form-control"
+                                                        id="investment" name="investment" aria-describedby="investment">
                                                         <option></option>
                                                         <option [value]="item._id" *ngFor="let item of investments">[{{
                                                             item._id}}] {{ item.explanation }}
@@ -86,8 +91,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 mb-2">
-                                    <button type="button" (click)="onSearch()" class="btn btn-block btn-secondary">Search Log</button>
+                                <div class="col-lg-2 mb-2 d-flex flex-column justify-content-between">
+                                    <button type="button" (click)="onSearch()"
+                                        class="btn btn-block btn-secondary">Search Log</button>
+                                    <button type="button" (click)="onReset()"
+                                        class="btn btn-block btn-secondary">Reset</button>
                                 </div>
                             </div>
                         </form>

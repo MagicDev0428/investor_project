@@ -16,6 +16,7 @@ import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 
+
 @Component({
   selector: 'app-adam-form',
   templateUrl: './adam-form.component.html',
@@ -60,19 +61,19 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
   createdBy = '';
   modifiedDate = '';
   modifiedBy = '';
-
+  
   protected adamForm: FormGroup;
   protected submitted = false;
 
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adamService: AdamService,
-    private toastrService: ToastrService,
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.selectedAdam$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedAdam$.subscribe(res => {
       this.userId = res;
@@ -95,7 +96,7 @@ export class AdamFormComponent extends BaseComponent implements OnInit {
         description: new FormControl(),
         attachments: new FormControl()
       });
-      this.adamForm.get('createdDate').setValue(moment(this.nowDateTime).format('yyyy-MM-DDTHH:mm'));
+      this.adamForm.get('createdDate').setValue(this.nowDateTime);
       this.adamService.getAdamInvestors().subscribe((res) => {
         this.investments = res.adams.investments;
         this.investorsNames = res.adams.investorsNames;

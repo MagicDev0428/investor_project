@@ -10,50 +10,59 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="profitMonth">Copy Paste Areas</label>
+                        <label for="text_1">Copy Paste Areas</label>
                         <div class="row">
                             <div class="col-md-10 form-group mt-1">
-                                <input type="text" class="form-control text-end" id="profitMonth"
-                                    aria-describedby="profitMonth" />
+                                <input type="text" class="form-control text-start" id="text_1"
+                                    aria-describedby="profitMonth" (change)="getValue($event)"
+                                    [value]="values.text_1" />
                             </div>
                             <div class="col-md-2 d-flex align-center form-group mt-1">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Copy</button>
+                                <button type="button" (click)="copyToClipboard(values.text_1)" class="btn btn-success"
+                                    data-dismiss="modal">Copy</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 form-group">
-                                <input type="text" class="form-control text-end" id="deposit"
-                                    aria-describedby="deposit" />
+                                <input type="text" class="form-control text-start" id="text_2"
+                                    aria-describedby="deposit" (change)="getValue($event)" [value]="values.text_2" />
                             </div>
                             <div class="col-md-2 d-flex align-center form-group">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Copy</button>
+                                <button type="button" (click)="copyToClipboard(values.text_2)" class="btn btn-success"
+                                    data-dismiss="modal">Copy</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 form-group">
-                                <input type="text" class="form-control text-end" id="transferDate"
-                                    aria-describedby="transferDate" />
+                                <input type="text" class="form-control text-start" id="text_3"
+                                    aria-describedby="transferDate" (change)="getValue($event)"
+                                    [value]="values.text_3" />
                             </div>
                             <div class="col-md-2 d-flex align-center form-group">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Copy</button>
+                                <button type="button" (click)="copyToClipboard(values.text_3)" class="btn btn-success"
+                                    data-dismiss="modal">Copy</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 form-group">
-                                <textarea class="form-control" id="description"
-                                    aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                <textarea class="form-control" (change)="getValue($event)" id="text_4"
+                                    aria-describedby="Money Transfer Description" rows="4"
+                                    cols="50">{{ values.text_4 }}</textarea>
                             </div>
                             <div class="col-md-2 d-flex align-center form-group">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Copy</button>
+                                <button type="button" (click)="copyToClipboard(values.text_4)" class="btn btn-success"
+                                    data-dismiss="modal">Copy</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 form-group">
-                                <textarea class="form-control" id="description"
-                                    aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                <textarea class="form-control" (change)="getValue($event)" id="text_5"
+                                    aria-describedby="Money Transfer Description" rows="4"
+                                    cols="50">{{ values.text_5 }}</textarea>
                             </div>
                             <div class="col-md-2 d-flex align-center form-group">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Copy</button>
+                                <button type="button" (click)="copyToClipboard(values.text_5)" class="btn btn-success"
+                                    data-dismiss="modal">Copy</button>
                             </div>
                         </div>
                     </div>

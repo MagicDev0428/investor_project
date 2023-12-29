@@ -46,11 +46,11 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   constructor(
     router: Router,
     auth: AuthService,
+    toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService,
   ) {
-    super(router, auth);
+    super(router, auth, toastrService);
     this.nowDateTime = new Date();
   }
 

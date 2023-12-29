@@ -4,7 +4,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title "><span>Withdraw Money</span> from <span> Mark </span> via <span>Crypto</span>
+                        <h5 class="modal-title "><span>Withdraw Money</span> from <span> Mark </span> via
+                            <span>Crypto</span>
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTo('')">
                             <span aria-hidden="true">x</span>
@@ -16,8 +17,8 @@
                             <div class="row">
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="withdrawMonth">Withdraw Month</label>
-                                    <input formControlName="withdrawMonth" type="date" class="form-control text-end"
-                                        id="withdrawMonth" aria-describedby="withdrawMonth" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'MM/yyyy'"
+                                        formControlName="withdrawMonth" name="withdrawMonth"></app-date-time-picker>
                                     <span class="text-danger"
                                         *ngIf="(payProfitForm.controls['withdrawMonth'].touched || submitted) && payProfitForm.controls['withdrawMonth'].errors?.['required']">
                                         Withdraw Month is required
@@ -35,8 +36,8 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transferDate">Transfer/Pay Date</label>
-                                    <input formControlName="transferDate" type="date" class="form-control text-end"
-                                        id="transferDate" aria-describedby="transferDate" />
+                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
+                                        formControlName="transferDate" name="transferDate"></app-date-time-picker>
                                     <span class="text-danger"
                                         *ngIf="(payProfitForm.controls['transferDate'].touched || submitted) && payProfitForm.controls['transferDate'].errors?.['required']">
                                         Transfer/Pay Date is required
