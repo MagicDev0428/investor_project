@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="country">Select Country:</label>
-                    <select formControlName="country" class="form-control" id="country" name="country"
+                    <select formControlName="country" class="form-control form-select" id="country" name="country"
                         aria-describedby="investor country"  autocomplete="off">
                         <option>Thailand</option>
                         <option>United States</option>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="status">Investor Status:</label>
-                    <select formControlName="status" class="form-control" id="status" name="status"
+                    <select formControlName="status" class="form-control form-select" id="status" name="status"
                         aria-describedby="investor status">
                         <option value="active" selected>ACTIVE</option>
                         <option value="pending">PENDING</option>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="currency">Transfer Types</label>
-                    <select formControlName="transferType" class="form-control" id="transferType" name="transferType"
+                    <select formControlName="transferType" class="form-control form-select" id="transferType" name="transferType"
                         aria-describedby="investor transferType">
 
                         <option selected disabled>Select transfer type</option>
@@ -148,25 +148,33 @@
             <div class="row">
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="moneyTransfer">Money Transfer</label>
-                    <select formControlName="countryToTransfer" class="form-control" id="moneyTransfer"
+                    <select formControlName="countryToTransfer" class="form-control form-select" id="moneyTransfer"
                         name="moneyTransfer" aria-describedby="Money Transfer">
                         <option selected disabled>Select Money Transfer</option>
-                        <option>Thailand</option>
-                        <option>United States</option>
+                        <option>Australia</option>
+                        <option>Denmark</option>
+                        <option>Germany</option>
+                        <option>Greece</option>
                         <option>India</option>
-                        <option>Russia</option>
+                        <option>Philippines</option>
+                        <option>Spain</option>
+                        <option>Thailand</option>
+                        <option>USA</option>
                     </select>
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="currency">Currency</label>
-                    <select formControlName="currency" class="form-control" id="currency" name="currency"
+                    <select formControlName="currency" class="form-control form-select" id="currency" name="currency"
                         aria-describedby="investor currency">
 
                         <option selected disabled>Select Currency</option>
+                        <option>AUD</option>
+                        <option>DKK</option>
+                        <option>EUR</option>
+                        <option>INR</option>
+                        <option>PHP</option>
                         <option>THB</option>
                         <option>USD</option>
-                        <option>INR</option>
-                        <option>CAD</option>
                     </select>
                 </div>
                 <div class="col-lg-4 col-xl-6 col-sm-12 form-group">

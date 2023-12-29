@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from 'ngx-toastr';
-import { ClipboardModule } from 'ngx-clipboard';
 
 
 
@@ -104,7 +103,6 @@ import { DateTimePickerComponent } from './components/date-time-picker/date-time
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ClipboardModule,
     AuthModule.forRoot({
       domain: environment.auth0Domain,
       clientId: environment.auth0ClientId,
