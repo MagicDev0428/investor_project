@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 export class BaseComponent {
 
@@ -92,7 +93,39 @@ export class BaseComponent {
     generatePinCode(): number {
         let code = Math.floor(Math.random() * (99 - 10 + 1) + 10);
         return code * 101;
-      }
+    }
+
+    getPastMonthsAndYears(inputMonth: number, inputYear: number): { month: string, year: number }[] {
+        const monthsAndYears = [];
+        let currentDate = moment({ year: inputYear, month: inputMonth - 1 }); // Create a moment object for the inputted month and year
+
+        for (let i = 0; i < 12; i++) {
+            monthsAndYears.push({
+                month: currentDate.format('MM'),
+                monthName: currentDate.format('MMMM'),
+                year: currentDate.year()
+            });
+            currentDate = currentDate.subtract(1, 'month'); // Subtract 1 month for the next iteration
+        }
+
+        return monthsAndYears;
+    }
+
+    getFutureMonthsAndYears(startMonth: number, startYear: number): { month: string, year: number }[] {
+        const monthsAndYears = [];
+        let currentDate = moment({ year: startYear, month: startMonth - 1 }); // Month is zero-based in Moment.js
+
+        for (let i = 0; i < 12; i++) {
+            monthsAndYears.push({
+                month: currentDate.format('MM'),
+                monthName: currentDate.format('MMMM'),
+                year: currentDate.year()
+            });
+            currentDate.add(1, 'month'); // Move to the next month
+        }
+        monthsAndYears.reverse();
+        return monthsAndYears;
+    }
 
 }
 

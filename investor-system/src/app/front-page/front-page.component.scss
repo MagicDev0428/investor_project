@@ -12,6 +12,62 @@
   .title {
     margin-right: 30px;
   }
+
+  span {
+    cursor: pointer;
+
+    .custom-select {
+      position: relative;
+      display: inline-block;
+    }
+
+    .select-selected {
+      background-color: #1f4e78;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .select-items {
+      background-color: #fff;
+      white-space: nowrap;
+      width: auto;
+      position: absolute;
+      border: 1px solid #ccc;
+      overflow-y: auto;
+      height: auto;
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .select-items li {
+      padding: 6px 20px;
+      font-size: 12pt;
+      text-align: left;
+      color: black;
+      transition: all 0.5s;
+      position: relative;
+
+      &:first-child {
+        list-style: none;
+        text-align: center;
+      }
+
+      &:last-child {
+        list-style: none;
+        text-align: center;
+      }
+
+      &:hover {
+        background-color: grey;
+      }
+
+      &:not(:first-child):not(:last-child)::before {
+        content: "\2022"; /* Unicode character for a bullet (•) */
+        position: absolute;
+        left: 5px;
+      }
+    }
+  }
 }
 
 .form-group {
