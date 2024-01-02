@@ -6,7 +6,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title "><span>Add Money</span> to <span> Mark </span> via <span>Envelop</span>
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTo('')">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTo('portfolio')">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -16,15 +16,16 @@
                             <div class="row">
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="profitMonth">Profit Month</label>
-                                    <app-date-time-picker [inputDatetimeFormat]="'MM/yyyy'"
-                                        formControlName="profitMonth" name="profitMonth"></app-date-time-picker>
+                                    <app-month-selector formControlName="profitMonth" [numberOfMonth]="6"
+                                        [startMonth]="currentMonth" (selectedMonth)="selectOption($event)"
+                                        [sectionHidden]="true"></app-month-selector>
                                     <span class="text-danger"
                                         *ngIf="(payProfitForm.controls['profitMonth'].touched || submitted) && payProfitForm.controls['profitMonth'].errors?.['required']">
                                         Profit Month is required
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="deposit">Deposit Money</label>
+                                    <label for="deposit">Add Money</label>
                                     <input formControlName="deposit" type="text" class="form-control text-end"
                                         id="deposit" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
                                         aria-describedby="deposit" />
@@ -44,7 +45,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transferType">Transfer Type</label>
-                                    <select formControlName="transferType" class="form-control" id="transferType"
+                                    <select formControlName="transferType" class="form-control form-select" id="transferType"
                                         aria-describedby="transferType">
                                         <option>Envelope</option>
                                         <option>Thai Bank</option>
@@ -65,7 +66,7 @@
                                 <div class="col-xl-3 col-lg-4 form-group">
                                     <label for="email">Email Sent</label>
                                     <input type="text" class="form-control" id="email"
-                                        aria-describedby="Transfer From" />
+                                        aria-describedby="Transfer From" readonly/>
                                     <button type="button" class="btn btn-primary mt-2" data-dismiss="modal"
                                         (click)="deleteTransaction(userId)">SEND EMAIL</button>
                                 </div>

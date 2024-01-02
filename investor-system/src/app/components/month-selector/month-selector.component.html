@@ -1,0 +1,11 @@
+<div class="custom-select">
+    <div *ngIf="!sectionHidden" class="select-selected" (click)="toggleDropdown($event)">{{ selectedOption }}</div>
+    <input [hidden]="!sectionHidden" #myInput [id]="formControlName" class="form-control" (focus)="inputFocus($event)"
+        [value]="value" autocomplete="off" readonly />
+    <ul class="select-items" *ngIf="isDropdownOpen">
+        <li (click)="onChangeRange($event, 'up')"><i class="bi bi-caret-up-fill"></i></li>
+        <li *ngFor="let option of pastMonths" (click)="selectOption(option)">{{ option.monthName }} {{ option.year }}
+        </li>
+        <li (click)="onChangeRange($event, 'down')"><i class="bi bi-caret-down-fill"></i></li>
+    </ul>
+</div>

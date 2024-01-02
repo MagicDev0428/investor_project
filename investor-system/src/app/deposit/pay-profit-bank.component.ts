@@ -39,6 +39,11 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
   createdBy = '';
   modifiedDate = '';
   modifiedBy = '';
+  currentMonth: any = {
+    month: 8,
+    monthName: 'Aug',
+    year: '2023'
+  }
 
   protected payProfitForm: FormGroup;
   protected submitted = false;
@@ -60,7 +65,7 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
         profitMonth: new FormControl("", Validators.required),
         deposit: new FormControl("", Validators.required),
         transferDate: new FormControl(new Date(), Validators.required),
-        transferType: new FormControl("", Validators.required),
+        transferType: new FormControl("Thai Bank", Validators.required),
         description: new FormControl(""),
         transferInfo: new FormControl(""),
         transferFrom: new FormControl(""),
@@ -83,8 +88,11 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
     
   }
 
-  checkSelect() {
-    
+  checkSelect(event: Event) {
+    let transferType = this.payProfitForm.get('transferType').value;
+    if (transferType === 'Envelope') {
+      this.goTo('pay-profit-env');
+    }
   }
 
   protected onSubmit(): void {
@@ -124,6 +132,11 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
   */
   deleteFile(index: number) {
     this.files.splice(index, 1);
+  }
+
+  selectOption(month: any) {
+    this.currentMonth = month;
+    this.payProfitForm.get('profitMonth').setValue(this.currentMonth.monthName + '-' + this.currentMonth.year);
   }
 
 }

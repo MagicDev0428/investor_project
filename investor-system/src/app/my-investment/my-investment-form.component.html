@@ -43,43 +43,39 @@
                             </div>
                             <hr class="separator m-0">
                             <div class="row">
-                                <div class="col-xl-5 col-lg-6 form-group">
+                                <div class="col-xl-5 col-lg-6 col-md-6 form-group">
                                     <label for="transactionFrom">Transfer From</label>
                                     <input formControlName="transactionFrom" type="text" class="form-control text-start"
                                         id="transactionFrom" aria-describedby="transactionFrom" />
                                 </div>
-                                <div class="col-xl-5 col-lg-6 form-group">
+                                <div class="col-xl-5 col-lg-6 col-md-6 form-group">
                                     <label for="transactionTo">Transfer To</label>
                                     <input formControlName="transactionTo" type="text" class="form-control text-start"
                                         id="transactionTo" aria-describedby="transactionTo" />
                                 </div>
-                                <div class="col-xl-2 col-lg-4 form-group">
+                                <div class="col-xl-2 col-lg-6 col-md-6 form-group">
                                     <label for="transferDate">Transfer Date</label>
                                     <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
                                         formControlName="transferDate" name="transferDate"></app-date-time-picker>
                                 </div>
-                                <div class="col-xl-5 col-lg-8 form-group my-0">
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <label for="transactionNo">Transaction No</label>
-                                            <input formControlName="transactionNo" type="text"
-                                                class="form-control text-start" id="transactionNo"
-                                                aria-describedby="transactionNo" />
-                                        </div>
-                                        <div class="col-xl-12 form-group choose-image-wrapper">
-                                            <label for="documents">Reciepts</label>
-                                            <div class="file-wrapper">
-                                                <div class="container" appDnd (fileDropped)="onFileDropped($event)">
-                                                    <input formControlName="documents" type="file" id="documents"
-                                                        multiple accept="image/*"
-                                                        (change)="fileBrowseHandler($event.target)">
-                                                    <span class="caption">Drag and drop files here</span>
-                                                </div>
-                                            </div>
+                                <div class="col-md-5 col-lg-6 col-md-6 form-group">
+                                    <label for="transactionNo">Transaction No</label>
+                                    <input formControlName="transactionNo" type="text" class="form-control text-start"
+                                        id="transactionNo" aria-describedby="transactionNo" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 form-group choose-image-wrapper">
+                                    <label for="documents">Reciepts</label>
+                                    <div class="file-wrapper">
+                                        <div class="container" appDnd (fileDropped)="onFileDropped($event)">
+                                            <input formControlName="documents" type="file" id="documents" multiple
+                                                accept="image/*" (change)="fileBrowseHandler($event.target)">
+                                            <span class="caption">Drag and drop files here</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-7 col-lg-7 form-group my-0">
+                                <div class="col-md-7 form-group">
                                     <label>Receipts/Contracts</label>
                                     <div class="files-list">
                                         <div class="single-file" *ngFor="let file of files; let i = index">
