@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionFrom">From</label>
-                                    <select formControlName="transactionFrom" class="form-control" id="transactionFrom"
+                                    <select formControlName="transactionFrom" class="form-control form-select" id="transactionFrom"
                                         #transactionFrom aria-describedby="Money Transfer" (change)="checkSelect()">
                                         <option value="Adam" [hidden]="to_value=='Adam'?true:null">FROM Adam</option>
                                         <option value="Torben" [hidden]="to_value=='Torben'?true:null">FROM Torben
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionTo">To</label>
-                                    <select formControlName="transactionTo" class="form-control" id="transactionTo"
+                                    <select formControlName="transactionTo" class="form-control form-select" id="transactionTo"
                                         #transactionTo aria-describedby="Money Transfer" (change)="checkSelect()">
                                         <option value="Adam" [hidden]="from_value=='Adam'?true:null">TO Adam</option>
                                         <option value="Torben" [hidden]="from_value=='Torben'?true:null">TO Torben
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-4 form-group">
                                     <label for="investments">Investment</label>
-                                    <select formControlName="investments" class="form-control" id="investments"
+                                    <select formControlName="investments" class="form-control form-select" id="investments"
                                         aria-describedby="investments">
                                         <option [value]="item._id" *ngFor="let item of investments">{{ item._id + ' ' +
                                             item.explanation }}
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-4 form-group">
                                     <label for="investorName">Investor Name</label>
-                                    <select formControlName="investorName" class="form-control" id="investorName"
+                                    <select formControlName="investorName" class="form-control form-select" id="investorName"
                                         aria-describedby="investorName">
                                         <option [value]="item._id" *ngFor="let item of investorsNames">{{ item._id}}
                                         </option>

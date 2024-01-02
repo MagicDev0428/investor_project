@@ -2,14 +2,7 @@
     <div class="title-create">
         <h4 class="title">INVESTOR SYSTEM</h4>
         <h4>{{ day }} <span class="add-edit" >
-                <div class="custom-select" (click)="toggleDropdown($event)">
-                    <div class="select-selected">{{ selectedOption }}</div>
-                    <ul class="select-items" *ngIf="isDropdownOpen">
-                        <li (click)="onChangeRange($event, 'up')"><i class="bi bi-caret-up-fill"></i></li>
-                        <li *ngFor="let option of pastMonths" (click)="selectOption(option)">{{ option.monthName }} {{ option.year }}</li>
-                        <li (click)="onChangeRange($event, 'down')"><i class="bi bi-caret-down-fill"></i></li>
-                    </ul>
-                </div>
+                <app-month-selector (selectedMonth)="selectOption($event)"></app-month-selector>
             </span>
         </h4>
     </div>

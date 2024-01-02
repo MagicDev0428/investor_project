@@ -39,6 +39,11 @@ export class AddMoneyEnvComponent extends BaseComponent implements OnInit {
   createdBy = '';
   modifiedDate = '';
   modifiedBy = '';
+  currentMonth: any = {
+    month: 8,
+    monthName: 'Aug',
+    year: '2023'
+  }
 
   protected payProfitForm: FormGroup;
   protected submitted = false;
@@ -80,6 +85,11 @@ export class AddMoneyEnvComponent extends BaseComponent implements OnInit {
 
   checkSelect() {
     
+  }
+
+  selectOption(month: any) {
+    this.currentMonth = month;
+    this.payProfitForm.get('profitMonth').setValue(this.currentMonth.monthName + '-' + this.currentMonth.year);
   }
 
   protected onSubmit(): void {

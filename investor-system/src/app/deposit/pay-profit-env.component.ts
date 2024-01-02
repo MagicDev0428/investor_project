@@ -39,6 +39,11 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   createdBy = '';
   modifiedDate = '';
   modifiedBy = '';
+  currentMonth: any = {
+    month: 8,
+    monthName: 'Aug',
+    year: '2023'
+  }
 
   protected payProfitForm: FormGroup;
   protected submitted = false;
@@ -55,14 +60,17 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentMonth.monthName = moment(new Date()).format('MMM');
+    this.currentMonth.month = moment(new Date()).format('MM');
+    this.currentMonth.year = moment(new Date()).format('YYYY');
     this.payProfitForm = this.formBuilder.group(
-    {
-        profitMonth: new FormControl("", Validators.required),
+      {
+        profitMonth: new FormControl(this.currentMonth.monthName + '-' + this.currentMonth.year, Validators.required),
         deposit: new FormControl("", Validators.required),
         transferDate: new FormControl(new Date(), Validators.required),
-        transferType: new FormControl("", Validators.required),
+        transferType: new FormControl("Envelope", Validators.required),
         description: new FormControl(),
-    });
+      });
   }
 
   changeStyle(value: any) {
@@ -75,15 +83,22 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   }
 
   deleteTransaction(_id: any) {
-    
+
   }
 
-  checkSelect() {
-    
+  selectOption(month: any) {
+    this.currentMonth = month;
+    this.payProfitForm.get('profitMonth').setValue(this.currentMonth.monthName + '-' + this.currentMonth.year);
+  }
+
+  checkSelect(event: Event) {
+    let transferType = this.payProfitForm.get('transferType').value;
+    if (transferType === 'Thai Bank') {
+      this.goTo('pay-profit-bank');
+    }
   }
 
   protected onSubmit(): void {
     this.submitted = true;
-   
   }
 }

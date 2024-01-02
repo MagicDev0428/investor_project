@@ -95,14 +95,14 @@ export class BaseComponent {
         return code * 101;
     }
 
-    getPastMonthsAndYears(inputMonth: number, inputYear: number): { month: string, year: number }[] {
+    getPastMonthsAndYears(inputMonth: number, inputYear: number, numberOfMonth: number = 12): { month: string, year: number }[] {
         const monthsAndYears = [];
         let currentDate = moment({ year: inputYear, month: inputMonth - 1 }); // Create a moment object for the inputted month and year
 
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < numberOfMonth; i++) {
             monthsAndYears.push({
                 month: currentDate.format('MM'),
-                monthName: currentDate.format('MMMM'),
+                monthName: currentDate.format('MMM'),
                 year: currentDate.year()
             });
             currentDate = currentDate.subtract(1, 'month'); // Subtract 1 month for the next iteration
@@ -111,14 +111,14 @@ export class BaseComponent {
         return monthsAndYears;
     }
 
-    getFutureMonthsAndYears(startMonth: number, startYear: number): { month: string, year: number }[] {
+    getFutureMonthsAndYears(startMonth: number, startYear: number, numberOfMonth: number = 12): { month: string, year: number }[] {
         const monthsAndYears = [];
         let currentDate = moment({ year: startYear, month: startMonth - 1 }); // Month is zero-based in Moment.js
 
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < numberOfMonth; i++) {
             monthsAndYears.push({
                 month: currentDate.format('MM'),
-                monthName: currentDate.format('MMMM'),
+                monthName: currentDate.format('MMM'),
                 year: currentDate.year()
             });
             currentDate.add(1, 'month'); // Move to the next month

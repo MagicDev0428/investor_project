@@ -39,6 +39,11 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
   createdBy = '';
   modifiedDate = '';
   modifiedBy = '';
+  currentMonth: any = {
+    month: 8,
+    monthName: 'Aug',
+    year: '2023'
+  }
 
   protected payProfitForm: FormGroup;
   protected submitted = false;
@@ -56,7 +61,7 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.payProfitForm = this.formBuilder.group(
-    {
+      {
         withdrawMonth: new FormControl("", Validators.required),
         withdraw: new FormControl("", Validators.required),
         transferDate: new FormControl(new Date(), Validators.required),
@@ -67,7 +72,7 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
         transferTo: new FormControl(""),
         transactionNo: new FormControl(""),
         documents: new FormControl(""),
-    });
+      });
   }
 
   changeStyle(value: any) {
@@ -80,16 +85,16 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
   }
 
   deleteTransaction(_id: any) {
-    
+
   }
 
   checkSelect() {
-    
+
   }
 
   protected onSubmit(): void {
     this.submitted = true;
-   
+
   }
   /**
   * on file drop handler
@@ -123,6 +128,11 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
   */
   deleteFile(index: number) {
     this.files.splice(index, 1);
+  }
+
+  selectOption(month: any) {
+    this.currentMonth = month;
+    this.payProfitForm.get('withdrawMonth').setValue(this.currentMonth.monthName + '-' + this.currentMonth.year);
   }
 
 }
