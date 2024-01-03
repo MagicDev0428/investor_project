@@ -20,70 +20,74 @@ textarea {
 }
 
 
-.container .modal {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    z-index: 1;
-    display: block;
+.container {
+    padding: 0;
 
-    .modal-dialog {
-        max-width: 1024px;
-        margin-top: 0;
-    }
-
-    .modal-content {
-        border-radius: 0;
-        background-color: #E9F5DD;
-    }
-
-    .modal-header {
-        margin: 0.5rem 0.5rem;
-        padding: 0.25rem 0.25rem;
-        background-color: rgb(71, 121, 6);
-        border-radius: 0;
+    .modal {
         position: relative;
-
-        h5 {
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-
-            span {
-                font-style: italic;
-                font-weight: normal;
-            }
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        z-index: 1;
+        display: block;
+    
+        .modal-dialog {
+            max-width: 1024px;
+            margin: 0;
         }
-
-        .close {
-            position: absolute;
-            right: 6px;
-            font-style: italic;
-            text-shadow: none;
-            opacity: 1;
-            padding: 0;
-            border-radius: 0.25rem;
-            border: none;
-
-            span {
-                background-color: #AAAAAA;
-                color: white;
-                font-weight: lighter;
-                border-radius: 0.25rem;
-                display: block;
-                width: 29px;
-                height: 29px;
+    
+        .modal-content {
+            border-radius: 0;
+            background-color: #E9F5DD;
+        }
+    
+        .modal-header {
+            margin: 0.5rem 0.5rem;
+            padding: 0.25rem 0.25rem;
+            background-color: rgb(71, 121, 6);
+            border-radius: 0;
+            position: relative;
+    
+            h5 {
+                width: 100%;
                 text-align: center;
-                box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+                color: white;
+                font-weight: bold;
+    
+                span {
+                    font-style: italic;
+                    font-weight: normal;
+                }
+            }
+    
+            .close {
+                position: absolute;
+                right: 6px;
+                font-style: italic;
+                text-shadow: none;
+                opacity: 1;
+                padding: 0;
+                border-radius: 0.25rem;
+                border: none;
+    
+                span {
+                    background-color: #AAAAAA;
+                    color: white;
+                    font-weight: lighter;
+                    border-radius: 0.25rem;
+                    display: block;
+                    width: 29px;
+                    height: 29px;
+                    text-align: center;
+                    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+                }
             }
         }
-    }
-
-    .modal-body {
-        padding: 0 30px 10px 30px;
+    
+        .modal-body {
+            padding: 0 30px 10px 30px;
+        }
     }
 }
 
@@ -99,7 +103,7 @@ label {
     background-color: rgb(100, 183, 5);
     font-weight: bold;
     border: 1px solid rgb(100, 183, 5);
-    width: 70%;
+    width: 100%;
     border-radius: 8px;
     box-shadow: 5px 5px 4px rgba(100, 183, 5, 0.6);
 

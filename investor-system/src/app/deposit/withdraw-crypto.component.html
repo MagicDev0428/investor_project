@@ -130,30 +130,35 @@
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator line">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Balance</button>
+                                    <button type="button" (click)="open('balance')" class="btn btn-success"
+                                        data-dismiss="modal">Balance</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator line">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Investor
+                                    <button type="button" (click)="open('balance-investor')" class="btn btn-success"
+                                        data-dismiss="modal">Investor
                                         Info</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator line">
-                                    <button type="button" class="btn btn-success exist" data-dismiss="modal">Hidden
+                                    <button type="button" (click)="open('hidden')" class="btn btn-success exist"
+                                        data-dismiss="modal">Hidden
                                         Text</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator line">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Copy
+                                    <button type="button" (click)="open('copy-paste')" class="btn btn-success"
+                                        data-dismiss="modal">Copy
                                         Paste</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
                                     <hr class="separator line">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Show Log</button>
+                                    <button type="button" (click)="open('balance-log')" class="btn btn-success"
+                                        data-dismiss="modal">Show Log</button>
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">
@@ -190,3 +195,5 @@
         </div>
     </div>
 </div>
+<app-drag-dialog>
+</app-drag-dialog>
