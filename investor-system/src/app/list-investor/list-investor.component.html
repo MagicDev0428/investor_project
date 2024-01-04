@@ -55,8 +55,8 @@
                     }}</app-profit-button>
                 </div>
                 <div class="tcol"><a [href]="'mailTo:'+item.email">{{ item.email }}</a></div>
-                <div class="tcol"><a [href]="item.facebook">Facebook</a></div>
-                <div class="tcol"><a [href]="item.folder">FOLDER</a></div>
+                <div class="tcol"><a target="_blank" [href]="item.facebook">Facebook</a></div>
+                <div class="tcol"><a target="_blank" href="https://drive.google.com/drive/folders/{{item.investorFolderId}}">FOLDER</a></div>
               </div>
             </div>
           </div>

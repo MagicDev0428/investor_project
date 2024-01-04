@@ -57,6 +57,31 @@ export class BaseComponent {
         this.router.navigate([routeStr]);
     }
 
+    formatNumber(digit: number, value: number) {
+        return value.toString().padStart(digit, '0');
+    }
+
+    getYearsAndMonths(months: any) {
+        if(!months) {
+            return 'more than 6 months';
+        }
+        let duration = moment.duration(months, 'months');
+        let years = duration.years();
+        let remainingMonths = duration.months();
+        let result = '';
+        if (years > 1) {
+            result = `${years} years`;
+        } else if (years === 1) {
+            result = `${years} year`;
+        }
+        if (remainingMonths > 1) {
+            result += `, ${Math.floor(remainingMonths)} months`;
+        } else if (remainingMonths === 1) {
+            result += `, ${remainingMonths} month`;
+        }
+        return result;
+    }
+
     /**
  * format bytes
  * @param bytes (File size in bytes)
