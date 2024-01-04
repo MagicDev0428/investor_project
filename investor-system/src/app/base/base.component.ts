@@ -33,6 +33,9 @@ export class BaseComponent {
     }
 
     profit_style(profit: number) {
+        if (profit === undefined) {
+            profit = 0;
+        }
         let value = '0';
         const factor = Math.pow(10, 2);
         value = (Math.round(profit * factor) / factor).toFixed(2);

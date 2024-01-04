@@ -103,7 +103,7 @@
             </div>
             <hr class="separator">
             <div class="row">
-                <div class="col-lg-3 col-md-6 form-group">
+                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="BeneficiaryName">Beneficiary Name</label>
                     <input formControlName="beneficiaryName" type="text" class="form-control" id="BeneficiaryName"
                         aria-describedby="Beneficiary Name" />
@@ -112,7 +112,7 @@
                         Beneficiary Name is required
                     </span>
                 </div>
-                <div class="col-lg-3 col-md-6 form-group">
+                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="BeneficiaryEmail">Beneficiary Email</label>
                     <input formControlName="beneficiaryEmail" type="email" class="form-control" id="BeneficiaryEmail"
                         aria-describedby="Beneficiary Email" />
@@ -125,7 +125,7 @@
                         Email Address is Invalid
                     </span>
                 </div>
-                <div class="col-lg-3 col-md-6 form-group">
+                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="BeneficiaryPhone">Beneficiary Phone</label>
                     <input formControlName="beneficiaryPhone" type="tel" class="form-control" id="BeneficiaryPhone"
                         aria-describedby="Beneficiary Phone" />
@@ -134,29 +134,14 @@
                         Beneficiary Phone is required
                     </span>
                 </div>
-                <div class="col-lg-3 col-md-6 form-group">
-                    <label for="currency">Transfer Types</label>
-                    <select formControlName="transferType" class="form-control form-select" id="transferType"
-                        name="transferType" aria-describedby="investor transferType">
-
-                        <option selected disabled>Select transfer type</option>
-                        <option>Envelope</option>
-                        <option>Thai Bank</option>
-                        <option>Foreign Bank</option>
-                        <option>Crypto Wallet</option>
-                        <option>Western Union</option>
-                        <option>WISE</option>
-                        <option>Other Transfer</option>
-                    </select>
-                </div>
             </div>
             <hr class="separator">
             <div class="row">
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                    <label for="moneyTransfer">Money Transfer</label>
-                    <select formControlName="countryToTransfer" class="form-control form-select" id="moneyTransfer"
-                        name="moneyTransfer" aria-describedby="Money Transfer">
-                        <option selected disabled>Select Money Transfer</option>
+                    <label for="transferType">Transfer Type</label>
+                    <select formControlName="transferType" class="form-control form-select" id="transferType"
+                        name="transferType" aria-describedby="transferType">
+                        <option selected disabled>Select Transfer Type</option>
                         <option>Envelope</option>
                         <option>Thai Bank</option>
                         <option>Foreign Bank</option>
@@ -182,8 +167,8 @@
                     </select>
                 </div>
                 <div class="col-lg-4 col-xl-6 col-sm-12 form-group">
-                    <label for="moneyTransferInformation">Money Transfer Information</label>
-                    <textarea formControlName="reason" class="form-control" id="moneyTransferInformation"
+                    <label for="transferInfo">Money Transfer Information</label>
+                    <textarea formControlName="reason" class="form-control" id="transferInfo"
                         aria-describedby="Money Transfer Information" rows="4" cols="50"></textarea>
                 </div>
 
@@ -243,12 +228,11 @@
             </div>
             <hr class="separator">
             <div class="row">
-                <div class="col-sm-12  mgn-btm-10 text-center"
-                    [ngClass]="{'col-lg-8': userId, ' col-lg-12': userId === undefined}">
-                    <button type="submit" class="btn btn-primary btn-lg">Save Investor</button>
+                <div class="col-lg-8 col-sm-12  mgn-btm-10 text-center">
+                    <button type="submit" class="btn btn-secondary">Save Investor</button>
                 </div>
-                <div class="col-sm-12 col-lg-4 text-center" *ngIf="userId">
-                    <button type="button" (click)="deleteInvestor(userId)" class="btn btn-danger btn-lg">Delete
+                <div class="col-sm-12 col-lg-4 text-center">
+                    <button [disabled]="!userId" type="button" class="btn btn-danger" (click)="deleteInvestor(userId)">Delete
                         Investor</button>
                 </div>
             </div>

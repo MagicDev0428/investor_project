@@ -47,6 +47,8 @@ export class ListInvestorComponent extends BaseComponent {
         investor.name = investor?._id;
         investor.amount = investor?.accountInvestments?.totalInvested;
         investor.profit = investor.accountInvestments?.totalProfitMonthly;
+        // let nextProfit = investor.accountBalances?
+        // investor.nextProfit = 
         if(investor.amount === undefined) {
           investor.amount = 0;
         }

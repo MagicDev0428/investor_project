@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { temp_data } from './temp-data';
+import { Component } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { ToastrService } from 'ngx-toastr';
@@ -14,9 +13,9 @@ import { InvestorService } from '../service/investor.service';
   styleUrls: ['./front-page.component.scss']
 })
 
+
 export class FrontPageComponent extends BaseComponent {
 
-  data = temp_data;
   currentMonth: any = {
     month: '',
     monthName: '',
@@ -33,14 +32,20 @@ export class FrontPageComponent extends BaseComponent {
   log_data: any = [];
   expire_data: any = [];
   bank_investors: any = {
-    total:0
+    total: 0
   };
   transfer_investors: any = {
-    total:0
+    total: 0
   };
   envelop_investors: any = {
     total: 0
   };
+  investor_color = {
+    green: "btn btn-success",
+    yellow: "btn btn-warning",
+    red: "btn btn-danger",
+    purple: "btn btn-info"
+  }
 
   constructor(
     router: Router,
@@ -58,7 +63,7 @@ export class FrontPageComponent extends BaseComponent {
   getFrontData(payload: any) {
     this.investorService.getFrontPage(payload).subscribe({
       next: (res) => {
-        console.log('res->', res.result);
+        // console.log('res->', res.result);
         this.pay_data = res.result.investorProfitResult;
         this.investment_data = res.result.investmentAndLogs;
         this.log_data = this.investment_data.logRecords.map((log) => {
@@ -91,7 +96,22 @@ export class FrontPageComponent extends BaseComponent {
           }
           return temp;
         });
-        console.log('soon->', this.expire_data);
+        this.bank_investors.data = res.result.investors.filter((item) => item.investor.transferType === 'Thai Bank');
+        this.bank_investors.total = 0;
+        this.bank_investors.data.forEach(data => {
+          this.bank_investors.total += data.investor.totalInvestment??0;
+        });
+        this.envelop_investors.data = res.result.investors.filter((item) => item.investor.transferType === 'Envelope');
+        this.envelop_investors.total = 0;
+        this.envelop_investors.data.forEach(data => {
+          this.envelop_investors.total += data.investor.totalInvestment??0;
+        });
+        this.transfer_investors.data = res.result.investors.filter((item) => ((item.investor.transferType !== 'Envelope') && (item.investor.transferType !== 'Thai Bank')));
+        this.transfer_investors.total = 0;
+        this.transfer_investors.data.forEach(data => {
+          this.transfer_investors.total += data.investor.totalInvestment??0;
+        });
+        console.log('investors->', res.result.investors);
         // this.investment_data.totalInvestors = res.investors[0].investmentResult[1].totalInvestors;
         // this.investment_data.totalProfitPaid = res.investors[0].investmentResult[3].totalDeposit;
         this.log_data.sort((a, b) => {

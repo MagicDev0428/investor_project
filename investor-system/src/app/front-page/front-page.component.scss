@@ -99,6 +99,18 @@
   }
 }
 
+.btn-info {
+  background-color: rgb(66, 0, 117);
+  border-color: rgb(66, 0, 117);
+  box-shadow: 5px 5px 4px rgba(66, 0, 117, 0.4);
+  color: white;
+
+  &:focus {
+    border-color: rgb(66, 0, 117);
+    box-shadow: 0 0 0 0.2rem rgba(45, 0, 80, 0.25);
+  }
+}
+
 .div-table {
   display: table;
   --bs-table-bg: none;
