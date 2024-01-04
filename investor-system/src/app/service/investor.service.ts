@@ -90,13 +90,19 @@ export class InvestorService {
   saveInvestor(modelData: any): Observable<any> {
     return this.http.post<any>(environment.apiUrl + this.apiURL + '/createinvestor/', modelData).pipe(
       catchError(this._configService.handleError)
-    );;
+    );
   }
 
   getInvestorInfo(id: number | string): Observable<any> {
-    return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorinfo/' + id)
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorinfobyid/' + id)
       .pipe(
         catchError(this._configService.handleError)
       );
+  }
+
+  getFrontPage(date: any): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + this.apiURL + '/investorlistbydate/', date).pipe(
+      catchError(this._configService.handleError)
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, from, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -7,14 +7,13 @@ import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-    selector: 'app-adam-form',
+    selector: 'app-copy-paste',
     templateUrl: './copy-paste-area.component.html',
     styleUrls: ['../adam/investorForm.scss', './copy-paste-area.component.scss'],
 })
 
 export class CopyPasteAreaComponent extends BaseComponent implements OnInit {
-    @ViewChild('transactionFrom') transactionFrom: ElementRef;
-    @ViewChild('transactionTo') transactionTo: ElementRef;
+    @Output() isShown = new EventEmitter<boolean>();
 
     userId: any = '';
     values = {
@@ -62,5 +61,9 @@ export class CopyPasteAreaComponent extends BaseComponent implements OnInit {
     getValue(event: any) {
         let id = event.target.id;
         this.values[id] = event.target.value;
+    }
+
+    onClose() {
+        this.isShown.emit(true);
     }
 }

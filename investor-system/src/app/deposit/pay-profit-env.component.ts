@@ -13,6 +13,7 @@ import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
+import { DraggableDialogComponent } from '../components/draggable-dialog/draggable-dialog.component';
 
 @Component({
   selector: 'app-pay-profit-env',
@@ -21,8 +22,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 
 export class PayProfitEnvComponent extends BaseComponent implements OnInit {
-  @ViewChild('transactionFrom') transactionFrom: ElementRef;
-  @ViewChild('transactionTo') transactionTo: ElementRef;
+  @ViewChild(DraggableDialogComponent) dialog: DraggableDialogComponent;
 
   amount = '';
   section = 'CREATE';
@@ -44,6 +44,8 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
     monthName: 'Aug',
     year: '2023'
   }
+
+  dialogVisible: boolean = true;
 
   protected payProfitForm: FormGroup;
   protected submitted = false;
@@ -96,6 +98,10 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
     if (transferType === 'Thai Bank') {
       this.goTo('pay-profit-bank');
     }
+  }
+
+  open(comp: string) {
+    this.dialog.onOpen(comp);
   }
 
   protected onSubmit(): void {

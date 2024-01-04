@@ -55,6 +55,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { DateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 import { MonthSelectorComponent } from './components/month-selector/month-selector.component';
+import { DraggableDialogComponent } from './components/draggable-dialog/draggable-dialog.component';
+import { BalanceInvestorComponent } from './deposit/investor-info.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,9 @@ import { MonthSelectorComponent } from './components/month-selector/month-select
     WithdrawCashComponent,
     SpinnerComponent,
     DateTimePickerComponent,
-    MonthSelectorComponent
+    MonthSelectorComponent,
+    DraggableDialogComponent,
+    BalanceInvestorComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,7 @@ import { MonthSelectorComponent } from './components/month-selector/month-select
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule.forRoot({
+        AuthModule.forRoot({
       domain: environment.auth0Domain,
       clientId: environment.auth0ClientId,
       authorizationParams: {

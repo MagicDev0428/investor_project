@@ -13,6 +13,7 @@ import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
+import { DraggableDialogComponent } from '../components/draggable-dialog/draggable-dialog.component';
 
 @Component({
   selector: 'app-pay-profit-bank',
@@ -21,8 +22,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 
 export class PayProfitBankComponent extends BaseComponent implements OnInit {
-  @ViewChild('transactionFrom') transactionFrom: ElementRef;
-  @ViewChild('transactionTo') transactionTo: ElementRef;
+  @ViewChild(DraggableDialogComponent) dialog: DraggableDialogComponent;
 
   amount = '';
   section = 'CREATE';
@@ -86,6 +86,10 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
 
   deleteTransaction(_id: any) {
     
+  }
+
+  open(comp: string) {
+    this.dialog.onOpen(comp);
   }
 
   checkSelect(event: Event) {

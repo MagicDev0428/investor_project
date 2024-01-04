@@ -168,14 +168,14 @@ export class DateTimePickerComponent
     setDateStringModel() {
         this.dateString = this.datetime.toString();
 
-        // if (!this.firstTimeAssign) {
+        if (!this.firstTimeAssign) {
             this.onChange(this.dateString);
-        // } else {
-        //     // Skip very first assignment to null done by Angular
-        //     if (this.dateString !== null) {
-        //         this.firstTimeAssign = false;
-        //     }
-        // }
+        } else {
+            // Skip very first assignment to null done by Angular
+            if (this.dateString !== null) {
+                this.firstTimeAssign = false;
+            }
+        }
     }
 
     inputBlur($event) {

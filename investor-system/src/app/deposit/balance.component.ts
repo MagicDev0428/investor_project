@@ -1,11 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {
-  Validators,
-  FormGroup,
-  NonNullableFormBuilder,
-  FormControl,
-} from "@angular/forms";
 import { FormBuilder } from '@angular/forms';
 import { Observable, from, map } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
@@ -63,12 +57,13 @@ const profit_balance_temp = {
 }
 
 @Component({
-  selector: 'app-investor-portfolio',
+  selector: 'app-balance',
   templateUrl: './balance.component.html',
   styleUrls: ['../adam/investorForm.scss', './balance.component.scss'],
 })
 
 export class BalanceComponent extends BaseComponent {
+  @Output() isShown = new EventEmitter<boolean>();
 
   amount = '';
   investmentId: any = '';
@@ -93,7 +88,6 @@ export class BalanceComponent extends BaseComponent {
       this.investmentId = res;
     });
     this.auth.user$.subscribe(result => {
-      console.log('user->', result);
       this.user = result['investor-system'];
       this.name = this.user.name;
     });
@@ -103,6 +97,10 @@ export class BalanceComponent extends BaseComponent {
     this.base_info = base_temp;
     this.investments = investment_temp;
     this.profit_balance = profit_balance_temp;
+  }
+
+  onClose() {
+    this.isShown.emit(true);
   }
 
   protected onSubmit(): void {

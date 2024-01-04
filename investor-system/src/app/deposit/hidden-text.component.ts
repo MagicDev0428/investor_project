@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, from, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -7,14 +7,13 @@ import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-adam-form',
+  selector: 'app-hidden',
   templateUrl: './hidden-text.component.html',
   styleUrls: ['../adam/investorForm.scss', './hidden-text.component.scss'],
 })
 
 export class HiddenTextComponent extends BaseComponent implements OnInit {
-  @ViewChild('transactionFrom') transactionFrom: ElementRef;
-  @ViewChild('transactionTo') transactionTo: ElementRef;
+  @Output() isShown = new EventEmitter<boolean>();
 
   userId: any = '';
   values: any[] = [];
@@ -43,6 +42,10 @@ export class HiddenTextComponent extends BaseComponent implements OnInit {
 
   checkSelect() {
     
+  }
+
+  onClose() {
+    this.isShown.emit(true);
   }
 
   protected onSubmit(): void {

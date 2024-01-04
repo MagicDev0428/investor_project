@@ -11,24 +11,24 @@
             <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                 <label for="investor_left_pay">Investors left to Pay</label>
                 <input type="text" class="form-control fw-bold" id="investor_left_pay"
-                    aria-describedby="Investors left to Pay" [value]="currency_style(data.investor_left_pay)"
+                    aria-describedby="Investors left to Pay" [value]="currency_style(pay_data.investorsLeftToPay)"
                     readonly />
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                 <label for="profit_to_pay">Profit to Pay</label>
                 <input type="text" class="form-control fw-bold" id="profit_to_pay" aria-describedby="Profit to Pay"
-                    [value]="currency_style(data.profit_to_pay)" readonly />
+                    [value]="currency_style(pay_data.profitToPay)" readonly />
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                 <label for="profit_already_paid">Profit Already Paid</label>
                 <input type="tel" class="form-control text-success fw-bold" id="profit_already_paid"
-                    aria-describedby="Profit Already Paid" [value]="currency_style(data.profit_already_paid)"
+                    aria-describedby="Profit Already Paid" [value]="currency_style(pay_data.profitAlreadyPaid)"
                     readonly />
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                 <label for="profit_left_pay">Profit left to Pay</label>
                 <input type="email" class="form-control text-danger fw-bold" id="profit_left_pay"
-                    aria-describedby="Profit left to Pay" [value]="currency_style(data.profit_left_pay)" readonly />
+                    aria-describedby="Profit left to Pay" [value]="currency_style(pay_data.profitLeftToPay)" readonly />
             </div>
         </div>
         <div class="row">
@@ -84,65 +84,65 @@
                     <div class="col-xl-6 form-group">
                         <label for="open_invest">Open Investments</label>
                         <input type="text" class="form-control fw-bold" id="open_invest"
-                            aria-describedby="Open Investments" [value]="data.open_invest" readonly />
+                            aria-describedby="Open Investments" [value]="investment_data.openInvestments" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="amount_available">Amount Available</label>
                         <input type="text" class="form-control fw-bold" id="amount_available"
-                            aria-describedby="Amount Available" [value]="currency_style(data.amount_available)"
+                            aria-describedby="Amount Available" [value]="currency_style(investment_data.amountAvailable)"
                             readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="total_invest">Totally Invested</label>
                         <input type="tel" class="form-control fw-bold" id="total_invest"
-                            aria-describedby="Totally Invested" [value]="currency_style(data.total_invest)" readonly />
+                            aria-describedby="Totally Invested" [value]="currency_style(investment_data.totalInvestmentAmount)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="total_profit">Total Profit Paid</label>
                         <input type="email" class="form-control fw-bold" id="total_profit"
-                            aria-describedby="Total Profit Paid" [value]="currency_style(data.total_profit)" readonly />
+                            aria-describedby="Total Profit Paid" [value]="currency_style(investment_data.totalProfitPaid)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="no_investor">No of Investors</label>
                         <input type="email" class="form-control fw-bold" id="no_investor"
-                            aria-describedby="No of Investors" [value]="data.no_investor" readonly />
+                            aria-describedby="No of Investors" [value]="investment_data.totalInvestors" readonly />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-primary">Investors</button>
+                        <button class="btn btn-primary" (click)="goTo('list')">Investors</button>
                     </div>
                     <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-primary">New</button>
+                        <button class="btn btn-primary" (click)="goTo('manage-investor')">New</button>
                     </div>
                     <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-info">Investments</button>
+                        <button class="btn btn-info" (click)="goTo('investment-list')">Investments</button>
                     </div>
                     <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-info">New</button>
+                        <button class="btn btn-info" (click)="goTo('investment-form')">New</button>
                     </div>
                     <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-secondary">Adam Transaction</button>
+                        <button class="btn btn-secondary" (click)="goTo('adam-table')">Adam Transaction</button>
                     </div>
                     <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-secondary">New</button>
+                        <button class="btn btn-secondary" (click)="goTo('adam-form')">New</button>
                     </div>
                 </div>
             </div>
             <div class="col-md-8 form-group">
                 <div class="div-table expire-table">
                     <div class="trow ttitle">Soon To Expire Investment</div>
-                    <div *ngFor="let item of data.soon_invests; let i = index"
-                        [ngClass]="{'trow': true, 'theader': i==0, 'text-danger': i==0, 'fw-bold': i==0}">
-                        <div class="tcol">{{ item[0] }}</div>
-                        <div class="tcol">{{ item[1] }}</div>
-                        <div class="tcol">{{ currency_style(item[2]) }}</div>
+                    <div *ngFor="let item of expire_data; let i = index"
+                        [ngClass]="{'trow': true, 'theader': item.remainingDays<90, 'text-danger': item.remainingDays<90, 'fw-bold': item.remainingDays<90}">
+                        <div class="tcol">{{ item.remainingDays }} Days</div>
+                        <div class="tcol">{{ item.investNo }} - {{ item.investType }} {{ profit_style(item.profit) }}</div>
+                        <div class="tcol">{{ currency_style(item.investAmount) }}</div>
                     </div>
                 </div>
                 <div class="log-entry">
                     <div class="log-title fw-bold">Newest Log Entries</div>
                     <select class="form-select" multiple aria-label="multiple select example">
-                        <option *ngFor="let item of data.log_entry">{{ item }}</option>
+                        <option *ngFor="let log of log_data">{{ log.entry }}</option>
                     </select>
                 </div>
             </div>

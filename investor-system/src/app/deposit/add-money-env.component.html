@@ -74,35 +74,35 @@
                             <div class="row my-5">
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
-                                    <hr class="separator">
-                                    <button type="button" (click)="goTo('/balance/')" class="btn btn-success"
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('balance')" class="btn btn-success"
                                         data-dismiss="modal">Balance</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
-                                    <hr class="separator">
-                                    <button type="button" (click)="goTo('/info/')" class="btn btn-success"
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('balance-investor')" class="btn btn-success"
                                         data-dismiss="modal">Investor
                                         Info</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
-                                    <hr class="separator">
-                                    <button type="button" (click)="goTo('/hidden-text/')" class="btn btn-success"
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('hidden')" class="btn btn-success exist"
                                         data-dismiss="modal">Hidden
                                         Text</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
-                                    <hr class="separator">
-                                    <button type="button" (click)="goTo('/copy-paste/')" class="btn btn-success"
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('copy-paste')" class="btn btn-success"
                                         data-dismiss="modal">Copy
                                         Paste</button>
                                 </div>
                                 <div
                                     class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
-                                    <hr class="separator">
-                                    <button type="button" (click)="goTo('/balance-log/')" class="btn btn-success"
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('balance-log')" class="btn btn-success"
                                         data-dismiss="modal">Show Log</button>
                                 </div>
                             </div>
@@ -140,3 +140,5 @@
         </div>
     </div>
 </div>
+<app-drag-dialog>
+</app-drag-dialog>
