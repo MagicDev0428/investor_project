@@ -33,8 +33,8 @@
                 <div class="tcol">Facebook</div>
                 <div class="tcol">Folder</div>
               </div>
-              <div class="trow" *ngFor="let item of items" (click)="goTo('/portfolio/'+item._id)">
-                <div class="tcol">
+              <div class="trow" *ngFor="let item of items">
+                <div class="tcol" (click)="goTo('/portfolio/'+item._id)">
                   <div>
                     <span class="name">{{ item._id }}</span>
                     <div class="button-group">
@@ -48,9 +48,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="tcol">{{ currency_style(item.amount) }}</div>
-                <div class="tcol">{{ currency_style(item.profit) }}</div>
-                <div class="tcol">{{ item.transferType }}</div>
+                <div class="tcol" (click)="goTo('/portfolio/'+item._id)">{{ currency_style(item.amount) }}</div>
+                <div class="tcol" (click)="goTo('/portfolio/'+item._id)">{{ currency_style(item.profit) }}</div>
+                <div class="tcol" (click)="goTo('/portfolio/'+item._id)">{{ item.transferType }}</div>
                 <div class="tcol"><app-profit-button [profitStyle]="'Red'" (click)="goTo('/portfolio/'+item._id)">{{ item.next_profit
                     }}</app-profit-button>
                 </div>
