@@ -101,7 +101,8 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         reason: new FormControl(),
         passportImages: new FormControl(),
         pincode: new FormControl(this.generatePinCode(), Validators.required),
-        transferType: new FormControl()
+        transferType: new FormControl(""),
+        transferInfo: new FormControl("")
       });
 
     this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator]);
@@ -131,6 +132,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
           this.addInvestorForm.get('reason').setValue(this.values['reason']);
           this.addInvestorForm.get('pincode').setValue(this.values['pincode']);
           this.addInvestorForm.get('transferType').setValue(this.values['transferType']);
+          this.addInvestorForm.get('transferInfo').setValue(this.values['transferInfo']);
         },
         complete: () => console.log('There are no more action happen.')
       });
@@ -198,6 +200,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
       this.investor.reason = this.addInvestorForm.get('reason').value;
       this.investor.pincode = this.addInvestorForm.get('pincode').value;
       this.investor.transferType = this.addInvestorForm.get('transferType').value;
+      this.investor.transferInfo = this.addInvestorForm.get('transferInfo').value;
 
       let formData;
       if (this.files && this.files.length) {

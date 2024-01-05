@@ -73,9 +73,9 @@ export class LogFormComponent extends BaseComponent {
     this.logForm = this.formBuilder.group(
       {
         logType: new FormControl("", Validators.required),
-        investorName: new FormControl("", Validators.required),
+        investorName: new FormControl(""),
         description: new FormControl("", Validators.required),
-        investment: new FormControl("", Validators.required)
+        investment: new FormControl("")
       });
     this.adamService.getAdamInvestors().subscribe((res) => {
       this.customers = res.adams.investorsNames;

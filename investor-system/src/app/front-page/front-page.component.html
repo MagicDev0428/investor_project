@@ -1,7 +1,7 @@
 <div class="wrapper">
     <div class="title-create">
         <h4 class="title">INVESTOR SYSTEM</h4>
-        <h4>{{ day }} <span class="add-edit" >
+        <h4>{{ day }} <span class="add-edit">
                 <app-month-selector (selectedMonth)="selectOption($event)"></app-month-selector>
             </span>
         </h4>
@@ -37,13 +37,16 @@
                     <div class="trow ttitle">ThaiBank Investors</div>
                     <div class="trow theader">
                         <div class="tcol">Total</div>
-                        <div class="tcol">{{ currency_style(data.bank_total) }}</div>
+                        <div class="tcol">{{ currency_style(bank_investors.total) }}</div>
                     </div>
-                    <div *ngFor="let item of data.bank_data; let i = index" class="trow">
-                        <div class="tcol"><button *ngIf="item[0]!=null" [class]="data.invest_state[item[2]]">{{ item[0]
-                                }}</button></div>
-                        <div *ngIf="item[1]!=null" class="tcol">{{ currency_style(item[1]) }}</div>
-                        <div *ngIf="item[1]==null" class="tcol"></div>
+                    <div *ngFor="let item of bank_investors.data; let i = index" class="trow">
+                        <div class="tcol">
+                            <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
+                                [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
+                                }}</button>
+                        </div>
+                        <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
+                            currency_style(item.investor.totalInvestment) }}</div>
                     </div>
                 </div>
             </div>
@@ -52,28 +55,34 @@
                     <div class="trow ttitle">Transfer Investors</div>
                     <div class="trow theader">
                         <div class="tcol">Total</div>
-                        <div class="tcol">{{ currency_style(data.transfer_total) }}</div>
+                        <div class="tcol">{{ currency_style(transfer_investors.total) }}</div>
                     </div>
-                    <div *ngFor="let item of data.transfer_data; let i = index" class="trow">
-                        <div class="tcol"><button *ngIf="item[0]!=null" [class]="data.invest_state[item[2]]">{{ item[0]
-                                }}</button></div>
-                        <div *ngIf="item[1]!=null" class="tcol">{{ currency_style(item[1]) }}</div>
-                        <div *ngIf="item[1]==null" class="tcol"></div>
+                    <div *ngFor="let item of transfer_investors.data; let i = index" class="trow">
+                        <div class="tcol">
+                            <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
+                                [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
+                                }}</button>
+                        </div>
+                        <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
+                            currency_style(item.investor.totalInvestment) }}</div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="div-table envelop-table">
-                    <div class="trow ttitle">Envelop Investors</div>
+                    <div class="trow ttitle">Envelope Investors</div>
                     <div class="trow theader">
                         <div class="tcol">Total</div>
-                        <div class="tcol">{{ currency_style(data.envelop_total) }}</div>
+                        <div class="tcol">{{ currency_style(envelop_investors.total) }}</div>
                     </div>
-                    <div *ngFor="let item of data.envelop_data; let i = index" class="trow">
-                        <div class="tcol"><button *ngIf="item[0]!=null" [class]="data.invest_state[item[2]]">{{ item[0]
-                                }}</button></div>
-                        <div *ngIf="item[1]!=null" class="tcol">{{ currency_style(item[1]) }}</div>
-                        <div *ngIf="item[1]==null" class="tcol"></div>
+                    <div *ngFor="let item of envelop_investors.data; let i = index" class="trow">
+                        <div class="tcol">
+                            <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
+                                [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
+                                }}</button>
+                        </div>
+                        <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
+                            currency_style(item.investor.totalInvestment) }}</div>
                     </div>
                 </div>
             </div>
@@ -89,43 +98,25 @@
                     <div class="col-xl-6 form-group">
                         <label for="amount_available">Amount Available</label>
                         <input type="text" class="form-control fw-bold" id="amount_available"
-                            aria-describedby="Amount Available" [value]="currency_style(investment_data.amountAvailable)"
-                            readonly />
+                            aria-describedby="Amount Available"
+                            [value]="currency_style(investment_data.amountAvailable)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="total_invest">Totally Invested</label>
                         <input type="tel" class="form-control fw-bold" id="total_invest"
-                            aria-describedby="Totally Invested" [value]="currency_style(investment_data.totalInvestmentAmount)" readonly />
+                            aria-describedby="Totally Invested"
+                            [value]="currency_style(investment_data.totalInvestmentAmount)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="total_profit">Total Profit Paid</label>
                         <input type="email" class="form-control fw-bold" id="total_profit"
-                            aria-describedby="Total Profit Paid" [value]="currency_style(investment_data.totalProfitPaid)" readonly />
+                            aria-describedby="Total Profit Paid"
+                            [value]="currency_style(investment_data.totalProfitPaid)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="no_investor">No of Investors</label>
                         <input type="email" class="form-control fw-bold" id="no_investor"
                             aria-describedby="No of Investors" [value]="investment_data.totalInvestors" readonly />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-primary" (click)="goTo('list')">Investors</button>
-                    </div>
-                    <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-primary" (click)="goTo('manage-investor')">New</button>
-                    </div>
-                    <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-info" (click)="goTo('investment-list')">Investments</button>
-                    </div>
-                    <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-info" (click)="goTo('investment-form')">New</button>
-                    </div>
-                    <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-secondary" (click)="goTo('adam-table')">Adam Transaction</button>
-                    </div>
-                    <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-secondary" (click)="goTo('adam-form')">New</button>
                     </div>
                 </div>
             </div>
@@ -135,10 +126,37 @@
                     <div *ngFor="let item of expire_data; let i = index"
                         [ngClass]="{'trow': true, 'theader': item.remainingDays<90, 'text-danger': item.remainingDays<90, 'fw-bold': item.remainingDays<90}">
                         <div class="tcol">{{ item.remainingDays }} Days</div>
-                        <div class="tcol">{{ item.investNo }} - {{ item.investType }} {{ profit_style(item.profit) }}</div>
+                        <div class="tcol">{{ item.investNo }} - {{ item.investType }} {{ profit_style(item.profit) }}
+                        </div>
                         <div class="tcol">{{ currency_style(item.investAmount) }}</div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <div class="row">
+                    <div class="col-xl-7 form-group mb-4">
+                        <button class="btn btn-primary" (click)="goTo('/list')">Investors</button>
+                    </div>
+                    <div class="col-xl-5 form-group mb-4">
+                        <button class="btn btn-primary" (click)="goTo('/manage-investor')">New</button>
+                    </div>
+                    <div class="col-xl-7 form-group mb-4">
+                        <button class="btn btn-info" (click)="goTo('/investment-list')">Investments</button>
+                    </div>
+                    <div class="col-xl-5 form-group mb-4">
+                        <button class="btn btn-info" (click)="goTo('/investment-form')">New</button>
+                    </div>
+                    <div class="col-xl-7 form-group mb-4">
+                        <button class="btn btn-secondary" (click)="goTo('/adam-table')">Adam Transaction</button>
+                    </div>
+                    <div class="col-xl-5 form-group mb-4">
+                        <button class="btn btn-secondary" (click)="goTo('/adam-form')">New</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 form-group">
                 <div class="log-entry">
                     <div class="log-title fw-bold">Newest Log Entries</div>
                     <select class="form-select" multiple aria-label="multiple select example">

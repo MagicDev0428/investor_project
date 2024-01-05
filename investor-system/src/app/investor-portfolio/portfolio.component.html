@@ -5,15 +5,16 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>Portfolio for: </span>{{ name }}</h5>
-                        <button type="button" (click)="goTo('/investment-list/')" class="close i-btn" data-dismiss="modal"
-                            aria-label="Close">
+                        <button type="button" (click)="goTo('/info/'+userId)" class="close i-btn"
+                            data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">i</span>
                         </button>
-                        <button type="button" (click)="goTo('/investment-list/')" class="close e-btn" data-dismiss="modal"
-                            aria-label="Close">
+                        <button type="button" (click)="goTo('/manage-investor/'+userId)" class="close e-btn"
+                            data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">e</span>
                         </button>
-                        <button type="button" (click)="goTo('/investment-list/')" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" (click)="goToPrev()" class="close" data-dismiss="modal"
+                            aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -23,18 +24,21 @@
                                 <div class="row">
                                     <div class="col-xl-12 form-group">
                                         <label for="email">Email</label>
-                                        <input [value]="base_info.email" type="text" class="form-control" id="email"
-                                            aria-describedby="email" readonly />
+                                        <input [value]="investor.email" type="text" class="form-control" id="email"
+                                            (dblclick)="copyToClipboard(investor.email)" aria-describedby="email"
+                                            readonly />
                                     </div>
                                     <div class="col-xl-12 form-group mt-0">
                                         <label for="mobilePhone">Mobile Phone</label>
-                                        <input [value]="base_info.phoneNumber" type="text" class="form-control"
-                                            id="mobilePhone" aria-describedby="mobilePhone" readonly />
+                                        <input [value]="investor.phone" type="text" class="form-control"
+                                            (dblclick)="copyToClipboard(investor.phone)" id="mobilePhone"
+                                            aria-describedby="mobilePhone" readonly />
                                     </div>
                                     <div class="col-xl-12 form-group mt-0">
                                         <label for="newestPayment">Newest Payment</label>
-                                        <input [value]="base_info.newestPayment" type="text" class="form-control"
-                                            id="newestPayment" aria-describedby="newestPayment" readonly />
+                                        <input [value]="investor.newestPayment" type="text" class="form-control"
+                                            (dblclick)="copyToClipboard(investor.newestPayment)" id="newestPayment"
+                                            aria-describedby="newestPayment" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -42,35 +46,34 @@
                                 <div class="row">
                                     <div class="col-md-5 form-group">
                                         <label for="address">Address</label>
-                                        <select class="form-control form-select" multiple id="address"
-                                            aria-describedby="address" readonly>
-                                            <option *ngFor="let item of base_info.address">{{ item }}
-                                            </option>
-                                        </select>
+                                        <textarea class="form-control" id="address" aria-describedby="address"
+                                            (dblclick)="copyToClipboard(investor.address)" readonly>{{ investor.address }}
+                                        </textarea>
                                     </div>
                                     <div class="col-md-7 form-group">
-                                        <label for="moneyTransferInfo">Money Transfer Information</label>
-                                        <select multiple class="form-control" id="moneyTransferInfo"
-                                            aria-describedby="moneyTransferInfo" readonly>
-                                            <option *ngFor="let item of base_info.moneyTransferInfo">{{ item }}
-                                            </option>
-                                        </select>
+                                        <label for="transferInfo">Money Transfer Information</label>
+                                        <textarea class="form-control" id="transferInfo" aria-describedby="transferInfo"
+                                            (dblclick)="copyToClipboard(investor.transferInfo)" readonly>{{ investor.transferInfo }}
+                                        </textarea>
                                     </div>
                                     <div class="col-md-3 mb-2">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                            aria-label="Icon Button" >Folder</button>
+                                        <a target="_blank"
+                                            href="https://drive.google.com/drive/folders/{{ investor.investorFolderId }}">
+                                            <button type="button" class="btn btn-block btn-secondary">FOLDER</button>
+                                        </a>
                                     </div>
                                     <div class="col-md-3 mb-2">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                            aria-label="Icon Button" >Facebook</button>
+                                        <a target="_blank" href="{{ investor.facebook }}">
+                                            <button type="button" class="btn btn-block btn-secondary">FACEBOOK</button>
+                                        </a>
                                     </div>
                                     <div class="col-md-3 mb-2">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                            aria-label="Icon Button" >Email</button>
+                                        <a href="mailTo:{{ investor.email }}"><button type="button"
+                                                class="btn btn-block btn-secondary">EMAIL</button></a>
                                     </div>
                                     <div class="col-md-3 mb-2">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                            aria-label="Icon Button" >Log</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)="open('balance-log')"
+                                            aria-label="Icon Button">Log</button>
                                     </div>
                                 </div>
                             </div>
@@ -82,26 +85,26 @@
                                 </div>
                                 <div class="col-xl-10">
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-6 col-sm-6 my-1">
+                                        <div class="col-lg-4 col-md-6 my-1">
                                             <div class="row statistics-panel">
-                                                <div class="col-xl-7 statistics-title">All Investments</div>
-                                                <div class="col-xl-5 statistics-value">{{
+                                                <div class="col-lg-7 col-6 statistics-title">All Investments</div>
+                                                <div class="col-lg-5 col-6 statistics-value">{{
                                                     currency_style(investments.all_investment) }}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 my-1">
+                                        <div class="col-lg-6 col-md-6 my-1">
                                             <div class="row statistics-panel">
-                                                <div class="col-xl-4 statistics-title">Total Profit Paid</div>
-                                                <div class="col-xl-5 col-sm-7 statistics-value">{{
+                                                <div class="col-lg-4 col-6 statistics-title">Total Profit Paid</div>
+                                                <div class="col-lg-5 col-3  statistics-value">{{
                                                     currency_style(investments.totalProfitPaid) }}</div>
-                                                <div class="col-xl-3 col-sm-5 statistics-value">{{
+                                                <div class="col-lg-3 col-3 statistics-value">{{
                                                     profit_style(investments.totalProfitPaidPct) }}</div>
                                             </div>
                                         </div>
                                         <div class="col-lg-2 my-2">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                aria-label="Icon Button" (click)="goTo('/my-investment-form/')">New
+                                                aria-label="Icon Button" (click)="goTo('/my-investment-form')">New
                                                 Investment</button>
                                         </div>
                                     </div>
@@ -143,15 +146,15 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 my-1">
                                                     <div class="row statistics-panel">
-                                                        <div class="col-xl-7 statistics-title">Balance</div>
-                                                        <div class="col-xl-5 statistics-value">{{
+                                                        <div class="col-7 statistics-title">Balance</div>
+                                                        <div class="col-5 statistics-value">{{
                                                             currency_style(profit_balance.balance) }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 my-1">
                                                     <div class="row statistics-panel">
-                                                        <div class="col-xl-7 statistics-title">Monthly Profit</div>
-                                                        <div class="col-xl-5 statistics-value">{{
+                                                        <div class="col-7 statistics-title">Monthly Profit</div>
+                                                        <div class="col-5 statistics-value">{{
                                                             currency_style(profit_balance.monthlyProfit) }}</div>
                                                     </div>
                                                 </div>
@@ -159,18 +162,18 @@
                                         </div>
                                         <div class="col-lg-5 my-1">
                                             <div class="row">
-                                                <div class="col-lg-4">
-                                                    <button type="button" (click)="goTo('/pay-profit-env/')"
+                                                <div class="col-sm-4">
+                                                    <button type="button" (click)="goTo('/pay-profit-env')"
                                                         class="btn btn-success w-100" data-dismiss="modal"
                                                         aria-label="Icon Button">Profit</button>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <button type="button" (click)="goTo('/withdraw-crypto/')"
+                                                <div class="col-sm-4">
+                                                    <button type="button" (click)="goTo('/withdraw-crypto')"
                                                         class="btn btn-danger w-100" data-dismiss="modal"
                                                         aria-label="Icon Button">Withdraw</button>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <button type="button" (click)="goTo('/add-money-env/')"
+                                                <div class="col-sm-4">
+                                                    <button type="button" (click)="goTo('/add-money-env')"
                                                         class="btn btn-primary w-100" data-dismiss="modal"
                                                         aria-label="Icon Button">Add+</button>
                                                 </div>
@@ -199,8 +202,9 @@
                                             <div class="tcol">{{ item[5] }}</div>
                                             <div class="tcol">
                                                 {{ item[6] }}
-                                                <button *ngIf="item[6]===''" type="button" class="btn btn-secondary w-100"
-                                                    data-dismiss="modal" aria-label="Icon Button">Send Email</button>
+                                                <button *ngIf="item[6]===''" type="button"
+                                                    class="btn btn-secondary w-100" data-dismiss="modal"
+                                                    aria-label="Icon Button">Send Email</button>
                                             </div>
                                         </div>
                                     </div>
@@ -212,3 +216,5 @@
             </div>
         </div>
     </div>
+    <app-drag-dialog>
+    </app-drag-dialog>

@@ -95,7 +95,7 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
   checkSelect(event: Event) {
     let transferType = this.payProfitForm.get('transferType').value;
     if (transferType === 'Envelope') {
-      this.goTo('pay-profit-env');
+      this.goTo('/pay-profit-env');
     }
   }
 

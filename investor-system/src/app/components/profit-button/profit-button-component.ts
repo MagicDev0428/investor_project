@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 const btnStyles = {
-    red: 'btn btn-danger',
-    yellow: 'btn btn-warning',
-    green: 'btn btn-success'
+    Red: 'btn btn-danger',
+    Yellow: 'btn btn-warning',
+    Green: 'btn btn-success'
 }
 
 @Component({
@@ -13,6 +13,7 @@ const btnStyles = {
 })
 export class ProfitButtonComponent {
     @Input() profitStyle: string;
+    @Input() text: string = '11-Nov-2023';
     btnStyle = btnStyles;
     myStyle = '';
 

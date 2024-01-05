@@ -288,7 +288,7 @@ export class InvestmentFormComponent extends BaseComponent {
         this.investmentService.updateInvestment(this.investment).subscribe({
           next: (res) => {
             this.toastrService.success('Investment was successfully updated!');
-            this.goTo('/investment-list/');
+            this.goTo('/investment-list');
           },
           error: err => {
             this.toastrService.error(err);
@@ -301,7 +301,7 @@ export class InvestmentFormComponent extends BaseComponent {
         this.investmentService.createInvestment(this.investment).subscribe({
           next: (res) => {
             this.toastrService.success('Investment was successfully created!');
-            this.goTo('/investment-list/');
+            this.goTo('/investment-list');
           },
           error: err => {
             this.toastrService.error(err);

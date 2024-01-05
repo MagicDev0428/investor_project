@@ -5,7 +5,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>INFO: </span>{{ title }}</h5>
-                        <button (click)="goTo('/list/')" type="button" class="close" data-dismiss="modal"
+                        <button (click)="goToPrev()" type="button" class="close" data-dismiss="modal"
                             aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
@@ -88,8 +88,8 @@
                                 <div class="col form-group mb-4">
                                     <label for="invest_for">Invest For</label>
                                     <input type="text" (dblclick)="copyToClipboard(investor.investFor)"
-                                        class="form-control" [style.color]="investor.investFor==='more than 6 months'?'red':''" id="invest_for" aria-describedby="Invest For"
-                                        [value]="investor.investFor??'more than 6 months'" readonly />
+                                        class="form-control" id="invest_for" aria-describedby="Invest For"
+                                        [value]="investor.investFor??''" readonly />
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -136,8 +136,10 @@
                                 </a>
                             </div>
                             <div class="col-sm-4 mb-2">
-                                <a target="_blank" href="{{ investor.facebook }}"><button type="button"
-                                        class="btn btn-block btn-secondary">FACEBOOK</button></a>
+                                <a target="_blank"
+                                    href="{{ investor.facebook }}">
+                                    <button type="button" class="btn btn-block btn-secondary">FACEBOOK</button>
+                                </a>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <a href="mailTo:{{ investor.email }}"><button type="button"

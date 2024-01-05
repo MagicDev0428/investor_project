@@ -5,7 +5,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>EDIT:</span> Log</h5>
-                        <button type="button" (click)="goTo('/log-list/')" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" (click)="goToPrev()" class="close" data-dismiss="modal"
+                            aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -38,10 +39,12 @@
                                         name="logType" aria-describedby="log type" value=" ">
                                         <option>ADAM</option>
                                         <option>BALANCE</option>
-                                        <option>EMAIL</option>
                                         <option>INVESTOR</option>
                                         <option>INVESTMENT</option>
                                         <option>MY INVESTMENT</option>
+                                        <option>EMAIL</option>
+                                        <option>LOGIN</option>
+                                        <option>OTHER</option>
                                     </select>
                                     <span class="text-danger"
                                         *ngIf="(logForm.controls['logType'].touched || submitted) && logForm.controls['logType'].errors?.['required']">

@@ -1,11 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Observable, from, map } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {
   Validators,
   FormGroup,
-  NonNullableFormBuilder,
   FormControl,
 } from "@angular/forms";
 
@@ -96,7 +94,7 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   checkSelect(event: Event) {
     let transferType = this.payProfitForm.get('transferType').value;
     if (transferType === 'Thai Bank') {
-      this.goTo('pay-profit-bank');
+      this.goTo('/pay-profit-bank');
     }
   }
 
