@@ -17,18 +17,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('app-started');
-    // localStorage.removeItem('routes');
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.visited_routes = JSON.parse(localStorage.getItem('routes')) ?? [];
       let length = this.visited_routes.length;
       if(length === 0) {
-        console.log('1');
         this.visited_routes.push(event.url);
       } else if(this.visited_routes[length-1] !== event.url) {
-        console.log('2');
         this.visited_routes.push(event.url);
       }
       localStorage.setItem('routes', JSON.stringify(this.visited_routes));

@@ -71,7 +71,6 @@ export class BaseComponent {
         localStorage.removeItem('routes');
         if (length > 1) {
             this.visited_routes.pop();
-            console.log('tar->', this.visited_routes);
             localStorage.setItem('routes', JSON.stringify(this.visited_routes));
             this.goTo(this.visited_routes[length - 2]);
         } else {
