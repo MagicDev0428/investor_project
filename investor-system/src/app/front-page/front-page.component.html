@@ -70,7 +70,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="div-table envelop-table">
-                    <div class="trow ttitle">Envelop Investors</div>
+                    <div class="trow ttitle">Envelope Investors</div>
                     <div class="trow theader">
                         <div class="tcol">Total</div>
                         <div class="tcol">{{ currency_style(envelop_investors.total) }}</div>
@@ -119,6 +119,22 @@
                             aria-describedby="No of Investors" [value]="investment_data.totalInvestors" readonly />
                     </div>
                 </div>
+            </div>
+            <div class="col-md-8 form-group">
+                <div class="div-table expire-table">
+                    <div class="trow ttitle">Soon To Expire Investment</div>
+                    <div *ngFor="let item of expire_data; let i = index"
+                        [ngClass]="{'trow': true, 'theader': item.remainingDays<90, 'text-danger': item.remainingDays<90, 'fw-bold': item.remainingDays<90}">
+                        <div class="tcol">{{ item.remainingDays }} Days</div>
+                        <div class="tcol">{{ item.investNo }} - {{ item.investType }} {{ profit_style(item.profit) }}
+                        </div>
+                        <div class="tcol">{{ currency_style(item.investAmount) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 form-group">
                 <div class="row">
                     <div class="col-xl-7 form-group mb-4">
                         <button class="btn btn-primary" (click)="goTo('/list')">Investors</button>
@@ -141,16 +157,6 @@
                 </div>
             </div>
             <div class="col-md-8 form-group">
-                <div class="div-table expire-table">
-                    <div class="trow ttitle">Soon To Expire Investment</div>
-                    <div *ngFor="let item of expire_data; let i = index"
-                        [ngClass]="{'trow': true, 'theader': item.remainingDays<90, 'text-danger': item.remainingDays<90, 'fw-bold': item.remainingDays<90}">
-                        <div class="tcol">{{ item.remainingDays }} Days</div>
-                        <div class="tcol">{{ item.investNo }} - {{ item.investType }} {{ profit_style(item.profit) }}
-                        </div>
-                        <div class="tcol">{{ currency_style(item.investAmount) }}</div>
-                    </div>
-                </div>
                 <div class="log-entry">
                     <div class="log-title fw-bold">Newest Log Entries</div>
                     <select class="form-select" multiple aria-label="multiple select example">
