@@ -5,9 +5,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>LOG</span> {{ user.name }}</h5>
-                        <button type="button" class="btn btn-success" data-dismiss="modal">New Log Entry</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="goTo('/log-form')">New Log Entry</button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">X</span>
                         </button>
                     </div>
                     <div class="modal-body">

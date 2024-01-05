@@ -122,7 +122,6 @@ export class PortfolioComponent extends BaseComponent {
           this.investor.totalProfit = res.investors[0]?.investor?.accountBalancesTotalDeposit?.totalDeposit ?? 0;
           this.investor.totalInvestment = res.investors[0]?.investor?.totalAmountInvested?.totalInvestments ?? 0;
           this.name = `${this.userId} \"\ ${this.investor.nickname} \"\ `;
-          console.log('investor->', this.investor);
         },
         error: err => {
           this.toastrService.error(err);

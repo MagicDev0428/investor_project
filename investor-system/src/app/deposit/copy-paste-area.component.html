@@ -6,7 +6,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title ">{{ user.name }} Copy Paste Area</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">X</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -63,6 +63,9 @@
                             <div class="col-md-2 d-flex align-center form-group">
                                 <button type="button" (click)="copyToClipboard(values.text_5)" class="btn btn-success"
                                     data-dismiss="modal">Copy</button>
+                            </div>
+                            <div class="col-12 d-flex flex-row justify-content-center">
+                                <button type="button" class="btn btn-success btn-save" data-dismiss="modal">Save</button>
                             </div>
                         </div>
                     </div>

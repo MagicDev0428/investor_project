@@ -40,8 +40,8 @@ select {
         }
 
         .modal-header {
-            margin: 0.5rem 0.5rem;
-            padding: 0.25rem 0.25rem;
+            margin: 0;
+            padding: 0;
             background-color: rgb(71, 121, 6);
             border-radius: 0;
             position: relative;
@@ -70,11 +70,11 @@ select {
                 span {
                     background-color: #AAAAAA;
                     color: white;
-                    font-weight: lighter;
+                    font-weight: bold;
                     border-radius: 0.25rem;
                     display: block;
                     width: 29px;
-                    height: 29px;
+                    line-height: 29px;
                     text-align: center;
                     box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
                 }

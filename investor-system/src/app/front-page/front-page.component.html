@@ -41,7 +41,7 @@
                     </div>
                     <div *ngFor="let item of bank_investors.data; let i = index" class="trow">
                         <div class="tcol">
-                            <button *ngIf="item._id!=null" (click)="goTo('portfolio/'+item._id)"
+                            <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
                                 [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
                                 }}</button>
                         </div>
@@ -59,7 +59,7 @@
                     </div>
                     <div *ngFor="let item of transfer_investors.data; let i = index" class="trow">
                         <div class="tcol">
-                            <button *ngIf="item._id!=null" (click)="goTo('portfolio/'+item._id)"
+                            <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
                                 [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
                                 }}</button>
                         </div>
@@ -77,7 +77,7 @@
                     </div>
                     <div *ngFor="let item of envelop_investors.data; let i = index" class="trow">
                         <div class="tcol">
-                            <button *ngIf="item._id!=null" (click)="goTo('portfolio/'+item._id)"
+                            <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
                                 [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
                                 }}</button>
                         </div>
@@ -121,22 +121,22 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-primary" (click)="goTo('list')">Investors</button>
+                        <button class="btn btn-primary" (click)="goTo('/list')">Investors</button>
                     </div>
                     <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-primary" (click)="goTo('manage-investor')">New</button>
+                        <button class="btn btn-primary" (click)="goTo('/manage-investor')">New</button>
                     </div>
                     <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-info" (click)="goTo('investment-list')">Investments</button>
+                        <button class="btn btn-info" (click)="goTo('/investment-list')">Investments</button>
                     </div>
                     <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-info" (click)="goTo('investment-form')">New</button>
+                        <button class="btn btn-info" (click)="goTo('/investment-form')">New</button>
                     </div>
                     <div class="col-xl-7 form-group mb-4">
-                        <button class="btn btn-secondary" (click)="goTo('adam-table')">Adam Transaction</button>
+                        <button class="btn btn-secondary" (click)="goTo('/adam-table')">Adam Transaction</button>
                     </div>
                     <div class="col-xl-5 form-group mb-4">
-                        <button class="btn btn-secondary" (click)="goTo('adam-form')">New</button>
+                        <button class="btn btn-secondary" (click)="goTo('/adam-form')">New</button>
                     </div>
                 </div>
             </div>

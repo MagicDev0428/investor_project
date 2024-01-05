@@ -43,8 +43,8 @@ textarea {
         }
     
         .modal-header {
-            margin: 0.5rem 0.5rem;
-            padding: 0.25rem 0.25rem;
+            margin: 0;
+            padding: 0;
             background-color: rgb(71, 121, 6);
             border-radius: 0;
             position: relative;
@@ -74,11 +74,11 @@ textarea {
                 span {
                     background-color: #AAAAAA;
                     color: white;
-                    font-weight: lighter;
+                    font-weight: bold;
                     border-radius: 0.25rem;
                     display: block;
                     width: 29px;
-                    height: 29px;
+                    line-height: 29px;
                     text-align: center;
                     box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
                 }
@@ -106,5 +106,21 @@ textarea {
     label[for=email] {
         color: #11749B;
         font-weight: bold;
+    }
+}
+
+.btn-success {
+    background-color: rgb(100, 183, 5);
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 2px 5px;
+    border: 1px solid rgb(100, 183, 5);
+    z-index: 12;
+    border-radius: 4px;
+    width: 100px;
+    box-shadow: 5px 5px 4px rgba(100, 183, 5, 0.6);
+
+    &:hover {
+        background-color: rgb(69, 126, 3);
     }
 }

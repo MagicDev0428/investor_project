@@ -7,6 +7,7 @@ import * as moment from 'moment';
 export class BaseComponent {
 
     user: any = [];
+    visited_routes: any = [];
 
     constructor(
         public router: Router,
@@ -64,8 +65,23 @@ export class BaseComponent {
         return value.toString().padStart(digit, '0');
     }
 
+    goToPrev() {
+        this.visited_routes = JSON.parse(localStorage.getItem('routes')) ?? [];
+        let length = this.visited_routes.length;
+        localStorage.removeItem('routes');
+        if (length > 1) {
+            this.visited_routes.pop();
+            console.log('tar->', this.visited_routes);
+            localStorage.setItem('routes', JSON.stringify(this.visited_routes));
+            this.goTo(this.visited_routes[length - 2]);
+        } else {
+            this.visited_routes.pop();
+            this.goTo('/');
+        }
+    }
+
     getYearsAndMonths(months: any) {
-        if(!months) {
+        if (!months) {
             return 'more than 6 months';
         }
         let duration = moment.duration(months, 'months');

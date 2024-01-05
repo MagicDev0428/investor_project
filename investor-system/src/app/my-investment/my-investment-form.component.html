@@ -6,10 +6,10 @@
                     <div class="modal-header">
                         <h5 class="modal-title "><span>{{ section }}: </span>{{ title }}</h5>
                         <button type="button" class="info-btn" data-dismiss="modal" aria-label="Info"
-                            (click)="goTo('')">
+                            (click)="goTo('/')">
                             <span aria-hidden="true">i</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goTo('')">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goToPrev()">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -122,7 +122,7 @@
                                     </span>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="profitEnd">Profit pr End</label>
+                                    <label for="profitEnd">One Time Profit</label>
                                     <input formControlName="profitEnd" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitEnd" aria-describedby="profitEnd" />
                                     <span class="text-danger"
@@ -171,7 +171,7 @@
                                         aria-describedby="torbenYearly" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="torbenEnd">Torben pr End</label>
+                                    <label for="torbenEnd">Torben One Time</label>
                                     <input formControlName="torbenEnd" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenEnd" aria-describedby="torbenEnd" />
                                 </div>

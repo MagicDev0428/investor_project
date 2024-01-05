@@ -5,7 +5,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title ">INVESTORS</h5>
-            <button type="button" (click)="goFront()" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="goToPrev()" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">x</span>
             </button>
           </div>
@@ -33,7 +33,7 @@
                 <div class="tcol">Facebook</div>
                 <div class="tcol">Folder</div>
               </div>
-              <div class="trow" *ngFor="let item of items" (click)="goTo('portfolio/'+item._id)">
+              <div class="trow" *ngFor="let item of items" (click)="goTo('/portfolio/'+item._id)">
                 <div class="tcol">
                   <div>
                     <span class="name">{{ item._id }}</span>
@@ -51,7 +51,7 @@
                 <div class="tcol">{{ currency_style(item.amount) }}</div>
                 <div class="tcol">{{ currency_style(item.profit) }}</div>
                 <div class="tcol">{{ item.transferType }}</div>
-                <div class="tcol"><app-profit-button [profitStyle]="'Red'" (click)="goTo('portfolio/'+item._id)">{{ item.next_profit
+                <div class="tcol"><app-profit-button [profitStyle]="'Red'" (click)="goTo('/portfolio/'+item._id)">{{ item.next_profit
                     }}</app-profit-button>
                 </div>
                 <div class="tcol"><a [href]="'mailTo:'+item.email">{{ item.email }}</a></div>
