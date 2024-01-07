@@ -14,13 +14,6 @@ import { FormBuilder } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
 import { ToastrService } from 'ngx-toastr';
 
-const temp = [
-  { createdDate: '15 Nov 2023', time: '12:45', type: 'INVESTOR', description: 'added new investment 45,000,000', customer: 'Mark Snowman', investmentNo: '007', createdBy: 'Bee' },
-  { createdDate: '15 Nov 2023', time: '13:48', type: 'EMAIL', description: 'profit mail from April sent to Gram', customer: 'Peter Gram', investmentNo: '012', createdBy: 'Torben' },
-  { createdDate: '15 Nov 2023', time: '12:45', type: 'INVESTOR', description: 'added new investment 45,000,000', customer: 'Mark Snowman', investmentNo: '007', createdBy: 'Bee' },
-  { createdDate: '15 Nov 2023', time: '13:48', type: 'EMAIL', description: 'profit mail from April sent to Gram', customer: 'Peter Gram', investmentNo: '012', createdBy: 'Torben' },
-]
-
 @Component({
   selector: 'app-log-list',
   templateUrl: './log-list.component.html',

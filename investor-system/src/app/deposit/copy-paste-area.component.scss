@@ -63,7 +63,7 @@ textarea {
     
             .close {
                 position: absolute;
-                right: 6px;
+                right: 0;
                 font-style: italic;
                 text-shadow: none;
                 opacity: 1;
@@ -86,7 +86,7 @@ textarea {
         }
     
         .modal-body {
-            padding: 0 30px 10px 30px;
+            padding: 10px 30px 10px 30px;
         }
     }
 }

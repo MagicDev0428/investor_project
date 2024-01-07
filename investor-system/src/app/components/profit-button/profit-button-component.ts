@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 const btnStyles = {
-    Red: 'btn btn-danger',
-    Yellow: 'btn btn-warning',
-    Green: 'btn btn-success'
+    red: 'btn btn-danger text-nowrap',
+    yellow: 'btn btn-warning text-nowrap',
+    green: 'btn btn-success text-nowrap'
 }
 
 @Component({

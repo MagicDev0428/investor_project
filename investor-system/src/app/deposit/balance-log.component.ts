@@ -1,24 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, from, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
-
-const temp = [
-    "25-Jul-2023 created the Investment [Torben]",
-    "26-Jul-2023 updated the Investment [Bee]",
-    "28-Jul-2023 added new Investment 4,500,000 from Mark [Torben]",
-    "28-Aug-2023 added new Investment 3,000,000 from Mark [Torben]",
-    "15-Sep-2023 paid profit 90,000 to Mark [Bee]",
-    "15-Sep-2023 sent Email to Mark [Bee]",
-    "15-Sep-2023 paid profit 60,000 to Mark [Bee]",
-    "15-Sep-2023 Mark withdraw 50,000 [Bee]",
-    "15-Oct-2023 paid profit 90,000 to Mark [Bee]",
-];
-
-
+import { LogService } from '../service/log.service';
 
 @Component({
     selector: 'app-balance-log',
@@ -28,6 +15,7 @@ const temp = [
 
 export class BalanceLogComponent extends BaseComponent implements OnInit {
     @Output() isShown = new EventEmitter<boolean>();
+    @Input() params: any = {};
 
     userId: any = '';
     values: any[] = [];
@@ -35,7 +23,7 @@ export class BalanceLogComponent extends BaseComponent implements OnInit {
     createdBy = '';
     modifiedDate = '';
     modifiedBy = '';
-    log_entry = [];
+    log_entry: any = [];
 
 
     protected submitted = false;
@@ -45,12 +33,22 @@ export class BalanceLogComponent extends BaseComponent implements OnInit {
         auth: AuthService,
         toastrService: ToastrService,
         private activatedRoute: ActivatedRoute,
+        private logService: LogService,
     ) {
         super(router, auth, toastrService);
     }
 
     ngOnInit(): void {
-        this.log_entry = temp;
+        this.userId = this.params?.params?.userId;
+        if (this.userId !== undefined) {
+            this.logService.getInvestorLogs(this.userId).subscribe((res) => {
+                this.log_entry = res.logs.map((log) => {
+                    log.date = moment(log._id).format('DD-MMM-YYYY');
+                    log.time = moment(log._id).format('HH:mm');
+                    return log;
+                });
+            });
+        }
     }
 
     deleteTransaction(_id: any) {

@@ -1,7 +1,7 @@
 <div [hidden]="isShown" #dialog class="drag-dialog" [style.left.px]="left" [style.top.px]="top" (mousedown)="onMouseDown($event)">
-    <app-copy-paste (isShown)="onClose($event)" *ngIf="comp==='copy-paste'"></app-copy-paste>
-    <app-balance (isShown)="onClose($event)" *ngIf="comp==='balance'"></app-balance>
-    <app-hidden (isShown)="onClose($event)" *ngIf="comp==='hidden'"></app-hidden>
-    <app-balance-log (isShown)="onClose($event)" *ngIf="comp==='balance-log'"></app-balance-log>
-    <app-balance-investor (isShown)="onClose($event)" *ngIf="comp==='balance-investor'"></app-balance-investor>
+    <app-copy-paste [params]="{params}" (isShown)="onClose($event)" *ngIf="comp==='copy-paste'"></app-copy-paste>
+    <app-balance [params]="{params}" (isShown)="onClose($event)" *ngIf="comp==='balance'"></app-balance>
+    <app-hidden [params]="{params}" (isShown)="onClose($event)" *ngIf="comp==='hidden'"></app-hidden>
+    <app-balance-log [params]="{params}" (isShown)="onClose($event)" *ngIf="comp==='balance-log'"></app-balance-log>
+    <app-balance-investor [params]="{params}" (isShown)="onClose($event)" *ngIf="comp==='balance-investor'"></app-balance-investor>
 </div>

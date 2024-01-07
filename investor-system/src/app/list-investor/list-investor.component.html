@@ -13,7 +13,8 @@
             <div class="search-panel">
               <div class="d-flex flex-row form-group">
                 <label class="col-form-label" for="search">Search Investor:</label>
-                <input type="text" [(ngModel)]="searchTerm" (keyup)="onSearch($event)"  class="form-control" id="search" aria-describedby="search" />
+                <input type="text" [(ngModel)]="searchTerm" (keyup)="onSearch($event)" class="form-control" id="search"
+                  aria-describedby="search" />
               </div>
               <div>
                 <!-- <button type="button" *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" 
@@ -38,12 +39,21 @@
                   <div>
                     <span class="name">{{ item._id }}</span>
                     <div class="button-group">
-                      <button type="button" (click)="goInfo(item._id)" class="btn btn-secondary mr-1" data-dismiss="modal"
+                      <button type="button" (click)="goTo('info/'+ item._id)" class="btn btn-secondary" data-dismiss="modal"
                         aria-label="Icon Button">
                         <span aria-hidden="true">i</span>
                       </button>
-                      <button type="button" (click)="goForm(item._id)" class="btn btn-secondary" data-dismiss="modal" aria-label="Icon Button">
+                      <button type="button" (click)="goTo('manage-investor/'+ item._id)" class="btn btn-secondary" data-dismiss="modal"
+                        aria-label="Icon Button">
                         <span aria-hidden="true">E</span>
+                      </button>
+                      <button type="button" (click)="goTo('portfolio/'+ item._id)" class="btn btn-success" data-dismiss="modal"
+                        aria-label="Icon Button">
+                        <span aria-hidden="true">P</span>
+                      </button>
+                      <button type="button" (click)="goTo('my-investments/'+ item._id)" class="btn btn-dark"
+                        data-dismiss="modal" aria-label="Icon Button">
+                        <span aria-hidden="true">C</span>
                       </button>
                     </div>
                   </div>
@@ -51,12 +61,13 @@
                 <div class="tcol" (click)="goTo('/portfolio/'+item._id)">{{ currency_style(item.amount) }}</div>
                 <div class="tcol" (click)="goTo('/portfolio/'+item._id)">{{ currency_style(item.profit) }}</div>
                 <div class="tcol" (click)="goTo('/portfolio/'+item._id)">{{ item.transferType }}</div>
-                <div class="tcol"><app-profit-button [profitStyle]="'Red'" (click)="goTo('/portfolio/'+item._id)">{{ item.next_profit
-                    }}</app-profit-button>
+                <div class="tcol"><app-profit-button *ngIf="item.nextProfit" [profitStyle]="item.btnColor"
+                    [text]="item.nextProfit" (click)="goTo('/portfolio/'+item._id)"></app-profit-button>
                 </div>
                 <div class="tcol"><a [href]="'mailTo:'+item.email">{{ item.email }}</a></div>
-                <div class="tcol"><a target="_blank" [href]="item.facebook">Facebook</a></div>
-                <div class="tcol"><a target="_blank" href="https://drive.google.com/drive/folders/{{item.investorFolderId}}">FOLDER</a></div>
+                <div class="tcol"><a (click)="goToExternal(item.facebook)">Facebook</a></div>
+                <div class="tcol"><a target="_blank"
+                    href="https://drive.google.com/drive/folders/{{item.investorFolderId}}">FOLDER</a></div>
               </div>
             </div>
           </div>

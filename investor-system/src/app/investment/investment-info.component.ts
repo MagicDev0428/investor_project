@@ -101,8 +101,8 @@ export class InvestmentInfoComponent extends BaseComponent {
       this.myInvestments = res.investmentInfo[0].investments?.myInvestmentsList?.myInvestmentsList?.map(obj => {
         obj.amountInvested = this.currency_style(obj.amountInvested);
         obj.profitMonthlyPct = this.profit_style(obj.profitMonthlyPct);
-        obj.transferDate = moment(obj.transferDate).format('DD-MMM-YYYY');
-        obj.firstProfitDate = moment(obj.firstProfitDate).format('DD-MMM-YYYY');
+        obj.transferDate = obj.transferDate ? moment(obj.transferDate).format('DD-MMM-YYYY') : '';
+        obj.firstProfitDate = obj.firstProfitDate ? moment(obj.firstProfitDate).format('DD-MMM-YYYY') : '';
         return obj;
       });
       this.sumOfTotalAmountInvested = this.currency_style(res.investmentInfo[0].investments?.myInvestmentsList?.sumOfTotalAmountInvested)
@@ -143,13 +143,13 @@ export class InvestmentInfoComponent extends BaseComponent {
       this.investmentInfoForm.get('monthlyProfit').enable();
       this.investmentInfoForm.get('annualProfit').enable();
       this.investmentInfoForm.get('endProfit').enable();
-      if(this.investmentInfo.investments?.profitMonthly !== 0) {
+      if (this.investmentInfo.investments?.profitMonthly !== 0) {
         this.title += this.profit_style(this.investmentInfo.investments?.profitMonthly);
       }
-      else if(this.investmentInfo.investments?.profitYearly !== 0) {
+      else if (this.investmentInfo.investments?.profitYearly !== 0) {
         this.title += this.profit_style(this.investmentInfo.investments?.profitYearly);
       }
-      else if(this.investmentInfo.investments?.profitEnd !== 0) {
+      else if (this.investmentInfo.investments?.profitEnd !== 0) {
         this.title += this.profit_style(this.investmentInfo.investments?.profitEnd);
       }
     }

@@ -1,5 +1,4 @@
 export class MyInvestment {
-    _id: number;
     investmentNo: number;
     investorName: string;
     amountInvested: string;

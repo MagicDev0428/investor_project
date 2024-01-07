@@ -44,7 +44,9 @@ export class AddMoneyEnvComponent extends BaseComponent implements OnInit {
     monthName: 'Aug',
     year: '2023'
   }
+  dialogParam: any = [];
 
+  selectedInvestor$!: Observable<string | number>;
   protected payProfitForm: FormGroup;
   protected submitted = false;
 
@@ -57,6 +59,11 @@ export class AddMoneyEnvComponent extends BaseComponent implements OnInit {
   ) {
     super(router, auth, toastrService);
     this.nowDateTime = new Date();
+    this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.selectedInvestor$.subscribe(res => {
+      this.userId = res;
+      this.dialogParam.userId = this.userId;
+    });
   }
 
   ngOnInit(): void {

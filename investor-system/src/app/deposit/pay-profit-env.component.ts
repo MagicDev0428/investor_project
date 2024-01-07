@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable, from, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -42,9 +43,11 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
     monthName: 'Aug',
     year: '2023'
   }
+  dialogParam: any = [];
 
   dialogVisible: boolean = true;
 
+  selectedInvestor$!: Observable<string | number>;
   protected payProfitForm: FormGroup;
   protected submitted = false;
 
@@ -57,6 +60,11 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   ) {
     super(router, auth, toastrService);
     this.nowDateTime = new Date();
+    this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.selectedInvestor$.subscribe(res => {
+      this.userId = res;
+      this.dialogParam.userId = this.userId;
+    });
   }
 
   ngOnInit(): void {

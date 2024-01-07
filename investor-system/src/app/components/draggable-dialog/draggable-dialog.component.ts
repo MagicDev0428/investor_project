@@ -1,5 +1,5 @@
 // my-dialog.component.ts
-import { Component, ElementRef, AfterViewInit, ViewChild, ChangeDetectorRef, ApplicationRef } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, ChangeDetectorRef, ApplicationRef, Input } from '@angular/core';
 
 @Component({
   selector: 'app-drag-dialog',
@@ -8,6 +8,7 @@ import { Component, ElementRef, AfterViewInit, ViewChild, ChangeDetectorRef, App
 })
 export class DraggableDialogComponent implements AfterViewInit {
   @ViewChild('dialog') dialog: ElementRef;
+  @Input() params: any = {};
 
   left: number = 0;
   top: number = 0;

@@ -173,8 +173,9 @@
   background-color: rgb(31, 78, 120);
   font-weight: bold;
   font-size: 1.2rem;
+  letter-spacing: 0.3rem;
   box-shadow: 5px 5px 4px rgba(31, 78, 120, 0.4);
-  width: 70%;
+  width: 80%;
   height: 50px;
 
   &:hover {
@@ -186,9 +187,10 @@
   background-color: rgb(140, 3, 17);
   font-weight: bold;
   font-size: 1rem;
+  letter-spacing: 0.3rem;
   box-shadow: 5px 5px 4px rgba(140, 3, 17, 0.4);
   right: 0;
-  width: 70%;
+  width: 50%;
   height: 50px;
   padding: 2px;
 }

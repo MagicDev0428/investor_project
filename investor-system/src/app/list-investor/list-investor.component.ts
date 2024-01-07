@@ -46,9 +46,13 @@ export class ListInvestorComponent extends BaseComponent {
         investor = investor.investor;
         investor.name = investor?._id;
         investor.amount = investor?.accountInvestments?.totalInvested;
-        investor.profit = investor.accountInvestments?.totalProfitMonthly;
-        // let nextProfit = investor.accountBalances?
-        // investor.nextProfit = 
+        investor.profit = investor?.accountInvestments?.totalProfitMonthly;
+        investor.nextProfit = '';
+        let nextProfit = investor?.accountBalances?.nextMonth??'';
+        if(nextProfit !== '') {
+          investor.nextProfit = moment(nextProfit).format('MMM-YYYY');
+        }
+        investor.btnColor = investor?.accountBalances?.buttonColor.toLowerCase()??'';
         if(investor.amount === undefined) {
           investor.amount = 0;
         }
@@ -67,22 +71,6 @@ export class ListInvestorComponent extends BaseComponent {
     if (this.searchTerm === "") {
       this.items = this.temp;
     }
-  }
-
-  goForm(id: string = '') {
-    if (id.length === 0) {
-      this.router.navigate(['/manage-investor']);
-    } else {
-      this.router.navigate(['/manage-investor/' + id]);
-    }
-  }
-
-  goFront() {
-    this.router.navigate(['/front-page/']);
-  }
-
-  goInfo(id: string = '') {
-      this.router.navigate(['/info/' + id]);
   }
 
   orderTable(column: string) {

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Observable, from, map } from 'rxjs';
@@ -6,34 +6,7 @@ import { BaseComponent } from '../base/base.component';
 import { InvestmentService } from '../service/investment.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { ToastrService } from 'ngx-toastr';
-
-const base_temp = {
-  email: 'bee@sunnythailand.com',
-  phoneNumber: '+66 123-123-1234',
-  newestPayment: '16-Nov-2023',
-  address: [
-    'Naklua Road Soi 16/2 Gai, Naklua',
-    'Banglamung Region',
-    '20120 Pattaya',
-    'Thailand'
-  ],
-  moneyTransferInfo: [
-    'K-Bank (Central Branch)',
-    'Mr. Mark Sejr Snowman',
-    '552-1-034547'
-  ]
-}
-
-const investment_temp = {
-  all_investment: 9500000,
-  totalProfitPaid: 9500000,
-  totalProfitPaidPct: 126.4,
-  investments: [
-    [4500000, 2, 90000, '15-Jul-2023', '15-Jul-2023', '15-Jul-2023', 190000, 'Special deal with Mark where he\'\s allowed'],
-    [2000000, 2.5, 50000, '15-Jul-2023', '15-Jul-2023', '15-Jul-2023', 150000, 'Special deal with Mark where he\'\s allowed'],
-    [3000000, 3, 90000, '15-Jul-2023', '15-Jul-2023', '15-Jul-2023', 190000, 'Special deal with Mark where he\'\s allowed']
-  ]
-}
+import { BalanceService } from '../service/balance.service';
 
 const profit_balance_temp = {
   balance: 9500000,
@@ -64,12 +37,11 @@ const profit_balance_temp = {
 
 export class BalanceComponent extends BaseComponent {
   @Output() isShown = new EventEmitter<boolean>();
+  @Input() params: any = {};
 
   amount = '';
+  userId = '';
   investmentId: any = '';
-  name: string = 'Mark Sejr Snowman (Mark)';
-  base_info: any = [];
-  investments: any = [];
   profit_balance: any = [];
 
   selectedInvestment$!: Observable<string | number>;
@@ -81,22 +53,29 @@ export class BalanceComponent extends BaseComponent {
     private activatedRoute: ActivatedRoute,
     private investmentService: InvestmentService,
     private formBuilder: FormBuilder,
+    private balanceService: BalanceService,
   ) {
     super(router, auth, toastrService);
     this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestment$.subscribe(res => {
       this.investmentId = res;
     });
-    this.auth.user$.subscribe(result => {
-      this.user = result['investor-system'];
-      this.name = this.user.name;
-    });
   }
 
   ngOnInit(): void {
-    this.base_info = base_temp;
-    this.investments = investment_temp;
     this.profit_balance = profit_balance_temp;
+    this.userId = this.params?.params?.userId;
+        if (typeof this.userId !== 'undefined') {
+            this.balanceService.getInvestorBalance(this.userId).subscribe({
+                next: (res) => {
+                    console.log('res->', res);
+                },
+                error: err => {
+                    this.toastrService.error(err);
+                },
+                complete: () => console.log('There are no more action happen.')
+            });
+        }
   }
 
   onClose() {
