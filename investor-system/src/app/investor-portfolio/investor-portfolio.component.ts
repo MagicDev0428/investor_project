@@ -64,13 +64,12 @@ const profit_balance_temp = {
 export class InvestorPortfolioComponent extends BaseComponent {
 
   amount = '';
-  investmentId: any = '';
-  name: string = 'Mark Sejr Snowman (Mark)';
+  userId: any = 'Mark Sejr Snowman (Mark)';
   base_info: any = [];
   investments: any = [];
   profit_balance: any = [];
 
-  selectedInvestment$!: Observable<string | number>;
+  selectedInvestor$!: Observable<string | number>;
 
   constructor(
     router: Router,
@@ -81,14 +80,9 @@ export class InvestorPortfolioComponent extends BaseComponent {
     private formBuilder: FormBuilder,
   ) {
     super(router, auth, toastrService);
-    this.selectedInvestment$ = activatedRoute.params.pipe(map(p => p['id']));
-    this.selectedInvestment$.subscribe(res => {
-      this.investmentId = res;
-    });
-    this.auth.user$.subscribe(result => {
-      console.log('user->', result);
-      this.user = result['investor-system'];
-      this.name = this.user.name;
+    this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.selectedInvestor$.subscribe(res => {
+      this.userId = res??'None';
     });
   }
 
