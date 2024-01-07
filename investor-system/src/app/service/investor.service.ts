@@ -36,7 +36,8 @@ export class InvestorService {
     isAdmin: undefined,
     transferType: '',
     transferInfo: '',
-    investorFolderId: ''
+    investorFolderId: '',
+    lastLogin: undefined
   }
 
   constructor(

@@ -335,7 +335,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         this.myInvestmentService.updateMyInvestment(this.myInvestment).subscribe({
           next: (res) => {
             this.toastrService.success('MyInvestment was successfully updated!');
-            // this.goList();
+            
           },
           error: err => {
             this.toastrService.error(err);

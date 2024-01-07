@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
+import * as moment from 'moment'
 
 import {
   AbstractControl,
@@ -28,7 +29,7 @@ import { InvestorService } from '../service/investor.service';
 export class ManageInvestorComponent extends BaseComponent implements OnInit {
 
   selectedInvestor$!: Observable<string | number>;
-  investor: Investor = {
+  investor: any = {
     _id: undefined,
     name: '',
     nickname: '',
@@ -52,7 +53,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
     isAdmin: false,
     transferType: '',
     transferInfo: '',
-    investorFolderId: ''
+    investorFolderId: '',
   }
   files: any[] = [];
   userId;
@@ -102,7 +103,8 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         passportImages: new FormControl(),
         pincode: new FormControl(this.generatePinCode(), Validators.required),
         transferType: new FormControl(""),
-        transferInfo: new FormControl("")
+        transferInfo: new FormControl(""),
+        lastLogin: new FormControl(""),
       });
 
     this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator]);
@@ -133,6 +135,8 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
           this.addInvestorForm.get('pincode').setValue(this.values['pincode']);
           this.addInvestorForm.get('transferType').setValue(this.values['transferType']);
           this.addInvestorForm.get('transferInfo').setValue(this.values['transferInfo']);
+          let lastLogin = this.values['lastLogin'];
+          this.addInvestorForm.get('lastLogin').setValue(lastLogin ? moment(lastLogin).format('DD-MMM-YYYY HH:mm') : "");
         },
         complete: () => console.log('There are no more action happen.')
       });

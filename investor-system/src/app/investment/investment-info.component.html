@@ -89,7 +89,6 @@
                                             <div class="tcol">Profit Amount</div>
                                             <div class="tcol">Transfer Date</div>
                                             <div class="tcol">First Profit Date</div>
-                                            <div class="tcol">Total Profit</div>
                                         </div>
                                         <div *ngFor="let item of myInvestments; let i = index" class="trow">
                                             <div class="tcol">{{ item.investorName }}</div>
@@ -98,7 +97,6 @@
                                             <div class="tcol">{{ item.transferDate }}</div>
                                             <div class="tcol">{{ item.transferDate }}</div>
                                             <div class="tcol">{{ item.firstProfitDate }}</div>
-                                            <div class="tcol">{{ currency_style(item.amount) }}</div>
                                         </div>
                                     </div>
                                 </div>
