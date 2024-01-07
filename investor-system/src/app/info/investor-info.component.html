@@ -113,7 +113,7 @@
                                 <label for="new_pay">Newest Payment</label>
                                 <input type="text" (dblclick)="copyToClipboard(investor.newestPayment)"
                                     class="form-control text-end" id="new_pay" aria-describedby="Newest Payment"
-                                    [value]="investor.newestPayment??''" readonly />
+                                    [value]="investor.newestPayment??'0'" readonly />
                             </div>
                             <div class="col-md-3 col-sm-6 form-group">
                                 <label for="total_profit">Total Profit</label>
@@ -123,7 +123,8 @@
                             </div>
                             <div class="col-md-3 col-sm-6 form-group">
                                 <label for="total_invest">Total Investment</label>
-                                <input type="text" (dblclick)="copyToClipboard(currency_style(investor.totalInvestment))"
+                                <input type="text"
+                                    (dblclick)="copyToClipboard(currency_style(investor.totalInvestment))"
                                     class="form-control text-end" id="total_invest" aria-describedby="Total Investment"
                                     [value]="currency_style(investor.totalInvestment??0)" readonly />
                             </div>
@@ -136,10 +137,8 @@
                                 </a>
                             </div>
                             <div class="col-sm-4 mb-2">
-                                <a target="_blank"
-                                    href="{{ investor.facebook }}">
-                                    <button type="button" class="btn btn-block btn-secondary">FACEBOOK</button>
-                                </a>
+                                <button type="button" class="btn btn-block btn-secondary"
+                                    (click)="goToExternal(investor.facebook)">FACEBOOK</button>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <a href="mailTo:{{ investor.email }}"><button type="button"

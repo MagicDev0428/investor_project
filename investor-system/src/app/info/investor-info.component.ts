@@ -77,7 +77,7 @@ export class InvestorInfoComponent extends BaseComponent {
           this.investor.investFor = this.getYearsAndMonths(res.investors[0]?.investor?.accountInvestments?.investForMonths);
           this.investor.monthlyProfit = res.investors[0]?.investor?.accountInvestments?.totalMonthlyProfit ?? 0;
           let newPayment = res.investors[0]?.investor?.latestAccountBalances?.latestBalance[0]?.profitMonth;
-          this.investor.newestPayment = newPayment ? moment(newPayment).format('DD-MMM-YYYY') : "";
+          this.investor.newestPayment = newPayment ? moment(newPayment).format('DD-MMM-YYYY') : "0";
           this.investor.totalProfit = res.investors[0]?.investor?.accountBalancesTotalDeposit?.totalDeposit ?? 0;
           this.investor.totalInvestment = res.investors[0]?.investor?.totalAmountInvested?.totalInvestments ?? 0;
           this.title = `${this.investor._id} \"\ ${this.investor.nickname} \"\ `;

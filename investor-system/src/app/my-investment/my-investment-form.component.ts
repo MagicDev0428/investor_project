@@ -52,7 +52,6 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
 
   selectedMyInvestment$!: Observable<string | number>;
   myInvestment: MyInvestment = {
-    _id: 0,
     investmentNo: 0,
     investorName: '',
     amountInvested: '',

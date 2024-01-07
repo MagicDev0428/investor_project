@@ -49,6 +49,7 @@ export class PortfolioComponent extends BaseComponent {
   }
   investments: any = [];
   profit_balance: any = [];
+  dialogParam: any = {};
 
   selectedInvestor$!: Observable<string | number>;
 
@@ -63,6 +64,7 @@ export class PortfolioComponent extends BaseComponent {
     this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
     this.selectedInvestor$.subscribe(res => {
       this.userId = res;
+      this.dialogParam.userId = this.userId;
     });
   }
 

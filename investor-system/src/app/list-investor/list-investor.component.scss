@@ -98,6 +98,34 @@ textarea.form-control {
     }
 }
 
+.btn-dark {
+    height: calc(1.5em + 0.75rem + 2px);
+    background-color: rgb(128, 128, 128);
+    padding: 6px 24px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    box-shadow: 5px 5px 4px rgba(128, 128, 128, 0.4);
+    border: none;
+
+    &:hover {
+        background-color: rgb(80, 80, 80);
+    }
+}
+
+.btn-success {
+    height: calc(1.5em + 0.75rem + 2px);
+    background-color: rgb(69, 110, 2);
+    padding: 6px 24px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    box-shadow: 5px 5px 4px rgba(69, 110, 2, 0.4);
+    border: none;
+
+    &:hover {
+        background-color: rgb(34, 54, 1);
+    }
+}
+
 .search-panel {
     padding-top: 1rem;
     display: flex;
@@ -150,12 +178,20 @@ textarea.form-control {
                     flex-direction: row;
                     justify-content: space-between;
                 }
-        
+
                 span {
                     width: auto;
                 }
-        
+
                 button:nth-child(1) {
+                    margin-right: 10px;
+                }
+                
+                button:nth-child(2) {
+                    margin-right: 10px;
+                }
+
+                button:nth-child(3) {
                     margin-right: 10px;
                 }
             }
@@ -163,76 +199,76 @@ textarea.form-control {
             &:nth-child(2) {
                 text-align: right;
             }
-        
+
             &:nth-child(3) {
                 text-align: right;
             }
-        
+
             &:nth-child(4) {
                 text-align: left;
             }
-        
+
             &:nth-child(5) {
                 text-align: center;
                 vertical-align: middle;
                 padding: 8px 4px;
-        
+
                 button {
                     font-size: 11pt;
                 }
             }
-        
+
             &:nth-child(6) {
                 text-align: left;
                 color: rgb(32, 32, 255);
                 text-decoration: underline;
-        
+
                 a {
                     color: rgb(32, 32, 255);
                 }
-        
+
                 a:active {
                     color: rgb(32, 32, 255);
                 }
-        
+
                 a:focuse {
                     color: rgb(32, 32, 255);
                 }
             }
-        
+
             &:nth-child(7) {
                 text-align: center;
                 color: rgb(32, 32, 255);
                 font-weight: bold;
                 text-decoration: underline;
-        
+
                 a {
                     color: rgb(32, 32, 255);
                 }
-        
+
                 a:active {
                     color: rgb(32, 32, 255);
                 }
-        
+
                 a:focuse {
                     color: rgb(32, 32, 255);
                 }
             }
-        
+
             &:nth-child(8) {
                 text-align: center;
                 color: rgb(32, 32, 255);
                 font-weight: bold;
                 text-decoration: underline;
-        
+
                 a {
                     color: rgb(32, 32, 255);
                 }
-        
+
                 a:active {
                     color: rgb(32, 32, 255);
                 }
-        
+
                 a:focuse {
                     color: rgb(32, 32, 255);
                 }
@@ -297,7 +333,9 @@ textarea.form-control {
         flex-direction: row;
         float: right;
 
-        .btn-secondary {
+        .btn-secondary,
+        .btn-dark,
+        .btn-success {
             font-size: 1rem;
             font-style: italic;
             font-weight: normal;
@@ -307,17 +345,21 @@ textarea.form-control {
             height: 29px;
         }
 
-        .btn-secondary span {
-            background-color: rgb(31, 78, 120);
-            color: white;
-            font-weight: bold;
-            border-radius: 0.25rem;
-            display: block;
-            width: 29px;
-            height: 29px;
-            text-align: center;
-            box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
-            line-height: 29px;
+        .btn-secondary,
+        .btn-dark,
+        .btn-success {
+            span {
+                // background-color: rgb(31, 78, 120);
+                color: white;
+                font-weight: bold;
+                border-radius: 0.25rem;
+                display: block;
+                width: 29px;
+                height: 29px;
+                text-align: center;
+                box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+                line-height: 29px;
+            }
         }
     }
 }

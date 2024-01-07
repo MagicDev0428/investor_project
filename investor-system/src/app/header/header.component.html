@@ -20,11 +20,11 @@
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
             [routerLink]="['list']">Investors</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a data-bs-target="#navbarNav" class="nav-link" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
             [routerLink]="['portfolio']">Balance</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a data-bs-target="#navbarNav" class="nav-link" (click)="toggleNavbar()"
             *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"

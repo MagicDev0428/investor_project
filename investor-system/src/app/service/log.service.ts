@@ -22,11 +22,11 @@ export class LogService {
   }
 
   constructor(
-    private http: HttpClient, 
-    private _configService: configService, 
-    private toasterService: ToastrService) { 
+    private http: HttpClient,
+    private _configService: configService,
+    private toasterService: ToastrService) {
 
-    }
+  }
 
   logList(): Observable<any> {
     return this.http.get<any>(environment.apiUrl + this.apiURL + '/loglist')
@@ -60,5 +60,12 @@ export class LogService {
     return this.http.post<any>(environment.apiUrl + this.apiURL + '/createlog/', modelData).pipe(
       catchError(this._configService.handleError)
     );;
+  }
+  getInvestorLogs(id: number | string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorlogs/' + id)
+      .pipe(
+        map((investor) => investor),
+        catchError(this._configService.handleError)
+      );
   }
 }

@@ -52,6 +52,7 @@ const routes: Routes = [
   {path: 'investment-info', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
   {path: 'investment-info/:id', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
   {path: 'my-investments', component: InvestorPortfolioComponent},
+  {path: 'my-investments/:id', component: InvestorPortfolioComponent},
   {path: 'my-investment-form', component: MyInvestmentFormComponent, canActivate: [AuthGuardFN]},
   {path: 'my-investment-form/:id', component: MyInvestmentFormComponent, canActivate: [AuthGuardFN]},
   {path: 'log-list', component: LogListComponent, canActivate: [AuthGuardFN]},
@@ -59,15 +60,15 @@ const routes: Routes = [
   {path: 'log-form/:id', component: LogFormComponent, canActivate: [AuthGuardFN]},
   {path: 'total', component: TotalComponent, canActivate: [AuthGuardFN]},
   {path: 'portfolio/:id', component: PortfolioComponent, canActivate: [AuthGuardFN]},
-  {path: 'pay-profit-env', component: PayProfitEnvComponent, canActivate: [AuthGuardFN]},
+  {path: 'pay-profit-env/:id', component: PayProfitEnvComponent, canActivate: [AuthGuardFN]},
   {path: 'balance', component: BalanceComponent, canActivate: [AuthGuardFN]},
   {path: 'hidden-text', component: HiddenTextComponent, canActivate: [AuthGuardFN]},
   {path: 'copy-paste', component: CopyPasteAreaComponent, canActivate: [AuthGuardFN]},
   {path: 'balance-log', component: BalanceLogComponent, canActivate: [AuthGuardFN]},
-  {path: 'pay-profit-bank', component: PayProfitBankComponent, canActivate: [AuthGuardFN]},
-  {path: 'add-money-env', component: AddMoneyEnvComponent, canActivate: [AuthGuardFN]},
-  {path: 'withdraw-crypto', component: WithdrawCryptoComponent, canActivate: [AuthGuardFN]},
-  {path: 'withdraw-cash', component: WithdrawCashComponent, canActivate: [AuthGuardFN]}
+  {path: 'pay-profit-bank/:id', component: PayProfitBankComponent, canActivate: [AuthGuardFN]},
+  {path: 'add-money-env/:id', component: AddMoneyEnvComponent, canActivate: [AuthGuardFN]},
+  {path: 'withdraw-crypto/:id', component: WithdrawCryptoComponent, canActivate: [AuthGuardFN]},
+  {path: 'withdraw-cash/:id', component: WithdrawCashComponent, canActivate: [AuthGuardFN]}
 ];
 
 @NgModule({

@@ -1,35 +1,16 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 import { InvestorService } from '../service/investor.service';
 import { Observable, map } from 'rxjs';
-import { Investor } from '../model/investor';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '@auth0/auth0-angular';
+import * as moment from "moment";
 
 interface Message {
   message?: string;
   err?: boolean;
   error?: string;
-}
-
-const temp_data = {
-  nickname: "Mark",
-  name: "Mark Sejr Snowman",
-  phone: "+66 123-123-1234",
-  address: "Nakula Road Soi 16/2 Gai, Nakia \nBangulamung Region \n20120 Pattaya \nThailand",
-  email: "bee@sunnythailand.com",
-  zipcode: "20120",
-  city: "Pattaya",
-  country: "Thailand",
-  first_invest: "01-Feb-2023",
-  invest_for: "5 years, 2 months",
-  transfer_info: "K-Bank (Central Branch) \nMr. Mark Sejr Snowman \n552-1-034547",
-  monthly_profit: 123465,
-  new_pay: "16-Nov-2023",
-  total_profit: 123456,
-  total_invest: 1200000
 }
 
 @Component({
@@ -39,16 +20,15 @@ const temp_data = {
 })
 
 export class BalanceInvestorComponent extends BaseComponent {
+  @Input() params: any = [];
   @Output() isShown = new EventEmitter<boolean>();
 
   selectedInvestor$!: Observable<string | number>;
-
-  data = temp_data;
   userId;
   values: any = [];
   title = '';
 
-  investor: Investor = {
+  investor: any = {
     _id: undefined,
     name: '',
     nickname: '',
@@ -90,11 +70,19 @@ export class BalanceInvestorComponent extends BaseComponent {
   }
 
   ngOnInit() {
+    this.userId = this.params?.params?.userId;
     if (typeof this.userId !== 'undefined') {
       this.investorService.getInvestorInfo(this.userId).subscribe({
         next: (res) => {
-          this.values = res.investors[0]?.investor;
-          this.investor = this.values;
+          this.investor = res.investors[0]?.investor;
+          let firstDate = res.investors[0]?.investor?.accountInvestments?.firstInvestment;
+          this.investor.firstInvestment = firstDate ? moment(firstDate).format('DD-MMM-YYYY') : "";
+          this.investor.investFor = this.getYearsAndMonths(res.investors[0]?.investor?.accountInvestments?.investForMonths);
+          this.investor.monthlyProfit = res.investors[0]?.investor?.accountInvestments?.totalMonthlyProfit ?? 0;
+          let newPayment = res.investors[0]?.investor?.latestAccountBalances?.latestBalance[0]?.profitMonth;
+          this.investor.newestPayment = newPayment ? moment(newPayment).format('DD-MMM-YYYY') : "0";
+          this.investor.totalProfit = res.investors[0]?.investor?.accountBalancesTotalDeposit?.totalDeposit ?? 0;
+          this.investor.totalInvestment = res.investors[0]?.investor?.totalAmountInvested?.totalInvestments ?? 0;
           this.title = `${this.investor._id} \"\ ${this.investor.nickname} \"\ `;
         },
         error: err => {

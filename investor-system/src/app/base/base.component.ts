@@ -170,5 +170,16 @@ export class BaseComponent {
         return monthsAndYears;
     }
 
+    isValidUrl(url: string): boolean {
+        const pattern = new RegExp('^(https?:\\/\\/)?', 'i'); // fragment locator
+        return !!pattern.test(url);
+    }
+
+    goToExternal(url: string = 'https://facebook.com/') {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+        window.open(url);
+    }
 }
 

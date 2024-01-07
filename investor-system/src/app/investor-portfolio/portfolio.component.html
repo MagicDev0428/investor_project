@@ -5,8 +5,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title "><span>Portfolio for: </span>{{ name }}</h5>
-                        <button type="button" (click)="goTo('/info/'+userId)" class="close i-btn"
-                            data-dismiss="modal" aria-label="Close">
+                        <button type="button" (click)="goTo('/info/'+userId)" class="close i-btn" data-dismiss="modal"
+                            aria-label="Close">
                             <span aria-hidden="true">i</span>
                         </button>
                         <button type="button" (click)="goTo('/manage-investor/'+userId)" class="close e-btn"
@@ -63,8 +63,9 @@
                                         </a>
                                     </div>
                                     <div class="col-md-3 mb-2">
-                                        <a target="_blank" href="{{ investor.facebook }}">
-                                            <button type="button" class="btn btn-block btn-secondary">FACEBOOK</button>
+                                        <a>
+                                            <button type="button" class="btn btn-block btn-secondary"
+                                                (click)="goToExternal(investor.facebook)">FACEBOOK</button>
                                         </a>
                                     </div>
                                     <div class="col-md-3 mb-2">
@@ -72,8 +73,8 @@
                                                 class="btn btn-block btn-secondary">EMAIL</button></a>
                                     </div>
                                     <div class="col-md-3 mb-2">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)="open('balance-log')"
-                                            aria-label="Icon Button">Log</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            (click)="open('balance-log')" aria-label="Icon Button">Log</button>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +105,8 @@
                                         </div>
                                         <div class="col-lg-2 my-2">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                aria-label="Icon Button" (click)="goTo('/my-investment-form')">New
+                                                aria-label="Icon Button"
+                                                (click)="goTo('/my-investment-form/'+ userId)">New
                                                 Investment</button>
                                         </div>
                                     </div>
@@ -163,17 +165,17 @@
                                         <div class="col-lg-5 my-1">
                                             <div class="row">
                                                 <div class="col-sm-4">
-                                                    <button type="button" (click)="goTo('/pay-profit-env')"
+                                                    <button type="button" (click)="goTo('/pay-profit-env/' + userId)"
                                                         class="btn btn-success w-100" data-dismiss="modal"
                                                         aria-label="Icon Button">Profit</button>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <button type="button" (click)="goTo('/withdraw-crypto')"
+                                                    <button type="button" (click)="goTo('/withdraw-crypto/' + userId)"
                                                         class="btn btn-danger w-100" data-dismiss="modal"
                                                         aria-label="Icon Button">Withdraw</button>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <button type="button" (click)="goTo('/add-money-env')"
+                                                    <button type="button" (click)="goTo('/add-money-env/' + userId)"
                                                         class="btn btn-primary w-100" data-dismiss="modal"
                                                         aria-label="Icon Button">Add+</button>
                                                 </div>
@@ -186,7 +188,7 @@
                                         <div class="trow theader lh-1">
                                             <div class="tcol">Profit Month</div>
                                             <div class="tcol">Description</div>
-                                            <div class="tcol">Nobey In Profit</div>
+                                            <div class="tcol">Money In Profit</div>
                                             <div class="tcol">Money Out Withdraw</div>
                                             <div class="tcol">Balance in Thailand</div>
                                             <div class="tcol">Pay / Transfer Date</div>
@@ -216,5 +218,5 @@
             </div>
         </div>
     </div>
-    <app-drag-dialog>
+    <app-drag-dialog [params]="dialogParam">
     </app-drag-dialog>

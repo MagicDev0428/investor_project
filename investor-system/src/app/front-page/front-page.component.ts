@@ -111,7 +111,6 @@ export class FrontPageComponent extends BaseComponent {
         this.transfer_investors.data.forEach(data => {
           this.transfer_investors.total += data.investor.totalInvestment??0;
         });
-        console.log('investors->', res.result.investors);
         // this.investment_data.totalInvestors = res.investors[0].investmentResult[1].totalInvestors;
         // this.investment_data.totalProfitPaid = res.investors[0].investmentResult[3].totalDeposit;
         this.log_data.sort((a, b) => {

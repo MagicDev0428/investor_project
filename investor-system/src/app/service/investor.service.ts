@@ -40,11 +40,11 @@ export class InvestorService {
   }
 
   constructor(
-    private http: HttpClient, 
-    private _configService: configService, 
-    private toasterService: ToastrService) { 
+    private http: HttpClient,
+    private _configService: configService,
+    private toasterService: ToastrService) {
 
-    }
+  }
 
   getInvestors(): Observable<any> {
     return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorlist')
@@ -104,5 +104,38 @@ export class InvestorService {
     return this.http.post<any>(environment.apiUrl + this.apiURL + '/investorlistbydate/', date).pipe(
       catchError(this._configService.handleError)
     );
+  }
+
+  getCopyPaste(id: number | string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorcopypaste/' + id)
+      .pipe(
+        catchError(this._configService.handleError)
+      );
+  }
+
+  saveCopyPaste(modelData: any): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + this.apiURL + '/investorcopypaste/', modelData).pipe(
+      catchError(this._configService.handleError)
+    );
+  }
+
+  getHidden(id: number | string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorhiddenremarks/' + id)
+      .pipe(
+        catchError(this._configService.handleError)
+      );
+  }
+
+  saveHidden(modelData: any): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + this.apiURL + '/investorhiddenremarks/', modelData).pipe(
+      catchError(this._configService.handleError)
+    );
+  }
+
+  getInvestorBalance(id: number | string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/balancewithmyinvestment/' + id)
+      .pipe(
+        catchError(this._configService.handleError)
+      );
   }
 }

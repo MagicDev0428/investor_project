@@ -13,7 +13,6 @@ export class MyInvestmentService {
     apiURL = '/myinvestment';  // URL to web api
 
     myInvestment: MyInvestment = {
-        _id: 0,
         investmentNo: 0,
         investorName: '',
         amountInvested: '',
