@@ -23,4 +23,5 @@ export class Investor {
     transferType: string;
     transferInfo: string;
     investorFolderId: string;
+    lastLogin: Date;
 }

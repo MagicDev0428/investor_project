@@ -47,7 +47,6 @@
                                             <div class="tcol">Investment</div>
                                             <div class="tcol">Amount</div>
                                             <div class="tcol">Pct</div>
-                                            <div class="tcol">Profit</div>
                                             <div class="tcol">Receipts</div>
                                         </div>
                                         <div *ngFor="let item of investments.investments; let i = index" class="trow">
@@ -55,7 +54,6 @@
                                             <div class="tcol">{{ item[3] }}</div>
                                             <div class="tcol">{{ currency_style(item[0]) }}</div>
                                             <div class="tcol">{{ currency_style(item[2]) }}</div>
-                                            <div class="tcol">{{ profit_style(item[1]) }}</div>
                                             <div class="tcol">{{ currency_style(item[6]) }}</div>
                                             <div class="tcol">Slip</div>
                                         </div>

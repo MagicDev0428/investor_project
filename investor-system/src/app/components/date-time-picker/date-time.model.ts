@@ -1,7 +1,8 @@
 import { NgbTimeStruct, NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { DatePipe } from "@angular/common";
+import * as moment from 'moment';
 
-export interface NgbDateTimeStruct extends NgbDateStruct, NgbTimeStruct {}
+export interface NgbDateTimeStruct extends NgbDateStruct, NgbTimeStruct { }
 
 export class DateTimeModel implements NgbDateTimeStruct {
   year: number;
@@ -17,8 +18,19 @@ export class DateTimeModel implements NgbDateTimeStruct {
     Object.assign(this, init);
   }
 
-  public static fromLocalString(dateString: string): DateTimeModel {
-    const date = new Date(dateString);
+
+  public static fromLocalString(dateString: string, dateStyle): DateTimeModel {
+
+    let dateMoment = moment(dateString, dateStyle);
+
+    // Check if the date is valid
+    let date = new Date(dateString);
+    if (dateMoment.isValid()) {
+      date = dateMoment.toDate();
+    } else {
+      if(!(date instanceof Date))
+      return null;
+    }
 
     const isValidDate = !isNaN(date.valueOf());
 
@@ -74,7 +86,7 @@ export class DateTimeModel implements NgbDateTimeStruct {
 
       const tzo = -this.timeZoneOffset;
       const dif = tzo >= 0 ? "+" : "-",
-        pad = function(num) {
+        pad = function (num) {
           const norm = Math.floor(Math.abs(num));
           return (norm < 10 ? "0" : "") + norm;
         };

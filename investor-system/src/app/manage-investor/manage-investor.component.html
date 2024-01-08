@@ -56,15 +56,36 @@
                     <textarea formControlName="address" class="form-control" id="investorAddress"
                         aria-describedby="investor Address" rows="4" cols="50"></textarea>
                 </div>
-                <div class="col-lg-3 col-md-6 form-group">
-                    <label for="postcode">Zip Code</label>
-                    <input formControlName="postcode" type="text" class="form-control" id="postcode"
-                        aria-describedby="investor Zip Code" />
-                </div>
-                <div class="col-lg-3 col-md-6 form-group">
-                    <label for="city">City</label>
-                    <input formControlName="city" type="text" class="form-control" id="city"
-                        aria-describedby="investor city" />
+                <div class="col-lg-6 col-sm-12">
+                    <div class="row d-flex flex-column">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 form-group">
+                                    <label for="postcode">Zip Code</label>
+                                    <input formControlName="postcode" type="text" class="form-control" id="postcode"
+                                        aria-describedby="investor Zip Code" />
+                                </div>
+                                <div class="col-lg-6 col-sm-12 form-group">
+                                    <label for="city">City</label>
+                                    <input formControlName="city" type="text" class="form-control" id="city"
+                                        aria-describedby="investor city" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12 mb-2">
+                                    <button [disabled]="!userId" class="btn btn-primary" (click)="goTo('info/' + userId)">INFO</button>
+                                </div>
+                                <div class="col-md-4 col-sm-12 mb-2">
+                                    <button [disabled]="!userId" class="btn btn-success" (click)="goTo('portfolio/' + userId)">PORTFOLIO</button>
+                                </div>
+                                <div class="col-md-4 col-sm-12 mb-2" (click)="goTo('my-investments/' + userId)">
+                                    <button [disabled]="!userId" class="btn btn-dark">CUSTOMER</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="country">Select Country:</label>
@@ -88,6 +109,7 @@
                         <option value="active" selected>ACTIVE</option>
                         <option value="pending">PENDING</option>
                         <option value="disabled">DISABLED</option>
+                        <option value="disabled">FROZEN</option>
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
@@ -103,7 +125,7 @@
             </div>
             <hr class="separator">
             <div class="row">
-                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                <div class="col-lg-3 col-md-5 form-group">
                     <label for="BeneficiaryName">Beneficiary Name</label>
                     <input formControlName="beneficiaryName" type="text" class="form-control" id="BeneficiaryName"
                         aria-describedby="Beneficiary Name" />
@@ -112,7 +134,7 @@
                         Beneficiary Name is required
                     </span>
                 </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                <div class="col-lg-3 col-md-6 form-group">
                     <label for="BeneficiaryEmail">Beneficiary Email</label>
                     <input formControlName="beneficiaryEmail" type="email" class="form-control" id="BeneficiaryEmail"
                         aria-describedby="Beneficiary Email" />
@@ -125,7 +147,7 @@
                         Email Address is Invalid
                     </span>
                 </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                <div class="col-lg-3 col-md-6 form-group">
                     <label for="BeneficiaryPhone">Beneficiary Phone</label>
                     <input formControlName="beneficiaryPhone" type="tel" class="form-control" id="BeneficiaryPhone"
                         aria-describedby="Beneficiary Phone" />
@@ -133,6 +155,11 @@
                         *ngIf="(addInvestorForm.controls['beneficiaryPhone'].touched || submitted) && addInvestorForm.controls['beneficiaryPhone'].errors?.['required']">
                         Beneficiary Phone is required
                     </span>
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <label for="lastLogin">Last Login</label>
+                    <input formControlName="lastLogin" type="tel" class="form-control" id="lastLogin"
+                        aria-describedby="Beneficiary Phone" readonly/>
                 </div>
             </div>
             <hr class="separator">
@@ -232,7 +259,8 @@
                     <button type="submit" class="btn btn-secondary">SAVE INVESTOR</button>
                 </div>
                 <div class="col-sm-12 col-lg-4 text-center">
-                    <button [disabled]="!userId" type="button" class="btn btn-danger" (click)="deleteInvestor(userId)">DELETE INVESTOR</button>
+                    <button [disabled]="!userId" type="button" class="btn btn-danger"
+                        (click)="deleteInvestor(userId)">DELETE INVESTOR</button>
                 </div>
             </div>
 

@@ -195,6 +195,41 @@
   padding: 2px;
 }
 
+.btn-primary {
+  background-color: rgb(0, 0, 255);
+  font-weight: bold;
+  box-shadow: 5px 5px 4px rgba(0, 0, 255, 0.4);
+  width: 100%;
+  border: none;
+
+  &:hover {
+    background-color: rgb(0, 0, 139);
+  }
+}
+
+.btn-success {
+  background-color: rgb(69,110,2);
+  font-weight: bold;
+  box-shadow: 5px 5px 4px rgba(69,110,2, 0.4);
+  width: 100%;
+  border: none;
+
+  &:hover {
+    background-color: rgb(34, 54, 1);
+  }
+}
+
+.btn-dark {
+  background-color: rgb(127,127,127);
+  font-weight: bold;
+  box-shadow: 5px 5px 4px rgba(127,127,127, 0.4);
+  width: 100%;
+  border: none;
+
+  &:hover {
+    background-color: rgb(58, 58, 58);
+  }
+}
 
 .choose-image-wrapper {
   .file-wrapper {

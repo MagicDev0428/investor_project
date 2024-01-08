@@ -45,6 +45,7 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
     year: '2023'
   }
   dialogParam: any = [];
+  transferType = 'Thai Bank';
 
   selectedInvestor$!: Observable<string | number>;
   protected payProfitForm: FormGroup;
@@ -67,19 +68,20 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.transferType = localStorage.getItem('transferType');
     this.payProfitForm = this.formBuilder.group(
-    {
+      {
         profitMonth: new FormControl("", Validators.required),
         deposit: new FormControl("", Validators.required),
         transferDate: new FormControl(new Date(), Validators.required),
-        transferType: new FormControl("Thai Bank", Validators.required),
+        transferType: new FormControl(this.transferType, Validators.required),
         description: new FormControl(""),
         transferInfo: new FormControl(""),
         transferFrom: new FormControl(""),
         transferTo: new FormControl(""),
         transactionNo: new FormControl(""),
         documents: new FormControl(""),
-    });
+      });
   }
 
   changeStyle(value: any) {
@@ -92,7 +94,7 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
   }
 
   deleteTransaction(_id: any) {
-    
+
   }
 
   open(comp: string) {
@@ -102,13 +104,16 @@ export class PayProfitBankComponent extends BaseComponent implements OnInit {
   checkSelect(event: Event) {
     let transferType = this.payProfitForm.get('transferType').value;
     if (transferType === 'Envelope') {
-      this.goTo('/pay-profit-env');
+      this.goTo('/pay-profit-env/' + this.userId);
     }
+    localStorage.setItem('transferType', transferType);
+    this.payProfitForm.get('transferType').setValue(transferType);
+    this.transferType = transferType;
   }
 
   protected onSubmit(): void {
     this.submitted = true;
-   
+
   }
 
   /**

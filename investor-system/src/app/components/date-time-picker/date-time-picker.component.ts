@@ -42,7 +42,7 @@ export class DateTimePickerComponent
     dateString: string;
 
     @Input()
-    inputDatetimeFormat = "d/M/yyyy H:mm";
+    inputDatetimeFormat = "dd/MM/YYYY H:mm";
     @Input()
     hourStep = 1;
     @Input()
@@ -87,10 +87,11 @@ export class DateTimePickerComponent
     }
 
     writeValue(newModel: string) {
+        let dateStyle = this.convertFormat(this.inputDatetimeFormat);
         if (newModel) {
             this.datetime = Object.assign(
                 this.datetime,
-                DateTimeModel.fromLocalString(newModel)
+                DateTimeModel.fromLocalString(newModel, dateStyle)
             );
             this.dateString = newModel;
             this.setDateStringModel();
@@ -117,10 +118,10 @@ export class DateTimePickerComponent
     }
 
     onInputChange($event: any) {
-        console.log('-LLL');
         const value = $event.target.value;
-        const dt = DateTimeModel.fromLocalString(value);
-
+        let dateStyle = this.convertFormat(this.inputDatetimeFormat);
+        const dt = DateTimeModel.fromLocalString(value, dateStyle);
+        console.log('ta->', value);
         if (dt) {
             this.datetime = dt;
             this.setDateStringModel();
@@ -135,7 +136,6 @@ export class DateTimePickerComponent
 
     onDateChange($event: string | NgbDateStruct, dp: NgbDatepicker) {
         const date = new DateTimeModel($event);
-
         if (!date) {
             this.dateString = this.dateString;
             return;
@@ -181,4 +181,18 @@ export class DateTimePickerComponent
     inputBlur($event) {
         this.onTouched();
     }
+
+    convertFormat(format: string): string {
+        return format
+          .replace(/yyyy/g, 'YYYY')
+          .replace(/yy/g, 'YY')
+          .replace(/MM/g, 'MM')
+          .replace(/M(?![ao])/g, 'M')
+          .replace(/dd/g, 'DD')
+          .replace(/d/g, 'D')
+          .replace(/HH/g, 'HH')
+          .replace(/H/g, 'H')
+          .replace(/mm/g, 'mm')
+          .replace(/m/g, 'm');
+      }
 }

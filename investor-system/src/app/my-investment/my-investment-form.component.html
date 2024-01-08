@@ -28,11 +28,13 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-6 form-group">
                                     <label for="investorName">Investor Name</label>
-                                    <select formControlName="investorName" class="form-control form-select"
-                                        id="investorName" #transactionFrom aria-describedby="investorName">
+                                    <input formControlName="investorName" type="text" class="form-control text-start"
+                                        id="investorName" aria-describedby="investorName" readonly/>
+                                    <!-- <select formControlName="investorName" class="form-control form-select"
+                                        id="investorName" #transactionFrom aria-describedby="investorName" readonly>
                                         <option [value]="item._id" *ngFor="let item of investors">{{ item._id}}
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                                 <div class="col-xl-2 col-lg-4 form-group">
                                     <label for="amountInvested">Amount</label>
@@ -43,22 +45,22 @@
                             </div>
                             <hr class="separator m-0">
                             <div class="row">
-                                <div class="col-xl-5 col-lg-6 col-md-6 form-group">
+                                <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="transactionFrom">Transfer From</label>
                                     <input formControlName="transactionFrom" type="text" class="form-control text-start"
                                         id="transactionFrom" aria-describedby="transactionFrom" />
                                 </div>
-                                <div class="col-xl-5 col-lg-6 col-md-6 form-group">
+                                <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="transactionTo">Transfer To</label>
                                     <input formControlName="transactionTo" type="text" class="form-control text-start"
                                         id="transactionTo" aria-describedby="transactionTo" />
                                 </div>
-                                <div class="col-xl-2 col-lg-6 col-md-6 form-group">
+                                <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="transferDate">Transfer Date</label>
                                     <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
                                         formControlName="transferDate" name="transferDate"></app-date-time-picker>
                                 </div>
-                                <div class="col-md-5 col-lg-6 col-md-6 form-group">
+                                <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="transactionNo">Transaction No</label>
                                     <input formControlName="transactionNo" type="text" class="form-control text-start"
                                         id="transactionNo" aria-describedby="transactionNo" />
@@ -102,6 +104,16 @@
                             <hr class="separator m-0">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
+                                    <label for="investType">Investment Type</label>
+                                    <select formControlName="investType" (change)="onSelectChange($event)"
+                                        class="form-control form-select" id="investType" aria-describedby="investType">
+                                        <option>Monthly Profit</option>
+                                        <option>Annual Profit</option>
+                                        <option>One-time Profit</option>
+                                        <option>Mixed</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="profitMonthly">Profit pr Month</label>
                                     <input formControlName="profitMonthly" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitMonthly"
@@ -129,16 +141,6 @@
                                         *ngIf="(myInvestmentForm.controls['profitEnd'].touched || submitted) && (myInvestmentForm.errors?.['endExceed'])">
                                         Profit by End cannot be less than 0.01% or greater than 100.00%.
                                     </span>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="investType">Investment Type</label>
-                                    <select formControlName="investType" (change)="onSelectChange($event)"
-                                        class="form-control form-select" id="investType" aria-describedby="investType">
-                                        <option>Monthly Profit</option>
-                                        <option>Annual Profit</option>
-                                        <option>One-time Profit</option>
-                                        <option>Mixed</option>
-                                    </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="firstProfitDate">First profit Date</label>

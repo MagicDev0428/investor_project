@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
+      if(event.url === '/front-page') {
+        localStorage.removeItem('routes');
+    }
       this.visited_routes = JSON.parse(localStorage.getItem('routes')) ?? [];
       let length = this.visited_routes.length;
       if(length === 0) {

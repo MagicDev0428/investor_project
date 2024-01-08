@@ -90,10 +90,12 @@ export class InvestorPortfolioComponent extends BaseComponent {
     this.base_info = base_temp;
     this.investments = investment_temp;
     this.profit_balance = profit_balance_temp;
+    if(this.user?.role?.includes('admin')) {
+      this.goTo('front-page/');
+    }
   }
 
   protected onSubmit(): void {
 
   }
-
 }
