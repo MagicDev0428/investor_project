@@ -188,7 +188,7 @@
                             <div class="row d-flex justify-content-center m-3 position-relative">
                                 <button type="submit" class="btn btn-secondary">SAVE MY INVESTMENT</button>
                                 <button type="button" class="btn btn-danger"
-                                    [class]="{'disabled': myInvestmentId === undefined}" data-dismiss="modal"
+                                    [class]="{'disabled': myInvestmentId === 'new'}" data-dismiss="modal"
                                     (click)="deleteTransaction(myInvestmentId)">DELETE
                                     TRANSACTION</button>
                             </div>

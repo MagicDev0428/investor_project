@@ -93,6 +93,7 @@ export class DateTimePickerComponent
                 this.datetime,
                 DateTimeModel.fromLocalString(newModel, dateStyle)
             );
+            console.log('ta->', this.datetime)
             this.dateString = newModel;
             this.setDateStringModel();
         } else {
