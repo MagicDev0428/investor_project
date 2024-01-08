@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap , Router} from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Investor } from '../model/investor';
 import { Observable, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -78,7 +78,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
 
   }
 
-  ngOnInit() {    
+  ngOnInit() {
 
     this.addInvestorForm = this.formBuilder.group(
       {
@@ -182,6 +182,15 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
     this.router.navigate(['/list/']);
   }
 
+  changeTransferType(event: any) {
+    let transferType = event.target.value;
+    if (transferType === 'Envelope') {
+      this.addInvestorForm.get('transferInfo').setValue('Envelope in Safe');
+    } else {
+      this.addInvestorForm.get('transferInfo').setValue('');
+    }
+  }
+
   protected onSubmit(): void {
     this.submitted = true;
     if (this.addInvestorForm.valid) {
@@ -225,11 +234,11 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
       });
       formData.set("_id", this.addInvestorForm.get('name').value);
       console.log('formData', formData);
-      
+
       let investorName = this.addInvestorForm.get('name').value;
       if (typeof this.userId !== 'undefined') {
         // Update case
-        
+
         formData.append("folders", JSON.stringify(this.values.folders));
         formData.append("_oldId", this._oldId);
         this.investorService.updateInvestor(formData).subscribe({
@@ -243,7 +252,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
           complete: () => console.log('There are no more action happen.')
         });
       } else {
-       // Save case
+        // Save case
         this.investorService.saveInvestor(formData).subscribe({
           next: (res) => {
             this.toastrService.success(`Investor ${investorName} was successfully created!`);
