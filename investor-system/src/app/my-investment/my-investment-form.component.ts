@@ -335,7 +335,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       this.myInvestment.torbenEnd = this.myInvestmentForm.get('torbenEnd').value?.replace(/%/g, '');
       this.myInvestment.description = this.myInvestmentForm.get('description').value;
 
-      if (typeof this.myInvestmentId !== 'undefined') {
+      if (this.myInvestmentId !== 'new') {
         this.myInvestment.modifiedBy = this.user.name;
         this.myInvestment.modifiedDate = new Date();
         this.myInvestmentService.updateMyInvestment(this.myInvestment).subscribe({

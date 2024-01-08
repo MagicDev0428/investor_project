@@ -147,6 +147,7 @@
                         font-weight: bold;
                         cursor: pointer;
                         background-color: #6D010E;
+                        font-family: 'Arial Narrow';
 
                         .tcol {
                             text-align: center;
@@ -187,6 +188,7 @@
 
                     .trow {
                         &.theader {
+                            font-family: 'Arial Narrow';
 
                             .tcol {
                                 text-align: center;
@@ -228,6 +230,7 @@
 
                     .trow {
                         &.theader {
+                            font-family: 'Arial Narrow';
 
                             .tcol {
                                 text-align: center;

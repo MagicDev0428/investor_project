@@ -131,6 +131,7 @@
 
     &.ttitle {
       display: table-caption;
+      font-family: 'Arial Narrow';
       width: 100%;
       height: 40px;
       color: black;
@@ -186,6 +187,8 @@
     }
 
     .ttitle {
+      font-family: 'Arial Narrow';
+
       &.trow {
         background-color: #C6E0B4;
       }
@@ -198,6 +201,8 @@
     }
 
     .ttitle {
+      font-family: 'Arial Narrow';
+
       &.trow {
         background-color: #70DFE4;
       }
@@ -210,6 +215,8 @@
     }
 
     .ttitle {
+      font-family: 'Arial Narrow';
+
       &.trow {
         background-color: #FFD966;
       }
@@ -238,7 +245,6 @@
       }
 
       &.theader {
-
         .tcol {
           &:nth-child(1) {
             width: 14%;
@@ -256,6 +262,8 @@
     }
 
     .ttitle {
+      font-family: 'Arial Narrow';
+
       &.trow {
         background-color: white;
         color: rgb(56, 56, 56);
@@ -272,6 +280,7 @@
     line-height: 30px;
     text-align: center;
     border: 1px solid rgb(78, 78, 78);
+    font-family: 'Arial Narrow';
   }
 
   select {
