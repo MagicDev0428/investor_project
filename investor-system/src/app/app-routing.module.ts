@@ -52,7 +52,7 @@ const routes: Routes = [
   {path: 'investment-info', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
   {path: 'investment-info/:id', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
   {path: 'my-investments', component: InvestorPortfolioComponent},
-  {path: 'my-investment-form', component: MyInvestmentFormComponent, canActivate: [AuthGuardFN]},
+  {path: 'my-investments/:id', component: InvestorPortfolioComponent},
   {path: 'my-investment-form/:id/:name', component: MyInvestmentFormComponent, canActivate: [AuthGuardFN]},
   {path: 'log-list', component: LogListComponent, canActivate: [AuthGuardFN]},
   {path: 'log-form', component: LogFormComponent, canActivate: [AuthGuardFN]},
