@@ -167,7 +167,7 @@
                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                     <label for="transferType">Transfer Type</label>
                     <select formControlName="transferType" class="form-control form-select" id="transferType"
-                        name="transferType" aria-describedby="transferType">
+                        name="transferType" aria-describedby="transferType" (change)="changeTransferType($event)">
                         <option selected disabled>Select Transfer Type</option>
                         <option>Envelope</option>
                         <option>Thai Bank</option>
@@ -195,7 +195,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-6 col-sm-12 form-group">
                     <label for="transferInfo">Money Transfer Information</label>
-                    <textarea formControlName="reason" class="form-control" id="transferInfo"
+                    <textarea formControlName="transferInfo" class="form-control" id="transferInfo"
                         aria-describedby="Money Transfer Information" rows="4" cols="50"></textarea>
                 </div>
 
