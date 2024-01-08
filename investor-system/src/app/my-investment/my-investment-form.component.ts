@@ -33,6 +33,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
 
   files: any[] = [];
   myInvestmentId: any = '';
+  userId: any = '';
   values: any[] = [];
   investments: any = [];
   investors: any = [];
@@ -51,6 +52,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   protected submitted = false;
 
   selectedMyInvestment$!: Observable<string | number>;
+  selectedInvestor$!: Observable<string | number>;
   myInvestment: MyInvestment = {
     investmentNo: 0,
     investorName: '',
@@ -92,6 +94,10 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
     this.selectedMyInvestment$.subscribe(res => {
       this.myInvestmentId = res;
     });
+    this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['name']));
+    this.selectedInvestor$.subscribe(res => {
+      this.userId = res;
+    });
   }
 
   ngOnInit(): void {
@@ -119,7 +125,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       });
     this.myInvestmentForm.addValidators([this.profitValidator]);
 
-    if (typeof this.myInvestmentId !== 'undefined') {
+    if (this.myInvestmentId !== 'new') {
       this.myInvestmentService.getMyInvestment(this.myInvestmentId).subscribe({
         next: (res) => {
           this.values = res.investments;
@@ -164,6 +170,10 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       this.section = 'CREATE';
     }
 
+    if (typeof this.userId !== 'undefined') {
+      this.myInvestmentForm.get('investorName').setValue(this.userId);
+    }
+
     this.adamService.getAdamInvestors().subscribe((res) => {
       this.investors = res.adams.investorsNames;
       this.investments = res.adams.investments.map(obj => {
@@ -176,11 +186,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         return obj;
       });
     });
-
-    this.auth.user$.subscribe(result => {
-      this.user = result['investor-system'];
-      this.title += ' ' + this.user.name;
-    });
+    this.title += ' ' + this.userId;
     this.checkProfitDisable();
   }
 
@@ -335,7 +341,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         this.myInvestmentService.updateMyInvestment(this.myInvestment).subscribe({
           next: (res) => {
             this.toastrService.success('MyInvestment was successfully updated!');
-            
+
           },
           error: err => {
             this.toastrService.error(err);
