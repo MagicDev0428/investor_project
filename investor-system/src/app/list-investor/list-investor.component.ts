@@ -52,7 +52,7 @@ export class ListInvestorComponent extends BaseComponent {
         if(nextProfit !== '') {
           investor.nextProfit = moment(nextProfit).format('MMM-YYYY');
         }
-        investor.btnColor = investor?.accountBalances?.buttonColor.toLowerCase()??'';
+        investor.btnColor = investor?.accountBalances?.buttonColor?.toLowerCase()??'';
         if(investor.amount === undefined) {
           investor.amount = 0;
         }

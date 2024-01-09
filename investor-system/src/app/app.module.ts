@@ -49,6 +49,7 @@ import { CopyPasteAreaComponent } from './deposit/copy-paste-area.component';
 import { BalanceLogComponent } from './deposit/balance-log.component';
 import { PayProfitBankComponent } from './deposit/pay-profit-bank.component';
 import { AddMoneyEnvComponent } from './deposit/add-money-env.component';
+import { AddMoneyBankComponent } from './deposit/add-money-bank.component';
 import { WithdrawCryptoComponent } from './deposit/withdraw-crypto.component';
 import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -93,6 +94,7 @@ import { BalanceInvestorComponent } from './deposit/investor-info.component';
     BalanceLogComponent,
     PayProfitBankComponent,
     AddMoneyEnvComponent,
+    AddMoneyBankComponent,
     WithdrawCryptoComponent,
     WithdrawCashComponent,
     SpinnerComponent,

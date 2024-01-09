@@ -28,6 +28,7 @@ import { CopyPasteAreaComponent } from './deposit/copy-paste-area.component';
 import { BalanceLogComponent } from './deposit/balance-log.component';
 import { PayProfitBankComponent } from './deposit/pay-profit-bank.component';
 import { AddMoneyEnvComponent } from './deposit/add-money-env.component';
+import { AddMoneyBankComponent } from './deposit/add-money-bank.component';
 import { WithdrawCryptoComponent } from './deposit/withdraw-crypto.component';
 import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
 //import { AuthGuard } from '@auth0/auth0-angular';
@@ -38,7 +39,7 @@ const routes: Routes = [
   {path: 'manage-investor', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
   {path: 'manage-investor/:id', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
   {path: '', redirectTo: '/my-investments', pathMatch: 'full'},
-  {path: 'profile', component: ProfileComponent },
+  {path: 'profile', component: ProfileComponent},
   {path: 'callback', component: CallbackComponent},
   {path: 'unauthorized', component: UnauthorizedComponent, canActivate: [AuthGuardFN]},
   {path: 'adam-table', component: AdamTableComponent, canActivate: [AuthGuardFN]},
@@ -51,23 +52,24 @@ const routes: Routes = [
   {path: 'investment-form/:id', component:InvestmentFormComponent, canActivate: [AuthGuardFN]},
   {path: 'investment-info', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
   {path: 'investment-info/:id', component:InvestmentInfoComponent, canActivate: [AuthGuardFN]},
-  {path: 'my-investments', component: InvestorPortfolioComponent},
-  {path: 'my-investments/:id', component: InvestorPortfolioComponent},
+  {path: 'my-investments', component: InvestorPortfolioComponent, canActivate: [AuthGuardFN]},
+  {path: 'my-investments/:id', component: InvestorPortfolioComponent, canActivate: [AuthGuardFN]},
   {path: 'my-investment-form/:id/:name', component: MyInvestmentFormComponent, canActivate: [AuthGuardFN]},
   {path: 'log-list', component: LogListComponent, canActivate: [AuthGuardFN]},
   {path: 'log-form', component: LogFormComponent, canActivate: [AuthGuardFN]},
   {path: 'log-form/:id', component: LogFormComponent, canActivate: [AuthGuardFN]},
   {path: 'total', component: TotalComponent, canActivate: [AuthGuardFN]},
   {path: 'portfolio/:id', component: PortfolioComponent, canActivate: [AuthGuardFN]},
-  {path: 'pay-profit-env/:id', component: PayProfitEnvComponent, canActivate: [AuthGuardFN]},
+  {path: 'pay-profit-env/:id/:name', component: PayProfitEnvComponent, canActivate: [AuthGuardFN]},
   {path: 'balance', component: BalanceComponent, canActivate: [AuthGuardFN]},
   {path: 'hidden-text', component: HiddenTextComponent, canActivate: [AuthGuardFN]},
   {path: 'copy-paste', component: CopyPasteAreaComponent, canActivate: [AuthGuardFN]},
   {path: 'balance-log', component: BalanceLogComponent, canActivate: [AuthGuardFN]},
-  {path: 'pay-profit-bank/:id', component: PayProfitBankComponent, canActivate: [AuthGuardFN]},
-  {path: 'add-money-env/:id', component: AddMoneyEnvComponent, canActivate: [AuthGuardFN]},
-  {path: 'withdraw-crypto/:id', component: WithdrawCryptoComponent, canActivate: [AuthGuardFN]},
-  {path: 'withdraw-cash/:id', component: WithdrawCashComponent, canActivate: [AuthGuardFN]}
+  {path: 'pay-profit-bank/:id/:name', component: PayProfitBankComponent, canActivate: [AuthGuardFN]},
+  {path: 'add-money-env/:id/:name', component: AddMoneyEnvComponent, canActivate: [AuthGuardFN]},
+  {path: 'add-money-bank/:id/:name', component: AddMoneyBankComponent, canActivate: [AuthGuardFN]},
+  {path: 'withdraw-crypto/:id/:name', component: WithdrawCryptoComponent, canActivate: [AuthGuardFN]},
+  {path: 'withdraw-cash/:id/:name', component: WithdrawCashComponent, canActivate: [AuthGuardFN]}
 ];
 
 @NgModule({

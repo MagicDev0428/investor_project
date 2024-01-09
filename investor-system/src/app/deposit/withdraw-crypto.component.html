@@ -4,8 +4,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title "><span>Withdraw Money</span> from <span> Mark </span> via
-                            <span>Crypto</span>
+                        <h5 class="modal-title "><span>Withdraw Money</span> from <span> {{ userId }} </span> via
+                            <span>{{ transferType }}</span>
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goToPrev()">
                             <span aria-hidden="true">x</span>
@@ -16,12 +16,12 @@
                             novalidate>
                             <div class="row">
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="withdrawMonth">Withdraw Month</label>
-                                    <app-month-selector formControlName="withdrawMonth" [numberOfMonth]="6"
+                                    <label for="profitMonth">Withdraw Month</label>
+                                    <app-month-selector formControlName="profitMonth" [numberOfMonth]="6"
                                         [startMonth]="currentMonth" (selectedMonth)="selectOption($event)"
                                         [sectionHidden]="true"></app-month-selector>
                                     <span class="text-danger"
-                                        *ngIf="(payProfitForm.controls['withdrawMonth'].touched || submitted) && payProfitForm.controls['withdrawMonth'].errors?.['required']">
+                                        *ngIf="(payProfitForm.controls['profitMonth'].touched || submitted) && payProfitForm.controls['profitMonth'].errors?.['required']">
                                         Withdraw Month is required
                                     </span>
                                 </div>
@@ -45,9 +45,9 @@
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
-                                    <label for="transferType">Transfer Type</label>
-                                    <select formControlName="transferType" class="form-control form-select" id="transferType"
-                                        aria-describedby="transferType">
+                                    <label for="transferMethod">Transfer Type</label>
+                                    <select formControlName="transferMethod" class="form-control form-select" id="transferMethod"
+                                        aria-describedby="transferMethod" (change)="checkSelect($event)">
                                         <option>Envelope</option>
                                         <option>Thai Bank</option>
                                         <option>Foreign Bank</option>
@@ -66,13 +66,13 @@
                                         aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
                                 </div>
                                 <div class="col-md-4 col-sm-6 form-group">
-                                    <label for="transferFrom">Transfer From</label>
-                                    <input formControlName="transferFrom" type="text" class="form-control"
-                                        id="transferFrom" aria-describedby="Transfer From" />
+                                    <label for="transactionFrom">Transfer From</label>
+                                    <input formControlName="transactionFrom" type="text" class="form-control"
+                                        id="transactionFrom" aria-describedby="Transfer From" />
                                 </div>
                                 <div class="col-md-4 col-sm-6 form-group">
-                                    <label for="transferTo">Transfer To</label>
-                                    <input formControlName="transferTo" type="text" class="form-control" id="transferTo"
+                                    <label for="transactionTo">Transfer To</label>
+                                    <input formControlName="transactionTo" type="text" class="form-control" id="transactionTo"
                                         aria-describedby="Transfer To" />
                                 </div>
                                 <div class="col-md-4 col-sm-6 form-group">

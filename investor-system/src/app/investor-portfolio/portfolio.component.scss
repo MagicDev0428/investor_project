@@ -381,6 +381,7 @@ textarea {
             .div-table {
                 .trow {
                     background-color: #F2FFDD;
+                    cursor: pointer;
 
                     .tcol {
                         text-align: center;
@@ -430,6 +431,7 @@ textarea {
                         line-height: 1;
                         font-family: 'Arial Narrow';
                         width: 100%;
+                        cursor: default;
 
                         .tcol {
                             text-align: center;
