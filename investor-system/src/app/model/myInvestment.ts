@@ -1,25 +1,32 @@
 export class MyInvestment {
+    documents: [];
     investmentNo: number;
     investorName: string;
-    amountInvested: string;
+    amountInvested: number;
     transferDate: Date;
     transactionFrom: string;
     transactionTo: string;
     transactionNo: string;
-    documents: [];
+    profitMonthlyPct: number;
     profitMonthly: number;
-    profitYearly: number;
+    profitAnnualPct: number;
+    profitAnnual: number;
+    profitEndPct: number;
     profitEnd: number;
     investType: string;
     firstProfitDate: Date;
     lastProfitDate: Date;
-    payBackDate: number;
+    payBackDate: Date;
+    torbenMonthlyPct: number;
     torbenMonthly: number;
-    torbenYearly: number;
+    torbenAnnualPct: number;
+    torbenAnnual: number;
+    torbenEndPct: number;
     torbenEnd: number;
     description: string;
     createdDate: Date;
     createdBy: string;
     modifiedDate: Date;
     modifiedBy: string;
+    startDate: null
 }

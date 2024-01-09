@@ -11,6 +11,10 @@
                             <option>USD</option>
                             <option>CAD</option>
                         </select>
+                        <button *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" type="button" (click)="goToPrev()" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
                     </div>
                     <div class="modal-body pt-4">
                         <div class="row investment">
@@ -20,21 +24,21 @@
                                 </div>
                                 <div class="col-xl-9">
                                     <div class="row">
-                                        <div class="col-lg-5 col-md-6 col-sm-6 my-1">
+                                        <div class="col-lg-5 col-md-6 my-1">
                                             <div class="row statistics-panel">
-                                                <div class="col-xl-7 statistics-title">All Investments</div>
-                                                <div class="col-xl-5 statistics-value">{{
-                                                    currency_style(investments.all_investment) }}
+                                                <div class="col-lg-7 col-6 statistics-title">All Investments</div>
+                                                <div class="col-lg-5 col-6 statistics-value">{{
+                                                    currency_style(investments.all_investment??0) }}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 my-1">
+                                        <div class="col-lg-7 col-md-6 my-1">
                                             <div class="row statistics-panel">
-                                                <div class="col-xl-4 statistics-title">Total Profit Paid</div>
-                                                <div class="col-xl-5 col-sm-7 statistics-value">{{
-                                                    currency_style(investments.totalProfitPaid) }}</div>
-                                                <div class="col-xl-3 col-sm-5 statistics-value">{{
-                                                    profit_style(investments.totalProfitPaidPct) }}</div>
+                                                <div class="col-lg-4 col-6 statistics-title">Total Profit Paid</div>
+                                                <div class="col-lg-5 col-3  statistics-value">{{
+                                                    currency_style(investments.totalProfitPaid??0) }}</div>
+                                                <div class="col-lg-3 col-3 statistics-value">{{
+                                                    profit_style(investments.totalProfitPaidPct??0) }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -49,12 +53,16 @@
                                             <div class="tcol">Pct</div>
                                             <div class="tcol">Receipts</div>
                                         </div>
-                                        <div *ngFor="let item of investments.investments; let i = index" class="trow">
-                                            <div class="tcol">{{ item[4] }}</div>
-                                            <div class="tcol">{{ item[3] }}</div>
-                                            <div class="tcol">{{ currency_style(item[0]) }}</div>
-                                            <div class="tcol">{{ currency_style(item[2]) }}</div>
-                                            <div class="tcol">{{ currency_style(item[6]) }}</div>
+                                        <div *ngFor="let item of investments.myInvestmentList; let i = index"
+                                            class="trow">
+                                            <div class="tcol">{{ formatDate(item.firstProfitDate, 'DD-MMM-YYYY') }}
+                                            </div>
+                                            <div class="tcol">{{ formatDate(item.firstProfitDate, 'DD-MMM-YYYY') }}
+                                            </div>
+                                            <div class="tcol">[{{ item.investmentNo??'' }}] {{ item.description??'' }}
+                                                <span>PDF</span></div>
+                                            <div class="tcol">{{ currency_style(item.amountInvested??0) }}</div>
+                                            <div class="tcol">{{ profit_style(item.profitMonthlyPct??0) }}</div>
                                             <div class="tcol">Slip</div>
                                         </div>
                                     </div>
@@ -68,20 +76,20 @@
                                 </div>
                                 <div class="col-xl-9">
                                     <div class="row">
-                                        <div class="col-lg-5 col-md-6 col-sm-6 my-1">
+                                        <div class="col-md-5 my-1">
                                             <div class="row statistics-panel">
-                                                <div class="col-xl-7 statistics-title">Current Balance</div>
-                                                <div class="col-xl-5 statistics-value">{{
-                                                    currency_style(investments.all_investment) }}
+                                                <div class="col-7 statistics-title">Current Balance</div>
+                                                <div class="col-5 statistics-value">{{
+                                                    currency_style(profit_balance.total_balance??0) }}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 my-1">
+                                        <div class="col-md-7 my-1">
                                             <div class="row statistics-panel">
-                                                <div class="col-xl-4 statistics-title">Monthly Profit</div>
-                                                <div class="col-xl-5 col-sm-7 statistics-value">{{
-                                                    currency_style(investments.totalProfitPaid) }}</div>
-                                                <div class="col-xl-3 col-sm-5 statistics-value">{{
+                                                <div class="col-4 statistics-title">Monthly Profit</div>
+                                                <div class="col-5 statistics-value">{{
+                                                    currency_style(profit_balance.monthlyProfit) }}</div>
+                                                <div class="col-3 statistics-value">{{
                                                     profit_style(investments.totalProfitPaidPct) }}</div>
                                             </div>
                                         </div>
@@ -98,14 +106,14 @@
                                             <div class="tcol">Balance</div>
                                             <div class="tcol">Receipts</div>
                                         </div>
-                                        <div *ngFor="let item of profit_balance.balances; let i = index"
-                                            [ngClass]="{'trow':true,'minus': item[3]<0, 'new': (item[2]===0)&&(item[3]===0)}">
-                                            <div class="tcol">{{ item[0] }}</div>
-                                            <div class="tcol">{{ item[1] }}</div>
-                                            <div class="tcol fw-bold">{{ currency_style(item[2]) }}</div>
-                                            <div class="tcol">{{ currency_style(item[3]) }}</div>
-                                            <div class="tcol">{{ currency_style(item[4]) }}</div>
-                                            <div class="tcol">{{ item[5] }}</div>
+                                        <div *ngFor="let item of profit_balance.investorBalanceList; let i = index"
+                                            [ngClass]="{'trow':true,'minus': item?.withdraw<0, 'new': (item.newestBalance === true)&&(item[3]===0)}">
+                                            <div class="tcol">{{ formatDate(item.profitMonth, 'MMM-YYYY') }}</div>
+                                            <div class="tcol">{{ formatDate(item.transferDate, 'DD-MMM-YYYY') }}</div>
+                                            <div class="tcol fw-bold">{{ item.description??'' }}</div>
+                                            <div class="tcol">{{ currency_style(item.deposit) }}</div>
+                                            <div class="tcol">{{ currency_style(item.withdraw) }}</div>
+                                            <div class="tcol">{{ currency_style(item.balanceInThai) }}</div>
                                             <div class="tcol">Slip</div>
                                         </div>
                                     </div>

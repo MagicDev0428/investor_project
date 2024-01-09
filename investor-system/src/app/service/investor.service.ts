@@ -139,4 +139,11 @@ export class InvestorService {
         catchError(this._configService.handleError)
       );
   }
+
+  getInvestorPortfolio(id: number | string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorportfolio/' + id)
+      .pipe(
+        catchError(this._configService.handleError)
+      );
+  }
 }

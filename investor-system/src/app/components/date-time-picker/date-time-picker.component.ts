@@ -78,12 +78,17 @@ export class DateTimePickerComponent
 
     ngOnInit(): void {
         this.ngControl = this.inj.get(NgControl);
+        console.log('TTT', this.datetime);
     }
 
     ngAfterViewInit(): void {
         this.popover.hidden.subscribe($event => {
             this.showTimePickerToggle = false;
         });
+    }
+
+    open() {
+        console.log('NNNN', this.datetime);
     }
 
     writeValue(newModel: string) {
@@ -122,16 +127,18 @@ export class DateTimePickerComponent
         const value = $event.target.value;
         let dateStyle = this.convertFormat(this.inputDatetimeFormat);
         const dt = DateTimeModel.fromLocalString(value, dateStyle);
-        console.log('ta->', value);
         if (dt) {
             this.datetime = dt;
+            console.log('1->', this.datetime)
             this.setDateStringModel();
         } else if (value.trim() === "") {
             this.datetime = new DateTimeModel();
             this.dateString = "";
             this.onChange(this.dateString);
+            console.log('2->', this.datetime)
         } else {
             this.onChange(value);
+            console.log('3->', value)
         }
     }
 
@@ -145,16 +152,15 @@ export class DateTimePickerComponent
         if (!this.datetime) {
             this.datetime = date;
         }
-
         this.datetime.year = date.year;
         this.datetime.month = date.month;
         this.datetime.day = date.day;
+        console.log('2->', this.datetime)
 
         const adjustedDate = new Date(this.datetime.toString());
         if (this.datetime.timeZoneOffset !== adjustedDate.getTimezoneOffset()) {
             this.datetime.timeZoneOffset = adjustedDate.getTimezoneOffset();
         }
-
         this.setDateStringModel();
     }
 
@@ -171,10 +177,13 @@ export class DateTimePickerComponent
 
         if (!this.firstTimeAssign) {
             this.onChange(this.dateString);
+            console.log('manu')
         } else {
             // Skip very first assignment to null done by Angular
             if (this.dateString !== null) {
                 this.firstTimeAssign = false;
+                this.onChange(this.dateString);
+                console.log('auto')
             }
         }
     }
