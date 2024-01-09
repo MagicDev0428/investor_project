@@ -247,6 +247,8 @@ textarea {
 
             .div-table {
                 .trow {
+                    cursor: pointer;
+                    
                     &:nth-child(even) {
                         background-color: white;
                     }
@@ -264,11 +266,19 @@ textarea {
                             text-align: right;
                         }
 
-                        &:nth-child(7) {
-                            text-align: right;
+                        &:nth-child(4) {
+                            white-space: nowrap;
                         }
 
-                        &:nth-child(8) {
+                        &:nth-child(5) {
+                            white-space: nowrap;
+                        }
+
+                        &:nth-child(6) {
+                            white-space: nowrap;
+                        }
+
+                        &:nth-child(7) {
                             text-align: left;
                         }
                     }
@@ -277,6 +287,7 @@ textarea {
                         background-color: rgb(39, 139, 139);
                         font-size: 11pt;
                         font-family: 'Arial Narrow';
+                        cursor: default;
 
                         .tcol {
                             text-align: center;
@@ -306,11 +317,7 @@ textarea {
                             }
 
                             &:nth-child(7) {
-                                width: 10%;
-                            }
-
-                            &:nth-child(8) {
-                                width: 30%;
+                                width: 40%;
                             }
                         }
                     }
@@ -379,22 +386,32 @@ textarea {
                         text-align: center;
                         line-height: 1;
 
+                        &:nth-child(1) {
+                            text-align: left;
+                            white-space: nowrap;
+                        }
+
                         &:nth-child(2) {
                             text-align: left;
                         }
 
                         &:nth-child(3) {
                             text-align: right;
-                            white-space: nowrap;
                         }
 
                         &:nth-child(4) {
                             text-align: right;
-                            white-space: nowrap;
                         }
 
                         &:nth-child(5) {
                             text-align: right;
+                        }
+
+                        &:nth-child(6) {
+                            white-space: nowrap;
+                        }
+
+                        &:nth-child(7) {
                             white-space: nowrap;
                         }
                     }
@@ -412,12 +429,13 @@ textarea {
                         font-size: 11pt;
                         line-height: 1;
                         font-family: 'Arial Narrow';
+                        width: 100%;
 
                         .tcol {
                             text-align: center;
                             line-height: 1;
 
-                            &:nth-child(1) {
+                            &:first-child {
                                 width: 10%;
                             }
 
@@ -442,7 +460,7 @@ textarea {
                                 width: 12%;
                             }
 
-                            &:nth-child(7) {
+                            &:last-child {
                                 width: 12%;
                             }
                         }

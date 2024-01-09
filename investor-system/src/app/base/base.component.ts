@@ -100,6 +100,10 @@ export class BaseComponent {
         return result;
     }
 
+    formatDate(date, dateStyle) {
+        return date ? moment(date).format(dateStyle) : "";
+    }
+
     /**
  * format bytes
  * @param bytes (File size in bytes)

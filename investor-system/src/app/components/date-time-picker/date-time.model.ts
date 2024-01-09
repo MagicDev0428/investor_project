@@ -5,12 +5,12 @@ import * as moment from 'moment';
 export interface NgbDateTimeStruct extends NgbDateStruct, NgbTimeStruct { }
 
 export class DateTimeModel implements NgbDateTimeStruct {
-  year: number;
-  month: number;
-  day: number;
-  hour: number;
-  minute: number;
-  second: number;
+  year: number = 2022;
+  month: number =  4;
+  day: number =  5;
+  hour: number =  12;
+  minute: number =  2;
+  second: number =  3;
 
   timeZoneOffset: number;
 

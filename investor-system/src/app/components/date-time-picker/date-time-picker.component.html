@@ -1,6 +1,6 @@
 <input [id]="ngControl?.name" [ngbPopover]="calendarContent" [ngClass]="ngControl?.valid ? 'ng-valid' : 'ng-invalid'" class="form-control"
-    (blur)="inputBlur($event)" [ngModel]="dateString | date:inputDatetimeFormat" (change)="onInputChange($event)"
-    [disabled]="disabled" />
+    (blur)="inputBlur($event)" [value]="dateString | date:inputDatetimeFormat" (change)="onInputChange($event)"
+    [disabled]="disabled" (click)="open()"/>
 
 <ng-template #calendarContent>
     <div>

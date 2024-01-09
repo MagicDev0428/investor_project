@@ -70,17 +70,17 @@ export class PortfolioComponent extends BaseComponent {
 
   ngOnInit(): void {
     if (typeof this.userId !== 'undefined') {
-      this.investorService.getInvestorInfo(this.userId).subscribe({
+      this.investorService.getInvestorPortfolio(this.userId).subscribe({
         next: (res) => {
           this.investor = res.investors[0]?.investor;
-          let firstDate = res.investors[0]?.investor?.accountInvestments?.firstInvestment;
-          this.investor.firstInvestment = firstDate ? moment(firstDate).format('DD-MMM-YYYY') : "";
-          this.investor.investFor = this.getYearsAndMonths(res.investors[0]?.investor?.accountInvestments?.investForMonths);
-          this.investor.monthlyProfit = res.investors[0]?.investor?.accountInvestments?.totalMonthlyProfit ?? 0;
-          let newPayment = res.investors[0]?.investor?.latestAccountBalances?.latestBalance[0]?.profitMonth;
+          let newPayment = this.investor?.newestBalance?.profitMonth;
           this.investor.newestPayment = newPayment ? moment(newPayment).format('DD-MMM-YYYY') : "";
-          this.investor.totalProfit = res.investors[0]?.investor?.accountBalancesTotalDeposit?.totalDeposit ?? 0;
-          this.investor.totalInvestment = res.investors[0]?.investor?.totalAmountInvested?.totalInvestments ?? 0;
+          this.investments = this.investor?.accountInvestments;
+          this.investments.all_investment = this.investor?.accountInvestments?.allInvestments;
+          this.investments.totalProfitPaid = this.investor?.accountBalances?.totalProfitPaid;
+          this.investments.totalProfitPaidPct = this.investor?.profitInPercentage;
+          this.profit_balance = this.investor?.accountBalances;
+          this.profit_balance.monthlyProfit = this.investor?.accountInvestments?.totalProfitMonthly;
           this.name = `${this.userId} \"${this.investor.nickname}\"`;
         },
         error: err => {
