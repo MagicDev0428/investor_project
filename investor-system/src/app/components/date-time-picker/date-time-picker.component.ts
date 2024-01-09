@@ -78,7 +78,6 @@ export class DateTimePickerComponent
 
     ngOnInit(): void {
         this.ngControl = this.inj.get(NgControl);
-        console.log('TTT', this.datetime);
     }
 
     ngAfterViewInit(): void {
@@ -98,7 +97,6 @@ export class DateTimePickerComponent
                 this.datetime,
                 DateTimeModel.fromLocalString(newModel, dateStyle)
             );
-            console.log('ta->', this.datetime)
             this.dateString = newModel;
             this.setDateStringModel();
         } else {
@@ -129,16 +127,13 @@ export class DateTimePickerComponent
         const dt = DateTimeModel.fromLocalString(value, dateStyle);
         if (dt) {
             this.datetime = dt;
-            console.log('1->', this.datetime)
             this.setDateStringModel();
         } else if (value.trim() === "") {
             this.datetime = new DateTimeModel();
             this.dateString = "";
             this.onChange(this.dateString);
-            console.log('2->', this.datetime)
         } else {
             this.onChange(value);
-            console.log('3->', value)
         }
     }
 
@@ -155,7 +150,6 @@ export class DateTimePickerComponent
         this.datetime.year = date.year;
         this.datetime.month = date.month;
         this.datetime.day = date.day;
-        console.log('2->', this.datetime)
 
         const adjustedDate = new Date(this.datetime.toString());
         if (this.datetime.timeZoneOffset !== adjustedDate.getTimezoneOffset()) {
@@ -177,13 +171,11 @@ export class DateTimePickerComponent
 
         if (!this.firstTimeAssign) {
             this.onChange(this.dateString);
-            console.log('manu')
         } else {
             // Skip very first assignment to null done by Angular
             if (this.dateString !== null) {
                 this.firstTimeAssign = false;
                 this.onChange(this.dateString);
-                console.log('auto')
             }
         }
     }
