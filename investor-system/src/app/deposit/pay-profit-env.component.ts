@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { DraggableDialogComponent } from '../components/draggable-dialog/draggable-dialog.component';
+import { BalanceService } from '../service/balance.service';
 
 @Component({
   selector: 'app-pay-profit-env',
@@ -28,12 +29,7 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   title = 'ADAM\'\s New Transaction';
   files: any[] = [];
   userId: any = '';
-  values: any[] = [];
-  investments: any[] = [];
-  investorsNames: any[] = [];
-  to_value: string;
-  from_value: string;
-  nowDateTime: Date;
+  balanceId: any = '';
   createdDate = '';
   createdBy = '';
   modifiedDate = '';
@@ -41,13 +37,15 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   currentMonth: any = {
     month: 8,
     monthName: 'Aug',
-    year: '2023'
+    year: 2023
   }
+  balance: any = {};
   dialogParam: any = [];
 
   dialogVisible: boolean = true;
 
   selectedInvestor$!: Observable<string | number>;
+  selectedBalance$!: Observable<string | number>;
   protected payProfitForm: FormGroup;
   protected submitted = false;
 
@@ -57,10 +55,14 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
     toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private balanceService: BalanceService
   ) {
     super(router, auth, toastrService);
-    this.nowDateTime = new Date();
-    this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.selectedBalance$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.selectedInvestor$ = activatedRoute.params.pipe(map(p => p['name']));
+    this.selectedBalance$.subscribe(res => {
+      this.balanceId = res;
+    });
     this.selectedInvestor$.subscribe(res => {
       this.userId = res;
       this.dialogParam.userId = this.userId;
@@ -75,10 +77,35 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
       {
         profitMonth: new FormControl(this.currentMonth.monthName + '-' + this.currentMonth.year, Validators.required),
         deposit: new FormControl("", Validators.required),
-        transferDate: new FormControl(new Date(), Validators.required),
-        transferType: new FormControl("Envelope", Validators.required),
-        description: new FormControl(),
+        transferDate: new FormControl("", Validators.required),
+        transferMethod: new FormControl("Envelope", Validators.required),
+        emailDate: new FormControl("",),
+        description: new FormControl(""),
       });
+    if(this.balanceId !== 'new') {
+      this.balanceService.getBalance(this.balanceId).subscribe({
+        next: (res) => {
+          this.balance = res?.balances;
+          this.payProfitForm.get('profitMonth').setValue(this.formatDate(this.balance?.profitMonth, 'MMM-YYYY'));
+          this.payProfitForm.get('deposit').setValue(this.currency_style(this.balance?.deposit??0));
+          this.payProfitForm.get('transferDate').setValue(this.formatDate(this.balance?.transferDate, 'DD-MM-YYYY')??null);
+          this.payProfitForm.get('transferMethod').setValue(this.balance?.transferMethod);
+          this.payProfitForm.get('emailDate').setValue(this.formatDate(this.balance?.emailDate, 'DD-MM-YYYY')??null);
+          this.payProfitForm.get('description').setValue(this.balance?.description??'');
+          this.createdDate = moment(this.balance?.createdDate).format('yyyy-MM-DD');
+          this.balance.createdDate = this.balance?.createdDate;
+          this.createdBy = this.balance?.createdBy;
+          this.balance.createdBy = this.balance?.createdBy;
+          this.modifiedDate = moment(this.balance?.modifiedDate).format('yyyy-MM-DD');
+          this.balance.modifiedDate = this.balance?.modifiedDate;
+          this.modifiedBy = this.balance?.modifiedBy;
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    }
   }
 
   changeStyle(value: any) {
@@ -91,7 +118,18 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   }
 
   deleteTransaction(_id: any) {
-
+    if (typeof _id !== 'undefined') {
+      this.balanceService.deleteBalance(_id).subscribe({
+        next: (res) => {
+          this.toastrService.success('Balance was successfully deleted!');
+          this.goTo('portfolio/' + this.userId);
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
+    }
   }
 
   selectOption(month: any) {
@@ -100,10 +138,10 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   }
 
   checkSelect(event: Event) {
-    let transferType = this.payProfitForm.get('transferType').value;
+    let transferType = this.payProfitForm.get('transferMethod').value;
     if (transferType !== 'Envelope') {
       localStorage.setItem('transferType', transferType);
-      this.goTo('/pay-profit-bank/' + this.userId);
+      this.goTo('/pay-profit-bank/' + this.balanceId + '/' + this.userId);
     }
   }
 
@@ -113,5 +151,41 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
 
   protected onSubmit(): void {
     this.submitted = true;
+    if (this.payProfitForm.valid) {
+      this.balance.profitMonth = new Date(this.currentMonth.year, this.currentMonth.month-1, 1);
+      this.balance.deposit = this.amount;
+      this.balance.transferDate = this.payProfitForm.get('transferDate').value;
+      this.balance.transferMethod = this.payProfitForm.get('transferMethod').value;
+      this.balance.description = this.payProfitForm.get('description').value;
+      this.balance.investorName = this.userId;
+
+      if (this.balanceId !== 'new') {
+        this.balance.modifiedBy = this.user.name;
+        this.balance.modifiedDate = new Date();
+        this.balanceService.updateBalance(this.balance).subscribe({
+          next: (res) => {
+            this.toastrService.success('Balance was successfully updated!');
+            this.goTo('portfolio/' + this.userId);
+          },
+          error: err => {
+            this.toastrService.error(err);
+          },
+          complete: () => console.log('There are no more action happen.')
+        });
+      } else {
+        this.balance.createdBy = this.user.name;
+        this.balance.createdDate = new Date();
+        this.balanceService.saveBalance(this.balance).subscribe({
+          next: (res) => {
+            this.toastrService.success('Balance was successfully created!');
+            this.goTo('portfolio/' + this.userId);
+          },
+          error: err => {
+            this.toastrService.error(err);
+          },
+          complete: () => console.log('There are no more action happen.')
+        });
+      }
+    }
   }
 }

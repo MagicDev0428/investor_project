@@ -64,10 +64,10 @@
                 <div class="tcol"><app-profit-button *ngIf="item.nextProfit" [profitStyle]="item.btnColor"
                     [text]="item.nextProfit" (click)="goTo('/portfolio/'+item._id)"></app-profit-button>
                 </div>
-                <div class="tcol"><a [href]="'mailTo:'+item.email">{{ item.email }}</a></div>
-                <div class="tcol"><a (click)="goToExternal(item.facebook)">Facebook</a></div>
+                <div class="tcol"><a [href]="'mailTo:'+item.email"><i class="bi bi-envelope-fill"></i></a></div>
+                <div class="tcol"><a (click)="goToExternal(item.facebook)"><i class="bi bi-facebook"></i></a></div>
                 <div class="tcol"><a target="_blank"
-                    href="https://drive.google.com/drive/folders/{{item.investorFolderId}}">FOLDER</a></div>
+                    href="https://drive.google.com/drive/folders/{{item.investorFolderId}}"><i class="bi bi-folder-fill"></i></a></div>
               </div>
             </div>
           </div>

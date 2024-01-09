@@ -19,6 +19,17 @@
   }
 }
 
+.btn-danger {
+  background-color: rgb(140, 3, 17);
+  font-weight: bold;
+  font-size: var(--bs-body-font-size);
+  box-shadow: 5px 5px 4px rgba(140, 3, 17, 0.4);
+  right: 0;
+  width: 40%;
+  height: auto;
+  padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+}
+
 .select-items li {
   padding: 6px 20px;
   font-size: 12pt;

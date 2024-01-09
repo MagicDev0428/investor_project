@@ -19,19 +19,21 @@
                                             <div class="tcol">Description</div>
                                             <div class="tcol">Money In Profit</div>
                                             <div class="tcol">Money Out Withdraw</div>
-                                            <div class="tcol">Balance in Thailand</div>
+                                            <div class="tcol" *ngIf="transferType === 'Envelope'">Balance in Thailand
+                                            </div>
                                             <div class="tcol">Pay/Transfer Date</div>
                                             <div class="tcol">Email Sent Date</div>
                                         </div>
-                                        <div *ngFor="let item of profit_balance.balances; let i = index"
-                                            [ngClass]="{'trow':true,'minus': item[3]<0, 'new': (item[2]===0)&&(item[3]===0)}">
-                                            <div class="tcol">{{ item[0] }}</div>
-                                            <div class="tcol">{{ item[1] }}</div>
-                                            <div class="tcol fw-bold">{{ currency_style(item[2]) }}</div>
-                                            <div class="tcol">{{ currency_style(item[3]) }}</div>
-                                            <div class="tcol">{{ currency_style(item[4]) }}</div>
-                                            <div class="tcol">{{ item[5] }}</div>
-                                            <div class="tcol">{{ item[6] }}</div>
+                                        <div *ngFor="let item of profit_balance; let i = index"
+                                            [ngClass]="{'trow':true,'minus': item?.deposit<0, 'new': (item[2]===0)&&(item[3]===0)}">
+                                            <div class="tcol">{{ formatDate(item?.profitMonth, 'MMM-YYYY') }}</div>
+                                            <div class="tcol">{{ item?.description??'' }}</div>
+                                            <div class="tcol fw-bold">{{ currency_style(item?.deposit??0) }}</div>
+                                            <div class="tcol">{{ currency_style(item?.withdraw??0) }}</div>
+                                            <div class="tcol" *ngIf="transferType === 'Envelope'">{{
+                                                currency_style(item?.balanceInThai??0) }}</div>
+                                            <div class="tcol">{{ formatDate(item?.transferDate, 'DD-MMM-YYYY') }}</div>
+                                            <div class="tcol">{{ formatDate(item?.emailDate, 'DD-MMM-YYYY') }}</div>
                                         </div>
                                     </div>
                                 </div>

@@ -42,7 +42,7 @@
                     <div *ngFor="let item of bank_investors.data; let i = index" class="trow">
                         <div class="tcol">
                             <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
-                                [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
+                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{ item._id
                                 }}</button>
                         </div>
                         <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
@@ -60,7 +60,7 @@
                     <div *ngFor="let item of transfer_investors.data; let i = index" class="trow">
                         <div class="tcol">
                             <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
-                                [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
+                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{ item._id
                                 }}</button>
                         </div>
                         <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
@@ -78,7 +78,7 @@
                     <div *ngFor="let item of envelop_investors.data; let i = index" class="trow">
                         <div class="tcol">
                             <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
-                                [class]="investor_color[item.investor.buttonColor.toLowerCase()]">{{ item._id
+                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{ item._id
                                 }}</button>
                         </div>
                         <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{

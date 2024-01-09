@@ -219,59 +219,27 @@ textarea.form-control {
             }
 
             &:nth-child(6) {
-                text-align: left;
-                color: rgb(32, 32, 255);
+                text-align: center;
+                color: #3A559F;
+                font-size: 2.5rem;
                 text-decoration: underline;
-
-                a {
-                    color: rgb(32, 32, 255);
-                }
-
-                a:active {
-                    color: rgb(32, 32, 255);
-                }
-
-                a:focuse {
-                    color: rgb(32, 32, 255);
-                }
+                padding: 0;
             }
 
             &:nth-child(7) {
                 text-align: center;
-                color: rgb(32, 32, 255);
-                font-weight: bold;
+                color: #3A559F;
+                font-size: 2.5rem;
                 text-decoration: underline;
-
-                a {
-                    color: rgb(32, 32, 255);
-                }
-
-                a:active {
-                    color: rgb(32, 32, 255);
-                }
-
-                a:focuse {
-                    color: rgb(32, 32, 255);
-                }
+                padding: 0;
             }
 
             &:nth-child(8) {
                 text-align: center;
-                color: rgb(32, 32, 255);
-                font-weight: bold;
+                color: #3A559F;
+                font-size: 2.5rem;
                 text-decoration: underline;
-
-                a {
-                    color: rgb(32, 32, 255);
-                }
-
-                a:active {
-                    color: rgb(32, 32, 255);
-                }
-
-                a:focuse {
-                    color: rgb(32, 32, 255);
-                }
+                padding: 0;
             }
         }
 
@@ -289,7 +257,7 @@ textarea.form-control {
                 line-height: 1;
 
                 &:nth-child(1) {
-                    width: 26%;
+                    width: 38.1%;
                 }
 
                 &:nth-child(2) {
@@ -309,21 +277,24 @@ textarea.form-control {
                 }
 
                 &:nth-child(6) {
-                    width: 18.6%;
+                    width: 7.1%;
                     color: white;
                     text-decoration: none;
+                    font-size: 11pt;
                 }
 
                 &:nth-child(7) {
                     width: 7.1%;
                     color: white;
                     text-decoration: none;
+                    font-size: 11pt;
                 }
 
                 &:nth-child(8) {
                     width: 7.1%;
                     color: white;
                     text-decoration: none;
+                    font-size: 11pt;
                 }
             }
         }

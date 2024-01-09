@@ -20,9 +20,35 @@ export class BalanceService {
   }
 
   getInvestorBalance(id: number | string): Observable<any> {
-    return this.http.get<any>(environment.apiUrl + this.apiURL + '/investorbalancelist/' + id)
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/balancewithmyinvestment/' + id)
       .pipe(
         catchError(this._configService.handleError)
       );
   }
+
+  saveBalance(modelData: any): Observable<any> {
+		return this.http.post<any>(environment.apiUrl + this.apiURL + '/createbalance/', modelData).pipe(
+			catchError(this._configService.handleError)
+		);;
+	}
+
+  updateBalance(modelData: any): Observable<any> {
+		return this.http.put<any>(environment.apiUrl + this.apiURL + '/updatebalance/', modelData).pipe(
+			catchError(this._configService.handleError)
+		);
+	}
+
+  deleteBalance(id: number | string): Observable<any> {
+		return this.http.delete<any>(environment.apiUrl + this.apiURL + '/deletebalance/' + id).pipe(
+			catchError(this._configService.handleError)
+		);
+	}
+
+  getBalance(id: number | string): Observable<any> {
+		return this.http.get<any>(environment.apiUrl + this.apiURL + '/getbalance/' + id)
+			.pipe(
+				map((adam) => adam),
+				catchError(this._configService.handleError)
+			);
+	}
 }
