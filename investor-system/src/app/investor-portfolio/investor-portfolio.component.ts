@@ -540,9 +540,9 @@ export class InvestorPortfolioComponent extends BaseComponent {
   }
 
   ngOnInit(): void {
-    // if (typeof this.userId !== 'undefined') {
-    //   this.investorService.getInvestorPortfolio(this.userId).subscribe({
-    //     next: (res) => {
+    if (this.userId !== 'None') {
+      this.investorService.getInvestorPortfolio(this.userId).subscribe({
+        next: (res) => {
           this.investor = temp.investors[0]?.investor;
           let newPayment = this.investor?.newestBalance?.profitMonth;
           this.investor.newestPayment = newPayment ? moment(newPayment).format('DD-MMM-YYYY') : "";
@@ -552,12 +552,12 @@ export class InvestorPortfolioComponent extends BaseComponent {
           this.investments.totalProfitPaidPct = this.investor?.profitInPercentage;
           this.profit_balance = this.investor?.accountBalances;
           this.profit_balance.monthlyProfit = this.investor?.accountInvestments?.totalProfitMonthly;
-    //     },
-    //     error: err => {
-    //       this.toastrService.error(err);
-    //     },
-    //     complete: () => console.log('There are no more action happen.')
-    //   });
+        },
+        error: err => {
+          this.toastrService.error(err);
+        },
+        complete: () => console.log('There are no more action happen.')
+      });
     }
-//   }
+  }
 }

@@ -15,7 +15,9 @@ export class BaseComponent {
         public toastrService: ToastrService,
     ) {
         this.auth.user$.subscribe(result => {
-            this.user = result['investor-system'];
+            if (result !== null) {
+                this.user = result['investor-system'];
+            }
         });
     }
 
