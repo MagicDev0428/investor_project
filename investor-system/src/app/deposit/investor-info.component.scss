@@ -49,14 +49,14 @@ textarea.form-control {
             background-color: rgb(71,121,6);
             border-radius: 0;
             position: relative;
+            border: none;
     
             h5 {
                 width: 100%;
                 text-align: center;
                 color: white;
                 font-weight: bold;
-                font-size: 15pt;
-                // margin: 5px;
+                font-size: 14pt;
     
                 span {
                     color: #B7E075;
@@ -70,19 +70,16 @@ textarea.form-control {
                 text-shadow: none;
                 opacity: 1;
                 padding: 0;
-                border-radius: 0.25rem;
                 border: none;
     
                 span {
                     background-color: #AAAAAA;
                     color: white;
                     font-weight: bold;
-                    border-radius: 0.25rem;
                     display: block;
                     width: 29px;
                     line-height: 29px;
                     text-align: center;
-                    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
                 }
             }
         }

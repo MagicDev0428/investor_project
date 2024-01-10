@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { LogService } from '../service/log.service';
+import { InvestorService } from '../service/investor.service';
 
 @Component({
     selector: 'app-balance-log',
@@ -24,6 +25,7 @@ export class BalanceLogComponent extends BaseComponent implements OnInit {
     modifiedDate = '';
     modifiedBy = '';
     log_entry: any = [];
+    nickName: string = '';
 
 
     protected submitted = false;
@@ -34,6 +36,7 @@ export class BalanceLogComponent extends BaseComponent implements OnInit {
         toastrService: ToastrService,
         private activatedRoute: ActivatedRoute,
         private logService: LogService,
+        private investorService: InvestorService
     ) {
         super(router, auth, toastrService);
     }
@@ -41,6 +44,15 @@ export class BalanceLogComponent extends BaseComponent implements OnInit {
     ngOnInit(): void {
         this.userId = this.params?.params?.userId;
         if (this.userId !== undefined) {
+            this.investorService.getInvestorInfo(this.userId).subscribe({
+                next: (res) => {
+                    this.nickName = res?.investors[0].investor?.nickname;
+                },
+                error: err => {
+                    this.toastrService.error(err);
+                },
+                complete: () => console.log('There are no more action happen.')
+            });
             this.logService.getInvestorLogs(this.userId).subscribe((res) => {
                 this.log_entry = res.logs.map((log) => {
                     log.date = moment(log._id).format('DD-MMM-YYYY');

@@ -412,6 +412,54 @@ textarea {
     }
 }
 
+.button-group {
+    display: flex;
+    flex-direction: row;
+    float: right;
+
+    .btn {
+        margin-left: 5px;
+    }
+
+    .btn-secondary,
+    .btn-dark,
+    .btn-success {
+        font-size: 1rem;
+        font-style: italic;
+        font-weight: normal;
+        padding: 0;
+        border-radius: 0.25rem;
+        width: 29px;
+        height: 29px;
+        border: none;
+    }
+
+    .btn-secondary,
+    .btn-dark,
+    .btn-success {
+        span {
+            // background-color: rgb(31, 78, 120);
+            color: white;
+            font-weight: bold;
+            border-radius: 0.25rem;
+            display: block;
+            width: 29px;
+            height: 29px;
+            text-align: center;
+            box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+            line-height: 29px;
+        }
+    }
+
+    .btn-success {
+        background-color: rgb(69, 110, 2);
+
+        &:hover {
+            background-color: rgb(34, 54, 1);
+        }
+    }
+}
+
 .form-group {
     margin: 1rem 0;
 

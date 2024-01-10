@@ -91,7 +91,25 @@
                                             <div class="tcol">First Profit Date</div>
                                         </div>
                                         <div *ngFor="let item of myInvestments; let i = index" class="trow">
-                                            <div class="tcol">{{ item.investorName }}</div>
+                                            <div class="tcol">
+                                                <div>
+                                                    <span class="name">{{ item.investorName }}</span>
+                                                    <div class="button-group">
+                                                      <button type="button" (click)="goTo('info/'+ item.investorName)" class="btn btn-secondary" data-dismiss="modal"
+                                                        aria-label="Icon Button">
+                                                        <span aria-hidden="true">i</span>
+                                                      </button>
+                                                      <button type="button" (click)="goTo('manage-investor/'+ item.investorName)" class="btn btn-secondary" data-dismiss="modal"
+                                                        aria-label="Icon Button">
+                                                        <span aria-hidden="true">E</span>
+                                                      </button>
+                                                      <button type="button" (click)="goTo('portfolio/'+ item.investorName)" class="btn btn-success" data-dismiss="modal"
+                                                        aria-label="Icon Button">
+                                                        <span aria-hidden="true">P</span>
+                                                      </button>
+                                                    </div>
+                                                  </div>
+                                            </div>
                                             <div class="tcol">{{ item.amountInvested }}</div>
                                             <div class="tcol">{{ item.profitMonthlyPct }}</div>
                                             <div class="tcol">{{ item.transferDate }}</div>

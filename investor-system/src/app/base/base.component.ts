@@ -106,6 +106,10 @@ export class BaseComponent {
         return date ? moment(date).format(dateStyle) : "";
     }
 
+    replaceSpaces(url: string): string {
+        return decodeURIComponent(url);
+    }
+
     /**
  * format bytes
  * @param bytes (File size in bytes)

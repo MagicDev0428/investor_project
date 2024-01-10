@@ -20,18 +20,22 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      if(event.url === '/front-page') {
+      if(this.replaceSpaces(event.url) === '/front-page') {
         localStorage.removeItem('routes');
     }
       this.visited_routes = JSON.parse(localStorage.getItem('routes')) ?? [];
       let length = this.visited_routes.length;
       if(length === 0) {
-        this.visited_routes.push(event.url);
-      } else if(this.visited_routes[length-1] !== event.url) {
-        this.visited_routes.push(event.url);
+        this.visited_routes.push(this.replaceSpaces(event.url));
+      } else if(this.visited_routes[length-1] !== this.replaceSpaces(event.url)) {
+        this.visited_routes.push(this.replaceSpaces(event.url));
       }
       localStorage.setItem('routes', JSON.stringify(this.visited_routes));
       this.visited_routes = this.visited_routes.filter(() => false);
     });
   }
+
+  replaceSpaces(url: string): string {
+    return decodeURIComponent(url);
+}
 }
