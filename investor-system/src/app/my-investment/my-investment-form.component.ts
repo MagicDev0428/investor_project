@@ -143,7 +143,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
           this.myInvestmentForm.get('transactionFrom').setValue(this.values['transactionFrom']);
           this.myInvestmentForm.get('transactionTo').setValue(this.values['transactionTo']);
           if(this.values['transferDate']) {
-            this.myInvestmentForm.get('transferDate').setValue(moment(this.values['transferDate']).format('yyyy-MM-DD'));
+            this.myInvestmentForm.get('transferDate').setValue(moment(this.values['transferDate']).format('DD-MM-YYYY'));
           }
           this.myInvestmentForm.get('transactionNo').setValue(this.values['transactionNo']);
           this.myInvestmentForm.get('investType').setValue(this.values['investType']);
@@ -152,13 +152,13 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
           this.myInvestmentForm.get('profitAnnualPct').setValue(this.profit_style(this.values['profitAnnualPct']));
           this.myInvestmentForm.get('profitEndPct').setValue(this.profit_style(this.values['profitEndPct']));
           if(this.values['firstProfitDate']) {
-            this.myInvestmentForm.get('firstProfitDate').setValue(moment(this.values['firstProfitDate']).format('yyyy-MM-DD'));
+            this.myInvestmentForm.get('firstProfitDate').setValue(moment(this.values['firstProfitDate']).format('DD-MM-YYYY'));
           }
           if(this.values['lastProfitDate']) {
-            this.myInvestmentForm.get('lastProfitDate').setValue(moment(this.values['lastProfitDate']).format('yyyy-MM-DD'));
+            this.myInvestmentForm.get('lastProfitDate').setValue(moment(this.values['lastProfitDate']).format('DD-MM-YYYY'));
           }
           if(this.values['payBackDate']) {
-            this.myInvestmentForm.get('payBackDate').setValue(moment(this.values['payBackDate']).format('yyyy-MM-DD'));
+            this.myInvestmentForm.get('payBackDate').setValue(moment(this.values['payBackDate']).format('DD-MM-YYYY'));
           }
           this.myInvestmentForm.get('torbenMonthlyPct').setValue(this.profit_style(this.values['torbenMonthlyPct']));
           this.myInvestmentForm.get('torbenAnnualPct').setValue(this.profit_style(this.values['torbenAnnualPct']));

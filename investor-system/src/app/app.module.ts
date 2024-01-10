@@ -58,6 +58,7 @@ import { DateTimePickerComponent } from './components/date-time-picker/date-time
 import { MonthSelectorComponent } from './components/month-selector/month-selector.component';
 import { DraggableDialogComponent } from './components/draggable-dialog/draggable-dialog.component';
 import { BalanceInvestorComponent } from './deposit/investor-info.component';
+import { NgbdDatepickerAdapter } from './components/date-picker/datepicker-adapter';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { BalanceInvestorComponent } from './deposit/investor-info.component';
     DateTimePickerComponent,
     MonthSelectorComponent,
     DraggableDialogComponent,
-    BalanceInvestorComponent
+    BalanceInvestorComponent,
+    NgbdDatepickerAdapter
   ],
   imports: [
     BrowserModule,

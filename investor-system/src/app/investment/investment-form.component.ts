@@ -103,8 +103,8 @@ export class InvestmentFormComponent extends BaseComponent {
           this.amount = this.values['investAmount'];
           this.changeStyle(this.amount);
           this.investmentForm.get('_id').setValue(this.values['_id']);
-          this.investmentForm.get('startDate').setValue(moment(this.values['startDate']).format('yyyy-MM-DD'));
-          this.investmentForm.get('endDate').setValue(moment(this.values['endDate']).format('yyyy-MM-DD'));
+          this.investmentForm.get('startDate').setValue(moment(this.values['startDate']).format('DD-MM-YYYY'));
+          this.investmentForm.get('endDate').setValue(moment(this.values['endDate']).format('DD-MM-YYYY'));
           this.investmentForm.get('investType').setValue(this.values['investType']);
           this.investType = this.values['investType'];
           this.investmentForm.get('profitMonthly').setValue(this.profit_style(this.values['profitMonthly']));
@@ -274,6 +274,7 @@ export class InvestmentFormComponent extends BaseComponent {
     if (this.investmentForm.valid) {
       this.investment._id = this.investmentForm.get('_id').value;
       this.investment.startDate = this.investmentForm.get('startDate').value;
+      console.log('res->', this.investmentForm.get('startDate').value);
       this.investment.endDate = this.investmentForm.get('endDate').value;
       this.investment.investAmount = this.amount?.toString().replace(/\D/g, '');
       this.investment.investType = this.investmentForm.get('investType').value;
