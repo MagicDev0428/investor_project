@@ -58,6 +58,10 @@ export class InvestorPortfolioComponent extends BaseComponent {
         },
         complete: () => console.log('There are no more action happen.')
       });
+    } else {
+      if (this.user?.roles?.includes('admin')) {
+        this.goTo('front-page/')
+      }
     }
   }
 }

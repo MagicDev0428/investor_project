@@ -6,10 +6,11 @@
                     <div class="modal-header">
                         <h5 class="modal-title "><span>{{ section }}: </span>{{ title }}</h5>
                         <button type="button" class="info-btn" data-dismiss="modal" aria-label="Info"
-                            (click)="goTo('/')">
+                            (click)="goTo('info/'+userId)">
                             <span aria-hidden="true">i</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goToPrev()">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="goToPrev()">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -29,7 +30,7 @@
                                 <div class="col-xl-5 col-lg-6 form-group">
                                     <label for="investorName">Investor Name</label>
                                     <input formControlName="investorName" type="text" class="form-control text-start"
-                                        id="investorName" aria-describedby="investorName" readonly/>
+                                        id="investorName" aria-describedby="investorName" readonly />
                                     <!-- <select formControlName="investorName" class="form-control form-select"
                                         id="investorName" #transactionFrom aria-describedby="investorName" readonly>
                                         <option [value]="item._id" *ngFor="let item of investors">{{ item._id}}
@@ -136,7 +137,8 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="profitEndPct">One Time Profit</label>
                                     <input formControlName="profitEndPct" type="text" class="form-control text-end"
-                                        (input)="onInputChange($event)" id="profitEndPct" aria-describedby="profitEndPct" />
+                                        (input)="onInputChange($event)" id="profitEndPct"
+                                        aria-describedby="profitEndPct" />
                                     <span class="text-danger"
                                         *ngIf="(myInvestmentForm.controls['profitEndPct'].touched || submitted) && (myInvestmentForm.errors?.['endExceed'])">
                                         Profit by End cannot be less than 0.01% or greater than 100.00%.
@@ -175,7 +177,8 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="torbenEndPct">Torben One Time</label>
                                     <input formControlName="torbenEndPct" type="text" class="form-control text-end"
-                                        (input)="onInputChange($event)" id="torbenEndPct" aria-describedby="torbenEndPct" />
+                                        (input)="onInputChange($event)" id="torbenEndPct"
+                                        aria-describedby="torbenEndPct" />
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="form-group">

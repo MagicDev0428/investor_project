@@ -52,6 +52,7 @@ select {
                 text-align: center;
                 color: white;
                 font-weight: bold;
+                font-size: 14pt;
 
                 span {
                     color: #B5DF78;
@@ -65,31 +66,28 @@ select {
                 text-shadow: none;
                 opacity: 1;
                 padding: 0;
-                border-radius: 0.25rem;
                 border: none;
 
                 span {
                     background-color: #AAAAAA;
                     color: white;
                     font-weight: bold;
-                    border-radius: 0.25rem;
                     display: block;
                     width: 29px;
                     line-height: 29px;
                     text-align: center;
-                    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
                 }
             }
 
             .btn-success {
                 position: absolute;
                 right: 46px;
-                height: 29px;
+                height: 25px;
                 padding: 0 5px;
                 background-color: rgb(100, 183, 5);
                 font-weight: bold;
                 border: 1px solid rgb(100, 183, 5);
-                border-radius: 8px;
+                border-radius: 4px;
                 box-shadow: 5px 5px 4px rgba(100, 183, 5, 0.2);
 
 
