@@ -25,17 +25,15 @@
                                                 <div class="col-sm-9">
                                                     <div class="row multi-date">
                                                         <div class="date fromDate pl-0">
-                                                            <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
-                                                                formControlName="fromDate"
-                                                                name="fromDate"></app-date-time-picker>
+                                                            <ngbd-datepicker-adapter
+                                                                formControlName="fromDate"></ngbd-datepicker-adapter>
                                                         </div>
                                                         <div class="col-form-label text px-0 w-auto">
                                                             <span>to</span>
                                                         </div>
                                                         <div class="date toDate pr-0">
-                                                            <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
-                                                                formControlName="toDate"
-                                                                name="toDate"></app-date-time-picker>
+                                                            <ngbd-datepicker-adapter
+                                                                formControlName="toDate"></ngbd-datepicker-adapter>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,8 +79,9 @@
                                                 <label for="investment"
                                                     class="col-sm-3 col-form-label">Investment</label>
                                                 <div class="col-sm-9">
-                                                    <select formControlName="investment" class="form-control form-select"
-                                                        id="investment" name="investment" aria-describedby="investment">
+                                                    <select formControlName="investment"
+                                                        class="form-control form-select" id="investment"
+                                                        name="investment" aria-describedby="investment">
                                                         <option></option>
                                                         <option [value]="item._id" *ngFor="let item of investments">[{{
                                                             item._id}}] {{ item.explanation }}

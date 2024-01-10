@@ -45,8 +45,8 @@ export class LogListComponent extends BaseComponent {
   ngOnInit(): void {
     this.logSearchForm = this.formBuilder.group(
       {
-        fromDate: new FormControl(moment().subtract(1, 'months').format('YYYY-MM-DD'), Validators.required),
-        toDate: new FormControl(new Date(), Validators.required),
+        fromDate: new FormControl(moment().subtract(1, 'months').format('DD-MM-YYYY'), Validators.required),
+        toDate: new FormControl(moment(new Date()).format('DD-MM-YYYY'), Validators.required),
         logType: new FormControl("", Validators.required),
         investorName: new FormControl("", Validators.required),
         investment: new FormControl("", Validators.required)
@@ -118,8 +118,8 @@ export class LogListComponent extends BaseComponent {
   }
 
   onReset() {
-    this.logSearchForm.get('fromDate').setValue(moment().subtract(1, 'months').format('YYYY-MM-DD'));
-    this.logSearchForm.get('toDate').setValue(new Date());
+    this.logSearchForm.get('fromDate').setValue(moment().subtract(1, 'months').format('DD-MM-YYYY'));
+    this.logSearchForm.get('toDate').setValue(moment(new Date()).format('DD-MM-YYYY'));
     this.logSearchForm.get('logType').setValue("");
     this.logSearchForm.get('investorName').setValue("");
     this.logSearchForm.get('investment').setValue("");

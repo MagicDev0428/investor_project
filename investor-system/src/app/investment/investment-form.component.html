@@ -28,13 +28,11 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="startDate">Start Date</label>
-                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'"
-                                        formControlName="startDate" name="startDate"></app-date-time-picker>
+                                    <ngbd-datepicker-adapter formControlName="startDate"></ngbd-datepicker-adapter>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="endDate">End Date</label>
-                                    <app-date-time-picker [inputDatetimeFormat]="'d/MM/yyyy'" formControlName="endDate"
-                                        name="endDate"></app-date-time-picker>
+                                    <ngbd-datepicker-adapter formControlName="endDate"></ngbd-datepicker-adapter>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="investType">Investment Type</label>

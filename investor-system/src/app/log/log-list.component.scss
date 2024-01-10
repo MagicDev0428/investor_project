@@ -90,10 +90,12 @@
         .tcol {
             display: table-cell;
             vertical-align: middle;
-            white-space: nowrap;
             padding: 10px 8px;
             border: 1px solid rgba(0, 0, 0, 0.7);
             text-align: center;
+            &:nth-child(1) {
+                white-space: nowrap;
+            }
 
             &:nth-child(4) {
                 text-align: left;
