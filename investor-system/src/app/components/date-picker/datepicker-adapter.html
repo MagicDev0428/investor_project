@@ -1,4 +1,4 @@
 <input [id]="ngControl?.name" class="form-control" placeholder="dd/mm/yyyy" name="d2" #c2="ngModel" [(ngModel)]="model2"
 	ngbDatepicker #d2="ngbDatepicker" (click)="open()" (ngModelChange)="onDateChange($event)"
-	[ngClass]="default=='6 months notice'?'text-danger fw-bold':''"
-	(change)="onInputChange($event)" [value]="default" />
+	[ngClass]="default=='6 months notice'?'text-danger fw-bold':''" (change)="onInputChange($event)" [value]="default"
+	[ngbTooltip]="tooltop" [autoClose]="'outside'" triggers="manual" #t="ngbTooltip" (focus)="openTooltip()" />

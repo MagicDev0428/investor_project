@@ -27,6 +27,10 @@
                                             item.explanation }}
                                         </option>
                                     </select>
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['investmentNo'].touched || submitted) && myInvestmentForm.controls['investmentNo'].errors?.['required']">
+                                        Investment should be selected.
+                                    </span>
                                 </div>
                                 <div class="col-xl-5 col-lg-6 form-group">
                                     <label for="investorName">Investor Name</label>
@@ -43,6 +47,10 @@
                                     <input formControlName="amountInvested" type="text" class="form-control text-end"
                                         id="amountInvested" (input)="onInputChange($event)"
                                         (keydown)="onlyNumbers($event)" aria-describedby="amountInvested" />
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['amountInvested'].touched || submitted) && myInvestmentForm.controls['amountInvested'].errors?.['required']">
+                                        Amount is required.
+                                    </span>
                                 </div>
                             </div>
                             <hr class="separator m-0">
@@ -59,7 +67,12 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="transferDate">Transfer Date</label>
-                                    <ngbd-datepicker-adapter formControlName="transferDate"></ngbd-datepicker-adapter>
+                                    <ngbd-datepicker-adapter formControlName="transferDate"
+                                        [tooltip]="'The date the investor has invested all /signed contract'"></ngbd-datepicker-adapter>
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['transferDate'].touched || submitted) && myInvestmentForm.controls['transferDate'].errors?.['required']">
+                                        Transfer Date is required.
+                                    </span>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="transactionNo">Transaction No</label>
@@ -158,16 +171,26 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="firstProfitDate">First profit Date</label>
-                                    <ngbd-datepicker-adapter
-                                        formControlName="firstProfitDate"></ngbd-datepicker-adapter>
+                                    <ngbd-datepicker-adapter formControlName="firstProfitDate"
+                                        [tooltip]="'First date that the investor should recieve profit'"></ngbd-datepicker-adapter>
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['firstProfitDate'].touched || submitted) && myInvestmentForm.controls['firstProfitDate'].errors?.['required']">
+                                        First profit Date is required.
+                                    </span>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="lastProfitDate">Last profit Date</label>
-                                    <ngbd-datepicker-adapter formControlName="lastProfitDate"></ngbd-datepicker-adapter>
+                                    <ngbd-datepicker-adapter formControlName="lastProfitDate"
+                                        [tooltip]="'Last day that the investor should recieve profit'"></ngbd-datepicker-adapter>
+                                    <span class="text-danger"
+                                        *ngIf="(myInvestmentForm.controls['lastProfitDate'].touched || submitted) && myInvestmentForm.controls['lastProfitDate'].errors?.['required']">
+                                        Last profit Date is required.
+                                    </span>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="payBackDate">Pay Back Date</label>
-                                    <ngbd-datepicker-adapter formControlName="payBackDate"></ngbd-datepicker-adapter>
+                                    <ngbd-datepicker-adapter formControlName="payBackDate"
+                                        [tooltip]="'The day we should return all money to the investor'"></ngbd-datepicker-adapter>
                                 </div>
                             </div>
                             <hr class="separator m-0">

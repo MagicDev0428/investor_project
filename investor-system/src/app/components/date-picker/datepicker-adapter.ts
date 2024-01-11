@@ -1,4 +1,4 @@
-import { Component, Injectable, ViewChild, forwardRef, Injector } from '@angular/core';
+import { Component, Injectable, ViewChild, forwardRef, Injector, Input } from '@angular/core';
 import {
 	NgbCalendar,
 	NgbDateAdapter,
@@ -15,6 +15,7 @@ import {
 	NgControl,
 } from '@angular/forms';
 import * as moment from 'moment';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
@@ -82,9 +83,11 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 })
 export class NgbdDatepickerAdapter {
 	@ViewChild('d2') d2: NgbInputDatepicker;
+	@ViewChild('t') t: NgbTooltip;
+	@Input('tooltip') tooltop: string;
 	model1: string;
 	model2: string;
-	default:string;
+	default: string;
 
 	public ngControl: NgControl;
 
@@ -109,8 +112,14 @@ export class NgbdDatepickerAdapter {
 		this.d2.toggle();
 	}
 
+	openTooltip() {
+		if (typeof this.tooltop !== 'undefined') {
+			this.t.open();
+		}
+	}
+
 	writeValue(newModel: string) {
-		if(newModel === '6 months notice') {
+		if (newModel === '6 months notice') {
 			this.default = newModel;
 			this.onChange(null);
 		}
