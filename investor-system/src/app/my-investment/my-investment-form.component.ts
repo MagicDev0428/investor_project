@@ -57,7 +57,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   selectedInvestor$!: Observable<string | number>;
   myInvestment: any = {
     documents: [],
-    investmentNo: 0,
+    investmentNo: null,
     investorName: '',
     amountInvested: 0,
     transferDate: null,
@@ -113,13 +113,13 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.myInvestmentForm = this.formBuilder.group(
       {
-        investmentNo: new FormControl(),
-        investorName: new FormControl(),
+        investmentNo: new FormControl(null, Validators.required),
+        investorName: new FormControl(''),
         amountInvested: new FormControl(this.currency_style(this.myInvestment.amountInvested), Validators.required),
-        transactionFrom: new FormControl(),
-        transactionTo: new FormControl(),
-        transferDate: new FormControl(),
-        transactionNo: new FormControl(),
+        transactionFrom: new FormControl(''),
+        transactionTo: new FormControl(''),
+        transferDate: new FormControl(null,Validators.required),
+        transactionNo: new FormControl(0),
         documents: new FormControl(),
         profitMonthlyPct: new FormControl(this.profit_style(this.myInvestment.profitMonthlyPct)),
         profitMonthly: new FormControl(this.currency_style(this.myInvestment.profitMonthly)),
@@ -128,9 +128,9 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         profitEndPct: new FormControl(this.profit_style(this.myInvestment.profitEndPct)),
         profitEnd: new FormControl(this.currency_style(this.myInvestment.profitEnd)),
         investType: new FormControl(),
-        firstProfitDate: new FormControl(),
-        lastProfitDate: new FormControl(),
-        payBackDate: new FormControl(),
+        firstProfitDate: new FormControl(null, Validators.required),
+        lastProfitDate: new FormControl(null, Validators.required),
+        payBackDate: new FormControl(null),
         torbenMonthlyPct: new FormControl(this.profit_style(this.myInvestment.torbenMonthlyPct)),
         torbenMonthly: new FormControl(this.currency_style(this.myInvestment.torbenMonthly)),
         torbenAnnualPct: new FormControl(this.profit_style(this.myInvestment.torbenAnnualPct)),
