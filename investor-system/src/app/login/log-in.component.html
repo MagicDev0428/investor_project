@@ -30,8 +30,8 @@
                             <div class="form-group row d-flex flex-row justify-content-center">
                                 <label for="pincode" class="text-center">Enter Pin Code</label>
                                 <div class="col-sm-4">
-                                    <input formControlName="pincode" class="form-control" type="password" id="pincode"
-                                        name="pincode" aria-describedby="pincode" />
+                                    <input formControlName="pincode" class="form-control text-center" type="password" id="pincode"
+                                        name="pincode" aria-describedby="pincode" maxlength="4" (keydown)="onlyNumbers($event)" />
                                 </div>
                                 <span class="text-danger text-center fw-bold"
                                     *ngIf="(logInForm.controls['pincode'].touched || submitted) && logInForm.controls['pincode'].errors?.['pincode']">
