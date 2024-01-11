@@ -209,6 +209,7 @@
     font-size: 1.2rem;
     box-shadow: 5px 5px 4px rgba(0, 117, 117, 0.4);
     width: 400px;
+    height: 45px;
 
     &:hover {
         background-color: rgb(1, 85, 85);
@@ -218,12 +219,13 @@
 .btn-danger {
     position: absolute;
     background-color: #8A0311;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: bold;
     box-shadow: 5px 5px 4px rgba(0, 117, 117, 0.4);
     right: 0;
     width: 130px;
     padding: 2px;
+    height: 45px;
 }
 
 .modal-footer {

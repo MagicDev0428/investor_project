@@ -175,7 +175,7 @@
   font-size: 1.2rem;
   box-shadow: 5px 5px 4px rgba(31, 78, 120, 0.4);
   width: 80%;
-  height: 50px;
+  height: 45px;
 
   &:hover {
     background-color: rgb(25, 61, 92);
@@ -183,14 +183,14 @@
 }
 
 .btn-danger {
-  background-color: rgb(140, 3, 17);
+  position: absolute;
+  background-color: #8A0311;
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 0.8rem;
-  box-shadow: 5px 5px 4px rgba(140, 3, 17, 0.4);
-  right: 0;
-  width: 40%;
-  height: 50px;
-  padding: 2px 10%;
+  box-shadow: 5px 5px 4px rgba(0, 117, 117, 0.4);
+  width: 130px;
+  padding: 2px;
+  height: 45px;
 }
 
 .btn-primary {

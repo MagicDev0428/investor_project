@@ -84,6 +84,7 @@ export class NgbdDatepickerAdapter {
 	@ViewChild('d2') d2: NgbInputDatepicker;
 	model1: string;
 	model2: string;
+	default:string;
 
 	public ngControl: NgControl;
 
@@ -109,9 +110,28 @@ export class NgbdDatepickerAdapter {
 	}
 
 	writeValue(newModel: string) {
-		if(typeof newModel === 'string') {
+		if(newModel === '6 months notice') {
+			this.default = newModel;
+		}
+		if ((typeof newModel === 'string') && (newModel !== '6 months notice')) {
 			this.model2 = newModel;
-			this.onChange(this.model2);
+			let formattedDate = moment(newModel, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
+			this.onChange(formattedDate);
+		}
+	}
+
+	onInputChange(event: any) {
+		let value = event.target.value;
+		let formattedDate = '';
+		if (value) {
+			formattedDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
+			if (formattedDate !== 'Invalid date') {
+				this.onChange(formattedDate);
+			} else {
+				this.onChange(null);
+			}
+		} else {
+			this.onChange(null);
 		}
 	}
 
@@ -124,8 +144,12 @@ export class NgbdDatepickerAdapter {
 	}
 
 	onDateChange($event: any) {
-        let value = $event
+		let value = $event
 		let formattedDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
-		this.onChange(formattedDate);
-    }
+		if (formattedDate !== 'Invalid date') {
+			this.onChange(formattedDate);
+		} else {
+			this.onChange(null);
+		}
+	}
 }

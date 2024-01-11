@@ -140,9 +140,10 @@ textarea {
 .btn-secondary {
     background-color: rgb(4, 0, 219);
     font-weight: bold;
-    font-size: 17pt;
+    font-size: 1.2rem;
     box-shadow: 5px 5px 4px rgba(4, 0, 219, 0.4);
     width: 400px;
+    height: 45px;
 
     &:hover {
         background-color: rgb(2, 0, 114);
@@ -151,18 +152,14 @@ textarea {
 
 .btn-danger {
     position: absolute;
-    background-color: grey;
-    font-size: 11pt;
+    background-color: #8A0311;
+    font-size: 1.1rem;
     font-weight: bold;
-    box-shadow: 5px 5px 4px rgba(71, 121, 6, 0.4);
+    box-shadow: 5px 5px 4px rgba(0, 117, 117, 0.4);
     right: 0;
     width: 130px;
     padding: 2px;
-    border: 1px solid grey;
-
-    &:hover {
-        background-color: rgb(87, 86, 86);
-    }
+    height: 45px;
 }
 
 .btn-primary {

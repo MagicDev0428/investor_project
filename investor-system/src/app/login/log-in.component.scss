@@ -1,0 +1,144 @@
+.form-control {
+    border-radius: 0;
+
+    &:focus {
+        border-color: rgb(84, 84, 84);
+        color: black;
+        box-shadow: 0 0 0 0.2rem rgba(84, 84, 84, 0.25);
+    }
+}
+
+select {
+    &.form-control {
+        padding: 0.375rem 0.3rem;
+    }
+}
+
+textarea {
+    &.form-control {
+        padding: 0.375rem 0.3rem;
+        height: 120px;
+    }
+}
+
+.container .modal {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 1;
+    display: block;
+
+    .modal-dialog {
+        max-width: 354px;
+        margin-top: 0;
+    }
+
+    .modal-content {
+        border-radius: 0;
+        background-color: #F2F2F2;
+    }
+
+    .modal-header {
+        margin: 0.5rem 0.5rem;
+        padding: 0.25rem 0.25rem;
+        background-color: rgb(84, 84, 84);
+        border-radius: 0;
+        position: relative;
+
+        h5 {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+
+            span {
+                color: rgb(200, 215, 128);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 6px;
+            font-style: italic;
+            text-shadow: none;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0.25rem;
+            border: none;
+
+            span {
+                background-color: #AAAAAA;
+                color: white;
+                font-weight: lighter;
+                border-radius: 0.25rem;
+                display: block;
+                width: 29px;
+                height: 29px;
+                text-align: center;
+                box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+            }
+        }
+    }
+
+    .modal-body {
+        padding: 0 25px 25px;
+    }
+}
+
+.info {
+    width: 100%;
+    padding: 10px 0;
+
+    .info-wrapper {
+        width: auto;
+
+        .info-text {
+            color: #555555;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .info-value {
+            color: black;
+            text-wrap: nowrap;
+        }
+    }
+}
+
+.form-group {
+    margin-bottom: 15px;
+
+    label {
+        color: #555555;
+        margin-bottom: 15px;
+        font-size: 2rem;
+        font-weight:bolder;
+    }
+}
+
+.btn-secondary {
+    background-color: #555555;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 80px;
+}
+
+@media (max-width: 576px) {
+
+    .info {
+        .info-wrapper {
+            display: flex;
+            flex-direction: column !important;
+            width: 100%;
+
+            info-col {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+        }
+    }
+}

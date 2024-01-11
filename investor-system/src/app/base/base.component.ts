@@ -180,6 +180,24 @@ export class BaseComponent {
         return monthsAndYears;
     }
 
+    getYearsMonthsString(startDate: string, endDate: string, style: string): string {
+        const startMoment = moment(startDate, style);
+        const endMoment = moment(endDate, style);
+      
+        const years = endMoment.diff(startMoment, 'years');
+        startMoment.add(years, 'years');
+        const months = endMoment.diff(startMoment, 'months');
+      
+        let result = '';
+        if (years > 0) {
+          result += years + (years === 1 ? ' year' : ' years');
+        }
+        if (months > 0) {
+          result += (result ? ', ' : '') + months + (months === 1 ? ' month' : ' months');
+        }
+        return result;
+      }
+
     isValidUrl(url: string): boolean {
         const pattern = new RegExp('^(https?:\\/\\/)?', 'i'); // fragment locator
         return !!pattern.test(url);
