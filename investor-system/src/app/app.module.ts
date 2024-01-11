@@ -59,6 +59,8 @@ import { MonthSelectorComponent } from './components/month-selector/month-select
 import { DraggableDialogComponent } from './components/draggable-dialog/draggable-dialog.component';
 import { BalanceInvestorComponent } from './deposit/investor-info.component';
 import { NgbdDatepickerAdapter } from './components/date-picker/datepicker-adapter';
+import { LogInComponent } from './login/log-in.component';
+import { LoginPincodeButtonComponent } from './components/login-pincode-button/login-pincode-button.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,9 @@ import { NgbdDatepickerAdapter } from './components/date-picker/datepicker-adapt
     MonthSelectorComponent,
     DraggableDialogComponent,
     BalanceInvestorComponent,
-    NgbdDatepickerAdapter
+    NgbdDatepickerAdapter,
+    LogInComponent,
+    LoginPincodeButtonComponent
   ],
   imports: [
     BrowserModule,

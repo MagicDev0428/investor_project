@@ -163,9 +163,8 @@
                             <div class="row d-flex justify-content-center m-3 position-relative">
                                 <button type="submit" class="btn btn-secondary">WITHDRAW MONEY</button>
                                 <button type="button" class="btn btn-danger"
-                                    [class]="{'disabled': userId === undefined}" data-dismiss="modal"
-                                    (click)="deleteTransaction(userId)">DELETE
-                                    BALANCE</button>
+                                    [class]="{'disabled': balanceId === 'new'}" data-dismiss="modal"
+                                    (click)="deleteTransaction(userId)">DELETE</button>
                             </div>
                         </form>
                     </div>

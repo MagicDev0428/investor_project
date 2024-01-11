@@ -31,7 +31,7 @@ import { AddMoneyEnvComponent } from './deposit/add-money-env.component';
 import { AddMoneyBankComponent } from './deposit/add-money-bank.component';
 import { WithdrawCryptoComponent } from './deposit/withdraw-crypto.component';
 import { WithdrawCashComponent } from './deposit/withdraw-cash.component';
-//import { AuthGuard } from '@auth0/auth0-angular';
+import { LogInComponent } from './login/log-in.component';
 
 
 const routes: Routes = [
@@ -39,6 +39,7 @@ const routes: Routes = [
   {path: 'manage-investor', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
   {path: 'manage-investor/:id', component: ManageInvestorComponent, canActivate: [AuthGuardFN]},
   {path: '', redirectTo: '/my-investments', pathMatch: 'full'},
+  {path: 'login', component: LogInComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'callback', component: CallbackComponent},
   {path: 'unauthorized', component: UnauthorizedComponent, canActivate: [AuthGuardFN]},
