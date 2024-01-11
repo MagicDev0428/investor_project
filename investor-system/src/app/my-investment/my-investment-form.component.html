@@ -21,7 +21,8 @@
                                 <div class="col-xl-5 col-lg-6 form-group">
                                     <label for="investmentNo">Investment</label>
                                     <select formControlName="investmentNo" class="form-control form-select"
-                                        id="investmentNo" aria-describedby="investmentNo" (change)="getInvestInfo($event)">
+                                        id="investmentNo" aria-describedby="investmentNo"
+                                        (change)="getInvestInfo($event)">
                                         <option [value]="item._id" *ngFor="let item of investments">{{ item._id}} {{
                                             item.explanation }}
                                         </option>
@@ -114,7 +115,7 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="profitMonthlyPct">Profit pr Month</label>
+                                    <label for="profitMonthlyPct">Profit pr Month(%)</label>
                                     <input formControlName="profitMonthlyPct" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitMonthlyPct"
                                         aria-describedby="profitMonthlyPct" />
@@ -122,9 +123,13 @@
                                         *ngIf="(myInvestmentForm.controls['profitMonthlyPct'].touched || submitted) &&(myInvestmentForm.errors?.['monthlyExceed'])">
                                         Profit pr Month cannot be less than 0.01% or greater than 100.00%.
                                     </span>
+                                    <label for="profitMonthly">Profit pr Month</label>
+                                    <input formControlName="profitMonthly" type="text" class="form-control text-end"
+                                        (input)="onInputChange($event)" id="profitMonthly"
+                                        aria-describedby="profitMonthly" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="profitAnnualPct">Profit pr Year</label>
+                                    <label for="profitAnnualPct">Profit pr Year(%)</label>
                                     <input formControlName="profitAnnualPct" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitAnnualPct"
                                         aria-describedby="profitAnnualPct" />
@@ -132,9 +137,13 @@
                                         *ngIf="(myInvestmentForm.controls['profitAnnualPct'].touched || submitted) && (myInvestmentForm.errors?.['yearlyExceed'])">
                                         Profit pr Year cannot be less than 0.01% or greater than 100.00%.
                                     </span>
+                                    <label for="profitAnnual">Profit pr Year</label>
+                                    <input formControlName="profitAnnual" type="text" class="form-control text-end"
+                                        (input)="onInputChange($event)" id="profitAnnual"
+                                        aria-describedby="profitAnnual" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="profitEndPct">One Time Profit</label>
+                                    <label for="profitEndPct">One Time Profit(%)</label>
                                     <input formControlName="profitEndPct" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitEndPct"
                                         aria-describedby="profitEndPct" />
@@ -142,10 +151,15 @@
                                         *ngIf="(myInvestmentForm.controls['profitEndPct'].touched || submitted) && (myInvestmentForm.errors?.['endExceed'])">
                                         Profit by End cannot be less than 0.01% or greater than 100.00%.
                                     </span>
+                                    <label for="profitEnd">One Time Profit</label>
+                                    <input formControlName="profitEnd" type="text" class="form-control text-end"
+                                        (input)="onInputChange($event)" id="profitEnd"
+                                        aria-describedby="profitEnd" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="firstProfitDate">First profit Date</label>
-                                    <ngbd-datepicker-adapter formControlName="firstProfitDate"></ngbd-datepicker-adapter>
+                                    <ngbd-datepicker-adapter
+                                        formControlName="firstProfitDate"></ngbd-datepicker-adapter>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="lastProfitDate">Last profit Date</label>
@@ -159,22 +173,34 @@
                             <hr class="separator m-0">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="torbenMonthlyPct">Torben pr Month</label>
+                                    <label for="torbenMonthlyPct">Torben pr Month(%)</label>
                                     <input formControlName="torbenMonthlyPct" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenMonthlyPct"
                                         aria-describedby="torbenMonthlyPct" />
+                                    <label for="torbenMonthly">Torben pr Month</label>
+                                    <input formControlName="torbenMonthly" type="text" class="form-control text-end"
+                                        (input)="onInputChange($event)" id="torbenMonthly"
+                                        aria-describedby="torbenMonthly" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="torbenAnnualPct">Torben pr Year</label>
+                                    <label for="torbenAnnualPct">Torben pr Year(%)</label>
                                     <input formControlName="torbenAnnualPct" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenAnnualPct"
                                         aria-describedby="torbenAnnualPct" />
+                                    <label for="torbenAnnual">Torben pr Year</label>
+                                    <input formControlName="torbenAnnual" type="text" class="form-control text-end"
+                                        (input)="onInputChange($event)" id="torbenAnnual"
+                                        aria-describedby="torbenAnnual" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
-                                    <label for="torbenEndPct">Torben One Time</label>
+                                    <label for="torbenEndPct">Torben One Time(%)</label>
                                     <input formControlName="torbenEndPct" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenEndPct"
                                         aria-describedby="torbenEndPct" />
+                                    <label for="torbenEnd">Torben One Time</label>
+                                    <input formControlName="torbenEnd" type="text" class="form-control text-end"
+                                        (input)="onInputChange($event)" id="torbenEnd"
+                                        aria-describedby="torbenEnd" />
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="form-group">
