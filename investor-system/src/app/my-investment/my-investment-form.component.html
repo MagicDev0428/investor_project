@@ -11,7 +11,7 @@
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                             (click)="goToPrev()">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">X</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -126,7 +126,7 @@
                                     <label for="profitMonthly">Profit pr Month</label>
                                     <input formControlName="profitMonthly" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitMonthly"
-                                        aria-describedby="profitMonthly" />
+                                        (keydown)="onlyNumbers($event)" aria-describedby="profitMonthly" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="profitAnnualPct">Profit pr Year(%)</label>
@@ -140,7 +140,7 @@
                                     <label for="profitAnnual">Profit pr Year</label>
                                     <input formControlName="profitAnnual" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="profitAnnual"
-                                        aria-describedby="profitAnnual" />
+                                        (keydown)="onlyNumbers($event)" aria-describedby="profitAnnual" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="profitEndPct">One Time Profit(%)</label>
@@ -153,7 +153,7 @@
                                     </span>
                                     <label for="profitEnd">One Time Profit</label>
                                     <input formControlName="profitEnd" type="text" class="form-control text-end"
-                                        (input)="onInputChange($event)" id="profitEnd"
+                                        (input)="onInputChange($event)" id="profitEnd" (keydown)="onlyNumbers($event)"
                                         aria-describedby="profitEnd" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
@@ -180,7 +180,7 @@
                                     <label for="torbenMonthly">Torben pr Month</label>
                                     <input formControlName="torbenMonthly" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenMonthly"
-                                        aria-describedby="torbenMonthly" />
+                                        (keydown)="onlyNumbers($event)" aria-describedby="torbenMonthly" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="torbenAnnualPct">Torben pr Year(%)</label>
@@ -190,7 +190,7 @@
                                     <label for="torbenAnnual">Torben pr Year</label>
                                     <input formControlName="torbenAnnual" type="text" class="form-control text-end"
                                         (input)="onInputChange($event)" id="torbenAnnual"
-                                        aria-describedby="torbenAnnual" />
+                                        (keydown)="onlyNumbers($event)" aria-describedby="torbenAnnual" />
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="torbenEndPct">Torben One Time(%)</label>
@@ -199,7 +199,7 @@
                                         aria-describedby="torbenEndPct" />
                                     <label for="torbenEnd">Torben One Time</label>
                                     <input formControlName="torbenEnd" type="text" class="form-control text-end"
-                                        (input)="onInputChange($event)" id="torbenEnd"
+                                        (input)="onInputChange($event)" id="torbenEnd" (keydown)="onlyNumbers($event)"
                                         aria-describedby="torbenEnd" />
                                 </div>
                                 <div class="col-xl-12">

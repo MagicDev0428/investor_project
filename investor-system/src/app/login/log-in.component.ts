@@ -41,9 +41,6 @@ export class LogInComponent extends BaseComponent implements OnInit {
         private formBuilder: FormBuilder,
     ) {
         super(router, auth, toastrService);
-        this.auth.user$.subscribe(result => {
-            this.user = result['investor-system'];
-        });
     }
 
     ngOnInit(): void {
