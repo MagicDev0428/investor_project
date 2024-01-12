@@ -22,7 +22,14 @@ export class BaseComponent {
     }
 
     currency_style(amount: any) {
+        if(typeof amount === 'string') {
+            amount = amount.replace(/\D/g, "");
+        }
         let currency_amount = amount?.toString();
+        if (!Number.isInteger(Number(currency_amount))) {
+            currency_amount = +Number(currency_amount)?.toFixed(2);
+        }
+        currency_amount = currency_amount?.toString();
         if (currency_amount === undefined) {
             currency_amount = '0';
         }
@@ -183,20 +190,20 @@ export class BaseComponent {
     getYearsMonthsString(startDate: string, endDate: string, style: string): string {
         const startMoment = moment(startDate, style);
         const endMoment = moment(endDate, style);
-      
+
         const years = endMoment.diff(startMoment, 'years');
         startMoment.add(years, 'years');
         const months = endMoment.diff(startMoment, 'months');
-      
+
         let result = '';
         if (years > 0) {
-          result += years + (years === 1 ? ' year' : ' years');
+            result += years + (years === 1 ? ' year' : ' years');
         }
         if (months > 0) {
-          result += (result ? ', ' : '') + months + (months === 1 ? ' month' : ' months');
+            result += (result ? ', ' : '') + months + (months === 1 ? ' month' : ' months');
         }
         return result;
-      }
+    }
 
     isValidUrl(url: string): boolean {
         const pattern = new RegExp('^(https?:\\/\\/)?', 'i'); // fragment locator

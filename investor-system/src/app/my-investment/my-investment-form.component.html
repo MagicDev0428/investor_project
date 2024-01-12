@@ -68,7 +68,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="transferDate">Transfer Date</label>
                                     <ngbd-datepicker-adapter formControlName="transferDate"
-                                        [tooltip]="'The date the investor has invested all /signed contract'"></ngbd-datepicker-adapter>
+                                        ngbTooltip="The date the investor has invested all /signed contract"></ngbd-datepicker-adapter>
                                     <span class="text-danger"
                                         *ngIf="(myInvestmentForm.controls['transferDate'].touched || submitted) && myInvestmentForm.controls['transferDate'].errors?.['required']">
                                         Transfer Date is required.
@@ -172,7 +172,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="firstProfitDate">First profit Date</label>
                                     <ngbd-datepicker-adapter formControlName="firstProfitDate"
-                                        [tooltip]="'First date that the investor should recieve profit'"></ngbd-datepicker-adapter>
+                                        ngbTooltip="First date that the investor should recieve profit"></ngbd-datepicker-adapter>
                                     <span class="text-danger"
                                         *ngIf="(myInvestmentForm.controls['firstProfitDate'].touched || submitted) && myInvestmentForm.controls['firstProfitDate'].errors?.['required']">
                                         First profit Date is required.
@@ -181,7 +181,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="lastProfitDate">Last profit Date</label>
                                     <ngbd-datepicker-adapter formControlName="lastProfitDate"
-                                        [tooltip]="'Last day that the investor should recieve profit'"></ngbd-datepicker-adapter>
+                                        ngbTooltip="Last day that the investor should recieve profit"></ngbd-datepicker-adapter>
                                     <span class="text-danger"
                                         *ngIf="(myInvestmentForm.controls['lastProfitDate'].touched || submitted) && myInvestmentForm.controls['lastProfitDate'].errors?.['required']">
                                         Last profit Date is required.
@@ -190,7 +190,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 form-group">
                                     <label for="payBackDate">Pay Back Date</label>
                                     <ngbd-datepicker-adapter formControlName="payBackDate"
-                                        [tooltip]="'The day we should return all money to the investor'"></ngbd-datepicker-adapter>
+                                        ngbTooltip="The day we should return all money to the investor"></ngbd-datepicker-adapter>
                                 </div>
                             </div>
                             <hr class="separator m-0">

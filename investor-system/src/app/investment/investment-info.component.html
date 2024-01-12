@@ -4,8 +4,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title ">Who is in <span>#{{ investmentInfo._id }}</span> Investment at {{ title }}</h5>
-                        <button type="button" (click)="goToPrev()" class="close" data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title ">Who is in <span>#{{ investmentInfo._id }}</span> Investment at {{ title
+                            }}</h5>
+                        <button type="button" (click)="goToPrev()" class="close" data-dismiss="modal"
+                            aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -16,41 +18,43 @@
                                 <div class="col-lg-1 form-group my-1">
                                     <label for="investment">Investment</label>
                                     <input formControlName="investment" type="text" class="form-control" id="investment"
-                                        aria-describedby="investment" readonly/>
+                                        aria-describedby="investment" readonly />
                                 </div>
                                 <div class="col-lg-11 form-group my-1">
                                     <label for="description">Explanation</label>
                                     <textarea formControlName="description" class="form-control" id="description"
-                                        aria-describedby="Money Transfer Description" rows="4" cols="50" readonly></textarea>
+                                        aria-describedby="Money Transfer Description" rows="4" cols="50"
+                                        readonly></textarea>
                                 </div>
                                 <div class="col-lg-2 col-md-3 col-sm-6 form-group my-2">
                                     <label for="totalAmount">Total Amount</label>
-                                    <input formControlName="totalAmount" type="text" class="form-control text-end" id="totalAmount"
-                                        aria-describedby="totalAmount" readonly/>
+                                    <input formControlName="totalAmount" type="text" class="form-control text-end"
+                                        id="totalAmount" aria-describedby="totalAmount" readonly />
                                 </div>
                                 <div class="col-lg-2 col-md-3 col-sm-6 form-group my-2">
                                     <label for="expireIn">Expire in</label>
-                                    <input formControlName="expireIn" type="text" class="form-control" id="expireIn" aria-describedby="expireIn" readonly/>
+                                    <input formControlName="expireIn" type="text" class="form-control" id="expireIn"
+                                        aria-describedby="expireIn" readonly />
                                 </div>
                                 <div class="col-lg-2 col-md-3 col-sm-6 form-group my-2">
                                     <label for="investmentType">Investment Type</label>
-                                    <input formControlName="investmentType" type="text" class="form-control" id="investmentType"
-                                        aria-describedby="investmentType" readonly/>
+                                    <input formControlName="investmentType" type="text" class="form-control"
+                                        id="investmentType" aria-describedby="investmentType" readonly />
                                 </div>
                                 <div class="col-lg-2 col-md-3 col-sm-6 form-group my-2">
                                     <label for="monthlyProfit">Profit pr Month</label>
-                                    <input formControlName="monthlyProfit" type="text" class="form-control text-end" id="monthlyProfit"
-                                        aria-describedby="monthlyProfit" readonly/>
+                                    <input formControlName="monthlyProfit" type="text" class="form-control text-end"
+                                        id="monthlyProfit" aria-describedby="monthlyProfit" readonly />
                                 </div>
                                 <div class="col-lg-2 col-md-3 col-sm-6 form-group my-2">
                                     <label for="annualProfit">Profit pr Year</label>
-                                    <input formControlName="annualProfit" type="text" class="form-control text-end" id="annualProfit"
-                                        aria-describedby="annualProfit" readonly/>
+                                    <input formControlName="annualProfit" type="text" class="form-control text-end"
+                                        id="annualProfit" aria-describedby="annualProfit" readonly />
                                 </div>
                                 <div class="col-lg-2 col-md-3 col-sm-6 form-group my-2">
                                     <label for="endProfit">Profit by End</label>
-                                    <input formControlName="endProfit" type="text" class="form-control text-end" id="endProfit"
-                                        aria-describedby="endProfit" readonly/>
+                                    <input formControlName="endProfit" type="text" class="form-control text-end"
+                                        id="endProfit" aria-describedby="endProfit" readonly />
                                 </div>
                             </div>
                         </form>
@@ -76,7 +80,8 @@
                                         </div>
                                         <div class="col-lg-2 d-flex my-2">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                aria-label="Icon Button" (click)="goTo('/my-investment-form')">NEW</button>
+                                                aria-label="Icon Button"
+                                                (click)="goTo('/my-investment-form')">NEW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -91,30 +96,46 @@
                                             <div class="tcol">First Profit Date</div>
                                         </div>
                                         <div *ngFor="let item of myInvestments; let i = index" class="trow">
-                                            <div class="tcol">
+                                            <div class="tcol"
+                                                (click)="goTo('my-investment-form/' + item._id + '/' + item.investorName)">
                                                 <div>
                                                     <span class="name">{{ item.investorName }}</span>
                                                     <div class="button-group">
-                                                      <button type="button" (click)="goTo('info/'+ item.investorName)" class="btn btn-secondary" data-dismiss="modal"
-                                                        aria-label="Icon Button">
-                                                        <span aria-hidden="true">i</span>
-                                                      </button>
-                                                      <button type="button" (click)="goTo('manage-investor/'+ item.investorName)" class="btn btn-secondary" data-dismiss="modal"
-                                                        aria-label="Icon Button">
-                                                        <span aria-hidden="true">E</span>
-                                                      </button>
-                                                      <button type="button" (click)="goTo('portfolio/'+ item.investorName)" class="btn btn-success" data-dismiss="modal"
-                                                        aria-label="Icon Button">
-                                                        <span aria-hidden="true">P</span>
-                                                      </button>
+                                                        <button type="button" (click)="goTo('info/'+ item.investorName)"
+                                                            class="btn btn-secondary" data-dismiss="modal"
+                                                            aria-label="Icon Button">
+                                                            <span aria-hidden="true">i</span>
+                                                        </button>
+                                                        <button type="button"
+                                                            (click)="goTo('manage-investor/'+ item.investorName)"
+                                                            class="btn btn-secondary" data-dismiss="modal"
+                                                            aria-label="Icon Button">
+                                                            <span aria-hidden="true">E</span>
+                                                        </button>
+                                                        <button type="button"
+                                                            (click)="goTo('portfolio/'+ item.investorName)"
+                                                            class="btn btn-success" data-dismiss="modal"
+                                                            aria-label="Icon Button">
+                                                            <span aria-hidden="true">P</span>
+                                                        </button>
                                                     </div>
-                                                  </div>
+                                                </div>
                                             </div>
-                                            <div class="tcol">{{ item.amountInvested }}</div>
-                                            <div class="tcol">{{ item.profitMonthlyPct }}</div>
-                                            <div class="tcol">{{ item.transferDate }}</div>
-                                            <div class="tcol">{{ item.transferDate }}</div>
-                                            <div class="tcol">{{ item.firstProfitDate }}</div>
+                                            <div class="tcol"
+                                                (click)="goTo('my-investment-form/' + item._id + '/' + item.investorName)">
+                                                {{ item.amountInvested }}</div>
+                                            <div class="tcol"
+                                                (click)="goTo('my-investment-form/' + item._id + '/' + item.investorName)">
+                                                {{ item.profitMonthlyPct }}</div>
+                                            <div class="tcol"
+                                                (click)="goTo('my-investment-form/' + item._id + '/' + item.investorName)">
+                                                {{ item.transferDate }}</div>
+                                            <div class="tcol"
+                                                (click)="goTo('my-investment-form/' + item._id + '/' + item.investorName)">
+                                                {{ item.transferDate }}</div>
+                                            <div class="tcol"
+                                                (click)="goTo('my-investment-form/' + item._id + '/' + item.investorName)">
+                                                {{ item.firstProfitDate }}</div>
                                         </div>
                                     </div>
                                 </div>

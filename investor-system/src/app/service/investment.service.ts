@@ -80,5 +80,12 @@ export class InvestmentService {
             );
     }
 
+    getMyInvestment(id: number | string): Observable<any> {
+        return this.http.get<any>(environment.apiUrl + this.apiURL + '/investmentMyInvestments/' + id)
+            .pipe(
+                catchError(this._configService.handleError)
+            );
+    }
+
 
 }
