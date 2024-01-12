@@ -20,6 +20,19 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
  */
+function getShortMonthName(monthNumber: number): string {
+	const months = [
+		"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+	];
+	return months[monthNumber - 1];
+}
+
+function convertToTwoDigitNumber(number: number): string {
+	return number.toString().padStart(2, '0');
+}
+
+
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
 	readonly DELIMITER = '-';
@@ -37,7 +50,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
 	}
 
 	toModel(date: NgbDateStruct | null): string | null {
-		return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+		return date ? convertToTwoDigitNumber(date.day) + this.DELIMITER + getShortMonthName(date.month) + this.DELIMITER + date.year : null;
 	}
 }
 
@@ -46,7 +59,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
  */
 @Injectable()
 export class CustomDateParserFormatter extends NgbDateParserFormatter {
-	readonly DELIMITER = '/';
+	readonly DELIMITER = '-';
 
 	parse(value: string): NgbDateStruct | null {
 		if (value) {
@@ -61,7 +74,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 	}
 
 	format(date: NgbDateStruct | null): string {
-		return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
+		return date ? (date.day) + this.DELIMITER + getShortMonthName(date.month) + this.DELIMITER + date.year : '';
 	}
 }
 
@@ -109,7 +122,7 @@ export class NgbdDatepickerAdapter {
 	open() {
 		this.d2.toggle();
 	}
-	
+
 	writeValue(newModel: string) {
 		if (newModel === '6 months notice') {
 			this.default = newModel;
@@ -118,7 +131,7 @@ export class NgbdDatepickerAdapter {
 		if ((typeof newModel === 'string') && (newModel !== '6 months notice')) {
 			this.default = newModel;
 			this.model2 = newModel;
-			let formattedDate = moment(newModel, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
+			let formattedDate = moment(newModel, 'DD-MMM-YYYY').format('YYYY-MM-DDTHH:mm');
 			this.onChange(formattedDate);
 		}
 	}
@@ -128,7 +141,7 @@ export class NgbdDatepickerAdapter {
 		this.default = value;
 		let formattedDate = '';
 		if (value) {
-			formattedDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
+			formattedDate = moment(value, 'DD-MMM-YYYY').format('YYYY-MM-DDTHH:mm');
 			if (formattedDate !== 'Invalid date') {
 				this.onChange(formattedDate);
 			} else {
@@ -150,7 +163,7 @@ export class NgbdDatepickerAdapter {
 	onDateChange($event: any) {
 		let value = $event;
 		this.default = value;
-		let formattedDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
+		let formattedDate = moment(value, 'DD-MMM-YYYY').format('YYYY-MM-DDTHH:mm');
 		if (formattedDate !== 'Invalid date') {
 			this.onChange(formattedDate);
 		} else {

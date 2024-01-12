@@ -46,11 +46,6 @@
             [routerLink]="['log-list']">Logs</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link" data-bs-target="#navbarNav" (click)="toggleNavbar()"
-            *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
-            [routerLink]="['my-investments']">Customers</a>
-        </li>
-        <li class="nav-item">
           <a class=" nav-link" data-bs-target="#navbarNav" (click)="toggleNavbar()" [routerLink]="['profile']"
             *ngIf="(auth.isAuthenticated$ | async) === true">Profile</a>
         </li>

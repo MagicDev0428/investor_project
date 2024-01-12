@@ -180,7 +180,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
             this.myInvestmentForm.get('lastProfitDate').setValue(moment(this.values['lastProfitDate']).format('DD-MM-YYYY'));
           }
           if (this.values['payBackDate']) {
-            // this.myInvestmentForm.get('payBackDate').setValue(moment(this.values['payBackDate']).format('DD-MM-YYYY'));
+            this.myInvestmentForm.get('payBackDate').setValue(moment(this.values['payBackDate']).format('DD-MM-YYYY'));
           } else {
             this.myInvestmentForm.get('payBackDate').setValue('6 months notice');
           }
@@ -325,6 +325,12 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       this.myInvestmentForm.get('profitMonthly').disable();
       this.myInvestmentForm.get('profitAnnual').disable();
       this.myInvestmentForm.get('profitEnd').disable();
+      this.myInvestmentForm.get('torbenMonthlyPct').disable();
+      this.myInvestmentForm.get('torbenAnnualPct').disable();
+      this.myInvestmentForm.get('torbenEndPct').disable();
+      this.myInvestmentForm.get('torbenMonthly').disable();
+      this.myInvestmentForm.get('torbenAnnual').disable();
+      this.myInvestmentForm.get('torbenEnd').disable();
     } else if (this.investType === 'Monthly Profit') {
       this.myInvestmentForm.get('profitMonthlyPct').enable();
       this.myInvestmentForm.get('profitAnnualPct').disable();
@@ -332,6 +338,12 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       this.myInvestmentForm.get('profitMonthly').enable();
       this.myInvestmentForm.get('profitAnnual').disable();
       this.myInvestmentForm.get('profitEnd').disable();
+      this.myInvestmentForm.get('torbenMonthlyPct').enable();
+      this.myInvestmentForm.get('torbenAnnualPct').disable();
+      this.myInvestmentForm.get('torbenEndPct').disable();
+      this.myInvestmentForm.get('torbenMonthly').enable();
+      this.myInvestmentForm.get('torbenAnnual').disable();
+      this.myInvestmentForm.get('torbenEnd').disable();
     } else if (this.investType === 'Annual Profit') {
       this.myInvestmentForm.get('profitMonthlyPct').disable();
       this.myInvestmentForm.get('profitAnnualPct').enable();
@@ -339,6 +351,12 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       this.myInvestmentForm.get('profitMonthly').disable();
       this.myInvestmentForm.get('profitAnnual').enable();
       this.myInvestmentForm.get('profitEnd').disable();
+      this.myInvestmentForm.get('torbenMonthlyPct').disable();
+      this.myInvestmentForm.get('torbenAnnualPct').enable();
+      this.myInvestmentForm.get('torbenEndPct').disable();
+      this.myInvestmentForm.get('torbenMonthly').disable();
+      this.myInvestmentForm.get('torbenAnnual').enable();
+      this.myInvestmentForm.get('torbenEnd').disable();
     } else if (this.investType === 'One-time Profit') {
       this.myInvestmentForm.get('profitMonthlyPct').disable();
       this.myInvestmentForm.get('profitAnnualPct').disable();
@@ -346,6 +364,12 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       this.myInvestmentForm.get('profitMonthly').disable();
       this.myInvestmentForm.get('profitAnnual').disable();
       this.myInvestmentForm.get('profitEnd').enable();
+      this.myInvestmentForm.get('torbenMonthlyPct').disable();
+      this.myInvestmentForm.get('torbenAnnualPct').disable();
+      this.myInvestmentForm.get('torbenEndPct').enable();
+      this.myInvestmentForm.get('torbenMonthly').disable();
+      this.myInvestmentForm.get('torbenAnnual').disable();
+      this.myInvestmentForm.get('torbenEnd').enable();
     } else if (this.investType === 'Mixed') {
       this.myInvestmentForm.get('profitMonthlyPct').enable();
       this.myInvestmentForm.get('profitAnnualPct').enable();
@@ -353,6 +377,12 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       this.myInvestmentForm.get('profitMonthly').enable();
       this.myInvestmentForm.get('profitAnnual').enable();
       this.myInvestmentForm.get('profitEnd').enable();
+      this.myInvestmentForm.get('torbenMonthlyPct').enable();
+      this.myInvestmentForm.get('torbenAnnualPct').enable();
+      this.myInvestmentForm.get('torbenEndPct').enable();
+      this.myInvestmentForm.get('torbenMonthly').enable();
+      this.myInvestmentForm.get('torbenAnnual').enable();
+      this.myInvestmentForm.get('torbenEnd').enable();
     }
   }
 
@@ -366,8 +396,10 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       || id === 'torbenAnnual' || id === 'torbenEnd') {
       this.myInvestment[id] = Number(event.target.value.replace(/\D/g, ''));
       this.changeStyle(this.myInvestment[id], id);
-      this.setAutoAmount(id, this.myInvestment[id]);
-      if(id !== 'amountInvested') {
+      if (id === 'amountInvested') {
+        this.setAutoAmount(id, this.myInvestment[id]);
+      }
+      if (id !== 'amountInvested') {
         this.setAutoPercent(id, this.myInvestment[id]);
       }
     }
@@ -375,7 +407,6 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       id === 'torbenAnnualPct' || id === 'profitEndPct' || id === 'torbenEndPct') {
       this.myInvestment[id] = event.target.value?.replace(/%/g, '');
       this.myInvestmentForm.get(id).setValue(this.myInvestment[id] + '%');
-      this.setAutoPercent(id, this.myInvestment[id])
       this.setAutoAmount(id, this.myInvestment[id]);
     }
   }
@@ -435,10 +466,10 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
 
   setAutoAmount(id, value) {
     if (id !== 'amountInvested') {
-    let value_id = id.replace("Pct", "");
-    let amount = this.myInvestment.amountInvested;
-    this.myInvestment[value_id] = value * amount / 100;
-    this.myInvestmentForm.get(value_id).setValue(this.currency_style(this.myInvestment[value_id]));
+      let value_id = id.replace("Pct", "");
+      let amount = this.myInvestment.amountInvested;
+      this.myInvestment[value_id] = value * amount / 100;
+      this.myInvestmentForm.get(value_id).setValue(this.currency_style(this.myInvestment[value_id]));
     } else {
       this.myInvestment['profitMonthly'] = this.myInvestment['profitMonthlyPct'] * value / 100;
       this.myInvestmentForm.get('profitMonthly').setValue(this.currency_style(this.myInvestment['profitMonthly']));
@@ -457,10 +488,12 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
 
   setAutoPercent(id, value) {
     if (id !== 'amountInvested') {
-    let value_id = id + "Pct";
-    let amount = this.myInvestment.amountInvested;
-    this.myInvestment[value_id] = value / amount * 100;
-    this.myInvestmentForm.get(value_id).setValue(this.profit_style(this.myInvestment[value_id]));
+      if (this.myInvestment.amountInvested !== 0) {
+        let value_id = id + "Pct";
+        let amount = this.myInvestment.amountInvested;
+        this.myInvestment[value_id] = value / amount * 100;
+        this.myInvestmentForm.get(value_id).setValue(this.profit_style(this.myInvestment[value_id]));
+      }
     } else {
       this.myInvestment['profitMonthlyPct'] = this.myInvestment['profitMonthly'] / value * 100;
       this.myInvestmentForm.get('profitMonthlyPct').setValue(this.profit_style(this.myInvestment['profitMonthlyPct']));

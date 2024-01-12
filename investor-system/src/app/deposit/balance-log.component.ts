@@ -59,6 +59,15 @@ export class BalanceLogComponent extends BaseComponent implements OnInit {
                     log.time = moment(log._id).format('HH:mm');
                     return log;
                 });
+                this.log_entry.sort((a, b) => {
+                    if (a['_id'] > b['_id']) {
+                      return -1;
+                    } else if (a['_id'] < b['_id']) {
+                      return 1;
+                    } else {
+                      return 0;
+                    }
+                  });
             });
         }
     }
