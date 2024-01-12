@@ -60,10 +60,10 @@
                                             <div class="tcol">{{ formatDate(item.firstProfitDate, 'DD-MMM-YYYY') }}
                                             </div>
                                             <div class="tcol">[{{ item.investmentNo??'' }}] {{ item.description??'' }}
-                                                <span>PDF</span></div>
+                                                <i class="bi bi-file-earmark-pdf"></i></div>
                                             <div class="tcol">{{ currency_style(item.amountInvested??0) }}</div>
                                             <div class="tcol">{{ profit_style(item.profitMonthlyPct??0) }}</div>
-                                            <div class="tcol">Slip</div>
+                                            <div class="tcol"><i class="bi bi-image"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                             <div class="tcol">{{ currency_style(item.deposit) }}</div>
                                             <div class="tcol">{{ currency_style(item.withdraw) }}</div>
                                             <div class="tcol">{{ currency_style(item.balanceInThai) }}</div>
-                                            <div class="tcol">Slip</div>
+                                            <div class="tcol"><i class="bi bi-image"></i></div>
                                         </div>
                                     </div>
                                 </div>

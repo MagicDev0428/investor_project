@@ -1,6 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Adam } from '../model/adam';
 import { Observable, from, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -15,7 +14,6 @@ import { AdamService } from '../service/adam.service';
 import * as moment from 'moment';
 import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
-import { MyInvestment } from '../model/myInvestment';
 import { MyInvestmentService } from '../service/myInvestmentService';
 import { InvestmentService } from '../service/investment.service';
 import { combineLatest } from 'rxjs';
@@ -118,7 +116,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         amountInvested: new FormControl(this.currency_style(this.myInvestment.amountInvested), Validators.required),
         transactionFrom: new FormControl(''),
         transactionTo: new FormControl(''),
-        transferDate: new FormControl(null,Validators.required),
+        transferDate: new FormControl(null, Validators.required),
         transactionNo: new FormControl(0),
         documents: new FormControl(),
         profitMonthlyPct: new FormControl(this.profit_style(this.myInvestment.profitMonthlyPct)),
@@ -170,8 +168,11 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
           this.myInvestmentForm.get('investType').setValue(this.values['investType']);
           this.investType = this.values['investType'];
           this.myInvestmentForm.get('profitMonthlyPct').setValue(this.profit_style(this.values['profitMonthlyPct']));
+          this.myInvestment.profitMonthlyPct = this.values['profitMonthlyPct'] ?? 0;
           this.myInvestmentForm.get('profitAnnualPct').setValue(this.profit_style(this.values['profitAnnualPct']));
+          this.myInvestment.profitAnnualPct = this.values['profitAnnualPct'] ?? 0;
           this.myInvestmentForm.get('profitEndPct').setValue(this.profit_style(this.values['profitEndPct']));
+          this.myInvestment.profitEndPct = this.values['profitEndPct'] ?? 0;
           if (this.values['firstProfitDate']) {
             this.myInvestmentForm.get('firstProfitDate').setValue(moment(this.values['firstProfitDate']).format('DD-MM-YYYY'));
           }
@@ -184,8 +185,11 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
             this.myInvestmentForm.get('payBackDate').setValue('6 months notice');
           }
           this.myInvestmentForm.get('torbenMonthlyPct').setValue(this.profit_style(this.values['torbenMonthlyPct']));
+          this.myInvestment.torbenMonthlyPct = this.values['profitEndPct'] ?? 0;
           this.myInvestmentForm.get('torbenAnnualPct').setValue(this.profit_style(this.values['torbenAnnualPct']));
+          this.myInvestment.torbenAnnualPct = this.values['torbenAnnualPct'] ?? 0;
           this.myInvestmentForm.get('torbenEndPct').setValue(this.profit_style(this.values['torbenEndPct']));
+          this.myInvestment.torbenEndPct = this.values['torbenEndPct'] ?? 0;
           this.myInvestmentForm.get('description').setValue(this.values['description']);
           this.createdDate = moment(this.values['createdDate']).format('yyyy-MM-DD');
           this.myInvestment.createdDate = this.values['createdDate'];
@@ -235,7 +239,7 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         if (obj.explanation === undefined) {
           obj.explanation = ""
         }
-        if(this.myInvestmentId === 'new') {
+        if (this.myInvestmentId === 'new') {
           this.myInvestmentForm.get('payBackDate').setValue('6 months notice');
         }
         return obj;
@@ -362,16 +366,16 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
       || id === 'torbenAnnual' || id === 'torbenEnd') {
       this.myInvestment[id] = Number(event.target.value.replace(/\D/g, ''));
       this.changeStyle(this.myInvestment[id], id);
-      if (id === 'amountInvested') {
-        // this.setAutoAmount(id, this.myInvestment[id]);
-      } else {
-        this.setAutoPercent(id, this.myInvestment[id])
+      this.setAutoAmount(id, this.myInvestment[id]);
+      if(id !== 'amountInvested') {
+        this.setAutoPercent(id, this.myInvestment[id]);
       }
     }
     if (id === 'profitMonthlyPct' || id === 'profitAnnualPct' || id === 'profitEndPct' || id === 'torbenMonthlyPct' ||
       id === 'torbenAnnualPct' || id === 'profitEndPct' || id === 'torbenEndPct') {
       this.myInvestment[id] = event.target.value?.replace(/%/g, '');
       this.myInvestmentForm.get(id).setValue(this.myInvestment[id] + '%');
+      this.setAutoPercent(id, this.myInvestment[id])
       this.setAutoAmount(id, this.myInvestment[id]);
     }
   }
@@ -430,47 +434,47 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
   }
 
   setAutoAmount(id, value) {
-    // if (id !== 'amountInvested') {
+    if (id !== 'amountInvested') {
     let value_id = id.replace("Pct", "");
     let amount = this.myInvestment.amountInvested;
     this.myInvestment[value_id] = value * amount / 100;
     this.myInvestmentForm.get(value_id).setValue(this.currency_style(this.myInvestment[value_id]));
-    // } else {
-    //   this.myInvestment['profitMonthly'] = this.myInvestment['profitMonthlyPct'] * value / 100;
-    //   this.myInvestmentForm.get('profitMonthly').setValue(this.currency_style(this.myInvestment['profitMonthly']));
-    //   this.myInvestment['profitAnnual'] = this.myInvestment['profitAnnualPct'] * value / 100;
-    //   this.myInvestmentForm.get('profitAnnual').setValue(this.currency_style(this.myInvestment['profitAnnual']));
-    //   this.myInvestment['profitEnd'] = this.myInvestment['profitEndPct'] * value / 100;
-    //   this.myInvestmentForm.get('profitEnd').setValue(this.currency_style(this.myInvestment['profitEnd']));
-    //   this.myInvestment['torbenMonthly'] = this.myInvestment['torbenMonthlyPct'] * value / 100;
-    //   this.myInvestmentForm.get('torbenMonthly').setValue(this.currency_style(this.myInvestment['torbenMonthly']));
-    //   this.myInvestment['torbenAnnual'] = this.myInvestment['torbenAnnualPct'] * value / 100;
-    //   this.myInvestmentForm.get('torbenAnnual').setValue(this.currency_style(this.myInvestment['torbenAnnual']));
-    //   this.myInvestment['torbenEnd'] = this.myInvestment['torbenEndPct'] * value / 100;
-    //   this.myInvestmentForm.get('torbenEnd').setValue(this.currency_style(this.myInvestment['torbenEnd']));
-    // }
+    } else {
+      this.myInvestment['profitMonthly'] = this.myInvestment['profitMonthlyPct'] * value / 100;
+      this.myInvestmentForm.get('profitMonthly').setValue(this.currency_style(this.myInvestment['profitMonthly']));
+      this.myInvestment['profitAnnual'] = this.myInvestment['profitAnnualPct'] * value / 100;
+      this.myInvestmentForm.get('profitAnnual').setValue(this.currency_style(this.myInvestment['profitAnnual']));
+      this.myInvestment['profitEnd'] = this.myInvestment['profitEndPct'] * value / 100;
+      this.myInvestmentForm.get('profitEnd').setValue(this.currency_style(this.myInvestment['profitEnd']));
+      this.myInvestment['torbenMonthly'] = this.myInvestment['torbenMonthlyPct'] * value / 100;
+      this.myInvestmentForm.get('torbenMonthly').setValue(this.currency_style(this.myInvestment['torbenMonthly']));
+      this.myInvestment['torbenAnnual'] = this.myInvestment['torbenAnnualPct'] * value / 100;
+      this.myInvestmentForm.get('torbenAnnual').setValue(this.currency_style(this.myInvestment['torbenAnnual']));
+      this.myInvestment['torbenEnd'] = this.myInvestment['torbenEndPct'] * value / 100;
+      this.myInvestmentForm.get('torbenEnd').setValue(this.currency_style(this.myInvestment['torbenEnd']));
+    }
   }
 
   setAutoPercent(id, value) {
-    // if (id !== 'amountInvested') {
+    if (id !== 'amountInvested') {
     let value_id = id + "Pct";
     let amount = this.myInvestment.amountInvested;
     this.myInvestment[value_id] = value / amount * 100;
     this.myInvestmentForm.get(value_id).setValue(this.profit_style(this.myInvestment[value_id]));
-    // } else {
-    //   this.myInvestment['profitMonthly'] = this.myInvestment['profitMonthlyPct'] * value / 100;
-    //   this.myInvestmentForm.get('profitMonthly').setValue(this.currency_style(this.myInvestment['profitMonthly']));
-    //   this.myInvestment['profitAnnual'] = this.myInvestment['profitAnnualPct'] * value / 100;
-    //   this.myInvestmentForm.get('profitAnnual').setValue(this.currency_style(this.myInvestment['profitAnnual']));
-    //   this.myInvestment['profitEnd'] = this.myInvestment['profitEndPct'] * value / 100;
-    //   this.myInvestmentForm.get('profitEnd').setValue(this.currency_style(this.myInvestment['profitEnd']));
-    //   this.myInvestment['torbenMonthly'] = this.myInvestment['torbenMonthlyPct'] * value / 100;
-    //   this.myInvestmentForm.get('torbenMonthly').setValue(this.currency_style(this.myInvestment['torbenMonthly']));
-    //   this.myInvestment['torbenAnnual'] = this.myInvestment['torbenAnnualPct'] * value / 100;
-    //   this.myInvestmentForm.get('torbenAnnual').setValue(this.currency_style(this.myInvestment['torbenAnnual']));
-    //   this.myInvestment['torbenEnd'] = this.myInvestment['torbenEndPct'] * value / 100;
-    //   this.myInvestmentForm.get('torbenEnd').setValue(this.currency_style(this.myInvestment['torbenEnd']));
-    // }
+    } else {
+      this.myInvestment['profitMonthlyPct'] = this.myInvestment['profitMonthly'] / value * 100;
+      this.myInvestmentForm.get('profitMonthlyPct').setValue(this.profit_style(this.myInvestment['profitMonthlyPct']));
+      this.myInvestment['profitAnnualPct'] = this.myInvestment['profitAnnual'] / value * 100;
+      this.myInvestmentForm.get('profitAnnualPct').setValue(this.profit_style(this.myInvestment['profitAnnualPct']));
+      this.myInvestment['profitEndPct'] = this.myInvestment['profitEnd'] / value * 100;
+      this.myInvestmentForm.get('profitEndPct').setValue(this.profit_style(this.myInvestment['profitEndPct']));
+      this.myInvestment['torbenMonthlyPct'] = this.myInvestment['torbenMonthly'] / value * 100;
+      this.myInvestmentForm.get('torbenMonthlyPct').setValue(this.profit_style(this.myInvestment['torbenMonthlyPct']));
+      this.myInvestment['torbenAnnualPct'] = this.myInvestment['torbenAnnual'] / value * 100;
+      this.myInvestmentForm.get('torbenAnnualPct').setValue(this.profit_style(this.myInvestment['torbenAnnualPct']));
+      this.myInvestment['torbenEndPct'] = this.myInvestment['torbenEnd'] / value * 100;
+      this.myInvestmentForm.get('torbenEndPct').setValue(this.profit_style(this.myInvestment['torbenEndPct']));
+    }
   }
 
   getInvestInfo(event: any) {
@@ -480,9 +484,21 @@ export class MyInvestmentFormComponent extends BaseComponent implements OnInit {
         let payBackDate = res?.investments?.endDate;
         if (payBackDate) {
           this.myInvestmentForm.get('payBackDate').setValue(moment(payBackDate).format('DD-MM-YYYY'));
+          this.myInvestmentForm.get('lastProfitDate').setValue(moment(payBackDate).format('DD-MM-YYYY'));
         }
-        let lastProfitDate = res?.investments?.lastProfitDate;
-        this.myInvestmentForm.get('lastProfitDate').setValue(moment(lastProfitDate).format('DD-MM-YYYY'));
+        this.myInvestmentForm.get('investType').setValue(res?.investments?.investType);
+        this.investType = res?.investments?.investType;
+        this.myInvestmentForm.get('profitMonthlyPct').setValue(this.profit_style(res?.investments?.profitMonthly));
+        this, this.myInvestment.profitMonthlyPct = res?.investments?.profitMonthly ?? 0;
+        this.setAutoAmount('profitMonthlyPct', this.myInvestment['profitMonthlyPct']);
+        this.myInvestmentForm.get('profitAnnualPct').setValue(this.profit_style(res?.investments?.profitYearly));
+        this, this.myInvestment.profitAnnualPct = res?.investments?.profitYearly ?? 0;
+        this.setAutoAmount('profitAnnualPct', this.myInvestment['profitAnnualPct']);
+        this.myInvestmentForm.get('profitEndPct').setValue(this.profit_style(res?.investments?.profitEnd));
+        this, this.myInvestment.profitEndPct = res?.investments?.profitEnd ?? 0;
+        this.setAutoAmount('profitEndPct', this.myInvestment['profitEndPct']);
+        this.setAutoDescription();
+        this.checkProfitDisable();
       },
       error: err => {
         console.error('An error occurred :', err);

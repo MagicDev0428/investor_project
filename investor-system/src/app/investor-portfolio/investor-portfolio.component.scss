@@ -232,12 +232,13 @@ select {
                         &:nth-child(3) {
                             text-align: left;
 
-                            span {
+                            i {
                                 float: right;
                                 color: #0000FF;
                                 cursor: pointer;
                                 text-decoration: underline;
                                 font-weight: bold;
+                                font-size: 1.5rem;
                             }
                         }
 
@@ -250,11 +251,14 @@ select {
                         }
 
                         &:nth-child(6) {
-                            text-align: center;
-                            color: #0000FF;
-                            cursor: pointer;
-                            text-decoration: underline;
-                            font-weight: bold;
+                            i {
+                                text-align: center;
+                                color: #0000FF;
+                                cursor: pointer;
+                                text-decoration: underline;
+                                font-weight: bold;
+                                font-size: 1.5rem;
+                            }
                         }
                     }
 
@@ -360,11 +364,14 @@ select {
                         }
 
                         &:nth-child(7) {
-                            text-align: center;
-                            color: #0000FF;
-                            cursor: pointer;
-                            text-decoration: underline;
-                            font-weight: bold;
+                            i {
+                                text-align: center;
+                                color: #0000FF;
+                                cursor: pointer;
+                                text-decoration: underline;
+                                font-weight: bold;
+                                font-size: 1.5rem;
+                            }
                         }
                     }
 

@@ -83,8 +83,6 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 })
 export class NgbdDatepickerAdapter {
 	@ViewChild('d2') d2: NgbInputDatepicker;
-	@ViewChild('t') t: NgbTooltip;
-	@Input('tooltip') tooltop: string;
 	model1: string;
 	model2: string;
 	default: string;
@@ -111,19 +109,14 @@ export class NgbdDatepickerAdapter {
 	open() {
 		this.d2.toggle();
 	}
-
-	openTooltip() {
-		if (typeof this.tooltop !== 'undefined') {
-			this.t.open();
-		}
-	}
-
+	
 	writeValue(newModel: string) {
 		if (newModel === '6 months notice') {
 			this.default = newModel;
 			this.onChange(null);
 		}
 		if ((typeof newModel === 'string') && (newModel !== '6 months notice')) {
+			this.default = newModel;
 			this.model2 = newModel;
 			let formattedDate = moment(newModel, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
 			this.onChange(formattedDate);
@@ -155,7 +148,6 @@ export class NgbdDatepickerAdapter {
 	}
 
 	onDateChange($event: any) {
-		console.log('chg')
 		let value = $event;
 		this.default = value;
 		let formattedDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');

@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { InvestmentService } from '../service/investment.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '@auth0/auth0-angular';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-investment-form',
@@ -87,9 +88,9 @@ export class InvestmentFormComponent extends BaseComponent {
         endDate: new FormControl(new Date()),
         investAmount: new FormControl(""),
         investType: new FormControl("", Validators.required),
-        profitMonthly: new FormControl(""),
-        profitYearly: new FormControl(""),
-        profitEnd: new FormControl(""),
+        profitMonthly: new FormControl('0.00%'),
+        profitYearly: new FormControl('0.00%'),
+        profitEnd: new FormControl('0.00%'),
         explanation: new FormControl(""),
         attachments: new FormControl()
       });
@@ -141,6 +142,15 @@ export class InvestmentFormComponent extends BaseComponent {
     } else {
       this.investmentService.getInvestmentNo().subscribe((res) => {
         this.investmentForm.get('_id').setValue(res.investmentNo);
+      });
+      combineLatest([
+        this.investmentForm.get('investAmount').valueChanges,
+        this.investmentForm.get('investType').valueChanges,
+        this.investmentForm.get('profitMonthly').valueChanges,
+        this.investmentForm.get('profitYearly').valueChanges,
+        this.investmentForm.get('profitEnd').valueChanges,
+      ]).subscribe(([value1, value2, value3, value4, value5]) => {
+        this.setAutoDescription();
       });
     }
     this.checkProfitDisable();
@@ -252,20 +262,58 @@ export class InvestmentFormComponent extends BaseComponent {
   changeStyle(value: any) {
     this.investmentForm.get('investAmount').setValue(this.currency_style(value));
   }
-  
+
   deleteInvestment(_id: any) {
     if (typeof _id !== 'undefined') {
-      this.investmentService.deleteInvestment(_id).subscribe({
+      this.investmentService.getMyInvestment(this.investmentId).subscribe({
         next: (res) => {
-          this.toastrService.success('Investment was successfully deleted!');
-          this.router.navigate(['/investment-list/']);
+          let myInvestments = res?.investmentInfo[0]?.investment?.myInvestmentsList?.myInvestmentsList;
+          if (myInvestments === undefined) {
+            this.investmentService.deleteInvestment(_id).subscribe({
+              next: (res) => {
+                this.toastrService.success('Investment was successfully deleted!');
+                this.router.navigate(['/investment-list/']);
+              },
+              error: err => {
+                this.toastrService.error(err);
+              },
+              complete: () => console.log('There are no more action happen.')
+            });
+          } else {
+            this.toastrService.warning('Investment already have investors who put money into it.  Please remove them before you delete the investment.');
+          }
         },
         error: err => {
+          console.error('An error occurred :', err);
           this.toastrService.error(err);
         },
         complete: () => console.log('There are no more action happen.')
       });
     }
+  }
+
+  setAutoDescription() {
+    let amount = this.investmentForm.get('investAmount').value ?? 0;
+    let description = '';
+    if (amount !== 0) {
+      description += this.currency_style(amount);
+      if (this.investType === 'Monthly Profit') {
+        let profitMonthly = this.investmentForm.get('profitMonthly').value ?? '0.00%';
+        description += ` Monthly paying ${profitMonthly} pr Month`;
+      } else if (this.investType === 'Annual Profit') {
+        let profitYearly = this.investmentForm.get('profitYearly').value ?? '0.00%';
+        description += ` Annual paying ${profitYearly} pr Year`;
+      } else if (this.investType === 'One-time Profit') {
+        let profitEnd = this.investmentForm.get('profitEnd').value ?? '0.00%';
+        description += ` One-time paying ${profitEnd} pr End`;
+      } else if (this.investType === 'Mixed') {
+        let profitMonthly = this.investmentForm.get('profitMonthly').value ?? '0.00%';
+        let profitYearly = this.investmentForm.get('profitYearly').value ?? '0.00%';
+        let profitEnd = this.investmentForm.get('profitEnd').value ?? '0.00%';
+        description += ` Mixed paying ${profitMonthly} pr Month, ${profitYearly} pr Year, at ${profitEnd} pr End`;
+      }
+    }
+    this.investmentForm.get('explanation').setValue(description);
   }
 
 
