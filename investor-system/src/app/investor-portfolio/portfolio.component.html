@@ -201,9 +201,9 @@
                                             (click)="goToBalance(item)">
                                             <div class="tcol">{{ formatDate(item.profitMonth, 'MMM-YYYY') }}</div>
                                             <div class="tcol">{{ item.description??'' }}</div>
-                                            <div class="tcol fw-bold">{{ currency_style(item.deposit) }}</div>
-                                            <div class="tcol">{{ currency_style(item.withdraw) }}</div>
-                                            <div class="tcol">{{ currency_style(item.balanceInThai) }}</div>
+                                            <div class="tcol fw-bold">{{ currency_style(item.deposit??0) }}</div>
+                                            <div class="tcol">{{ currency_style(item.withdraw??0) }}</div>
+                                            <div class="tcol">{{ currency_style(item.balanceInThai??0) }}</div>
                                             <div class="tcol">{{ formatDate(item.transferDate, 'DD-MMM-YYYY') }}</div>
                                             <div class="tcol">
                                                 {{ formatDate(item.emailDate, 'DD-MMM-YYYY') }}
