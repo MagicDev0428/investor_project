@@ -22,6 +22,7 @@ export class BaseComponent {
     }
 
     currency_style(amount: any) {
+        amount = amount??'0';
         if(typeof amount === 'string') {
             amount = amount.replace(/\D/g, "");
         }
