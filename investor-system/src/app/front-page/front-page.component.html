@@ -99,24 +99,24 @@
                         <label for="amount_available">Amount Available</label>
                         <input type="text" class="form-control fw-bold" id="amount_available"
                             aria-describedby="Amount Available"
-                            [value]="currency_style(investment_data.amountAvailable)" readonly />
+                            [value]="currency_style(investment_data?.amountAvailable??0)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="total_invest">Totally Invested</label>
                         <input type="tel" class="form-control fw-bold" id="total_invest"
                             aria-describedby="Totally Invested"
-                            [value]="currency_style(investment_data.totalInvestmentAmount)" readonly />
+                            [value]="currency_style(investment_data?.totalInvestmentAmount??0)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="total_profit">Total Profit Paid</label>
                         <input type="email" class="form-control fw-bold" id="total_profit"
                             aria-describedby="Total Profit Paid"
-                            [value]="currency_style(investment_data.totalProfitPaid)" readonly />
+                            [value]="currency_style(investment_data?.totalProfitPaid??0)" readonly />
                     </div>
                     <div class="col-xl-6 form-group">
                         <label for="no_investor">No of Investors</label>
                         <input type="email" class="form-control fw-bold" id="no_investor"
-                            aria-describedby="No of Investors" [value]="investment_data.totalInvestors" readonly />
+                            aria-describedby="No of Investors" [value]="investment_data?.totalInvestors??0" readonly />
                     </div>
                 </div>
             </div>
