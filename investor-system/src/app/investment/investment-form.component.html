@@ -24,7 +24,7 @@
                                     <label for="investAmount">Amount</label>
                                     <input formControlName="investAmount" type="text" class="form-control text-end"
                                         id="investAmount" (input)="onInputChange($event)"
-                                        (keydown)="onlyNumbers($event)" aria-describedby="investAmount" />
+                                        (keydown)="onlyNumbers($event)" aria-describedby="investAmount" appCurrencyDirective/>
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="startDate">Start Date</label>
@@ -52,7 +52,7 @@
                                     <label for="profitMonthly">Profit pr Month</label>
                                     <input formControlName="profitMonthly" type="text" [style.textAlign]="textAlign"
                                         class="form-control" (input)="onInputChange($event)" id="profitMonthly"
-                                        aria-describedby="profitMonthly" />
+                                        aria-describedby="profitMonthly" appPercentDirective/>
                                     <span class="text-danger"
                                         *ngIf="submitted && (investmentForm.errors?.['monthlyRequired'] || investmentForm.errors?.['anyoneRequired'])">
                                         Profit pr Month is required.
@@ -66,7 +66,7 @@
                                     <label for="profitYearly">Profit pr Year</label>
                                     <input formControlName="profitYearly" type="text" [style.textAlign]="textAlign"
                                         class="form-control form-input" (input)="onInputChange($event)"
-                                        id="profitYearly" aria-describedby="profitYearly" />
+                                        id="profitYearly" aria-describedby="profitYearly" appPercentDirective/>
                                     <span class="text-danger"
                                         *ngIf="submitted && (investmentForm.errors?.['yearlyRequired'] || investmentForm.errors?.['anyoneRequired'])">
                                         Profit pr Year is required.
@@ -80,7 +80,7 @@
                                     <label for="profitEnd">Profit by End</label>
                                     <input formControlName="profitEnd" type="text" [style.textAlign]="textAlign"
                                         class="form-control" (input)="onInputChange($event)" id="profitEnd"
-                                        aria-describedby="profitEnd" />
+                                        aria-describedby="profitEnd" appPercentDirective/>
                                     <span class="text-danger"
                                         *ngIf="submitted && (investmentForm.errors?.['endRequired'] || investmentForm.errors?.['anyoneRequired'])">
                                         Profit by End is required.

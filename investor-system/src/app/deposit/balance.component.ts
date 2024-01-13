@@ -40,7 +40,6 @@ export class BalanceComponent extends BaseComponent {
     if (typeof this.userId !== 'undefined') {
       this.balanceService.getInvestorBalance(this.userId).subscribe({
         next: (res) => {
-          console.log('res->', res);
           this.profit_balance = res?.balances?.balancesAndMyInvestments;
         },
         error: err => {

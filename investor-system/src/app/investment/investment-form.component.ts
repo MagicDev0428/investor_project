@@ -88,9 +88,9 @@ export class InvestmentFormComponent extends BaseComponent {
         endDate: new FormControl(new Date()),
         investAmount: new FormControl(""),
         investType: new FormControl("", Validators.required),
-        profitMonthly: new FormControl('0.00%'),
-        profitYearly: new FormControl('0.00%'),
-        profitEnd: new FormControl('0.00%'),
+        profitMonthly: new FormControl(),
+        profitYearly: new FormControl(),
+        profitEnd: new FormControl(),
         explanation: new FormControl(""),
         attachments: new FormControl()
       });
@@ -322,7 +322,6 @@ export class InvestmentFormComponent extends BaseComponent {
     if (this.investmentForm.valid) {
       this.investment._id = this.investmentForm.get('_id').value;
       this.investment.startDate = this.investmentForm.get('startDate').value;
-      console.log('res->', this.investmentForm.get('startDate').value);
       this.investment.endDate = this.investmentForm.get('endDate').value;
       this.investment.investAmount = this.amount?.toString().replace(/\D/g, '');
       this.investment.investType = this.investmentForm.get('investType').value;

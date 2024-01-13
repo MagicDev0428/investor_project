@@ -96,7 +96,6 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
     if (this.balanceId !== 'new') {
       this.balanceService.getBalance(this.balanceId).subscribe({
         next: (res) => {
-          console.log('balance->', res);
           this.balance = res?.balances;
           this.payProfitForm.get('profitMonth').setValue(this.formatDate(this.balance?.profitMonth, 'MMM-YYYY'));
           this.payProfitForm.get('withdraw').setValue(this.currency_style(this.balance?.withdraw ?? 0));

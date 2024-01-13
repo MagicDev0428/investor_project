@@ -75,13 +75,16 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col-md-4 col-sm-12 mb-2">
-                                    <button [disabled]="!userId" class="btn btn-primary" (click)="goTo('info/' + userId)">INFO</button>
+                                    <button [disabled]="!userId" class="btn btn-primary"
+                                        (click)="goTo('info/' + userId)">INFO</button>
                                 </div>
                                 <div class="col-md-4 col-sm-12 mb-2">
-                                    <button [disabled]="!userId" class="btn btn-success" (click)="goTo('portfolio/' + userId)">PORTFOLIO</button>
+                                    <button [disabled]="!userId" class="btn btn-success"
+                                        (click)="goTo('portfolio/' + userId)">PORTFOLIO</button>
                                 </div>
-                                <div class="col-md-4 col-sm-12 mb-2" (click)="goTo('my-investments/' + userId)">
-                                    <button [disabled]="!userId" class="btn btn-dark">CUSTOMER</button>
+                                <div class="col-md-4 col-sm-12 mb-2">
+                                    <button [disabled]="!userId" (click)="goTo('my-investments/' + userId)"
+                                        class="btn btn-dark">CUSTOMER</button>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +162,7 @@
                 <div class="col-lg-3 col-md-6 form-group">
                     <label for="lastLogin">Last Login</label>
                     <input formControlName="lastLogin" type="tel" class="form-control" id="lastLogin"
-                        aria-describedby="Beneficiary Phone" readonly/>
+                        aria-describedby="Beneficiary Phone" readonly />
                 </div>
             </div>
             <hr class="separator">
@@ -218,7 +221,7 @@
                         </div>
                         <div class="col-md-7 form-group">
                             <label>Passport Image</label>
-                            <div class="files-list" >{{files}}
+                            <div class="files-list">{{files}}
                                 <div class="single-file" *ngFor="let file of files; let i = index">
                                     <div class="info">
                                         <h4 class="name">
@@ -230,17 +233,18 @@
                                     </div>
                                     <div class="delete" (click)="deleteFile(i)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18"
-                                        viewBox="0 0 14 18">
-                                        <path fill="#ff0000" fill-rule="nonzero"
-                                            d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
-                                    </svg>
+                                            viewBox="0 0 14 18">
+                                            <path fill="#ff0000" fill-rule="nonzero"
+                                                d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
-                            <div class="files-list" *ngIf="values?.folders" >
+                            <div class="files-list" *ngIf="values?.folders">
                                 <div class="single-file" *ngFor="let item of values?.folders">
                                     <div class="info">
-                                        <a class="name" *ngIf="!item.readonly && item.image" href="{{item.webLink}}" target="_blank">
+                                        <a class="name" *ngIf="!item.readonly && item.image" href="{{item.webLink}}"
+                                            target="_blank">
                                             {{ item?.image }}
                                         </a>
                                         <!-- <p class="size" *ngIf="!item.readonly && item.image">
@@ -248,7 +252,8 @@
                                         </p> -->
                                         <!-- <app-progress [progress]="file?.progress"></app-progress> -->
                                     </div>
-                                    <div *ngIf="!item.readonly && item.image" class="delete" (click)="deleteInvestorFile(item)">
+                                    <div *ngIf="!item.readonly && item.image" class="delete"
+                                        (click)="deleteInvestorFile(item)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18"
                                             viewBox="0 0 14 18">
                                             <path fill="#ff0000" fill-rule="nonzero"

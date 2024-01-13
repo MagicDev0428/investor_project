@@ -231,9 +231,9 @@ select {
 
                         &:nth-child(3) {
                             text-align: left;
+                            border: none;
 
                             i {
-                                float: right;
                                 color: #0000FF;
                                 cursor: pointer;
                                 text-decoration: underline;
@@ -253,7 +253,7 @@ select {
                         &:nth-child(6) {
                             i {
                                 text-align: center;
-                                color: #0000FF;
+                                color: DarkGreen;
                                 cursor: pointer;
                                 text-decoration: underline;
                                 font-weight: bold;
@@ -366,7 +366,7 @@ select {
                         &:nth-child(7) {
                             i {
                                 text-align: center;
-                                color: #0000FF;
+                                color: DarkGreen;
                                 cursor: pointer;
                                 text-decoration: underline;
                                 font-weight: bold;
