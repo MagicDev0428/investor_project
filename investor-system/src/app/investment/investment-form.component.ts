@@ -322,7 +322,6 @@ export class InvestmentFormComponent extends BaseComponent {
     if (this.investmentForm.valid) {
       this.investment._id = this.investmentForm.get('_id').value;
       this.investment.startDate = this.investmentForm.get('startDate').value;
-      console.log('res->', this.investmentForm.get('startDate').value);
       this.investment.endDate = this.investmentForm.get('endDate').value;
       this.investment.investAmount = this.amount?.toString().replace(/\D/g, '');
       this.investment.investType = this.investmentForm.get('investType').value;

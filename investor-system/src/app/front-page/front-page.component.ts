@@ -63,7 +63,6 @@ export class FrontPageComponent extends BaseComponent {
   getFrontData(payload: any) {
     this.investorService.getFrontPage(payload).subscribe({
       next: (res) => {
-        // console.log('res->', res.result);
         this.pay_data = res.result.investorProfitResult;
         this.investment_data = res.result.investmentAndLogs;
         this.log_data = this.investment_data.logRecords.map((log) => {
