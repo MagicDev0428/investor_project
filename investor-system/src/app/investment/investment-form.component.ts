@@ -88,9 +88,9 @@ export class InvestmentFormComponent extends BaseComponent {
         endDate: new FormControl(new Date()),
         investAmount: new FormControl(""),
         investType: new FormControl("", Validators.required),
-        profitMonthly: new FormControl('0.00%'),
-        profitYearly: new FormControl('0.00%'),
-        profitEnd: new FormControl('0.00%'),
+        profitMonthly: new FormControl(),
+        profitYearly: new FormControl(),
+        profitEnd: new FormControl(),
         explanation: new FormControl(""),
         attachments: new FormControl()
       });

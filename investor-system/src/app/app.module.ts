@@ -62,6 +62,10 @@ import { NgbdDatepickerAdapter } from './components/date-picker/datepicker-adapt
 import { LogInComponent } from './login/log-in.component';
 import { LoginPincodeButtonComponent } from './components/login-pincode-button/login-pincode-button.component';
 
+//Directives
+import { CurrencyDirective } from './directives/currency_directive/currency-directive.directive';
+import { PercentDirective } from './directives/percent_directive/percent-directive.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,7 +111,9 @@ import { LoginPincodeButtonComponent } from './components/login-pincode-button/l
     BalanceInvestorComponent,
     NgbdDatepickerAdapter,
     LogInComponent,
-    LoginPincodeButtonComponent
+    LoginPincodeButtonComponent,
+    CurrencyDirective,
+    PercentDirective
   ],
   imports: [
     BrowserModule,

@@ -50,7 +50,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
 	}
 
 	toModel(date: NgbDateStruct | null): string | null {
-		return date ? convertToTwoDigitNumber(date.day) + this.DELIMITER + getShortMonthName(date.month) + this.DELIMITER + date.year : null;
+		return date ? convertToTwoDigitNumber(date.day) + this.DELIMITER + (date.month) + this.DELIMITER + date.year : null;
 	}
 }
 
@@ -74,7 +74,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 	}
 
 	format(date: NgbDateStruct | null): string {
-		return date ? (date.day) + this.DELIMITER + getShortMonthName(date.month) + this.DELIMITER + date.year : '';
+		return date ? convertToTwoDigitNumber(date.day) + this.DELIMITER + getShortMonthName(date.month) + this.DELIMITER + date.year : '';
 	}
 }
 
@@ -138,10 +138,10 @@ export class NgbdDatepickerAdapter {
 
 	onInputChange(event: any) {
 		let value = event.target.value;
-		this.default = value;
 		let formattedDate = '';
 		if (value) {
 			formattedDate = moment(value, 'DD-MMM-YYYY').format('YYYY-MM-DDTHH:mm');
+			this.model2 = moment(value, 'DD-MMM-YYYY').format('DD-MM-YYYY');
 			if (formattedDate !== 'Invalid date') {
 				this.onChange(formattedDate);
 			} else {
@@ -162,8 +162,7 @@ export class NgbdDatepickerAdapter {
 
 	onDateChange($event: any) {
 		let value = $event;
-		this.default = value;
-		let formattedDate = moment(value, 'DD-MMM-YYYY').format('YYYY-MM-DDTHH:mm');
+		let formattedDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
 		if (formattedDate !== 'Invalid date') {
 			this.onChange(formattedDate);
 		} else {

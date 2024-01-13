@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="tcol">{{ formatDate(item.firstProfitDate, 'DD-MMM-YYYY') }}
                                             </div>
-                                            <div class="tcol">[{{ item.investmentNo??'' }}] {{ item.description??'' }}
+                                            <div class="tcol d-flex flex-row justify-content-between">[{{ item.investmentNo??'' }}] {{ item.description??'' }}
                                                 <i class="bi bi-file-earmark-pdf"></i></div>
                                             <div class="tcol">{{ currency_style(item.amountInvested??0) }}</div>
                                             <div class="tcol">{{ profit_style(item.profitMonthlyPct??0) }}</div>
