@@ -131,7 +131,7 @@ export class NgbdDatepickerAdapter {
 		if ((typeof newModel === 'string') && (newModel !== '6 months notice')) {
 			this.default = newModel;
 			this.model2 = newModel;
-			let formattedDate = moment(newModel, 'DD-MMM-YYYY').format('YYYY-MM-DDTHH:mm');
+			let formattedDate = moment(newModel, 'DD-MM-YYYY').format('YYYY-MM-DDTHH:mm');
 			this.onChange(formattedDate);
 		}
 	}
