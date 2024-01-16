@@ -274,7 +274,7 @@
                     <label for="loginAttempts">Login Attemps</label>
                     <input formControlName="loginAttempts" type="text" class="form-control" id="loginAttempts"
                         aria-describedby="loginAttempts" readonly/>
-                    <button [disabled]="!userId" (click)="resetAttempt()"
+                    <button [disabled]="!userId" type="button" (click)="resetAttempt()"
                         class="btn btn-dark mt-2">RESET</button>
                 </div>
             </div>
