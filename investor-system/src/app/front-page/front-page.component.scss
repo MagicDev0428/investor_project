@@ -53,11 +53,13 @@
   }
 
   &:not(:first-child):not(:last-child)::before {
-    content: "\2022"; /* Unicode character for a bullet (•) */
+    content: "\2022";
+    /* Unicode character for a bullet (•) */
     position: absolute;
     left: 5px;
   }
 }
+
 .form-group {
 
   label {
@@ -311,7 +313,7 @@
       span {
         font-weight: bold;
         font-size: 11pt;
-        -webkit-font-weight: bold;
+        -webkit-font-weight: bold!important;
       }
     }
   }

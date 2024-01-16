@@ -199,7 +199,7 @@
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <select class="form-select" multiple aria-label="multiple select example">
-                                        <option *ngFor="let item of logEtries">{{ item.log }}</option>
+                                        <option *ngFor="let item of logEtries">{{ item.log }}<span>[{{ item.logBy }}]</span></option>
                                     </select>
                                 </div>
                             </div>

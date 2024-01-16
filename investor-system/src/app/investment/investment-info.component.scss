@@ -408,6 +408,18 @@ textarea {
                 padding: 2px 5px;
                 color: rgb(56, 56, 56);
                 height: 200px;
+
+                option {
+                    white-space: wrap;
+                    font-family: 'Arial Narrow';
+                    font-size: 13pt;
+
+                    span {
+                        font-weight: bold;
+                        font-size: 11pt;
+                        -webkit-font-weight: bold!important;
+                    }
+                }
             }
         }
     }
