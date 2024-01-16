@@ -82,16 +82,16 @@ export class WithdrawCashComponent extends BaseComponent implements OnInit {
         emailDate: new FormControl("",),
         description: new FormControl(""),
       });
-    if(this.balanceId !== 'new') {
+    if (this.balanceId !== 'new') {
       this.balanceService.getBalance(this.balanceId).subscribe({
         next: (res) => {
           this.balance = res?.balances;
           this.payProfitForm.get('profitMonth').setValue(this.formatDate(this.balance?.profitMonth, 'MMM-YYYY'));
-          this.payProfitForm.get('withdraw').setValue(this.currency_style(this.balance?.withdraw??0));
-          this.payProfitForm.get('transferDate').setValue(this.formatDate(this.balance?.transferDate, 'DD-MM-YYYY')??null);
+          this.payProfitForm.get('withdraw').setValue(this.currency_style(-this.balance?.withdraw ?? 0));
+          this.payProfitForm.get('transferDate').setValue(this.formatDate(this.balance?.transferDate, 'DD-MM-YYYY') ?? null);
           this.payProfitForm.get('transferMethod').setValue(this.balance?.transferMethod);
-          this.payProfitForm.get('emailDate').setValue(this.formatDate(this.balance?.emailDate, 'DD-MM-YYYY')??null);
-          this.payProfitForm.get('description').setValue(this.balance?.description??'');
+          this.payProfitForm.get('emailDate').setValue(this.formatDate(this.balance?.emailDate, 'DD-MM-YYYY') ?? null);
+          this.payProfitForm.get('description').setValue(this.balance?.description ?? '');
           this.createdDate = moment(this.balance?.createdDate).format('yyyy-MM-DD');
           this.balance.createdDate = this.balance?.createdDate;
           this.createdBy = this.balance?.createdBy;
@@ -152,8 +152,8 @@ export class WithdrawCashComponent extends BaseComponent implements OnInit {
   protected onSubmit(): void {
     this.submitted = true;
     if (this.payProfitForm.valid) {
-      this.balance.profitMonth = new Date(this.currentMonth.year, this.currentMonth.month-1, 1);
-      this.balance.withdraw = this.amount;
+      this.balance.profitMonth = new Date(this.currentMonth.year, this.currentMonth.month - 1, 1);
+      this.balance.withdraw = '-' + this.amount;
       this.balance.transferDate = this.payProfitForm.get('transferDate').value;
       this.balance.transferMethod = this.payProfitForm.get('transferMethod').value;
       this.balance.description = this.payProfitForm.get('description').value;

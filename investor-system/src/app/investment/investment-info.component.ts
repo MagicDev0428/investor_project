@@ -92,7 +92,7 @@ export class InvestmentInfoComponent extends BaseComponent {
         return obj;
       });
       this.logEtries = res.investmentInfo[0].investments?.logs?.logs.map(obj => {
-        obj.log = `${moment(obj._id).format('DD-MMM-YYYY')} ${obj.description} [${obj.investorName}]`;
+        obj.log = `${moment(obj._id).format('DD-MMM-YYYY')} ${obj.description} [${obj.logBy??''}]`;
         return obj;
       });
       this.sumOfTotalAmountAdam = this.currency_style(res.investmentInfo[0].investments?.adams?.

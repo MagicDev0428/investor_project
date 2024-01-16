@@ -25,7 +25,8 @@
                                             <div class="tcol">Email Sent Date</div>
                                         </div>
                                         <div *ngFor="let item of profit_balance; let i = index"
-                                            [ngClass]="{'trow':true,'minus': item?.deposit<0, 'new': (item[2]===0)&&(item[3]===0)}">
+                                            [ngClass]="{'trow':true,'minus': item?.withdraw<0, 'new': (item?.newInvestment)}"
+                                            (click)="goToBalance(item, userId)">
                                             <div class="tcol">{{ formatDate(item?.profitMonth, 'MMM-YYYY') }}</div>
                                             <div class="tcol">{{ item?.description??'' }}</div>
                                             <div class="tcol fw-bold">{{ currency_style(item?.deposit??0) }}</div>

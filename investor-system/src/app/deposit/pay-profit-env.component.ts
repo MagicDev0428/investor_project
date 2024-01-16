@@ -158,6 +158,7 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
       this.balance.transferMethod = this.payProfitForm.get('transferMethod').value;
       this.balance.description = this.payProfitForm.get('description').value;
       this.balance.investorName = this.userId;
+      this.balance.profitMonthPaid = true;
 
       if (this.balanceId !== 'new') {
         this.balance.modifiedBy = this.user.name;
