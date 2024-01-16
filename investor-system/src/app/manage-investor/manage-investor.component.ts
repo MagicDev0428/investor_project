@@ -54,6 +54,8 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
     transferType: '',
     transferInfo: '',
     investorFolderId: '',
+    LastLoginDate: null,
+    loginAttempts:0
   }
   files: any[] = [];
   userId;
@@ -91,7 +93,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         postcode: new FormControl(),
         city: new FormControl(),
         country: new FormControl(),
-        status: new FormControl("active"),
+        status: new FormControl("INVESTOR"),
         facebook: new FormControl(),
         passport: new FormControl(),
         beneficiaryName: new FormControl(""),
@@ -104,7 +106,8 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         pincode: new FormControl(this.generatePinCode(), Validators.required),
         transferType: new FormControl(""),
         transferInfo: new FormControl(""),
-        lastLogin: new FormControl(""),
+        LastLoginDate: new FormControl(""),
+        loginAttempts: new FormControl(0)
       });
 
     this.addInvestorForm.setValidators([this.emailValidator, this.beneficiaryEmailValidator]);
@@ -135,8 +138,9 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
           this.addInvestorForm.get('pincode').setValue(this.values['pincode']);
           this.addInvestorForm.get('transferType').setValue(this.values['transferType']);
           this.addInvestorForm.get('transferInfo').setValue(this.values['transferInfo']);
-          let lastLogin = this.values['lastLogin'];
-          this.addInvestorForm.get('lastLogin').setValue(lastLogin ? moment(lastLogin).format('DD-MMM-YYYY HH:mm') : "");
+          let lastLogin = this.values['LastLoginDate'];
+          this.addInvestorForm.get('LastLoginDate').setValue(lastLogin ? moment(lastLogin).format('DD-MMM-YYYY HH:mm') : "");
+          this.addInvestorForm.get('loginAttempts').setValue(this.values['loginAttempts']??0);
         },
         complete: () => console.log('There are no more action happen.')
       });
@@ -262,6 +266,10 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         });
       }
     }
+  }
+
+  resetAttempt() {
+
   }
 
   /**

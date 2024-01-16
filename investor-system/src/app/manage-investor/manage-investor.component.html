@@ -109,10 +109,10 @@
                     <label for="status">Investor Status:</label>
                     <select formControlName="status" class="form-control form-select" id="status" name="status"
                         aria-describedby="investor status">
-                        <option value="active" selected>ACTIVE</option>
-                        <option value="pending">PENDING</option>
-                        <option value="disabled">DISABLED</option>
-                        <option value="disabled">FROZEN</option>
+                        <option selected>INVESTOR</option>
+                        <option>PENDING</option>
+                        <option>DISABLED</option>
+                        <option>FROZEN</option>
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
@@ -142,10 +142,6 @@
                     <input formControlName="beneficiaryEmail" type="email" class="form-control" id="BeneficiaryEmail"
                         aria-describedby="Beneficiary Email" />
                     <span class="text-danger"
-                        *ngIf="(addInvestorForm.controls['beneficiaryEmail'].touched || submitted) && addInvestorForm.controls['beneficiaryEmail'].errors?.['required']">
-                        Email Address is required
-                    </span>
-                    <span class="text-danger"
                         *ngIf="(addInvestorForm.controls['beneficiaryEmail'].touched || submitted) && addInvestorForm.errors?.['invalidBeneficiaryEmail']">
                         Email Address is Invalid
                     </span>
@@ -160,9 +156,9 @@
                     </span>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <label for="lastLogin">Last Login</label>
-                    <input formControlName="lastLogin" type="tel" class="form-control" id="lastLogin"
-                        aria-describedby="Beneficiary Phone" readonly />
+                    <label for="LastLoginDate">Last Login</label>
+                    <input formControlName="LastLoginDate" type="tel" class="form-control" id="LastLoginDate"
+                        aria-describedby="LastLoginDate" readonly />
                 </div>
             </div>
             <hr class="separator">
@@ -275,6 +271,11 @@
                         *ngIf="(addInvestorForm.controls['pincode'].touched || submitted) && addInvestorForm.controls['pincode'].errors?.['required']">
                         Pin Code is Required
                     </span>
+                    <label for="loginAttempts">Login Attemps</label>
+                    <input formControlName="loginAttempts" type="text" class="form-control" id="loginAttempts"
+                        aria-describedby="loginAttempts" readonly/>
+                    <button [disabled]="!userId" (click)="resetAttempt()"
+                        class="btn btn-dark mt-2">RESET</button>
                 </div>
             </div>
             <hr class="separator">

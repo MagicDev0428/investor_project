@@ -302,6 +302,17 @@
     padding: 0.375rem 1.5rem 0.375rem 0.375rem;
     color: rgb(56, 56, 56);
     height: 200px;
-  }
 
+    option {
+      white-space: wrap;
+      font-family: 'Arial Narrow';
+      font-size: 13pt;
+
+      span {
+        font-weight: bold;
+        font-size: 11pt;
+        -webkit-font-weight: bold;
+      }
+    }
+  }
 }
