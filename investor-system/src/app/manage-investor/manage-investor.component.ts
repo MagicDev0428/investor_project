@@ -55,7 +55,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
     transferInfo: '',
     investorFolderId: '',
     LastLoginDate: null,
-    loginAttempts:0
+    loginAttempts: 0
   }
   files: any[] = [];
   userId;
@@ -140,7 +140,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
           this.addInvestorForm.get('transferInfo').setValue(this.values['transferInfo']);
           let lastLogin = this.values['LastLoginDate'];
           this.addInvestorForm.get('LastLoginDate').setValue(lastLogin ? moment(lastLogin).format('DD-MMM-YYYY HH:mm') : "");
-          this.addInvestorForm.get('loginAttempts').setValue(this.values['loginAttempts']??0);
+          this.addInvestorForm.get('loginAttempts').setValue(this.values['loginAttempts'] ?? 0);
         },
         complete: () => console.log('There are no more action happen.')
       });
@@ -269,7 +269,13 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
   }
 
   resetAttempt() {
-
+    this.investorService.resetAttempt(this.userId).subscribe({
+      next: (res) => {
+        this.toastrService.success(`Login Attempt was successfully reset!`);
+        this.addInvestorForm.get('loginAttempts').setValue(0);
+      },
+      complete: () => console.log('There are no more action happen.')
+    });
   }
 
   /**

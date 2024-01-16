@@ -153,4 +153,11 @@ export class InvestorService {
       catchError(this._configService.handleError)
     );
   }
+
+  resetAttempt(id: number | string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + this.apiURL + '/resetloginattempts/' + id)
+      .pipe(
+        catchError(this._configService.handleError)
+      );
+  }
 }
