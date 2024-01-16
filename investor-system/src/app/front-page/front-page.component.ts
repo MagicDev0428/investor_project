@@ -66,7 +66,8 @@ export class FrontPageComponent extends BaseComponent {
         this.pay_data = res.result.investorProfitResult;
         this.investment_data = res.result.investmentAndLogs;
         this.log_data = this.investment_data.logRecords.map((log) => {
-          log.entry = `${moment(log._id).format('DD-MMM-YYYY')} ${log.description} [${log.investorName}]`;
+          log.entry = `${moment(log._id).format('DD-MMM-YYYY')} ${log.description}`;
+          log.name = log?.logBy?.toLowerCase()??'';
           return log;
         });
         this.expire_data = this.investment_data.filteredInvestments.map((invest) => {

@@ -31,16 +31,15 @@
                                 <label for="pincode" class="text-center">Enter Pin Code</label>
                                 <div class="col-sm-4">
                                     <input formControlName="pincode" class="form-control text-center" type="password" id="pincode"
-                                        name="pincode" aria-describedby="pincode" maxlength="4" (keydown)="onlyNumbers($event)" />
+                                        name="pincode" aria-describedby="pincode" maxlength="4" (keydown)="onlyNumbers($event)" autocomplete="off"/>
                                 </div>
                                 <span class="text-danger text-center fw-bold"
-                                    *ngIf="(logInForm.controls['pincode'].touched || submitted) && logInForm.controls['pincode'].errors?.['pincode']">
-                                    PINCODE IS WRONG, TRY AGAIN
+                                    *ngIf="(logInForm.controls['pincode'].touched || submitted) && logInForm.controls['pincode'].errors?.['required']">
+                                    PINCODE REQUIRED TO LOGIN
                                 </span>
                                 <span class="text-danger text-center fw-bold"
-                                    *ngIf="(logInForm.controls['pincode'].touched || submitted) && logInForm.controls['pincode'].errors?.['pincode']">
-                                    THIS ACCOUNT IS FROZEN<br>
-                                    PLEASE CONTACT TORBEN OR BEE
+                                    *ngIf="error">
+                                    {{ error }}
                                 </span>
                             </div>
                             <div>

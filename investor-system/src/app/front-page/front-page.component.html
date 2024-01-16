@@ -160,7 +160,7 @@
                 <div class="log-entry">
                     <div class="log-title fw-bold">Newest Log Entries</div>
                     <select class="form-select" multiple aria-label="multiple select example">
-                        <option *ngFor="let log of log_data">{{ log.entry }}</option>
+                        <option *ngFor="let log of log_data">{{ log.entry }} <span>{{ log.name?'['+log.name+']':'' }}</span></option>
                     </select>
                 </div>
             </div>

@@ -37,7 +37,8 @@ export class InvestorService {
     transferType: '',
     transferInfo: '',
     investorFolderId: '',
-    lastLogin: undefined
+    LastLoginDate: undefined,
+    loginAttempts:0
   }
 
   constructor(
@@ -145,5 +146,11 @@ export class InvestorService {
       .pipe(
         catchError(this._configService.handleError)
       );
+  }
+
+  loginWithPincode(modelData: any): Observable<any> {
+    return this.http.put<any>(environment.apiUrl + this.apiURL + '/loginpincode/insram@gmail.com', modelData).pipe(
+      catchError(this._configService.handleError)
+    );
   }
 }
