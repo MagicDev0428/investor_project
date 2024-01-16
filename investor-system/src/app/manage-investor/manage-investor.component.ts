@@ -93,7 +93,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         postcode: new FormControl(),
         city: new FormControl(),
         country: new FormControl(),
-        status: new FormControl("INVESTOR"),
+        status: new FormControl("ACTIVE"),
         facebook: new FormControl(),
         passport: new FormControl(),
         beneficiaryName: new FormControl(""),
