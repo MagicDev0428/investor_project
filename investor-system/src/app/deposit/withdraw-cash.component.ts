@@ -14,6 +14,7 @@ import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { DraggableDialogComponent } from '../components/draggable-dialog/draggable-dialog.component';
 import { BalanceService } from '../service/balance.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-withdraw-envelope',
@@ -106,6 +107,12 @@ export class WithdrawCashComponent extends BaseComponent implements OnInit {
         complete: () => console.log('There are no more action happen.')
       });
     }
+    combineLatest([
+      this.payProfitForm.get('transferDate').valueChanges,
+      this.payProfitForm.get('withdraw').valueChanges
+    ]).subscribe(([value1, value2]) => {
+      this.setAutoDescription();
+    });
   }
 
   changeStyle(value: any) {
@@ -144,6 +151,19 @@ export class WithdrawCashComponent extends BaseComponent implements OnInit {
       this.goTo('/withdraw-crypto/' + this.balanceId + '/' + this.userId);
     }
   }
+
+  setAutoDescription() {
+    let description = '';
+    let transferDate = this.payProfitForm.get('transferDate').value ?? 'none';
+    if(this.amount) {
+      description += `Withdraw ${this.currency_style(this.amount)}`;
+    }
+    if(transferDate !== 'none') {
+      description += ` ${this.calculateDateDifference(transferDate, 'YYYY-MM-DDTHH:mm')}`;
+    }
+    this.payProfitForm.get('description').setValue(description);
+  }
+
 
   open(comp: string) {
     this.dialog.onOpen(comp);

@@ -103,9 +103,17 @@ export class BaseComponent {
             result = `${years} year`;
         }
         if (remainingMonths > 1) {
-            result += `, ${Math.floor(remainingMonths)} months`;
+            if (years === 0) {
+                result += `${Math.floor(remainingMonths)} months`;
+            } else {
+                result += `, ${Math.floor(remainingMonths)} months`;
+            }
         } else if (remainingMonths === 1) {
-            result += `, ${remainingMonths} month`;
+            if (years === 0) {
+                result += `${remainingMonths} month`;
+            } else {
+                result += `, ${remainingMonths} month`;
+            }
         }
         return result;
     }
@@ -116,6 +124,43 @@ export class BaseComponent {
 
     replaceSpaces(url: string): string {
         return decodeURIComponent(url);
+    }
+
+    calculateDateDifference(date: string, style: string) {
+        let inputDate = moment(date, style);
+        let today = moment();
+        let duration = moment.duration(today.diff(inputDate));
+
+        let years = Math.trunc(duration.asYears());
+        let months = Math.trunc(duration.asMonths()) % 12;
+        let days = Math.floor(duration.asDays()) % 30;
+        console.log(`ye->${years}, mo->${months} da->${days}`)
+        let result = '';
+        if(years!=0) {
+            result += `${Math.abs(years)} years, `;
+        }
+        if(months!=0) {
+            result += `${Math.abs(months)} months, `;
+        }
+        if(days!=0) {
+            result += `${Math.abs(days)} days `;
+        } 
+        if (today.isAfter(inputDate)) {
+            result += "ago";
+        } else {
+            result += "later";
+        }
+        if (this.isDateToday(date, style)) {
+            return 'today';
+        }
+        return result;
+    }
+
+
+    isDateToday(inputDate: string, style: string) {
+        let dateToCheck = moment(inputDate, style);
+        let today = moment().startOf('day'); // Set the time to the start of the day for accurate comparison
+        return dateToCheck.isSame(today, 'day');
     }
 
     /**
