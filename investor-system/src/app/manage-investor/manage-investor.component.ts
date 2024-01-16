@@ -97,7 +97,7 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
         facebook: new FormControl(),
         passport: new FormControl(),
         beneficiaryName: new FormControl(""),
-        beneficiaryEmail: new FormControl(""),
+        beneficiaryEmail: new FormControl(undefined),
         beneficiaryPhone: new FormControl(""),
         countryToTransfer: new FormControl(),
         currency: new FormControl(),
@@ -160,7 +160,9 @@ export class ManageInvestorComponent extends BaseComponent implements OnInit {
     const emailRegex = /^$|^.+@[^\.].*\.[a-z]{2,}$/; // Customize the regex pattern as needed
 
     const valid = emailRegex.test(beneficiaryEmail);
-    return valid ? null : { invalidBeneficiaryEmail: "true" };
+    if (beneficiaryEmail !== undefined) {
+      return valid ? null : { invalidBeneficiaryEmail: "true" };
+    } else return null;
   };
 
   protected get InvestorFormControl() {

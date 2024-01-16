@@ -14,6 +14,7 @@ import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { DraggableDialogComponent } from '../components/draggable-dialog/draggable-dialog.component';
 import { BalanceService } from '../service/balance.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-pay-profit-env',
@@ -106,6 +107,12 @@ export class AddMoneyEnvComponent extends BaseComponent implements OnInit {
         complete: () => console.log('There are no more action happen.')
       });
     }
+    combineLatest([
+      this.payProfitForm.get('transferDate').valueChanges,
+      this.payProfitForm.get('deposit').valueChanges
+    ]).subscribe(([value1, value2]) => {
+      this.setAutoDescription();
+    });
   }
 
   changeStyle(value: any) {
@@ -143,6 +150,18 @@ export class AddMoneyEnvComponent extends BaseComponent implements OnInit {
       localStorage.setItem('transferType', transferType);
       this.goTo('/add-money-bank/' + this.balanceId + '/' + this.userId);
     }
+  }
+
+  setAutoDescription() {
+    let description = '';
+    let transferDate = this.payProfitForm.get('transferDate').value ?? 'none';
+    if(this.amount) {
+      description += `Add Money ${this.currency_style(this.amount)}`;
+    }
+    if(transferDate !== 'none') {
+      description += ` ${this.calculateDateDifference(transferDate, 'YYYY-MM-DDTHH:mm')}`;
+    }
+    this.payProfitForm.get('description').setValue(description);
   }
 
   open(comp: string) {

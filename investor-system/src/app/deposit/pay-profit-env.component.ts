@@ -14,6 +14,7 @@ import { BaseComponent } from '../base/base.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { DraggableDialogComponent } from '../components/draggable-dialog/draggable-dialog.component';
 import { BalanceService } from '../service/balance.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-pay-profit-env',
@@ -82,16 +83,16 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
         emailDate: new FormControl("",),
         description: new FormControl(""),
       });
-    if(this.balanceId !== 'new') {
+    if (this.balanceId !== 'new') {
       this.balanceService.getBalance(this.balanceId).subscribe({
         next: (res) => {
           this.balance = res?.balances;
           this.payProfitForm.get('profitMonth').setValue(this.formatDate(this.balance?.profitMonth, 'MMM-YYYY'));
-          this.payProfitForm.get('deposit').setValue(this.currency_style(this.balance?.deposit??0));
-          this.payProfitForm.get('transferDate').setValue(this.formatDate(this.balance?.transferDate, 'DD-MM-YYYY')??null);
+          this.payProfitForm.get('deposit').setValue(this.currency_style(this.balance?.deposit ?? 0));
+          this.payProfitForm.get('transferDate').setValue(this.formatDate(this.balance?.transferDate, 'DD-MM-YYYY') ?? null);
           this.payProfitForm.get('transferMethod').setValue(this.balance?.transferMethod);
-          this.payProfitForm.get('emailDate').setValue(this.formatDate(this.balance?.emailDate, 'DD-MM-YYYY')??null);
-          this.payProfitForm.get('description').setValue(this.balance?.description??'');
+          this.payProfitForm.get('emailDate').setValue(this.formatDate(this.balance?.emailDate, 'DD-MM-YYYY') ?? null);
+          this.payProfitForm.get('description').setValue(this.balance?.description ?? '');
           this.createdDate = moment(this.balance?.createdDate).format('yyyy-MM-DD');
           this.balance.createdDate = this.balance?.createdDate;
           this.createdBy = this.balance?.createdBy;
@@ -106,6 +107,12 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
         complete: () => console.log('There are no more action happen.')
       });
     }
+    combineLatest([
+      this.payProfitForm.get('transferDate').valueChanges,
+      this.payProfitForm.get('deposit').valueChanges
+    ]).subscribe(([value1, value2]) => {
+      this.setAutoDescription();
+    });
   }
 
   changeStyle(value: any) {
@@ -145,6 +152,18 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
     }
   }
 
+  setAutoDescription() {
+    let description = '';
+    let transferDate = this.payProfitForm.get('transferDate').value ?? 'none';
+    if (this.amount) {
+      description += `Deposit ${this.currency_style(this.amount)}`;
+    }
+    if (transferDate !== 'none') {
+      description += ` ${this.calculateDateDifference(transferDate, 'YYYY-MM-DDTHH:mm')}`;
+    }
+    this.payProfitForm.get('description').setValue(description);
+  }
+
   open(comp: string) {
     this.dialog.onOpen(comp);
   }
@@ -152,7 +171,7 @@ export class PayProfitEnvComponent extends BaseComponent implements OnInit {
   protected onSubmit(): void {
     this.submitted = true;
     if (this.payProfitForm.valid) {
-      this.balance.profitMonth = new Date(this.currentMonth.year, this.currentMonth.month-1, 1);
+      this.balance.profitMonth = new Date(this.currentMonth.year, this.currentMonth.month - 1, 1);
       this.balance.deposit = this.amount;
       this.balance.transferDate = this.payProfitForm.get('transferDate').value;
       this.balance.transferMethod = this.payProfitForm.get('transferMethod').value;
