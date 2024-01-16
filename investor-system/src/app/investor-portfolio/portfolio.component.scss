@@ -419,6 +419,12 @@ textarea {
 
                     &.minus {
                         background-color: #FFDCE0;
+
+                        .tcol {
+                            &:nth-child(4) {
+                                font-weight: bold;
+                            }
+                        }
                     }
 
                     &.new {

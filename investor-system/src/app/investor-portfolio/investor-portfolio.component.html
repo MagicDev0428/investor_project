@@ -11,8 +11,8 @@
                             <option>USD</option>
                             <option>CAD</option>
                         </select>
-                        <button *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true" type="button" (click)="goToPrev()" class="close" data-dismiss="modal"
-                            aria-label="Close">
+                        <button *ngIf="(auth.user$ | async)?.['investor-system']['roles'].includes('admin') == true"
+                            type="button" (click)="goToPrev()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -59,8 +59,10 @@
                                             </div>
                                             <div class="tcol">{{ formatDate(item.firstProfitDate, 'DD-MMM-YYYY') }}
                                             </div>
-                                            <div class="tcol d-flex flex-row justify-content-between">[{{ item.investmentNo??'' }}] {{ item.description??'' }}
-                                                <i class="bi bi-file-earmark-pdf"></i></div>
+                                            <div class="tcol d-flex flex-row justify-content-between">[{{
+                                                item.investmentNo??'' }}] {{ item.description??'' }}
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                            </div>
                                             <div class="tcol">{{ currency_style(item.amountInvested??0) }}</div>
                                             <div class="tcol">{{ profit_style(item.profitMonthlyPct??0) }}</div>
                                             <div class="tcol"><i class="bi bi-image"></i></div>
@@ -107,7 +109,8 @@
                                             <div class="tcol">Receipts</div>
                                         </div>
                                         <div *ngFor="let item of profit_balance.investorBalanceList; let i = index"
-                                            [ngClass]="{'trow':true,'minus': item?.withdraw<0, 'new': (item.newestBalance === true)&&(item[3]===0)}">
+                                            [ngClass]="{'trow':true,'minus': item?.withdraw<0, 'new': (item?.newInvestment)}"
+                                            (click)="goToBalance(item, userId)">
                                             <div class="tcol">{{ formatDate(item.profitMonth, 'MMM-YYYY') }}</div>
                                             <div class="tcol">{{ formatDate(item.transferDate, 'DD-MMM-YYYY') }}</div>
                                             <div class="tcol fw-bold">{{ item.description??'' }}</div>

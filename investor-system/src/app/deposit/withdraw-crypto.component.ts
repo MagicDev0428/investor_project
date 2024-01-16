@@ -98,7 +98,7 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
         next: (res) => {
           this.balance = res?.balances;
           this.payProfitForm.get('profitMonth').setValue(this.formatDate(this.balance?.profitMonth, 'MMM-YYYY'));
-          this.payProfitForm.get('withdraw').setValue(this.currency_style(this.balance?.withdraw ?? 0));
+          this.payProfitForm.get('withdraw').setValue(this.currency_style(-this.balance?.withdraw ?? 0));
           this.payProfitForm.get('transferDate').setValue(this.formatDate(this.balance?.transferDate, 'DD-MM-YYYY')??null);
           this.payProfitForm.get('transferMethod').setValue(this.balance?.transferMethod);
           this.payProfitForm.get('transactionFrom').setValue(this.balance?.transactionFrom);
@@ -174,7 +174,7 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
     this.submitted = true;
     if (this.payProfitForm.valid) {
       this.balance.profitMonth = new Date(this.currentMonth.year, this.currentMonth.month-1);
-      this.balance.withdraw = this.amount;
+      this.balance.withdraw = '-' + this.amount;
       this.balance.transferDate = this.payProfitForm.get('transferDate').value;
       this.balance.transferMethod = this.payProfitForm.get('transferMethod').value;
       // this.balance.transferInfo = this.payProfitForm.get('transferInfo').value;

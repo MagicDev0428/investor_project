@@ -120,6 +120,7 @@ select {
             .trow {
                 display: table-row;
                 border: 1px solid rgba(0, 0, 0, 0.7);
+                cursor: pointer;
 
                 .tcol {
                     display: table-cell;
@@ -134,7 +135,7 @@ select {
                     color: white;
                     height: 40px;
                     font-weight: bold;
-                    cursor: pointer;
+                    cursor: default;
                     font-family: 'Arial Narrow';
 
                     .tcol {

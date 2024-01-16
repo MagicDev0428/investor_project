@@ -22,8 +22,8 @@ export class BaseComponent {
     }
 
     currency_style(amount: any) {
-        amount = amount??'0';
-        if(typeof amount === 'string') {
+        amount = amount ?? '0';
+        if (typeof amount === 'string') {
             amount = amount.replace(/\D/g, "");
         }
         let currency_amount = amount?.toString();
@@ -216,6 +216,31 @@ export class BaseComponent {
             url = 'https://' + url;
         }
         window.open(url);
+    }
+
+    goToBalance(item: any, userId: string) {
+        if (item.withdraw < 0) {
+            if (item.transferMethod === 'Envelope') {
+                this.goTo('withdraw-cash/' + item._id + '/' + userId);
+            } else {
+                this.goTo('withdraw-crypto/' + item._id + '/' + userId);
+            }
+        }
+        else {
+            if ((item.profitMonthPaid === false) && (item.profitOtherPaid === false)) {
+                if (item.transferMethod === 'Envelope') {
+                    this.goTo('add-money-env/' + item._id + '/' + userId);
+                } else {
+                    this.goTo('add-money-bank/' + item._id + '/' + userId);
+                }
+            } else {
+                if (item.transferMethod === 'Envelope') {
+                    this.goTo('pay-profit-env/' + item._id + '/' + userId);
+                } else {
+                    this.goTo('pay-profit-bank/' + item._id + '/' + userId);
+                }
+            }
+        }
     }
 }
 

@@ -101,28 +101,4 @@ export class PortfolioComponent extends BaseComponent {
   protected onSubmit(): void {
 
   }
-
-  goToBalance(item: any) {
-    if ((item.profitMonthPaid === false) && (item.profitOtherPaid === false)) {
-      if (item.transferMethod === 'Envelope') {
-        this.goTo('add-money-env/' + item._id + '/' + this.userId);
-      } else {
-        this.goTo('add-money-bank/' + item._id + '/' + this.userId);
-      }
-    } else {
-      if((item.withdraw === 0) || (item.withdraw === undefined)) {
-        if (item.transferMethod === 'Envelope') {
-          this.goTo('pay-profit-env/' + item._id + '/' + this.userId);
-        } else {
-          this.goTo('pay-profit-bank/' + item._id + '/' + this.userId);
-        }
-      } else {
-        if (item.transferMethod === 'Envelope') {
-          this.goTo('withdraw-cash/' + item._id + '/' + this.userId);
-        } else {
-          this.goTo('withdraw-crypto/' + item._id + '/' + this.userId);
-        }
-      }
-    }
-  }
 }
