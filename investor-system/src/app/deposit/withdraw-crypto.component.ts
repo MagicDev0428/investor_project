@@ -169,7 +169,7 @@ export class WithdrawCryptoComponent extends BaseComponent implements OnInit {
 
   checkSelect(event: Event) {
     let transferType = this.payProfitForm.get('transferMethod').value;
-    if (transferType === 'Envelope') {
+    if (transferType === 'Cash') {
       this.goTo('/withdraw-cash/' + this.balanceId + '/' + this.userId);
     }
     localStorage.setItem('transferType', transferType);

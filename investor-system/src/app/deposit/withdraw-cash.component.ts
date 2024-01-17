@@ -79,7 +79,8 @@ export class WithdrawCashComponent extends BaseComponent implements OnInit {
         profitMonth: new FormControl(this.currentMonth.monthName + '-' + this.currentMonth.year, Validators.required),
         withdraw: new FormControl("", Validators.required),
         transferDate: new FormControl("", Validators.required),
-        transferMethod: new FormControl("Envelope", Validators.required),
+        transferMethod: new FormControl("Cash", Validators.required),
+        documents: new FormControl(""),
         emailDate: new FormControl("",),
         description: new FormControl(""),
       });
@@ -208,4 +209,40 @@ export class WithdrawCashComponent extends BaseComponent implements OnInit {
       }
     }
   }
+
+
+  /**
+  * on file drop handler
+  */
+  onFileDropped($event) {
+    this.prepareFilesList($event);
+  }
+  /**
+  * handle file from browsing
+  */
+  fileBrowseHandler(target) {
+    let files = target?.files;
+    this.prepareFilesList(files);
+  }
+
+  /**
+  * Convert Files list to normal array list
+  * @param files (Files List)
+  */
+  prepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      this.files.push(item);
+    }
+    //this.adamForm.get('passportImage').setValue(this.files);
+
+  }
+
+  /**
+  * Delete file from files list
+  * @param index (File index)
+  */
+  deleteFile(index: number) {
+    this.files.splice(index, 1);
+  }
+
 }
