@@ -285,6 +285,7 @@
                 </div>
                 <div class="col-sm-12 col-lg-4 text-center">
                     <button [disabled]="!userId" type="button" class="btn btn-danger"
+                    *ngIf="userId !== undefined"
                         (click)="deleteInvestor(userId)">DELETE</button>
                 </div>
             </div>

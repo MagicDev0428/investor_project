@@ -7,7 +7,8 @@
                         <h5 class="modal-title "><span>Withdraw Money</span> from <span> {{ userId }} </span> via
                             <span>{{ transferType }}</span>
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goToPrev()">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="goToPrev()">
                             <span aria-hidden="true">x</span>
                         </button>
                     </div>
@@ -45,8 +46,9 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transferMethod">Transfer Type</label>
-                                    <select formControlName="transferMethod" class="form-control form-select" id="transferMethod"
-                                        aria-describedby="transferMethod" (change)="checkSelect($event)">
+                                    <select formControlName="transferMethod" class="form-control form-select"
+                                        id="transferMethod" aria-describedby="transferMethod"
+                                        (change)="checkSelect($event)">
                                         <option>Envelope</option>
                                         <option>Thai Bank</option>
                                         <option>Foreign Bank</option>
@@ -71,8 +73,8 @@
                                 </div>
                                 <div class="col-md-4 col-sm-6 form-group">
                                     <label for="transactionTo">Transfer To</label>
-                                    <input formControlName="transactionTo" type="text" class="form-control" id="transactionTo"
-                                        aria-describedby="Transfer To" />
+                                    <input formControlName="transactionTo" type="text" class="form-control"
+                                        id="transactionTo" aria-describedby="Transfer To" />
                                 </div>
                                 <div class="col-md-4 col-sm-6 form-group">
                                     <label for="transactionNo">Transaction No</label>
@@ -119,8 +121,8 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-4 form-group">
                                     <label for="email">Email Sent</label>
-                                    <input type="text" class="form-control" id="email"
-                                        aria-describedby="Transfer From" readonly/>
+                                    <input type="text" class="form-control" id="email" aria-describedby="Transfer From"
+                                        readonly />
                                     <button type="button" class="btn btn-primary mt-2" data-dismiss="modal"
                                         (click)="deleteTransaction(userId)">SEND EMAIL</button>
                                 </div>
@@ -162,7 +164,7 @@
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">
                                 <button type="submit" class="btn btn-secondary">WITHDRAW MONEY</button>
-                                <button type="button" class="btn btn-danger"
+                                <button type="button" class="btn btn-danger" *ngIf="balanceId !== 'new'"
                                     [class]="{'disabled': balanceId === 'new'}" data-dismiss="modal"
                                     (click)="deleteTransaction(userId)">DELETE</button>
                             </div>
