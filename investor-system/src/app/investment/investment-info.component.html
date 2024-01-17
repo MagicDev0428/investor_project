@@ -198,9 +198,13 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 mb-4">
-                                    <select class="form-select" multiple aria-label="multiple select example">
-                                        <option *ngFor="let item of logEtries">{{ item.log }}<span>[{{ item.logBy }}]</span></option>
-                                    </select>
+                                    <div class="log-body">
+                                        <div *ngFor="let item of logEtries" class="lrow" (click)="goTo('log-form/'+item._id)">
+                                            <div class="lcol">
+                                                {{ item.log }}<span>[{{ item.logBy }}]</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -42,7 +42,8 @@
                     <div *ngFor="let item of bank_investors.data; let i = index" class="trow">
                         <div class="tcol">
                             <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
-                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{ item._id
+                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{
+                                item._id
                                 }}</button>
                         </div>
                         <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
@@ -60,7 +61,8 @@
                     <div *ngFor="let item of transfer_investors.data; let i = index" class="trow">
                         <div class="tcol">
                             <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
-                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{ item._id
+                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{
+                                item._id
                                 }}</button>
                         </div>
                         <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
@@ -78,7 +80,8 @@
                     <div *ngFor="let item of envelop_investors.data; let i = index" class="trow">
                         <div class="tcol">
                             <button *ngIf="item._id!=null" (click)="goTo('/portfolio/'+item._id)"
-                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{ item._id
+                                [class]="investor_color[item?.investor?.buttonColor?.toLowerCase()??'green']">{{
+                                item._id
                                 }}</button>
                         </div>
                         <div *ngIf="item.investor.totalInvestment!=null" class="tcol">{{
@@ -159,9 +162,13 @@
             <div class="col-md-8 form-group">
                 <div class="log-entry">
                     <div class="log-title fw-bold">Newest Log Entries</div>
-                    <select class="form-select" multiple aria-label="multiple select example">
-                        <option *ngFor="let log of log_data">{{ log.entry }} <span>{{ log.name?'['+log.name+']':'' }}</span></option>
-                    </select>
+                    <div class="log-body">
+                        <div *ngFor="let log of log_data" class="lrow" (click)="goTo('log-form/' + log._id)">
+                            <div class="lcol">
+                                {{ log.entry }} <span>{{ log.name?'['+log.name+']':'' }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
