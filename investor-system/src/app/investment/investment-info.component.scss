@@ -417,7 +417,41 @@ textarea {
                     span {
                         font-weight: bold;
                         font-size: 11pt;
-                        -webkit-font-weight: bold!important;
+                        -webkit-font-weight: bold !important;
+                    }
+                }
+            }
+
+            .log-body {
+                max-height: 200px !important;
+                overflow: auto !important;
+                box-sizing: border-box;
+                border: solid 1px rgb(78, 78, 78);
+                background-color: white;
+
+                .lrow {
+                    border: none;
+                    white-space: wrap;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #1967D2;
+                    }
+
+                    .lcol {
+                        font-family: 'Arial Narrow';
+                        white-space: wrap;
+                        font-size: 13pt;
+                        height: 30px;
+                        text-align: left;
+                        border: none;
+                        height: auto;
+                        line-height: normal;
+
+                        span {
+                            font-size: 11pt;
+                            font-weight: bold;
+                        }
                     }
                 }
             }
