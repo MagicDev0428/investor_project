@@ -265,7 +265,7 @@ export class BaseComponent {
 
     goToBalance(item: any, userId: string) {
         if (item.withdraw < 0) {
-            if (item.transferMethod === 'Envelope') {
+            if (item.transferMethod === 'Cash') {
                 this.goTo('withdraw-cash/' + item._id + '/' + userId);
             } else {
                 this.goTo('withdraw-crypto/' + item._id + '/' + userId);

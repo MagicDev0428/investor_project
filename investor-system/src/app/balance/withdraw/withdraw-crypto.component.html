@@ -1,0 +1,199 @@
+<div class="withdraw-crypto">
+    <div class="container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title "><span>Withdraw Money</span> from <span> {{ userId }} </span> via
+                            <span>{{ transferType }}</span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="goToPrev()">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" [formGroup]="payProfitForm" (ngSubmit)="onSubmit()" autocomplete="off"
+                            novalidate>
+                            <div class="row">
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="profitMonth">Withdraw Month</label>
+                                    <app-month-selector formControlName="profitMonth" [numberOfMonth]="6"
+                                        [startMonth]="currentMonth" (selectedMonth)="selectOption($event)"
+                                        [sectionHidden]="true"></app-month-selector>
+                                    <span class="text-danger"
+                                        *ngIf="(payProfitForm.controls['profitMonth'].touched || submitted) && payProfitForm.controls['profitMonth'].errors?.['required']">
+                                        Withdraw Month is required
+                                    </span>
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="withdraw">Withdraw</label>
+                                    <input formControlName="withdraw" type="text" class="form-control text-end"
+                                        id="withdraw" (input)="onInputChange($event)" (keydown)="onlyNumbers($event)"
+                                        aria-describedby="withdraw" />
+                                    <span class="text-danger"
+                                        *ngIf="(payProfitForm.controls['withdraw'].touched || submitted) && payProfitForm.controls['withdraw'].errors?.['required']">
+                                        Withdraw is required
+                                    </span>
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="transferDate">Transfer/Pay Date</label>
+                                    <ngbd-datepicker-adapter formControlName="transferDate"></ngbd-datepicker-adapter>
+                                    <span class="text-danger"
+                                        *ngIf="(payProfitForm.controls['transferDate'].touched || submitted) && payProfitForm.controls['transferDate'].errors?.['required']">
+                                        Transfer/Pay Date is required
+                                    </span>
+                                </div>
+                                <div class="col-lg-4 col-xl-3 col-md-6 form-group">
+                                    <label for="transferMethod">Transfer Type</label>
+                                    <select formControlName="transferMethod" class="form-control form-select"
+                                        id="transferMethod" aria-describedby="transferMethod"
+                                        (change)="checkSelect($event)">
+                                        <option>Cash</option>
+                                        <option>Thai Bank</option>
+                                        <option>Foreign Bank</option>
+                                        <option>Crypto Wallet</option>
+                                        <option>Western Union</option>
+                                        <option>WISE</option>
+                                        <option>Other Transfer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr class="separator">
+                            <div class="row">
+                                <div class="col-xl-12 form-group">
+                                    <label for="transferInfo">Money Transfer Information</label>
+                                    <textarea formControlName="transferInfo" class="form-control" id="transferInfo"
+                                        aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="col-md-4 col-sm-6 form-group">
+                                    <label for="transactionFrom">Transfer From</label>
+                                    <input formControlName="transactionFrom" type="text" class="form-control"
+                                        id="transactionFrom" aria-describedby="Transfer From" />
+                                </div>
+                                <div class="col-md-4 col-sm-6 form-group">
+                                    <label for="transactionTo">Transfer To</label>
+                                    <input formControlName="transactionTo" type="text" class="form-control"
+                                        id="transactionTo" aria-describedby="Transfer To" />
+                                </div>
+                                <div class="col-md-4 col-sm-6 form-group">
+                                    <label for="transactionNo">Transaction No</label>
+                                    <input formControlName="transactionNo" type="text" class="form-control"
+                                        id="transactionNo" aria-describedby="Transfer No" />
+                                </div>
+                                <div class="col-md-5 col-sm-6 form-group  choose-image-wrapper">
+                                    <label for="documents">Reciepts</label>
+                                    <div class="file-wrapper">
+                                        <div class="container" appDnd (fileDropped)="onFileDropped($event)">
+                                            <input formControlName="documents" type="file" id="documents" multiple
+                                                accept="image/*" (change)="fileBrowseHandler($event.target)">
+                                            <span class="caption">Drag and drop files here</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 form-group">
+                                    <label>Receipts</label>
+                                    <div class="files-list">
+                                        <div class="single-file" *ngFor="let file of files; let i = index">
+                                            <div class="info">
+                                                <h4 class="name">
+                                                    {{ file?.name }}
+                                                </h4>
+                                                <p class="size">
+                                                    ({{ formatBytes(file?.size) }})
+                                                </p>
+                                                <!-- <app-progress [progress]="file?.progress"></app-progress> -->
+                                            </div>
+                                            <div class="delete" (click)="deleteFile(i)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18"
+                                                    viewBox="0 0 14 18">
+                                                    <path fill="#ff0000" fill-rule="nonzero"
+                                                        d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-9 col-lg-8 form-group">
+                                    <label for="description">Description</label>
+                                    <textarea formControlName="description" class="form-control" id="description"
+                                        aria-describedby="Money Transfer Description" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="col-xl-3 col-lg-4 form-group">
+                                    <label for="email">Email Sent</label>
+                                    <input type="text" class="form-control" id="email" aria-describedby="Transfer From"
+                                        readonly />
+                                    <button type="button" class="btn btn-primary mt-2" data-dismiss="modal"
+                                        (click)="deleteTransaction(userId)">SEND EMAIL</button>
+                                </div>
+                            </div>
+                            <div class="row my-5">
+                                <div
+                                    class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('balance')" class="btn btn-success"
+                                        data-dismiss="modal">Balance</button>
+                                </div>
+                                <div
+                                    class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('balance-investor')" class="btn btn-success"
+                                        data-dismiss="modal">Investor
+                                        Info</button>
+                                </div>
+                                <div
+                                    class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('hidden')" class="btn btn-success exist"
+                                        data-dismiss="modal">Hidden
+                                        Text</button>
+                                </div>
+                                <div
+                                    class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('copy-paste')" class="btn btn-success"
+                                        data-dismiss="modal">Copy
+                                        Paste</button>
+                                </div>
+                                <div
+                                    class="mcol-xl-5 mcol-lg-4 mcol-md-3 mcol-sm-2 d-flex justify-content-center position-relative my-1">
+                                    <hr class="separator line">
+                                    <button type="button" (click)="open('balance-log')" class="btn btn-success"
+                                        data-dismiss="modal">Show Log</button>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center m-3 position-relative">
+                                <button type="submit" class="btn btn-secondary">WITHDRAW MONEY</button>
+                                <button type="button" class="btn btn-danger" *ngIf="balanceId !== 'new'"
+                                    [class]="{'disabled': balanceId === 'new'}" data-dismiss="modal"
+                                    (click)="deleteTransaction(userId)">DELETE</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="info-wrapper">
+                            <div class="info-col">
+                                <span class="info-text">Create Date </span>
+                                <span class="info-value">{{ createdDate }}</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Create By</span>
+                                <span class="info-value">{{ createdBy }}</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Update Date</span>
+                                <span class="info-value">{{ modifiedDate }}</span>
+                            </div>
+                            <div class="info-col">
+                                <span class="info-text">Update By</span>
+                                <span class="info-value">{{ modifiedBy }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-drag-dialog [params]="dialogParam">
+</app-drag-dialog>
