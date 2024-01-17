@@ -25,8 +25,9 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionFrom">From</label>
-                                    <select formControlName="transactionFrom" class="form-control form-select" id="transactionFrom"
-                                        #transactionFrom aria-describedby="Money Transfer" (change)="checkSelect()">
+                                    <select formControlName="transactionFrom" class="form-control form-select"
+                                        id="transactionFrom" #transactionFrom aria-describedby="Money Transfer"
+                                        (change)="checkSelect()">
                                         <option value="Adam" [hidden]="to_value=='Adam'?true:null">FROM Adam</option>
                                         <option value="Torben" [hidden]="to_value=='Torben'?true:null">FROM Torben
                                         </option>
@@ -40,8 +41,9 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="transactionTo">To</label>
-                                    <select formControlName="transactionTo" class="form-control form-select" id="transactionTo"
-                                        #transactionTo aria-describedby="Money Transfer" (change)="checkSelect()">
+                                    <select formControlName="transactionTo" class="form-control form-select"
+                                        id="transactionTo" #transactionTo aria-describedby="Money Transfer"
+                                        (change)="checkSelect()">
                                         <option value="Adam" [hidden]="from_value=='Adam'?true:null">TO Adam</option>
                                         <option value="Torben" [hidden]="from_value=='Torben'?true:null">TO Torben
                                         </option>
@@ -55,7 +57,8 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-3 col-md-6 form-group">
                                     <label for="createdDate">Transfer Date</label>
-                                    <app-date-time-picker formControlName="createdDate" name="createdDate"></app-date-time-picker>   
+                                    <app-date-time-picker formControlName="createdDate"
+                                        name="createdDate"></app-date-time-picker>
                                     <span class="text-danger"
                                         *ngIf="(adamForm.controls['createdDate'].touched || submitted) && adamForm.controls['createdDate'].errors?.['required']">
                                         Transfer Date is required
@@ -63,8 +66,8 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-4 form-group">
                                     <label for="investments">Investment</label>
-                                    <select formControlName="investments" class="form-control form-select" id="investments"
-                                        aria-describedby="investments">
+                                    <select formControlName="investments" class="form-control form-select"
+                                        id="investments" aria-describedby="investments">
                                         <option [value]="item._id" *ngFor="let item of investments">{{ item._id + ' ' +
                                             item.explanation }}
                                         </option>
@@ -72,8 +75,8 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-4 form-group">
                                     <label for="investorName">Investor Name</label>
-                                    <select formControlName="investorName" class="form-control form-select" id="investorName"
-                                        aria-describedby="investorName">
+                                    <select formControlName="investorName" class="form-control form-select"
+                                        id="investorName" aria-describedby="investorName">
                                         <option [value]="item._id" *ngFor="let item of investorsNames">{{ item._id}}
                                         </option>
                                     </select>
@@ -144,7 +147,7 @@
                             <div class="row d-flex justify-content-center m-3 position-relative">
                                 <button type="submit" class="btn btn-secondary">SAVE ADAM
                                     TRANSACTION</button>
-                                <button type="button" class="btn btn-danger"
+                                <button type="button" class="btn btn-danger" *ngIf="userId !== undefined"
                                     [class]="{'disabled': userId === undefined}" data-dismiss="modal"
                                     (click)="deleteTransaction(userId)">DELETE</button>
                             </div>

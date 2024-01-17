@@ -164,8 +164,9 @@
                             </div>
                             <div class="row d-flex justify-content-center m-3 position-relative">
                                 <button type="submit" class="btn btn-secondary">ADD MONEY</button>
-                                <button type="button" class="btn btn-danger" [class]="{'disabled': balanceId === 'new'}"
-                                    data-dismiss="modal" (click)="deleteTransaction(balanceId)">DELETE</button>
+                                <button type="button" class="btn btn-danger" *ngIf="balanceId !== 'new'"
+                                    [class]="{'disabled': balanceId === 'new'}" data-dismiss="modal"
+                                    (click)="deleteTransaction(balanceId)">DELETE</button>
                             </div>
                         </form>
                     </div>
